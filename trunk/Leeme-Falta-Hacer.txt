@@ -1,0 +1,12 @@
+Falta:
+
+1) Revisar nueva versión del informe de diseño, lo que está resaltado en amarillo
+2) TP2 integrador (Pablito es para el 24 de mayo que es el martes próximo, te lo
+encargamos) POR LA PLATAFORMA.
+3) Para diagramas del diseño, ya están CU y MER. Falta diagrama de flujo
+genérico del proceso de sensado (Está en las fotos y hay que refinarlo), y
+diagrama de bloques de golpe de ariete (al menos un avance porque es larguito)
+N) Cualquier cosa que quieran añadir en este txt, tracen linea de guiones y 
+pongan (Numero 3 del anterior COMPLETADO).
+
+--------------------------------------------------------------------------
