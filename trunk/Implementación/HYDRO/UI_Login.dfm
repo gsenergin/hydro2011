@@ -1,0 +1,77 @@
+object PasswordDlg: TPasswordDlg
+  Left = 245
+  Top = 108
+  BorderStyle = bsDialog
+  Caption = 'HYDRO - Login'
+  ClientHeight = 140
+  ClientWidth = 237
+  Color = clBtnFace
+  ParentFont = True
+  OldCreateOrder = True
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 57
+    Width = 54
+    Height = 13
+    Caption = 'Password'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 13
+    Width = 43
+    Height = 13
+    Caption = 'Usuario'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Password: TEdit
+    Left = 8
+    Top = 76
+    Width = 217
+    Height = 21
+    PasswordChar = '*'
+    TabOrder = 0
+  end
+  object btn_OK: TButton
+    Left = 154
+    Top = 107
+    Width = 75
+    Height = 25
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+    OnClick = btn_OKClick
+  end
+  object btn_Cancel: TButton
+    Left = 8
+    Top = 106
+    Width = 75
+    Height = 25
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object User: TEdit
+    Left = 8
+    Top = 32
+    Width = 217
+    Height = 21
+    TabOrder = 3
+  end
+end
