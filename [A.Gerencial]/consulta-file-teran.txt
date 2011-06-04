@@ -1,5 +1,5 @@
 - averiguar empleados dependientes
-- organigrama en las sucursales
+- organigrama en las sucursales (listo)
 - area marketing (sacar..)
 - isla digital -> variedad aparte de proceso (OK)
 
