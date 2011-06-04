@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2010/08/29 18:59:53.325.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\Unit1.pas</Transaction>
+    <Transaction>2010/08/29 18:59:53.325.dfm,C:\Users\Adry\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\Unit1.dfm</Transaction>
+    <Transaction>2010/08/29 19:08:53.461.dproj,C:\Users\Adry\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\ModbusRS232.dproj</Transaction>
+    <Transaction>2010/08/29 19:26:59.699.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\serialNG\SerialNG.pas=</Transaction>
+    <Transaction>2010/08/29 19:26:59.705.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\serialNG\CommPortList.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.554.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\gnugettext.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.563.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortTypes.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.569.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortTrmSet.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.569.dfm,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortTrmSet.dfm=</Transaction>
+    <Transaction>2010/08/29 20:23:07.575.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortSetup.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.575.dfm,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortSetup.dfm=</Transaction>
+    <Transaction>2010/08/29 20:23:07.580.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortReg.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.585.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortEsc.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.590.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortCtl.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.595.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortAbout.pas=</Transaction>
+    <Transaction>2010/08/29 20:23:07.595.dfm,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPortAbout.dfm=</Transaction>
+    <Transaction>2010/08/29 20:23:07.600.pas,C:\Program Files\CodeGear\RAD Studio\5.0\lib\comportlib4\source\CPort.pas=</Transaction>
+    <Transaction>2010/08/31 22:25:42.961.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\Unit2.pas=C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\crc16bits.pas</Transaction>
+    <Transaction>2010/09/01 13:51:34.689.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\crc16.pas=</Transaction>
+    <Transaction>2010/09/01 13:51:49.636.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\crc16bits.pas=</Transaction>
+    <Transaction>2010/09/01 13:52:07.063.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\Unit2.pas=C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\CRC16_Modbus.pas</Transaction>
+    <Transaction>2010/09/04 16:52:48.476.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Modbus-RS232\CRC16_Modbus.pas=</Transaction>
+    <Transaction>2010/09/23 19:29:39.313.dproj,D:\Mis Documentos\RAD Studio\Projects\Modbus TCP\ModbusRS232.dproj=D:\Mis Documentos\RAD Studio\Projects\Modbus TCP\ModbusTCP.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
