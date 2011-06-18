@@ -1,0 +1,28 @@
+- pagina 28/29
+
+hay que chamullar algo de ingresos promedio
+respecto de los costos, tenemos que poner los costos que luego de la reingenieria se reduzcan o desaparezcan
+por ej, los sueldos mucho no cuentan xq despues los vas a tener q seguir pagando
+
+pagina 29 -> el socio gerente (resaltado) esta OK
+
+pag 30/31 -> en lo q es rediseño propiamente dicho
+
+hay que aclarar algunos detalles, por ej, que el chabon cuando va a recoger doc. al cliente, lleva una notebook a lo del cliente y ahi se conecta a internet y lo carga
+eso me olvide de escribirlo
+y fijate q cuadre todo...por si se me escapo algo
+
+
+pag 32/33 -> Cambios Radicales -> deben ser consistentes con los arg de proaccion (creo q lo son, pero hay q revisarlo). ademas hay q ponerlo en %
+o subilo
+
+pag 34 -> el sist. informatico se adquiere -> OK!
+  -> Rediseño del Proceso esta OK como actividad (el huevo no la habia puesto)
+
+pag 35 -> Prueba piloto. Hay que aclarar que la misma se va a hacer en paralelo al proceso actual. Habria q poner que se va a usar a un cliente como "experimento" en vez de hacer todo, etc, etc....
+
+pag 35 -> "(equipo de caso)", desresaltarlo, esta ok
+
+pag 36 -> Borrar el "4) Algo mas"
+  -> Explayarse un poco en la supervision del dueño del proceso
+  -> Seguimiento respecto a indicadores esta ok!. Una vez definidos indicadores, aclarar mas este punto
