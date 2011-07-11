@@ -3,10 +3,11 @@ unit AccesoDatos;
 interface
 
 uses
-  SysUtils, Classes;
+  SysUtils, Classes, WideStrings, DB, SqlExpr, ADODB;
 
 type
   TDM_Hydro = class(TDataModule)
+    ADOConnection1: TADOConnection;
   private
     { Private declarations }
   public
