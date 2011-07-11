@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/07/10 18:31:28.311.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Adry\Documents\RAD Studio\Projects\testMODBUS\Unit1.pas</Transaction>
+    <Transaction>2011/07/10 18:31:28.311.dfm,C:\Users\Adry\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Adry\Documents\RAD Studio\Projects\testMODBUS\Unit1.dfm</Transaction>
+    <Transaction>2011/07/10 18:32:27.705.dproj,C:\Users\Adry\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Adry\Documents\RAD Studio\Projects\testMODBUS\Project1.dproj</Transaction>
+    <Transaction>2011/07/10 20:33:40.071.dproj,C:\Users\Adry\Documents\RAD Studio\Projects\testMODBUS\Project1.dproj=D:\[Proyecto]\Implementación\ControlAutomatico\ControlAutomatico.dproj</Transaction>
+    <Transaction>2011/07/10 20:34:04.331.pas,C:\Users\Adry\Documents\RAD Studio\Projects\testMODBUS\Unit1.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Unit1.pas</Transaction>
+    <Transaction>2011/07/10 20:34:04.331.dfm,C:\Users\Adry\Documents\RAD Studio\Projects\testMODBUS\Unit1.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

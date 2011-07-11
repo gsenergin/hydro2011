@@ -1,4 +1,5 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{870730d6-849a-468a-8e3c-59d45591462e}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -17,54 +18,17 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Version>7.0</Version>
     <DCC_Define>DEBUG</DCC_Define>
-    <DCC_UnitSearchPath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5</DCC_UnitSearchPath>
-    <DCC_ResourcePath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5</DCC_ResourcePath>
-    <DCC_ObjPath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5</DCC_ObjPath>
-    <DCC_IncludePath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5</DCC_IncludePath>
+    <DCC_UnitSearchPath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5;D:\[Proyecto]\Implementación\HYDRO</DCC_UnitSearchPath>
+    <DCC_ResourcePath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5;D:\[Proyecto]\Implementación\HYDRO</DCC_ResourcePath>
+    <DCC_ObjPath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5;D:\[Proyecto]\Implementación\HYDRO</DCC_ObjPath>
+    <DCC_IncludePath>C:\Program Files\CodeGear\RAD Studio\5.0\Quickrep5;D:\[Proyecto]\Implementación\HYDRO</DCC_IncludePath>
   </PropertyGroup>
   <ProjectExtensions>
     <Borland.Personality>Delphi.Personality</Borland.Personality>
     <Borland.ProjectType />
     <BorlandProject>
 <BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">11274</VersionInfo><VersionInfo Name="CodePage">1252</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">Hydro.dpr</Source></Source><Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxEditorsD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxEditorsD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxExtEditorsD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxExtEditorsD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxBarEditItemD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxBarEditItemD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxLayoutControlD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxLayoutControlD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxGridD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxGridD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxPivotGridD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxPivotGridD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxPivotGridChartD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxPivotGridChartD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxPivotGridOLAPD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxPivotGridOLAPD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxTreeListD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxTreeListD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxTreeListdxBarPopupMenuD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxTreeListdxBarPopupMenuD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxSchedulerD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxSchedulerD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxSchedulerGridD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxSchedulerGridD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxSkinscxScheduler3PainterD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxSkinscxScheduler3PainterD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxSpellCheckerD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxSpellCheckerD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dclcxVerticalGridD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dclcxVerticalGridD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSCoreD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSCoreD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSLnksD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSLnksD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxCommonD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxCommonD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxExtCommonD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxExtCommonD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxGrid6LnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxGrid6LnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxPivotGrid2LnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxPivotGrid2LnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxScheduler3LnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxScheduler3LnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxSSLnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxSSLnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxTL5LnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxTL5LnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPScxVGridLnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPScxVGridLnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSTeeChartD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSTeeChartD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSDBTeeChartD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSDBTeeChartD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSdxOCLnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSdxOCLnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSdxDBOCLnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSdxDBOCLnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSdxDBTVLnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSdxDBTVLnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSdxFCLnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSdxFCLnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSdxLC2LnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSdxLC2LnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSdxSkinsHelperD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSdxSkinsHelperD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dcldxPSdxMVLnkD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dcldxPSdxMVLnkD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dxPScxPCProdD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dxPScxPCProdD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dxPSPrVwAdvD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dxPSPrVwAdvD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dxPSPrVwRibbonD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dxPSPrVwRibbonD11.bpl not found</Excluded_Packages>
-      <Excluded_Packages Name="$(BDS)\DevExpress VCL\Library\Delphi11\dxSkinscxScheduler3PainterD11.bpl">File c:\program files\codegear\rad studio\5.0\DevExpress VCL\Library\Delphi11\dxSkinscxScheduler3PainterD11.bpl not found</Excluded_Packages>
+      <Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\5.0\Bpl\acnt2007.bpl">AlphaControls</Excluded_Packages>
     </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
   </ProjectExtensions>
   <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
