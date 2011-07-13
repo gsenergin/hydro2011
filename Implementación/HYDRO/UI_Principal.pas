@@ -7,7 +7,7 @@ uses
   Dialogs, ComCtrls, ExtCtrls, StdCtrls, Buttons, Grids, DBGrids,
   dxSkinMcSkin, dxSkinscxPCPainter, cxPC, cxControls, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, Menus, cxTextEdit, dxSkinsForm,
-  cxButtons, cxLabel, dxGDIPlusClasses, dxSkinsCore;
+  cxButtons, cxLabel, dxGDIPlusClasses, dxSkinsCore, ScktComp;
 
 type
   Tfrm_Principal = class(TForm)
@@ -123,7 +123,9 @@ type
     cxButton23: TcxButton;
     SG_Configuracion: TStringGrid;
     cxButton1: TcxButton;
+    SocketSuscripcion: TClientSocket;
     procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -137,8 +139,21 @@ implementation
 
 {$R *.dfm}
 
+
+
+procedure Tfrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    SocketSuscripcion.Socket.SendText('BAJA');
+end;
+
 procedure Tfrm_Principal.FormCreate(Sender: TObject);
 begin
+    // Activo el Socket
+//    SocketSuscripcion.Active:= false;
+//    SocketSuscripcion.Host:= '127.0.0.1';
+//    SocketSuscripcion.Port:= 9000;
+    SocketSuscripcion.Active:= true;
+
 
     // StringGrid Alertas
     SG_Alertas.Cells[1,0]:= 'Fecha';
@@ -219,6 +234,11 @@ begin
       SG_Configuracion.Cells[6,4]:='...';
       SG_Configuracion.Cells[7,4]:='...';
       SG_Configuracion.Cells[8,4]:='...';
+
+
+    // Me suscribo a la distribución de información del control automatico
+
+
 
 end;
 

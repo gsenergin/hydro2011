@@ -7,9 +7,16 @@ uses
   Dialogs, Grids, StdCtrls, Tag, PLCTag, TagBlock, PLCString, CommPort,
   tcp_udpport, ProtocolDriver, ModBusDriver, ModBusTCP, PLCBlock, ExtCtrls,
   HMILabel, PLCNumber, PLCBlockElement, HMIEdit, ComCtrls, HMIUpDown,
-  HMIAnimation, HMICheckBox, DB, ADODB, ExtDlgs;
+  HMIAnimation, HMICheckBox, DB, ADODB, ExtDlgs, ScktComp, Sockets,
+  ClienteObservador;
 
 type
+  TClienteObservador = record
+      RemoteAdress:string;
+      RemotePort: integer;
+      active: boolean;
+  end;
+
   TForm1 = class(TForm)
     ModBusTCPDriver1: TModBusTCPDriver;
     TCP_UDPPort1: TTCP_UDPPort;
@@ -130,6 +137,9 @@ type
     btn_SaveLog: TButton;
     SaveLogDialog: TSaveTextFileDialog;
     TimerGuardaDatos: TTimer;
+    UdpSocket1: TUdpSocket;
+    ServerSocket1: TServerSocket;
+    Button1: TButton;
     procedure btn_CambiarDatosConexionClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -142,9 +152,16 @@ type
     procedure btn_DesconectarBDClick(Sender: TObject);
     procedure TimerGuardaDatosTimer(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure ServerSocket1ClientRead(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocket1ClientConnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocket1ClientDisconnect(Sender: TObject;
+      Socket: TCustomWinSocket);
   private
     { Private declarations }
     cantRegistrosEscritos: int64;
+    Observador: TClienteObservador;
   public
     { Public declarations }
     procedure SP_InsertarHistorialSensado(var SP:TADOStoredProc; direccionMemoria, numeroRTU, valor:variant);
@@ -179,6 +196,7 @@ end;
 procedure TForm1.btn_DesconectarBDClick(Sender: TObject);
 begin
     ADOConnection1.Connected:= false;
+    TimerGuardaDatos.Enabled:= false;
 
     btn_ConectarBD.Enabled:= true;
     btn_DesconectarBD.Enabled:= false;
@@ -195,7 +213,7 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   // PRUEBAAA
-  SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40001,1,RTU1_SCC0001.Value);
+  ShowMessage(FloatToStr(RTU1_SCC0002.Value));
 
 end;
 
@@ -270,9 +288,38 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-//    ADOConnection1.Connected:= True;
-//    TCP_UDPPort1.Active:= True;
+    ADOConnection1.Connected:= False;
+    TCP_UDPPort1.Active:= False;
+    TimerGuardaDatos.Enabled:= false;
     cantRegistrosEscritos:=0;
+
+    Observador.active:= false;
+    ServerSocket1.Active:= true;
+    
+end;
+
+procedure TForm1.ServerSocket1ClientConnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+    ShowMessage('Se conectó un cliente! -> '+Socket.RemoteAddress);
+
+    Observador.RemoteAdress:= Socket.RemoteAddress;
+    Observador.RemotePort:= Socket.RemotePort;
+    Observador.active:= true;
+end;
+
+procedure TForm1.ServerSocket1ClientDisconnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+    ShowMessage('Se desconectó un cliente!'+Socket.RemoteAddress);
+    Observador.active:= false;
+end;
+
+procedure TForm1.ServerSocket1ClientRead(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+    ShowMessage('Mensaje de '+Socket.RemoteAddress+' que dice '+Socket.ReceiveText);
+
 end;
 
 procedure TForm1.SP_InsertarHistorialSensado(var SP: TADOStoredProc;
@@ -283,43 +330,72 @@ begin
     SP.Parameters[1].Value:= numeroRTU;
     SP.Parameters[2].Value:= valor;
     SP.ExecProc;
+    inc (cantRegistrosEscritos);
 end;
 
 procedure TForm1.TimerGuardaDatosTimer(Sender: TObject);
+var Trama: string;
+
 begin
     // Datos de la RTU #1
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40001,1,RTU1_SCC0001.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40002,1,RTU1_SCC0002.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,1,RTU1_ACC0003.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40004,1,RTU1_ACC0004.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40005,1,RTU1_SCC0005.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40001,1,RTU1_SCC0001.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40002,1,RTU1_SCC0002.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40005,1,RTU1_SCC0005.Value);
     // Datos de la RTU #2
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40001,2,RTU2_ST10001.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40002,2,RTU2_ST10002.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,2,RTU2_AT10003.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40004,2,RTU2_AT10004.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40005,2,RTU2_ST10005.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40006,2,RTU2_AT10006.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40007,2,RTU2_AT10007.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40008,2,RTU2_ST10008.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40009,2,RTU2_ST10009.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40010,2,RTU2_ST10010.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40011,2,RTU2_AT10011.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40012,2,RTU2_ST10012.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40013,2,RTU2_ST10013.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40014,2,RTU2_ST10014.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40015,2,RTU2_AT10015.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40016,2,RTU2_AT10016.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40017,2,RTU2_AT10017.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40018,2,RTU2_AT10018.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40019,2,RTU2_AT10019.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40020,2,RTU2_ST10020.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40021,2,RTU2_ST10021.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40001,2,RTU2_ST10001.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40002,2,RTU2_ST10002.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40005,2,RTU2_ST10005.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40008,2,RTU2_ST10008.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40009,2,RTU2_ST10009.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40012,2,RTU2_ST10012.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40013,2,RTU2_ST10013.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40014,2,RTU2_ST10014.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40020,2,RTU2_ST10020.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40021,2,RTU2_ST10021.Value);
     // Datos de la RTU #3
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40002,3,RTU3_SSA0001.Value);
-    SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,3,RTU3_ASA0002.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40001,3,RTU3_SSA0001.Value);
 
-    cantRegistrosEscritos:= cantRegistrosEscritos + 28;
+      
+      (*
+
+      if Observador.active then
+      begin
+
+          Trama:= FloatToStr(RTU1_SCC0001.Value) +'#'+FloatToStr(RTU1_SCC0002.Value) +'#'+FloatToStr(RTU1_SCC0005.Value) +'#'+
+                  FloatToStr(RTU2_ST10001.Value) +'#'+FloatToStr(RTU2_ST10002.Value) +'#'+FloatToStr(RTU2_ST10005.Value) +'#'+
+                  FloatToStr(RTU2_ST10008.Value) +'#'+FloatToStr(RTU2_ST10009.Value) +'#'+FloatToStr(RTU2_ST10012.Value) +'#'+
+                  FloatToStr(RTU2_ST10013.Value) +'#'+FloatToStr(RTU2_ST10014.Value) +'#'+FloatToStr(RTU2_ST10020.Value) +'#'+
+                  FloatToStr(RTU2_ST10021.Value) +'#'+FloatToStr(RTU3_SSA0001.Value);
+          //ShowMessage(trama);
+          ServerSocket1.Socket.SendText(Trama);
+          try
+          //  ServerSocket1.Socket.SendText(Trama);
+
+          except
+            exit;
+          end;
+      end;
+      *)
+ (* LOS ACTUADORES SE GUARDAN EN BD CUANDO HAN CAMBIADO DE VALOR SOLAMENTE
+    // ACTUADORES
+    // RTU 1
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,1,RTU1_ACC0003.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40004,1,RTU1_ACC0004.Value);
+    // RTU 2
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,2,RTU2_AT10003.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40004,2,RTU2_AT10004.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40006,2,RTU2_AT10006.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40007,2,RTU2_AT10007.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40010,2,RTU2_ST10010.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40011,2,RTU2_AT10011.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40015,2,RTU2_AT10015.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40016,2,RTU2_AT10016.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40017,2,RTU2_AT10017.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40018,2,RTU2_AT10018.Value);
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40019,2,RTU2_AT10019.Value);
+    //RTU 3
+      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,3,RTU3_ASA0002.Value);
+   *)
 end;
 
 procedure TForm1.TimerStatusBarTimer(Sender: TObject);

@@ -12,6 +12,7 @@ object frm_Principal: Tfrm_Principal
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -96,7 +97,7 @@ object frm_Principal: Tfrm_Principal
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D4948445200000300
           0000023208060000007C44AD9C0000000467414D410000B18F0BFC6105000000
-          097048597300000EC300000EC301C76FA86400005ABF49444154785EEDDD4DB6
+          097048597300000EC200000EC20115284A8000005ABF49444154785EEDDD4DB6
           233792ADED984D0DA3BA77569AD29D43746B185F237BDF10E28AA964893A411E
           C73FCCE04FAE75564A22E0000C2FCCF776C0C91FFFFD7FFEE75794BF7FFDEB5F
           BFFC8901063080010C60000318C00006E631F0238AF87FF6C364CF9B6CB1155B
@@ -825,7 +826,6 @@ object frm_Principal: Tfrm_Principal
           7E9D02B37148CC18C000063080010C60E09A81FF07A0B8B77CF4EBDE10000000
           0049454E44AE426082}
         Proportional = True
-        Transparent = True
       end
       object cxLabel10: TcxLabel
         Left = 262
@@ -9231,5 +9231,13 @@ object frm_Principal: Tfrm_Principal
     SkinName = 'McSkin'
     Left = 600
     Top = 16
+  end
+  object SocketSuscripcion: TClientSocket
+    Active = False
+    ClientType = ctNonBlocking
+    Host = '192.168.1.103'
+    Port = 9000
+    Left = 376
+    Top = 8
   end
 end

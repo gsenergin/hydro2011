@@ -4,7 +4,7 @@ object Form1: TForm1
   BorderStyle = bsSingle
   Caption = 'Modulo de Control Autom'#225'tico'
   ClientHeight = 354
-  ClientWidth = 710
+  ClientWidth = 1052
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object Form1: TForm1
   object StatusBar1: TStatusBar
     Left = 0
     Top = 331
-    Width = 710
+    Width = 1052
     Height = 23
     BorderWidth = 1
     Color = clGray
@@ -47,8 +47,6 @@ object Form1: TForm1
       item
         Width = 105
       end>
-    ExplicitTop = 325
-    ExplicitWidth = 1061
   end
   object PanelRTU1: TPanel
     Left = 8
@@ -894,6 +892,15 @@ object Form1: TForm1
       OnClick = btn_SaveLogClick
     end
   end
+  object Button1: TButton
+    Left = 776
+    Top = 5
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 6
+    OnClick = Button1Click
+  end
   object ModBusTCPDriver1: TModBusTCPDriver
     Tag = 1
     CommunicationPort = TCP_UDPPort1
@@ -1072,7 +1079,7 @@ object Form1: TForm1
     Top = 105
   end
   object PLCBlock_RTU3: TPLCBlock
-    TagGUID = '{F21E3504-B7C7-4012-B518-6BF1DB39B550}'
+    TagGUID = '{93EA29A6-498D-4981-AE9A-C48E3920CD43}'
     PLCRack = 0
     PLCSlot = 0
     PLCStation = 3
@@ -1107,13 +1114,12 @@ object Form1: TForm1
     Top = 20
   end
   object ADOConnection1: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
       'er ID=root;Data Source=HydroDB'
     ConnectionTimeout = 0
-    DefaultDatabase = 'hydrodb'
     LoginPrompt = False
+    Provider = 'MSDASQL.1'
     Left = 632
     Top = 244
   end
@@ -1126,18 +1132,21 @@ object Form1: TForm1
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = 'rtu_num'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end
       item
         Name = 'valor'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 664
     Top = 244
@@ -1204,5 +1213,22 @@ object Form1: TForm1
     OnTimer = TimerGuardaDatosTimer
     Left = 680
     Top = 212
+  end
+  object UdpSocket1: TUdpSocket
+    BlockMode = bmNonBlocking
+    LocalHost = '127.0.0.1'
+    LocalPort = '9001'
+    Left = 728
+    Top = 48
+  end
+  object ServerSocket1: TServerSocket
+    Active = False
+    Port = 9000
+    ServerType = stNonBlocking
+    OnClientConnect = ServerSocket1ClientConnect
+    OnClientDisconnect = ServerSocket1ClientDisconnect
+    OnClientRead = ServerSocket1ClientRead
+    Left = 728
+    Top = 16
   end
 end
