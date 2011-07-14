@@ -15,6 +15,21 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object Label8: TLabel
+    Left = 384
+    Top = 320
+    Width = 31
+    Height = 13
+    Caption = 'Label8'
+  end
+  object HMILabel1: THMILabel
+    Left = 512
+    Top = 256
+    Width = 47
+    Height = 13
+    NumberFormat = '#0.0'
+    PLCTag = RTU1_SCC0001
+  end
   object btn_ComenzarGeneracion: TButton
     Left = 232
     Top = 320
@@ -155,8 +170,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
       ItemIndex = 0
       Items.Strings = (
         'Poco'
-        'Mucho'
-        'Valor Fijo')
+        'Mucho')
       ParentFont = False
       TabOrder = 0
     end
@@ -250,20 +264,6 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
       TabOrder = 3
     end
   end
-  object DBGrid1: TDBGrid
-    Left = 606
-    Top = 48
-    Width = 339
-    Height = 307
-    DataSource = DS_Sensores
-    ReadOnly = True
-    TabOrder = 5
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-  end
   object ModBusTCPDriver1: TModBusTCPDriver
     Tag = 1
     CommunicationPort = TCP_UDPPort1
@@ -279,6 +279,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Top = 124
   end
   object TimerGeneracion: TTimer
+    Enabled = False
     OnTimer = TimerGeneracionTimer
     Left = 24
     Top = 124
@@ -530,25 +531,18 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Left = 416
     Top = 192
   end
-  object DS_Sensores: TDataSource
-    AutoEdit = False
-    DataSet = ADOTable_Sensor
-    Left = 712
-    Top = 8
-  end
   object ADOConnection1: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
       'er ID=root;Data Source=HydroDB'
     ConnectionTimeout = 0
-    DefaultDatabase = #15552#6446#58220#18#35017#30271#34957#30271#46059#21358
+    DefaultDatabase = 'hydrodb'
     LoginPrompt = False
+    Provider = 'MSDASQL.1'
     Left = 648
     Top = 12
   end
   object ADOTable_Sensor: TADOTable
-    Active = True
     Connection = ADOConnection1
     CursorType = ctStatic
     LockType = ltReadOnly
