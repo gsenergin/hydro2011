@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, CommPort, tcp_udpport, ProtocolDriver,
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
-  PLCBlock, ScktComp, Sockets, Grids, DBGrids, DB, ADODB, HMILabel;
+  PLCBlock, ScktComp, Sockets, Grids, DBGrids, DB, ADODB, HMILabel, PLCTagNumber;
 
 type
 
@@ -43,41 +43,38 @@ type
     txtValorSensor: TEdit;
     Button3: TButton;
     memoDetalleSensor: TMemo;
-    PLCBlock_RTU2: TPLCBlock;
-    RTU2_ST10001: TPLCBlockElement;
-    RTU2_ST10002: TPLCBlockElement;
-    RTU2_AT10003: TPLCBlockElement;
-    RTU2_AT10004: TPLCBlockElement;
-    RTU2_ST10005: TPLCBlockElement;
-    RTU2_AT10006: TPLCBlockElement;
-    RTU2_AT10007: TPLCBlockElement;
-    RTU2_ST10008: TPLCBlockElement;
-    RTU2_ST10009: TPLCBlockElement;
-    RTU2_ST10010: TPLCBlockElement;
-    RTU2_AT10011: TPLCBlockElement;
-    RTU2_ST10012: TPLCBlockElement;
-    RTU2_ST10013: TPLCBlockElement;
-    RTU2_ST10014: TPLCBlockElement;
-    RTU2_AT10015: TPLCBlockElement;
-    RTU2_AT10016: TPLCBlockElement;
-    RTU2_AT10017: TPLCBlockElement;
-    RTU2_AT10018: TPLCBlockElement;
-    RTU2_AT10019: TPLCBlockElement;
-    RTU2_ST10020: TPLCBlockElement;
-    RTU2_ST10021: TPLCBlockElement;
-    PLCBlock_RTU3: TPLCBlock;
-    RTU3_ASA0002: TPLCBlockElement;
-    RTU3_SSA0001: TPLCBlockElement;
-    PLCBlock_RTU1: TPLCBlock;
-    RTU1_SCC0001: TPLCBlockElement;
-    RTU1_SCC0002: TPLCBlockElement;
-    RTU1_ACC0003: TPLCBlockElement;
-    RTU1_ACC0004: TPLCBlockElement;
-    RTU1_SCC0005: TPLCBlockElement;
     ADOConnection1: TADOConnection;
     ADOTable_Sensor: TADOTable;
     Label8: TLabel;
     HMILabel1: THMILabel;
+    RTU1_SCC0001: TPLCTagNumber;
+    RTU1_SCC0002: TPLCTagNumber;
+    RTU1_ACC0003: TPLCTagNumber;
+    RTU1_ACC0004: TPLCTagNumber;
+    RTU1_SCC0005: TPLCTagNumber;
+    RTU2_ST10001: TPLCTagNumber;
+    RTU2_ST10002: TPLCTagNumber;
+    RTU2_AT10003: TPLCTagNumber;
+    RTU2_AT10004: TPLCTagNumber;
+    RTU2_ST10005: TPLCTagNumber;
+    RTU2_AT10006: TPLCTagNumber;
+    RTU2_AT10007: TPLCTagNumber;
+    RTU2_ST10008: TPLCTagNumber;
+    RTU2_ST10009: TPLCTagNumber;
+    RTU2_ST10010: TPLCTagNumber;
+    RTU2_AT10011: TPLCTagNumber;
+    RTU2_ST10012: TPLCTagNumber;
+    RTU2_ST10013: TPLCTagNumber;
+    RTU2_ST10014: TPLCTagNumber;
+    RTU2_AT10015: TPLCTagNumber;
+    RTU2_AT10016: TPLCTagNumber;
+    RTU2_AT10017: TPLCTagNumber;
+    RTU2_AT10018: TPLCTagNumber;
+    RTU2_AT10019: TPLCTagNumber;
+    RTU2_ST10020: TPLCTagNumber;
+    RTU2_ST10021: TPLCTagNumber;
+    RTU3_SSA0001: TPLCTagNumber;
+    RTU3_ASA0002: TPLCTagNumber;
     procedure btn_ComenzarGeneracionClick(Sender: TObject);
     procedure btn_DetenerGeneracionClick(Sender: TObject);
     procedure TimerGeneracionTimer(Sender: TObject);
@@ -96,6 +93,9 @@ var
   frm_GeneracionDatos: Tfrm_GeneracionDatos;
   Sensores: TSensor;
 
+const ABIERTO=1; ENCENDIDO=1; ERROR=1;
+		CERRADO=0; APAGADO=0;   CORRECTO=0;
+
 
 
 implementation
@@ -108,13 +108,11 @@ implementation
 procedure Tfrm_GeneracionDatos.btn_ComenzarGeneracionClick(Sender: TObject);
 
 begin
-
-
     TCP_UDPPort1.Host:= txt_Host.text;
     TCP_UDPPort1.Port:= strtoint(txt_Puerto.Text);
-    PLCBlock_RTU1.RefreshTime:= strtoint(txt_Refresco.text);
-    PLCBlock_RTU2.RefreshTime:= strtoint(txt_Refresco.text);
-    PLCBlock_RTU3.RefreshTime:= strtoint(txt_Refresco.text);
+//    PLCBlock_RTU1.RefreshTime:= strtoint(txt_Refresco.text);
+//    PLCBlock_RTU2.RefreshTime:= strtoint(txt_Refresco.text);
+//    PLCBlock_RTU3.RefreshTime:= strtoint(txt_Refresco.text);
     TimerGeneracion.Interval:= strtoint(txt_Refresco.text);
 
     // Abro la conexión TCP/UDP
@@ -128,9 +126,9 @@ begin
     btn_DetenerGeneracion.Enabled:= true;
 
     // Levanto los ultimos datos actuales de la RTU y los cargo en Sensores[i]
-    PLCBlock_RTU1.Read;
-    PLCBlock_RTU2.Read;
-    PLCBlock_RTU3.Read;
+//    PLCBlock_RTU1.Read;
+//    PLCBlock_RTU2.Read;
+//    PLCBlock_RTU3.Read;
 
         Sensores[1].Valores[0]:= trunc(RTU1_SCC0001.value);
         Sensores[2].Valores[0]:= trunc(RTU1_SCC0002.value);
@@ -256,11 +254,18 @@ procedure Tfrm_GeneracionDatos.ActualizarValoresSensores;
               until dadoDelta<>0;
               
               if dado<=(probabilidadMantenerse+probabilidadIncrementar) then
+              begin
                   // Se incrementa el valor
-                  valorNuevo:= valorAnterior + dadoDelta
-               else
+                  valorNuevo:= valorAnterior + dadoDelta;
+                  if valorNuevo>LimiteSuperior then valorNuevo:= LimiteSuperior;
+              end
+              else
+              begin
                   // Se decrementa el valor
-                  valorNuevo:= valorAnterior - dadoDelta
+                  valorNuevo:= valorAnterior - dadoDelta;
+                  if valorNuevo<LimiteInferior then valorNuevo:= LimiteInferior;
+              end;
+                  
            end;
        until (valorNuevo>=LimiteInferior) and(valorNuevo<=LimiteSuperior);
 
@@ -269,8 +274,13 @@ procedure Tfrm_GeneracionDatos.ActualizarValoresSensores;
 
 
 var i: integer;
-begin
+    probAumentar,probMantener,probDisminuir: double;
+    porcentajeTotalAnterior, porcentajeTotalActual: double;
+(*TEMP*)  PCAnterior , PACCAnterior, PCActual , PACCActual: integer; 
 
+
+begin
+     
      ///////////////////////////////////////////////////
      ///         RTU 1 - Camara de Carga             ///
      ///////////////////////////////////////////////////
@@ -307,44 +317,352 @@ begin
         end;
       end;
 
-
      (*----      SCC002 - Sensores[2] - Nivel Desborde en Camara    ----*)
+	 // Afectado por Sensores[1], y por los actuadores RTU1_ACC0003 y RTU1_ACC0004
+	 // RTU1_ACC0003 = Compuerta desvio
+	 // RTU1_ACC0004 = Compuerta ingreso a tuberia forzada
+	 
+	 incIndex(Sensores[2].index);
+   i:= Sensores[2].index;
 
-     (*----      SCC005 - Sensores[3] - Presion Tuberia Forzada   ----*)
+	 if (trunc(RTU1_ACC0003.Value)=CERRADO) and (trunc(RTU1_ACC0004.Value)=CERRADO) then
+	 begin
+		  // Disminuye el Nivel de Desborde (+Agua en Camara de Carga)
+		  Sensores[2].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[2].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[2].LL,
+                  (* Limite Superior *) Sensores[2].HH,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 0.0,
+                  (* Probabilidad -- *) 1.0,
+                  (* Delta Cambio    *) 1);
+	 end
+	 else 
+	 if (trunc(RTU1_ACC0003.Value)=CERRADO) and (trunc(RTU1_ACC0004.Value)=ABIERTO) then
+	 begin
+		  // Aumenta el Nivel de Desborde (-Agua en Camara de Carga)
+		  Sensores[2].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[2].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[2].LL,
+                  (* Limite Superior *) Sensores[2].HH,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 1.0, ///OJO ACA...debuguear
+                  (* Probabilidad -- *) 0.0,
+                  (* Delta Cambio    *) 3);
+	 end
+   else
+	 if (trunc(RTU1_ACC0003.Value)=ABIERTO) and (trunc(RTU1_ACC0004.Value)= CERRADO) then
+	 begin
+		  // Disminuye el Nivel de Desborde (+Agua en Camara de Carga)
+		  Sensores[2].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[2].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[2].LL,
+                  (* Limite Superior *) Sensores[2].HH,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 0.2,
+                  (* Probabilidad -- *) 0.8,
+                  (* Delta Cambio    *) 1);
+	 end
+   else
+	 if (trunc(RTU1_ACC0003.Value)=ABIERTO) and (trunc(RTU1_ACC0004.Value)=ABIERTO) then
+	 begin
+		  // ? el Nivel de Desborde (Agua en Camara de Carga)
 
+		  // Depende del vaor anterior del caudal de entrada
+		  if (Sensores[2].valores[antIndex(i)] < Sensores[2].valores[antIndex(antIndex(i))]) then
+		  begin
+				// Viene en aumento
+				probAumentar:= 0.6;
+				probMantener:= 0.2;
+				probDisminuir:= 0.2;
+		  end else
+		  if (Sensores[2].valores[antIndex(i)] > Sensores[2].valores[antIndex(antIndex(i))]) then
+		  begin
+				// Viene en disminucion
+				probAumentar:= 0.2;
+				probMantener:= 0.2;
+				probDisminuir:= 0.6;
+		  end else
+		  begin
+				// Se mantiene
+				probAumentar:= 0.2;
+				probMantener:= 0.6;
+				probDisminuir:= 0.2;
+		  end;
+		  
+		  Sensores[2].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[2].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[2].LL,
+                  (* Limite Superior *) Sensores[2].HH,
+                  (* Probabilidad ++ *) probAumentar,
+                  (* Probabilidad == *) probMantener,
+                  (* Probabilidad -- *) probDisminuir,
+                  (* Delta Cambio    *) 1);
+		  
+	 end; 
+	 
+   (*----      SCC005 - Sensores[3] - Presion Tuberia Forzada   ----*)
+	 // Afectado por Sensores[1] y Sensores[2], y por el actuador RTU1_ACC0004
+	 // RTU1_ACC0004 = Compuerta ingreso a tuberia forzada
+	 incIndex(Sensores[3].index);
+   i:= Sensores[3].index;
+	  
+	 if (RTU1_ACC0004.Value = CERRADO) then
+	 begin
+		  // Si la compuerta de ingreso a la tuberia forzada ha sido cerrada, el agua
+		  // y la presion disminuyen drásticamente		
+		  Sensores[3].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[3].valores[antIndex(i)],
+                  (* Limite Inferior *) 0,
+                  (* Limite Superior *) Sensores[3].HH,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 0.0,
+                  (* Probabilidad -- *) 1.0,
+                  (* Delta Cambio    *) 1);
+	  end
+	  else
+	  begin
+			// Aca hay que tener en cuenta el caudal de entrada y
+			// el nivel de desborde
+		//	try
+(*TEMP*) PCAnterior:= trunc(Sensores[1].Valores[antIndex(i)]*100/Sensores[1].HH); //porcentajeCaudal
+         
+         PACCAnterior:= trunc((Sensores[2].Valores[antIndex(i)]+0.25)*100/Sensores[2].HH); //porcentajeAguaCC  
+      
+	   	   porcentajeTotalAnterior:= PCAnterior * PACCAnterior;  //porcentajeAguaCC
+
+         PCActual:= trunc(Sensores[1].Valores[i]*100/Sensores[1].HH); //porcentajeCaudal
+         PACCActual:= trunc((Sensores[2].Valores[i]+0.25)*100/Sensores[2].HH); //porcentajeAguaCC  
+      
+	   	   porcentajeTotalAnterior:= PCActual * PACCActual;  //porcentajeAguaCC
+
+                
+				if (porcentajeTotalAnterior<=porcentajeTotalActual) then
+				begin
+					// Viene en aumento
+					probAumentar:= 0.8;
+					probMantener:= 0.1;
+					probDisminuir:= 0.1;
+				end else
+				if (porcentajeTotalAnterior>porcentajeTotalActual) then
+				begin
+					// Viene en disminucion
+					probAumentar:= 0.1;
+					probMantener:= 0.1;
+					probDisminuir:= 0.8;
+				end;
+				
+	(*		except
+				// Producido por division por 0, porque el caudal de entrada es 0
+				probAumentar:= 0.0;
+				probMantener:= 0.1;
+				probDisminuir:= 0.9;
+			end;
+	 *)		
+			Sensores[3].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[3].valores[antIndex(i)],
+                  (* Limite Inferior *) 0,
+                  (* Limite Superior *) Sensores[3].HH,
+                  (* Probabilidad ++ *) probAumentar,
+                  (* Probabilidad == *) probMantener,
+                  (* Probabilidad -- *) probDisminuir,
+                  (* Delta Cambio    *) 1);
+			
+	  end;
+	  
+	  
+	  
      ///////////////////////////////////////////////////
      ///         RTU 2 - Turbina 1                   ///
      ///////////////////////////////////////////////////
 
-     (*----      ST10001 - Sensores[4]    ----*)
+     (*----      ST10001 - Sensores[4] - Presión A de la Válvula Mariposa    ----*)
+	  incIndex(Sensores[4].index);
+      i:= Sensores[4].index;
+	  // Toma el valor del segundo anterior de la presion de la tuberia forzada
+	  Sensores[4].Valores[i]:= Sensores[3].Valores[antIndex(i)];
+	    
+	  
+     (*----      ST10002 - Sensores[5] - Presión B de la Válvula Mariposa    ----*)
+	  // Afectado por Sensores[4] y por los actuadores 
+	  // RTU2_AT10003 = Válvula Mariposa
+      // RTU2_AT10004 = Bypass Válvula Mariposa
+	  // Estos 2 actuadores no pueden estar abiertos a la vez
+	  
+	  incIndex(Sensores[5].index);
+      i:= Sensores[5].index;
+	  
+	  if (RTU2_AT10003.Value = ABIERTO) then
+	  begin
+		  // Si la Valvula está abierta
+		  // La presion es la misma que en el lado A
+		  Sensores[5].Valores[i]:= Sensores[4].Valores[i];
+	  end
+	  else
+	  if (RTU2_AT10004.Value = ABIERTO) then
+	  begin
+		  // Si el Bypass está abierto
+		  // La presion en B aumenta hasta llegar a la del lado A	
+	      Sensores[5].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[5].valores[antIndex(i)],
+                  (* Limite Inferior *) 0,
+                  (* Limite Superior *) Sensores[4].Valores[i],
+                  (* Probabilidad ++ *) 1.0,
+                  (* Probabilidad == *) 0.0,
+                  (* Probabilidad -- *) 0.0,
+                  (* Delta Cambio    *) 3);
+	  end
+	  else 
+	  begin
+		  // Bypass & Valvula cerrados
+		  // La persion diminuye
+		  Sensores[5].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[5].valores[antIndex(i)],
+                  (* Limite Inferior *) 0,
+                  (* Limite Superior *) Sensores[5].HH,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 0.0,
+                  (* Probabilidad -- *) 1.0,
+                  (* Delta Cambio    *) 3);
+	  end;
+	 
+	  	  
+     (*----      ST10005 - Sensores[6] - Presión Sobre Tapa Turbina    ----*)
+	  incIndex(Sensores[6].index);
+      i:= Sensores[6].index;
+	  // La presion es igual a la del lado B de la valvula mariposa
+	  Sensores[6].Valores[i]:= Sensores[5].Valores[i];
+	
+	
+	
+	
+	 (*Se calcula antes porque se usa para las temperaturas*)
+	 (*---!!!!   ST10014 - Sensores[12] - Estado Sistema Enfriamiento   ----*)
+	 incIndex(Sensores[12].index);
+     i:= Sensores[12].index;
+	 // Es igual al valor anterior
+	 Sensores[12].Valores[i]:= Sensores[12].Valores[antIndex(i)];
+	 
+	 	 
+	  
+     (*----      ST10008 - Sensores[7] - Temperatura Cojinetes Superiores   ----*)
+	 // Afectado por Sensor[12] y Actuador
+	 // RTU_ST10012 = Sistema de Refrigeracion
+	 incIndex(Sensores[7].index);
+     i:= Sensores[7].index;
+	 
+	 if (Sensores[12].Valores[i] = ERROR) or (trunc(RTU2_AT10011.Value) = APAGADO) then
+	 begin
+		 // La temperatura Aumenta
+		 Sensores[7].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[7].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[7].LL,
+                  (* Limite Superior *) 100,
+                  (* Probabilidad ++ *) 0.8,
+                  (* Probabilidad == *) 0.2,
+                  (* Probabilidad -- *) 0.0,
+                  (* Delta Cambio    *) 1);
+	 end
+	 else
+	 begin
+	     // La temperatura se Mantiene o Baja
+		 Sensores[7].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[7].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[7].L,
+                  (* Limite Superior *) 100,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 0.3,
+                  (* Probabilidad -- *) 0.7,
+                  (* Delta Cambio    *) 1);
+	 end;
 
-     (*----      ST10002 - Sensores[5]    ----*)
+     (*----      ST10009 - Sensores[8] - Temperatura Cojinetes Inferiores     ----*)
+	 // Afectado por Sensor[12] y Actuador
+	 // RTU_ST10012 = Sistema de Refrigeracion
+	 incIndex(Sensores[8].index);
+     i:= Sensores[8].index;
+	 
+	 if (Sensores[12].Valores[i] = ERROR) or (trunc(RTU2_AT10011.Value) = APAGADO) then
+	 begin
+		 // La temperatura Aumenta
+		 Sensores[8].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[8].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[8].LL,
+                  (* Limite Superior *) 100,
+                  (* Probabilidad ++ *) 0.8,
+                  (* Probabilidad == *) 0.2,
+                  (* Probabilidad -- *) 0.0,
+                  (* Delta Cambio    *) 1);
+	 end
+	 else
+	 begin
+	     // La temperatura se Mantiene o Baja
+		 Sensores[8].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[8].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[7].L,
+                  (* Limite Superior *) 100,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 0.3,
+                  (* Probabilidad -- *) 0.7,
+                  (* Delta Cambio    *) 1);
+	 end;
+	 
+	 
+     (*----      ST10010 - Sensores[9] - Temperatura Cojinetes Turbina     ----*)
+     // Afectado por Sensor[12] y Actuador
+	 // RTU_ST10012 = Sistema de Refrigeracion
+	 incIndex(Sensores[9].index);
+     i:= Sensores[9].index;	
+	 
+	 if (Sensores[12].Valores[i] = ERROR) or (trunc(RTU2_AT10011.Value) = APAGADO) then
+	 begin
+		 // La temperatura Aumenta
+		 Sensores[9].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[9].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[9].LL,
+                  (* Limite Superior *) 100,
+                  (* Probabilidad ++ *) 0.8,
+                  (* Probabilidad == *) 0.2,
+                  (* Probabilidad -- *) 0.0,
+                  (* Delta Cambio    *) 1);
+	 end
+	 else
+	 begin
+	     // La temperatura se Mantiene o Baja
+		 Sensores[9].Valores[i] := aleatorio(
+                  (* Valor Anterior  *) Sensores[9].valores[antIndex(i)],
+                  (* Limite Inferior *) Sensores[7].L,
+                  (* Limite Superior *) 100,
+                  (* Probabilidad ++ *) 0.0,
+                  (* Probabilidad == *) 0.3,
+                  (* Probabilidad -- *) 0.7,
+                  (* Delta Cambio    *) 1);
+	 end;
+	 
+	 
+     (*----      ST10012 - Sensores[10] - Caudal Turbinado   ----*)
+	 // La turbina aguanta hasta 40 m^3 / s
+	 // Depende de la apertura de los alabes y de la presion en la tuberia forzada
+	 // algo mas??	
 
-     (*----      ST10005 - Sensores[6]    ----*)
+	 
+     (*----      ST10013 - Sensores[11] - Velocidad Giro Turbina   ----*)
 
-     (*----      ST10008 - Sensores[7]    ----*)
+     
 
-     (*----      ST10009 - Sensores[8]    ----*)
+     (*----      ST10020 - Sensores[13] - Intensidad Corriente   ----*)
 
-     (*----      ST10010 - Sensores[9]    ----*)
-
-     (*----      ST10012 - Sensores[10]    ----*)
-
-     (*----      ST10013 - Sensores[11]    ----*)
-
-     (*----      ST10014 - Sensores[12]    ----*)
-
-     (*----      ST10020 - Sensores[13]    ----*)
-
-     (*----      ST10021 - Sensores[14]    ----*)
+     (*----      ST10021 - Sensores[14] - Voltaje Generado   ----*)
 
      ///////////////////////////////////////////////////
      ///         RTU 3 - Salida                      ///
      ///////////////////////////////////////////////////
 
-     (*----      SSA0001 - Sensores[15]    ----*)
-
-     
+     (*----      SSA0001 - Sensores[15] - Nivel Desfogue   ----*)
+     incIndex(Sensores[15].index);
+     i:= Sensores[15].index;
+	 // Debe ser igual al caudar turbinado
+     Sensores[15].Valores[i]:= Sensores[10].Valores[i];
 
 end;
 
@@ -353,32 +671,28 @@ end;
 
 procedure Tfrm_GeneracionDatos.TimerGeneracionTimer(Sender: TObject);
 begin
-      ActualizarValoresSensores();
+     ActualizarValoresSensores();
       Label8.Caption:= floattostr( Sensores[1].Valores[ Sensores[1].index ] );
       
       // RTU 1
       RTU1_SCC0001.value:= Sensores[1].Valores[ Sensores[1].index ];
-
-
- (*     RTU1_SCC0002.value:= Sensores[2].Valores[1];
-      RTU1_SCC0005.value:= Sensores[3].Valores[1];
+      RTU1_SCC0002.value:= Sensores[2].Valores[ Sensores[2].index ];
+      RTU1_SCC0005.value:= Sensores[3].Valores[ Sensores[3].index ];
       // RTU 2
-      RTU2_ST10001.value:= Sensores[4].Valores[1];
-      RTU2_ST10002.value:= Sensores[5].Valores[1];
-      RTU2_ST10005.value:= Sensores[6].Valores[1];
-      RTU2_ST10008.value:= Sensores[7].Valores[1];
-      RTU2_ST10009.value:= Sensores[8].Valores[1];
-      RTU2_ST10010.value:= Sensores[9].Valores[1];
-      RTU2_ST10012.value:= Sensores[10].Valores[1];
-      RTU2_ST10013.value:= Sensores[11].Valores[1];
-      RTU2_ST10014.value:= Sensores[12].Valores[1];
-      RTU2_ST10020.value:= Sensores[13].Valores[1];
-      RTU2_ST10021.value:= Sensores[14].Valores[1];
+      RTU2_ST10001.value:= Sensores[4].Valores[ Sensores[4].index ];
+      RTU2_ST10002.value:= Sensores[5].Valores[ Sensores[5].index ];
+      RTU2_ST10005.value:= Sensores[6].Valores[ Sensores[6].index ];
+      RTU2_ST10008.value:= Sensores[7].Valores[ Sensores[7].index ];
+      RTU2_ST10009.value:= Sensores[8].Valores[ Sensores[8].index ];
+      RTU2_ST10010.value:= Sensores[9].Valores[ Sensores[9].index ];
+      RTU2_ST10012.value:= Sensores[10].Valores[ Sensores[10].index ];
+      RTU2_ST10013.value:= Sensores[11].Valores[ Sensores[11].index ];
+      RTU2_ST10014.value:= Sensores[12].Valores[ Sensores[12].index ];
+      RTU2_ST10020.value:= Sensores[13].Valores[ Sensores[13].index ];
+      RTU2_ST10021.value:= Sensores[14].Valores[ Sensores[14].index ];
       // RTU 3
-      RTU3_SSA0001.value:= Sensores[15].Valores[1];
-      *)
-
-
+      RTU3_SSA0001.value:= Sensores[15].Valores[ Sensores[15].index ];
+  
 end;
 
 end.

@@ -23,12 +23,11 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Caption = 'Label8'
   end
   object HMILabel1: THMILabel
-    Left = 512
-    Top = 256
+    Left = 384
+    Top = 339
     Width = 47
     Height = 13
     NumberFormat = '#0.0'
-    PLCTag = RTU1_SCC0001
   end
   object btn_ComenzarGeneracion: TButton
     Left = 232
@@ -284,203 +283,28 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Left = 24
     Top = 124
   end
-  object PLCBlock_RTU2: TPLCBlock
-    TagGUID = '{F21E3504-B7C7-4012-B518-6BF1DB39B550}'
-    AutoRead = False
-    PLCRack = 0
-    PLCSlot = 0
-    PLCStation = 2
-    MemFile_DB = 0
-    MemAddress = 0
-    MemSubElement = 0
-    MemReadFunction = 3
-    MemWriteFunction = 16
-    ProtocolDriver = ModBusTCPDriver1
-    Size = 21
-    SyncWrites = True
-    Left = 512
-    Top = 33
+  object ADOConnection1: TADOConnection
+    ConnectionString = 
+      'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
+      'er ID=root;Data Source=HydroDB'
+    ConnectionTimeout = 0
+    DefaultDatabase = 'hydrodb'
+    LoginPrompt = False
+    Provider = 'MSDASQL.1'
+    Left = 816
+    Top = 44
   end
-  object RTU2_ST10001: TPLCBlockElement
-    TagGUID = '{6BB4D01B-756F-4135-AF91-CEE19A1AFD12}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 0
-    Left = 448
-    Top = 65
+  object ADOTable_Sensor: TADOTable
+    Connection = ADOConnection1
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    IndexName = 'PRIMARY'
+    TableName = 'sensor'
+    Left = 848
+    Top = 40
   end
-  object RTU2_ST10002: TPLCBlockElement
-    TagGUID = '{5A798831-605E-445C-8553-041986388EEE}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 1
-    Left = 448
-    Top = 97
-  end
-  object RTU2_AT10003: TPLCBlockElement
-    TagGUID = '{F4CD7470-5C16-45AA-B70C-495F792BA308}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 2
-    Left = 448
-    Top = 129
-  end
-  object RTU2_AT10004: TPLCBlockElement
-    TagGUID = '{B6AEA738-B57D-493A-9DBA-594B6485E3EE}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 3
-    Left = 448
-    Top = 161
-  end
-  object RTU2_ST10005: TPLCBlockElement
-    TagGUID = '{11DD8031-67A7-4BAC-91B9-637D48F550BF}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 4
-    Left = 448
-    Top = 193
-  end
-  object RTU2_AT10006: TPLCBlockElement
-    TagGUID = '{6B3BD249-C8FC-4690-A8D9-81654D60977D}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 5
-    Left = 480
-    Top = 65
-  end
-  object RTU2_AT10007: TPLCBlockElement
-    TagGUID = '{7ECACFCE-1ED1-4D44-8A46-7D6AE883FEE6}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 6
-    Left = 480
-    Top = 97
-  end
-  object RTU2_ST10008: TPLCBlockElement
-    TagGUID = '{40E07825-907B-45FE-8325-2FEDAA6ACD4E}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 7
-    Left = 480
-    Top = 129
-  end
-  object RTU2_ST10009: TPLCBlockElement
-    TagGUID = '{1B076C7C-1CC2-4DC8-A2F3-E41742AC1CF6}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 8
-    Left = 480
-    Top = 161
-  end
-  object RTU2_ST10010: TPLCBlockElement
-    TagGUID = '{D0108BF7-5F6C-44CC-81C0-888AA24DF3CF}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 9
-    Left = 480
-    Top = 193
-  end
-  object RTU2_AT10011: TPLCBlockElement
-    TagGUID = '{3F5863AA-86DE-492C-9B8C-91B289766281}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 10
-    Left = 512
-    Top = 65
-  end
-  object RTU2_ST10012: TPLCBlockElement
-    TagGUID = '{0A99D121-2652-4847-8D68-D10B86B05137}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 11
-    Left = 512
-    Top = 97
-  end
-  object RTU2_ST10013: TPLCBlockElement
-    TagGUID = '{956BCF18-71A4-45C1-AA99-5788F6794CB8}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 12
-    Left = 512
-    Top = 129
-  end
-  object RTU2_ST10014: TPLCBlockElement
-    TagGUID = '{DA4516F0-7DA9-42CF-AC93-2E6C1B4C6304}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 13
-    Left = 512
-    Top = 161
-  end
-  object RTU2_AT10015: TPLCBlockElement
-    TagGUID = '{0946AEE2-6E41-41AD-AD46-89CCAE087248}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 14
-    Left = 512
-    Top = 193
-  end
-  object RTU2_AT10016: TPLCBlockElement
-    TagGUID = '{A75D22CC-40C9-444D-A6F3-436AC2547439}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 15
-    Left = 544
-    Top = 65
-  end
-  object RTU2_AT10017: TPLCBlockElement
-    TagGUID = '{AE8F86AF-7ADB-4AA9-A7F5-F4CAA91DF23D}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 16
-    Left = 544
-    Top = 97
-  end
-  object RTU2_AT10018: TPLCBlockElement
-    TagGUID = '{2038AFB5-E3B2-434F-96E4-16DAAAFA5FB7}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 17
-    Left = 544
-    Top = 129
-  end
-  object RTU2_AT10019: TPLCBlockElement
-    TagGUID = '{DB6C3F85-F90F-4864-B3B9-A1696E0B0553}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 18
-    Left = 544
-    Top = 161
-  end
-  object RTU2_ST10020: TPLCBlockElement
-    TagGUID = '{8CF5E3AD-CD4B-4398-8DC2-0F0505158235}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 19
-    Left = 544
-    Top = 193
-  end
-  object RTU2_ST10021: TPLCBlockElement
-    TagGUID = '{870F6C6A-BA25-4747-A105-098C903C6775}'
-    PLCBlock = PLCBlock_RTU2
-    Index = 20
-    Left = 576
-    Top = 65
-  end
-  object PLCBlock_RTU3: TPLCBlock
-    TagGUID = '{93EA29A6-498D-4981-AE9A-C48E3920CD43}'
-    AutoRead = False
-    PLCRack = 0
-    PLCSlot = 0
-    PLCStation = 3
-    MemFile_DB = 0
-    MemAddress = 0
-    MemSubElement = 0
-    MemReadFunction = 3
-    MemWriteFunction = 16
-    ProtocolDriver = ModBusTCPDriver1
-    Size = 2
-    SyncWrites = True
-    Left = 608
-    Top = 32
-  end
-  object RTU3_ASA0002: TPLCBlockElement
-    TagGUID = '{63E9CF73-2245-412A-B395-B32BFB889183}'
-    PLCBlock = PLCBlock_RTU3
-    Index = 1
-    Left = 608
-    Top = 96
-  end
-  object RTU3_SSA0001: TPLCBlockElement
-    TagGUID = '{C50B11E5-15A1-4F4C-8EA3-C1D4217BABEA}'
-    PLCBlock = PLCBlock_RTU3
-    Index = 0
-    Left = 608
-    Top = 64
-  end
-  object PLCBlock_RTU1: TPLCBlock
-    TagGUID = '{9323DC12-ACEF-41F6-9FC2-B72E302C804D}'
+  object RTU1_SCC0001: TPLCTagNumber
+    TagGUID = '{3B90BA67-220C-479C-9CB7-50D8B8399BE8}'
     AutoRead = False
     PLCRack = 0
     PLCSlot = 0
@@ -491,64 +315,412 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     MemReadFunction = 3
     MemWriteFunction = 16
     ProtocolDriver = ModBusTCPDriver1
-    Size = 5
-    SyncWrites = True
     Left = 416
-    Top = 32
+    Top = 24
   end
-  object RTU1_SCC0001: TPLCBlockElement
-    TagGUID = '{BB0CFBD1-8C93-4E13-A10E-2AC6980045AE}'
-    PLCBlock = PLCBlock_RTU1
-    Index = 0
+  object RTU1_SCC0002: TPLCTagNumber
+    TagGUID = '{3307ABDF-9FDD-428E-A32B-BD410BB28F41}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 1
+    MemFile_DB = 0
+    MemAddress = 1
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
     Left = 416
-    Top = 64
+    Top = 56
   end
-  object RTU1_SCC0002: TPLCBlockElement
-    TagGUID = '{FEB9CA3C-4376-497F-A60C-9A5E9B07B5BE}'
-    PLCBlock = PLCBlock_RTU1
-    Index = 1
+  object RTU1_ACC0003: TPLCTagNumber
+    TagGUID = '{E6F85AEC-D702-4449-BE5A-D65E20609F84}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 1
+    MemFile_DB = 0
+    MemAddress = 2
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
     Left = 416
-    Top = 96
+    Top = 88
   end
-  object RTU1_ACC0003: TPLCBlockElement
-    TagGUID = '{270E8ACD-4E1F-4C9E-ABF5-D09753F2F0D7}'
-    PLCBlock = PLCBlock_RTU1
-    Index = 2
+  object RTU1_ACC0004: TPLCTagNumber
+    TagGUID = '{E08FBE43-AC87-4A78-9845-043B61194542}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 1
+    MemFile_DB = 0
+    MemAddress = 3
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
     Left = 416
-    Top = 128
+    Top = 120
   end
-  object RTU1_ACC0004: TPLCBlockElement
-    TagGUID = '{BEF91A26-5724-4C8A-93BF-3F4EDAEE4490}'
-    PLCBlock = PLCBlock_RTU1
-    Index = 3
+  object RTU1_SCC0005: TPLCTagNumber
+    TagGUID = '{1ACE5EFD-A0C1-4801-AB61-E107A644F83D}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 1
+    MemFile_DB = 0
+    MemAddress = 4
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
     Left = 416
-    Top = 160
+    Top = 152
   end
-  object RTU1_SCC0005: TPLCBlockElement
-    TagGUID = '{134E1786-B331-418E-A16B-E83365776D1F}'
-    PLCBlock = PLCBlock_RTU1
-    Index = 4
-    Left = 416
-    Top = 192
+  object RTU2_ST10001: TPLCTagNumber
+    TagGUID = '{1ACE5EFD-A0C1-4801-AB61-E107A644F83D}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 0
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 488
+    Top = 24
   end
-  object ADOConnection1: TADOConnection
-    ConnectionString = 
-      'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
-      'er ID=root;Data Source=HydroDB'
-    ConnectionTimeout = 0
-    DefaultDatabase = 'hydrodb'
-    LoginPrompt = False
-    Provider = 'MSDASQL.1'
-    Left = 648
-    Top = 12
+  object RTU2_ST10002: TPLCTagNumber
+    TagGUID = '{57448682-D726-4231-B54F-77687D09FC97}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 1
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 488
+    Top = 56
   end
-  object ADOTable_Sensor: TADOTable
-    Connection = ADOConnection1
-    CursorType = ctStatic
-    LockType = ltReadOnly
-    IndexName = 'PRIMARY'
-    TableName = 'sensor'
-    Left = 680
-    Top = 8
+  object RTU2_AT10003: TPLCTagNumber
+    TagGUID = '{06E2FBD0-2F2B-4E91-812A-5EA367797D18}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 2
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 488
+    Top = 88
+  end
+  object RTU2_AT10004: TPLCTagNumber
+    TagGUID = '{50B2B7AE-8E78-4E82-B7F7-3B5BAC0F0D6B}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 3
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 488
+    Top = 120
+  end
+  object RTU2_ST10005: TPLCTagNumber
+    TagGUID = '{B62C0C48-38CF-40D3-8CA5-0890D4BA5BFB}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 4
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 488
+    Top = 152
+  end
+  object RTU2_AT10006: TPLCTagNumber
+    TagGUID = '{1C842F8C-67DF-42ED-B299-C480723DE5DE}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 5
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 520
+    Top = 24
+  end
+  object RTU2_AT10007: TPLCTagNumber
+    TagGUID = '{A5784B31-1DAB-48F1-8E9D-BE896844B75B}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 6
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 520
+    Top = 56
+  end
+  object RTU2_ST10008: TPLCTagNumber
+    TagGUID = '{57924CBE-21A7-46D8-AB51-29554650C243}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 7
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 520
+    Top = 88
+  end
+  object RTU2_ST10009: TPLCTagNumber
+    TagGUID = '{F7F761E5-74D0-4FDC-A784-049560D0E972}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 8
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 520
+    Top = 120
+  end
+  object RTU2_ST10010: TPLCTagNumber
+    TagGUID = '{75369396-CFC7-42BC-B89F-B5BAE89B2F91}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 9
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 520
+    Top = 152
+  end
+  object RTU2_AT10011: TPLCTagNumber
+    TagGUID = '{4E1BA708-D958-4F95-A27A-77C04A4C1723}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 10
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 552
+    Top = 24
+  end
+  object RTU2_ST10012: TPLCTagNumber
+    TagGUID = '{76E1E425-FD11-4AE2-B1CB-854F8622F119}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 11
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 552
+    Top = 56
+  end
+  object RTU2_ST10013: TPLCTagNumber
+    TagGUID = '{80F3159D-591E-4333-9A76-093BD42344A0}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 12
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 552
+    Top = 88
+  end
+  object RTU2_ST10014: TPLCTagNumber
+    TagGUID = '{95131A9E-0887-4EA6-ABA0-D373ABB57EEE}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 13
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 552
+    Top = 120
+  end
+  object RTU2_AT10015: TPLCTagNumber
+    TagGUID = '{42E27FDA-21FD-4D00-BDD1-670414169E96}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 14
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 552
+    Top = 152
+  end
+  object RTU2_AT10016: TPLCTagNumber
+    TagGUID = '{B980D308-3A1B-485A-8A0E-6EFC365BDDC4}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 15
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 584
+    Top = 24
+  end
+  object RTU2_AT10017: TPLCTagNumber
+    TagGUID = '{0BEF21B8-1DF7-410D-977B-79A0BD53B92E}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 16
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 584
+    Top = 56
+  end
+  object RTU2_AT10018: TPLCTagNumber
+    TagGUID = '{1D7C95EE-29EE-4AA7-899A-1E8C2FBDEFED}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 17
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 584
+    Top = 88
+  end
+  object RTU2_AT10019: TPLCTagNumber
+    TagGUID = '{745839C4-E8B0-4D45-99C4-EE2EB210F3E9}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 18
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 584
+    Top = 120
+  end
+  object RTU2_ST10020: TPLCTagNumber
+    TagGUID = '{9F26CC02-DA61-4E7B-92DC-76E013923E6D}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 19
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 584
+    Top = 152
+  end
+  object RTU2_ST10021: TPLCTagNumber
+    TagGUID = '{9714D29B-9B08-4ADD-95D6-EFD5B9147AC2}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 20
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 624
+    Top = 24
+  end
+  object RTU3_SSA0001: TPLCTagNumber
+    TagGUID = '{E08FBE43-AC87-4A78-9845-043B61194542}'
+    AutoRead = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 3
+    MemFile_DB = 0
+    MemAddress = 0
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 672
+    Top = 24
+  end
+  object RTU3_ASA0002: TPLCTagNumber
+    TagGUID = '{1ACE5EFD-A0C1-4801-AB61-E107A644F83D}'
+    AutoWrite = False
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 3
+    MemFile_DB = 0
+    MemAddress = 1
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Left = 672
+    Top = 56
   end
 end
