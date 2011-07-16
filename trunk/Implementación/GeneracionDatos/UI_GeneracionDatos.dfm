@@ -4,7 +4,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
   BorderStyle = bsSingle
   Caption = 'HYDRO - Modulo de Generacion de Datos'
   ClientHeight = 360
-  ClientWidth = 1000
+  ClientWidth = 704
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,13 +15,6 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label8: TLabel
-    Left = 384
-    Top = 320
-    Width = 31
-    Height = 13
-    Caption = 'Label8'
-  end
   object HMILabel1: THMILabel
     Left = 384
     Top = 339
@@ -30,8 +23,8 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     NumberFormat = '#0.0'
   end
   object btn_ComenzarGeneracion: TButton
-    Left = 232
-    Top = 320
+    Left = 231
+    Top = 310
     Width = 121
     Height = 25
     Caption = 'Comenzar Generaci'#243'n'
@@ -40,7 +33,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
   end
   object btn_DetenerGeneracion: TButton
     Left = 47
-    Top = 320
+    Top = 311
     Width = 123
     Height = 25
     Caption = 'Detener Generaci'#243'n'
@@ -158,25 +151,29 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     object radioCaudalEntrada: TRadioGroup
       Left = 16
       Top = 24
-      Width = 169
+      Width = 217
       Height = 105
       Caption = 'Caudal de Entrada'
+      Columns = 2
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
-      ItemIndex = 0
+      ItemIndex = 3
       Items.Strings = (
         'Poco'
-        'Mucho')
+        'Mucho'
+        'Valor Fijo (=20)'
+        'Valor Fijo (=60)')
       ParentFont = False
       TabOrder = 0
+      OnClick = radioCaudalEntradaClick
     end
     object radioRangoSensores: TRadioGroup
-      Left = 207
+      Left = 239
       Top = 24
-      Width = 162
+      Width = 130
       Height = 105
       Caption = 'Rango Sensores'
       Font.Charset = DEFAULT_CHARSET
@@ -191,6 +188,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
         'Alerta Grave')
       ParentFont = False
       TabOrder = 1
+      OnClick = radioRangoSensoresClick
     end
   end
   object Panel2: TPanel
@@ -215,11 +213,11 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 16
-      Top = 99
-      Width = 84
+      Left = 24
+      Top = 45
+      Width = 138
       Height = 13
-      Caption = 'Valor a Inserar'
+      Caption = 'Sistema de Enfriamiento'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -227,41 +225,25 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object cmbSensor: TComboBox
-      Left = 16
-      Top = 24
-      Width = 153
-      Height = 21
-      ItemHeight = 13
+    object chkErrorEnfriamiento: TCheckBox
+      Left = 48
+      Top = 71
+      Width = 97
+      Height = 17
+      Caption = 'Error del Sistema'
       TabOrder = 0
-      Text = 'cmbSensor'
     end
-    object txtValorSensor: TEdit
-      Left = 106
-      Top = 96
-      Width = 63
-      Height = 21
-      TabOrder = 1
-      Text = 'txtValorSensor'
-    end
-    object Button3: TButton
-      Left = 47
-      Top = 118
-      Width = 75
-      Height = 25
-      Caption = 'Insertar'
-      TabOrder = 2
-    end
-    object memoDetalleSensor: TMemo
-      Left = 16
-      Top = 51
-      Width = 153
-      Height = 42
-      Color = clGradientInactiveCaption
-      Lines.Strings = (
-        'memoDetalleSensor')
-      TabOrder = 3
-    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 341
+    Width = 704
+    Height = 19
+    Panels = <
+      item
+        Width = 50
+      end>
+    ExplicitWidth = 716
   end
   object ModBusTCPDriver1: TModBusTCPDriver
     Tag = 1
@@ -291,8 +273,8 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     DefaultDatabase = 'hydrodb'
     LoginPrompt = False
     Provider = 'MSDASQL.1'
-    Left = 816
-    Top = 44
+    Left = 416
+    Top = 212
   end
   object ADOTable_Sensor: TADOTable
     Connection = ADOConnection1
@@ -300,8 +282,8 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     LockType = ltReadOnly
     IndexName = 'PRIMARY'
     TableName = 'sensor'
-    Left = 848
-    Top = 40
+    Left = 416
+    Top = 184
   end
   object RTU1_SCC0001: TPLCTagNumber
     TagGUID = '{3B90BA67-220C-479C-9CB7-50D8B8399BE8}'
@@ -379,7 +361,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Top = 152
   end
   object RTU2_ST10001: TPLCTagNumber
-    TagGUID = '{1ACE5EFD-A0C1-4801-AB61-E107A644F83D}'
+    TagGUID = '{D64E6560-CAAC-4622-AF4B-57D44779370F}'
     AutoRead = False
     PLCRack = 0
     PLCSlot = 0
@@ -694,7 +676,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Top = 24
   end
   object RTU3_SSA0001: TPLCTagNumber
-    TagGUID = '{E08FBE43-AC87-4A78-9845-043B61194542}'
+    TagGUID = '{82C37608-5AE7-417F-8A94-99205D2A339C}'
     AutoRead = False
     PLCRack = 0
     PLCSlot = 0
@@ -709,7 +691,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Top = 24
   end
   object RTU3_ASA0002: TPLCTagNumber
-    TagGUID = '{1ACE5EFD-A0C1-4801-AB61-E107A644F83D}'
+    TagGUID = '{D104576B-06A6-4BAD-8BA4-518F8C51BD42}'
     AutoWrite = False
     PLCRack = 0
     PLCSlot = 0
