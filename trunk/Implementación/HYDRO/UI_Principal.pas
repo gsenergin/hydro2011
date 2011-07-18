@@ -7,7 +7,10 @@ uses
   Dialogs, ComCtrls, ExtCtrls, StdCtrls, Buttons, Grids, DBGrids,
   dxSkinMcSkin, dxSkinscxPCPainter, cxPC, cxControls, cxGraphics, cxLookAndFeels,
   cxLookAndFeelPainters, cxContainer, cxEdit, Menus, cxTextEdit, dxSkinsForm,
-  cxButtons, cxLabel, dxGDIPlusClasses, dxSkinsCore, ScktComp;
+  cxButtons, cxLabel, dxGDIPlusClasses, dxSkinsCore, ScktComp,
+  HMIControlDislocatorAnimation, CommPort, tcp_udpport, ProtocolDriver,
+  ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
+  PLCBlock, HMILabel, HMIText;
 
 type
   Tfrm_Principal = class(TForm)
@@ -56,46 +59,29 @@ type
     cxTextEdit8: TcxTextEdit;
     cxTextEdit9: TcxTextEdit;
     Image1: TImage;
-    cxLabel10: TcxLabel;
     cxLabel11: TcxLabel;
-    cxLabel12: TcxLabel;
     cxLabel13: TcxLabel;
-    cxButton4: TcxButton;
+    btnCompuertaDesvioAbierta: TcxButton;
     cxLabel14: TcxLabel;
-    cxLabel15: TcxLabel;
     cxLabel16: TcxLabel;
-    cxLabel17: TcxLabel;
-    cxLabel18: TcxLabel;
     cxLabel20: TcxLabel;
     cxLabel29: TcxLabel;
-    cxLabel30: TcxLabel;
-    cxLabel31: TcxLabel;
     cxLabel32: TcxLabel;
-    cxLabel33: TcxLabel;
     cxLabel34: TcxLabel;
-    cxLabel36: TcxLabel;
     UpDown1: TUpDown;
     cxLabel37: TcxLabel;
-    cxLabel38: TcxLabel;
     UpDown2: TUpDown;
-    cxLabel39: TcxLabel;
     UpDown3: TUpDown;
-    cxLabel40: TcxLabel;
     cxLabel41: TcxLabel;
-    cxLabel42: TcxLabel;
     cxLabel44: TcxLabel;
-    cxLabel35: TcxLabel;
     cxLabel45: TcxLabel;
     cxLabel46: TcxLabel;
-    cxLabel47: TcxLabel;
     cxLabel48: TcxLabel;
-    cxLabel49: TcxLabel;
     cxLabel50: TcxLabel;
-    cxLabel51: TcxLabel;
     cxLabel52: TcxLabel;
-    cxButton12: TcxButton;
-    cxButton2: TcxButton;
-    cxButton13: TcxButton;
+    btnCompuertaDesvioCerrada: TcxButton;
+    btnCompuertaIngresoCerrada: TcxButton;
+    btnCompuertaIngresoAbierta: TcxButton;
     cxLabel53: TcxLabel;
     cxLabel54: TcxLabel;
     cxLabel55: TcxLabel;
@@ -124,8 +110,75 @@ type
     SG_Configuracion: TStringGrid;
     cxButton1: TcxButton;
     SocketSuscripcion: TClientSocket;
+    cxTabSheet1: TcxTabSheet;
+    PLCBlock_RTU2: TPLCBlock;
+    RTU2_ST10001: TPLCBlockElement;
+    RTU2_ST10002: TPLCBlockElement;
+    RTU2_AT10003: TPLCBlockElement;
+    RTU2_AT10004: TPLCBlockElement;
+    RTU2_ST10005: TPLCBlockElement;
+    RTU2_AT10006: TPLCBlockElement;
+    RTU2_AT10007: TPLCBlockElement;
+    RTU2_ST10008: TPLCBlockElement;
+    RTU2_ST10009: TPLCBlockElement;
+    RTU2_ST10010: TPLCBlockElement;
+    RTU2_AT10011: TPLCBlockElement;
+    RTU2_ST10012: TPLCBlockElement;
+    RTU2_ST10013: TPLCBlockElement;
+    RTU2_ST10014: TPLCBlockElement;
+    RTU2_AT10015: TPLCBlockElement;
+    RTU2_AT10016: TPLCBlockElement;
+    RTU2_AT10017: TPLCBlockElement;
+    RTU2_AT10018: TPLCBlockElement;
+    RTU2_AT10019: TPLCBlockElement;
+    RTU2_ST10020: TPLCBlockElement;
+    RTU2_ST10021: TPLCBlockElement;
+    PLCBlock_RTU3: TPLCBlock;
+    RTU3_ASA0002: TPLCBlockElement;
+    RTU3_SSA0001: TPLCBlockElement;
+    PLCBlock_RTU1: TPLCBlock;
+    RTU1_SCC0001: TPLCBlockElement;
+    RTU1_SCC0002: TPLCBlockElement;
+    RTU1_ACC0003: TPLCBlockElement;
+    RTU1_ACC0004: TPLCBlockElement;
+    RTU1_SCC0005: TPLCBlockElement;
+    ModBusTCPDriver1: TModBusTCPDriver;
+    TCP_UDPPort1: TTCP_UDPPort;
+    HMILabel2: THMILabel;
+    HMILabel3: THMILabel;
+    HMILabel4: THMILabel;
+    HMILabel5: THMILabel;
+    HMILabel6: THMILabel;
+    HMILabel27: THMILabel;
+    HMILabel28: THMILabel;
+    HMILabel1: THMILabel;
+    HMILabel7: THMILabel;
+    HMILabel10: THMILabel;
+    HMILabel13: THMILabel;
+    HMILabel14: THMILabel;
+    HMILabel15: THMILabel;
+    HMILabel8: THMILabel;
+    HMILabel9: THMILabel;
+    HMILabel11: THMILabel;
+    HMILabel12: THMILabel;
+    cxLabel10: TcxLabel;
+    cxLabel12: TcxLabel;
+    HMILabel16: THMILabel;
+    HMILabel17: THMILabel;
+    HMILabel18: THMILabel;
+    HMILabel19: THMILabel;
+    HMILabel20: THMILabel;
+    HMILabel21: THMILabel;
+    HMILabel22: THMILabel;
+    HMILabel23: THMILabel;
+    HMILabel24: THMILabel;
+    HMILabel25: THMILabel;
+    HMILabel26: THMILabel;
+    cxLabel15: TcxLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure RTU1_ACC0003ValueChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,6 +194,13 @@ implementation
 
 
 
+procedure Tfrm_Principal.Button1Click(Sender: TObject);
+begin
+    TCP_UDPPort1.Active:= true;
+end;
+
+
+
 procedure Tfrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     SocketSuscripcion.Socket.SendText('BAJA');
@@ -149,10 +209,11 @@ end;
 procedure Tfrm_Principal.FormCreate(Sender: TObject);
 begin
     // Activo el Socket
+    TCP_UDPPort1.Active:= true;
 //    SocketSuscripcion.Active:= false;
 //    SocketSuscripcion.Host:= '127.0.0.1';
 //    SocketSuscripcion.Port:= 9000;
-    SocketSuscripcion.Active:= true;
+ //   SocketSuscripcion.Active:= true;
 
 
     // StringGrid Alertas
@@ -241,5 +302,17 @@ begin
 
 
 end;
+
+
+// Cambio en La compuerta de Desvio
+procedure Tfrm_Principal.RTU1_ACC0003ValueChange(Sender: TObject);
+begin
+    if trunc(RTU1_ACC0003.Value)=1 then
+        btnCompuertaDesvioAbierta.SetFocus
+    else
+        btnCompuertaDesvioCerrada.SetFocus;
+
+end;
+
 
 end.

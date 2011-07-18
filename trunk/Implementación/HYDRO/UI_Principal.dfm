@@ -4,7 +4,7 @@ object frm_Principal: Tfrm_Principal
   BorderStyle = bsSingle
   Caption = 'HYDRO'
   ClientHeight = 751
-  ClientWidth = 769
+  ClientWidth = 765
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -76,7 +76,7 @@ object frm_Principal: Tfrm_Principal
   end
   object PageControl: TcxPageControl
     Left = 0
-    Top = 71
+    Top = 63
     Width = 761
     Height = 506
     ActivePage = tab_Control
@@ -89,15 +89,15 @@ object frm_Principal: Tfrm_Principal
       Caption = 'Control'
       ImageIndex = 0
       object Image1: TImage
-        Left = 0
-        Top = 0
+        Left = 3
+        Top = 3
         Width = 742
         Height = 476
         Enabled = False
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D4948445200000300
           0000023208060000007C44AD9C0000000467414D410000B18F0BFC6105000000
-          097048597300000EC200000EC20115284A8000005ABF49444154785EEDDD4DB6
+          097048597300000EC100000EC101B8916BED00005ABF49444154785EEDDD4DB6
           233792ADED984D0DA3BA77569AD29D43746B185F237BDF10E28AA964893A411E
           C73FCCE04FAE75564A22E0000C2FCCF776C0C91FFFFD7FFEE75794BF7FFDEB5F
           BFFC8901063080010C60000318C00006E631F0238AF87FF6C364CF9B6CB1155B
@@ -827,24 +827,418 @@ object frm_Principal: Tfrm_Principal
           0049454E44AE426082}
         Proportional = True
       end
-      object cxLabel10: TcxLabel
+      object HMILabel2: THMILabel
         Left = 262
-        Top = 3
-        Caption = 'lblCaudal'
+        Top = 7
+        Width = 90
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
         ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
+        NumberFormat = '#0.0'
+        PLCTag = RTU1_SCC0001
+        Sufix = ' m^3/seg'
+      end
+      object HMILabel3: THMILabel
+        Left = 262
+        Top = 28
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0.0'
+        PLCTag = RTU1_SCC0002
+        Sufix = ' mm'
+      end
+      object HMILabel4: THMILabel
+        Left = 16
+        Top = 120
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU1_ACC0003
+      end
+      object HMILabel5: THMILabel
+        Left = 200
+        Top = 78
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU1_ACC0004
+      end
+      object HMILabel6: THMILabel
+        Left = 161
+        Top = 174
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU1_SCC0005
+        Sufix = ' bar'
+      end
+      object HMILabel27: THMILabel
+        Left = 319
+        Top = 446
+        Width = 86
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0.0'
+        PLCTag = RTU3_SSA0001
+        Sufix = ' m^3/seg'
+      end
+      object HMILabel28: THMILabel
+        Left = 141
+        Top = 440
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU3_ASA0002
+      end
+      object HMILabel1: THMILabel
+        Left = 215
+        Top = 210
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10001
+        Sufix = ' bar'
+      end
+      object HMILabel7: THMILabel
+        Left = 433
+        Top = 210
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10002
+        Sufix = ' bar'
+      end
+      object HMILabel10: THMILabel
+        Left = 648
+        Top = 297
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10005
+        Sufix = ' bar'
+      end
+      object HMILabel13: THMILabel
+        Left = 653
+        Top = 58
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10008
+        Sufix = ' '#186' C'
+      end
+      object HMILabel14: THMILabel
+        Left = 653
+        Top = 210
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10009
+        Sufix = ' '#186' C'
+      end
+      object HMILabel15: THMILabel
+        Left = 653
+        Top = 266
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10010
+        Sufix = ' '#186' C'
+      end
+      object HMILabel8: THMILabel
+        Left = 368
+        Top = 241
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10003
+      end
+      object HMILabel9: THMILabel
+        Left = 358
+        Top = 92
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU1_ACC0004
+      end
+      object HMILabel11: THMILabel
+        Left = 642
+        Top = 392
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10006
+        Sufix = ' %'
+      end
+      object HMILabel12: THMILabel
+        Left = 642
+        Top = 345
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10007
+        Sufix = ' %'
+      end
+      object HMILabel16: THMILabel
+        Left = 274
+        Top = 356
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10011
+      end
+      object HMILabel17: THMILabel
+        Left = 274
+        Top = 375
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10012
+      end
+      object HMILabel18: THMILabel
+        Left = 462
+        Top = 385
+        Width = 75
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10013
+        Sufix = ' m^3/seg'
+      end
+      object HMILabel19: THMILabel
+        Left = 462
+        Top = 366
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10014
+        Sufix = ' rpm'
+      end
+      object HMILabel20: THMILabel
+        Left = 640
+        Top = 174
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10015
+        Sufix = ' %'
+      end
+      object HMILabel21: THMILabel
+        Left = 274
+        Top = 281
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10016
+      end
+      object HMILabel22: THMILabel
+        Left = 274
+        Top = 331
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10017
+      end
+      object HMILabel23: THMILabel
+        Left = 274
+        Top = 306
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10018
+      end
+      object HMILabel24: THMILabel
+        Left = 274
+        Top = 256
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_AT10019
+      end
+      object HMILabel25: THMILabel
+        Left = 680
+        Top = 103
+        Width = 58
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10020
+        Sufix = ' amp'
+      end
+      object HMILabel26: THMILabel
+        Left = 680
+        Top = 128
+        Width = 47
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        NumberFormat = '#0'
+        PLCTag = RTU2_ST10021
+        Sufix = ' V'
       end
       object cxLabel11: TcxLabel
         Left = 161
-        Top = 3
+        Top = 5
         Caption = 'Caudal Entrada: '
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
@@ -852,21 +1246,6 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Height = -11
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
-      object cxLabel12: TcxLabel
-        Left = 262
-        Top = 26
-        Caption = 'lblNivelDesborde'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
       end
@@ -883,15 +1262,14 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxButton4: TcxButton
+      object btnCompuertaDesvioAbierta: TcxButton
         Left = 30
         Top = 113
         Width = 33
         Height = 31
         Caption = 'A'
-        TabOrder = 4
+        TabOrder = 2
         SpeedButtonOptions.GroupIndex = 1
-        SpeedButtonOptions.AllowAllUp = True
       end
       object cxLabel14: TcxLabel
         Left = 127
@@ -906,21 +1284,6 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxLabel15: TcxLabel
-        Left = 127
-        Top = 170
-        Caption = 'lblPresionTuberia'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
       object cxLabel16: TcxLabel
         Left = 200
         Top = 193
@@ -931,36 +1294,6 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Height = -11
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
-      object cxLabel17: TcxLabel
-        Left = 193
-        Top = 208
-        Caption = 'lblPresionA'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
-      object cxLabel18: TcxLabel
-        Left = 414
-        Top = 208
-        Caption = 'lblPresionB'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
       end
@@ -990,36 +1323,6 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxLabel30: TcxLabel
-        Left = 642
-        Top = 56
-        Caption = 'lblTempCGS'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
-      object cxLabel31: TcxLabel
-        Left = 642
-        Top = 208
-        Caption = 'lblTempCGI'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
       object cxLabel32: TcxLabel
         Left = 591
         Top = 208
@@ -1030,21 +1333,6 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Height = -11
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
-      object cxLabel33: TcxLabel
-        Left = 642
-        Top = 264
-        Caption = 'lblTempCGT'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
       end
@@ -1061,27 +1349,12 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxLabel36: TcxLabel
-        Left = 642
-        Top = 340
-        Caption = 'lblAlabes'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
       object UpDown1: TUpDown
         Left = 619
-        Top = 332
+        Top = 329
         Width = 17
-        Height = 25
-        TabOrder = 18
+        Height = 28
+        TabOrder = 9
       end
       object cxLabel37: TcxLabel
         Left = 591
@@ -1096,64 +1369,19 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxLabel38: TcxLabel
-        Left = 642
-        Top = 295
-        Caption = 'lblPresionT'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
       object UpDown2: TUpDown
         Left = 619
         Top = 377
         Width = 17
         Height = 25
-        TabOrder = 21
-      end
-      object cxLabel39: TcxLabel
-        Left = 642
-        Top = 380
-        Caption = 'lblFrenosTurbina'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
+        TabOrder = 11
       end
       object UpDown3: TUpDown
-        Left = 619
-        Top = 156
+        Left = 617
+        Top = 160
         Width = 17
         Height = 25
-        TabOrder = 23
-      end
-      object cxLabel40: TcxLabel
-        Left = 642
-        Top = 164
-        Caption = 'lblFrenosGen'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
+        TabOrder = 12
       end
       object cxLabel41: TcxLabel
         Left = 220
@@ -1168,40 +1396,10 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxLabel42: TcxLabel
-        Left = 320
-        Top = 448
-        Caption = 'lblNivelDesfogue'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
       object cxLabel44: TcxLabel
-        Left = 274
-        Top = 356
-        Caption = 'lblEstado'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
-      object cxLabel35: TcxLabel
-        Left = 462
-        Top = 354
-        Caption = 'lblVel'
+        Left = 213
+        Top = 375
+        Caption = 'Estado: '
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
         Style.Font.Color = clWindowText
@@ -1215,7 +1413,7 @@ object frm_Principal: Tfrm_Principal
       end
       object cxLabel45: TcxLabel
         Left = 403
-        Top = 354
+        Top = 362
         Caption = 'Vel. Giro:'
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
@@ -1228,7 +1426,7 @@ object frm_Principal: Tfrm_Principal
       end
       object cxLabel46: TcxLabel
         Left = 403
-        Top = 377
+        Top = 385
         Caption = 'Caudal:'
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
@@ -1239,46 +1437,16 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxLabel47: TcxLabel
-        Left = 462
-        Top = 377
-        Caption = 'lblCaudal'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
       object cxLabel48: TcxLabel
         Left = 653
         Top = 126
-        Caption = 'KV:'
+        Caption = 'V:'
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
         Style.Font.Color = clWindowText
         Style.Font.Height = -11
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
-      object cxLabel49: TcxLabel
-        Left = 680
-        Top = 126
-        Caption = 'lblKVolt'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
       end
@@ -1295,21 +1463,6 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxLabel51: TcxLabel
-        Left = 681
-        Top = 103
-        Caption = 'lblAmper'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.TextColor = clHotLight
-        Style.TextStyle = [fsBold]
-        Style.IsFontAssigned = True
-        Transparent = True
-      end
       object cxLabel52: TcxLabel
         Left = 30
         Top = 97
@@ -1323,37 +1476,35 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxButton12: TcxButton
+      object btnCompuertaDesvioCerrada: TcxButton
         Left = 69
         Top = 113
         Width = 33
         Height = 31
         Caption = 'C'
-        TabOrder = 37
+        TabOrder = 20
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 1
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
       end
-      object cxButton2: TcxButton
+      object btnCompuertaIngresoCerrada: TcxButton
         Left = 147
         Top = 96
         Width = 33
         Height = 31
         Caption = 'C'
-        TabOrder = 38
+        TabOrder = 21
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 2
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
       end
-      object cxButton13: TcxButton
+      object btnCompuertaIngresoAbierta: TcxButton
         Left = 108
         Top = 96
         Width = 33
         Height = 31
         Caption = 'A'
-        TabOrder = 39
+        TabOrder = 22
         SpeedButtonOptions.GroupIndex = 2
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1424,7 +1575,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 45
+        TabOrder = 28
         SpeedButtonOptions.GroupIndex = 5
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1434,7 +1585,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 46
+        TabOrder = 29
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 5
         SpeedButtonOptions.AllowAllUp = True
@@ -1446,7 +1597,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 47
+        TabOrder = 30
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 6
         SpeedButtonOptions.AllowAllUp = True
@@ -1458,7 +1609,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 48
+        TabOrder = 31
         SpeedButtonOptions.GroupIndex = 6
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1468,7 +1619,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 49
+        TabOrder = 32
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 7
         SpeedButtonOptions.AllowAllUp = True
@@ -1480,7 +1631,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 50
+        TabOrder = 33
         SpeedButtonOptions.GroupIndex = 7
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1490,7 +1641,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 51
+        TabOrder = 34
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 8
         SpeedButtonOptions.AllowAllUp = True
@@ -1502,7 +1653,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 52
+        TabOrder = 35
         SpeedButtonOptions.GroupIndex = 8
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1524,7 +1675,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 54
+        TabOrder = 37
         SpeedButtonOptions.GroupIndex = 9
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1534,7 +1685,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 55
+        TabOrder = 38
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 9
         SpeedButtonOptions.AllowAllUp = True
@@ -1546,7 +1697,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 31
         Caption = 'A'
-        TabOrder = 56
+        TabOrder = 39
         SpeedButtonOptions.GroupIndex = 10
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1556,7 +1707,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 31
         Caption = 'C'
-        TabOrder = 57
+        TabOrder = 40
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 10
         SpeedButtonOptions.AllowAllUp = True
@@ -1581,7 +1732,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'A'
-        TabOrder = 59
+        TabOrder = 42
         SpeedButtonOptions.GroupIndex = 3
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1591,7 +1742,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'C'
-        TabOrder = 60
+        TabOrder = 43
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 3
         SpeedButtonOptions.AllowAllUp = True
@@ -1628,7 +1779,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'A'
-        TabOrder = 63
+        TabOrder = 46
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1638,11 +1789,50 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'C'
-        TabOrder = 64
+        TabOrder = 47
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
+      end
+      object cxLabel10: TcxLabel
+        Left = 642
+        Top = 327
+        Caption = 'Apertura '#193'laves'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+        Transparent = True
+      end
+      object cxLabel12: TcxLabel
+        Left = 642
+        Top = 377
+        Caption = 'Frenos Turbina'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+        Transparent = True
+      end
+      object cxLabel15: TcxLabel
+        Left = 633
+        Top = 155
+        Caption = 'Frenos Generador'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+        Transparent = True
       end
     end
     object tab_Historicos: TcxTabSheet
@@ -9086,11 +9276,15 @@ object frm_Principal: Tfrm_Principal
         TabOrder = 1
       end
     end
+    object cxTabSheet1: TcxTabSheet
+      Caption = 'Control [v2.0]'
+      ImageIndex = 5
+    end
   end
   object panel_Usuario: TPanel
     Left = 0
     Top = 0
-    Width = 995
+    Width = 761
     Height = 57
     BevelInner = bvLowered
     Color = clGradientInactiveCaption
@@ -9239,5 +9433,264 @@ object frm_Principal: Tfrm_Principal
     Port = 9000
     Left = 376
     Top = 8
+  end
+  object PLCBlock_RTU2: TPLCBlock
+    TagGUID = '{F21E3504-B7C7-4012-B518-6BF1DB39B550}'
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 2
+    MemFile_DB = 0
+    MemAddress = 0
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Size = 21
+    SyncWrites = True
+    Left = 856
+    Top = 113
+  end
+  object RTU2_ST10001: TPLCBlockElement
+    TagGUID = '{6BB4D01B-756F-4135-AF91-CEE19A1AFD12}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 0
+    Left = 792
+    Top = 145
+  end
+  object RTU2_ST10002: TPLCBlockElement
+    TagGUID = '{5A798831-605E-445C-8553-041986388EEE}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 1
+    Left = 792
+    Top = 177
+  end
+  object RTU2_AT10003: TPLCBlockElement
+    TagGUID = '{F4CD7470-5C16-45AA-B70C-495F792BA308}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 2
+    Left = 792
+    Top = 209
+  end
+  object RTU2_AT10004: TPLCBlockElement
+    TagGUID = '{B6AEA738-B57D-493A-9DBA-594B6485E3EE}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 3
+    Left = 792
+    Top = 241
+  end
+  object RTU2_ST10005: TPLCBlockElement
+    TagGUID = '{11DD8031-67A7-4BAC-91B9-637D48F550BF}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 4
+    Left = 792
+    Top = 273
+  end
+  object RTU2_AT10006: TPLCBlockElement
+    TagGUID = '{6B3BD249-C8FC-4690-A8D9-81654D60977D}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 5
+    Left = 824
+    Top = 145
+  end
+  object RTU2_AT10007: TPLCBlockElement
+    TagGUID = '{7ECACFCE-1ED1-4D44-8A46-7D6AE883FEE6}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 6
+    Left = 824
+    Top = 177
+  end
+  object RTU2_ST10008: TPLCBlockElement
+    TagGUID = '{40E07825-907B-45FE-8325-2FEDAA6ACD4E}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 7
+    Left = 824
+    Top = 209
+  end
+  object RTU2_ST10009: TPLCBlockElement
+    TagGUID = '{1B076C7C-1CC2-4DC8-A2F3-E41742AC1CF6}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 8
+    Left = 824
+    Top = 241
+  end
+  object RTU2_ST10010: TPLCBlockElement
+    TagGUID = '{D0108BF7-5F6C-44CC-81C0-888AA24DF3CF}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 9
+    Left = 824
+    Top = 273
+  end
+  object RTU2_AT10011: TPLCBlockElement
+    TagGUID = '{3F5863AA-86DE-492C-9B8C-91B289766281}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 10
+    Left = 856
+    Top = 145
+  end
+  object RTU2_ST10012: TPLCBlockElement
+    TagGUID = '{0A99D121-2652-4847-8D68-D10B86B05137}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 11
+    Left = 856
+    Top = 177
+  end
+  object RTU2_ST10013: TPLCBlockElement
+    TagGUID = '{956BCF18-71A4-45C1-AA99-5788F6794CB8}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 12
+    Left = 856
+    Top = 209
+  end
+  object RTU2_ST10014: TPLCBlockElement
+    TagGUID = '{DA4516F0-7DA9-42CF-AC93-2E6C1B4C6304}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 13
+    Left = 856
+    Top = 241
+  end
+  object RTU2_AT10015: TPLCBlockElement
+    TagGUID = '{0946AEE2-6E41-41AD-AD46-89CCAE087248}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 14
+    Left = 856
+    Top = 273
+  end
+  object RTU2_AT10016: TPLCBlockElement
+    TagGUID = '{A75D22CC-40C9-444D-A6F3-436AC2547439}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 15
+    Left = 888
+    Top = 145
+  end
+  object RTU2_AT10017: TPLCBlockElement
+    TagGUID = '{AE8F86AF-7ADB-4AA9-A7F5-F4CAA91DF23D}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 16
+    Left = 888
+    Top = 177
+  end
+  object RTU2_AT10018: TPLCBlockElement
+    TagGUID = '{2038AFB5-E3B2-434F-96E4-16DAAAFA5FB7}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 17
+    Left = 888
+    Top = 209
+  end
+  object RTU2_AT10019: TPLCBlockElement
+    TagGUID = '{DB6C3F85-F90F-4864-B3B9-A1696E0B0553}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 18
+    Left = 888
+    Top = 241
+  end
+  object RTU2_ST10020: TPLCBlockElement
+    TagGUID = '{8CF5E3AD-CD4B-4398-8DC2-0F0505158235}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 19
+    Left = 888
+    Top = 273
+  end
+  object RTU2_ST10021: TPLCBlockElement
+    TagGUID = '{870F6C6A-BA25-4747-A105-098C903C6775}'
+    PLCBlock = PLCBlock_RTU2
+    Index = 20
+    Left = 920
+    Top = 145
+  end
+  object PLCBlock_RTU3: TPLCBlock
+    TagGUID = '{93EA29A6-498D-4981-AE9A-C48E3920CD43}'
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 3
+    MemFile_DB = 0
+    MemAddress = 0
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Size = 2
+    SyncWrites = True
+    Left = 1008
+    Top = 112
+  end
+  object RTU3_ASA0002: TPLCBlockElement
+    TagGUID = '{63E9CF73-2245-412A-B395-B32BFB889183}'
+    PLCBlock = PLCBlock_RTU3
+    Index = 1
+    Left = 1008
+    Top = 176
+  end
+  object RTU3_SSA0001: TPLCBlockElement
+    TagGUID = '{C50B11E5-15A1-4F4C-8EA3-C1D4217BABEA}'
+    PLCBlock = PLCBlock_RTU3
+    Index = 0
+    Left = 1008
+    Top = 144
+  end
+  object PLCBlock_RTU1: TPLCBlock
+    TagGUID = '{9323DC12-ACEF-41F6-9FC2-B72E302C804D}'
+    PLCRack = 0
+    PLCSlot = 0
+    PLCStation = 1
+    MemFile_DB = 0
+    MemAddress = 0
+    MemSubElement = 0
+    MemReadFunction = 3
+    MemWriteFunction = 16
+    ProtocolDriver = ModBusTCPDriver1
+    Size = 5
+    SyncWrites = True
+    Left = 960
+    Top = 112
+  end
+  object RTU1_SCC0001: TPLCBlockElement
+    TagGUID = '{BB0CFBD1-8C93-4E13-A10E-2AC6980045AE}'
+    PLCBlock = PLCBlock_RTU1
+    Index = 0
+    Left = 960
+    Top = 144
+  end
+  object RTU1_SCC0002: TPLCBlockElement
+    TagGUID = '{FEB9CA3C-4376-497F-A60C-9A5E9B07B5BE}'
+    PLCBlock = PLCBlock_RTU1
+    Index = 1
+    Left = 960
+    Top = 176
+  end
+  object RTU1_ACC0003: TPLCBlockElement
+    TagGUID = '{270E8ACD-4E1F-4C9E-ABF5-D09753F2F0D7}'
+    OnValueChangeLast = RTU1_ACC0003ValueChange
+    PLCBlock = PLCBlock_RTU1
+    Index = 2
+    Left = 960
+    Top = 208
+  end
+  object RTU1_ACC0004: TPLCBlockElement
+    TagGUID = '{BEF91A26-5724-4C8A-93BF-3F4EDAEE4490}'
+    PLCBlock = PLCBlock_RTU1
+    Index = 3
+    Left = 960
+    Top = 240
+  end
+  object RTU1_SCC0005: TPLCBlockElement
+    TagGUID = '{134E1786-B331-418E-A16B-E83365776D1F}'
+    PLCBlock = PLCBlock_RTU1
+    Index = 4
+    Left = 960
+    Top = 272
+  end
+  object ModBusTCPDriver1: TModBusTCPDriver
+    Tag = 1
+    CommunicationPort = TCP_UDPPort1
+    Left = 816
+    Top = 68
+  end
+  object TCP_UDPPort1: TTCP_UDPPort
+    Host = '127.0.0.1'
+    Port = 502
+    Timeout = 0
+    ExclusiveDevice = False
+    Left = 784
+    Top = 68
   end
 end

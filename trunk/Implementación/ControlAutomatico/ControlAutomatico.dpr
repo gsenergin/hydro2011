@@ -2,13 +2,13 @@ program ControlAutomatico;
 
 uses
   Forms,
-  Unit1 in 'Unit1.pas' {Form1};
+  UI_ControlAutomatico in 'UI_ControlAutomatico.pas' {frm_ControlAutomatico};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(Tfrm_ControlAutomatico, frm_ControlAutomatico);
   Application.Run;
 end.
