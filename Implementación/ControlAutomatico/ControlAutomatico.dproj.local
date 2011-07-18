@@ -10,5 +10,7 @@
     <Transaction>2011/07/11 10:58:14.840.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\TClienteObservador.pas</Transaction>
     <Transaction>2011/07/11 10:58:28.881.pas,D:\[Proyecto]\Implementación\ControlAutomatico\TClienteObservador.pas=D:\[Proyecto]\Implementación\ControlAutomatico\ClienteObservador.pas</Transaction>
     <Transaction>2011/07/12 09:50:37.741.pas,D:\[Proyecto]\Implementación\ControlAutomatico\ClienteObservador.pas=</Transaction>
+    <Transaction>2011/07/18 10:38:40.234.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit1.pas=D:\[Proyecto]\Implementación\ControlAutomatico\UI_ControlAutomatico.pas</Transaction>
+    <Transaction>2011/07/18 10:38:40.234.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\Unit1.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\UI_ControlAutomatico.dfm</Transaction>
   </Transactions>
 </BorlandProject>
