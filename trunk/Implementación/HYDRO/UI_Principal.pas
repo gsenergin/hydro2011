@@ -10,7 +10,9 @@ uses
   cxButtons, cxLabel, dxGDIPlusClasses, dxSkinsCore, ScktComp,
   HMIControlDislocatorAnimation, CommPort, tcp_udpport, ProtocolDriver,
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
-  PLCBlock, HMILabel, HMIText;
+  PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
+  TeeDBCrossTab, Series, TeeProcs, Chart,
+  UI_Grafico;
 
 type
   Tfrm_Principal = class(TForm)
@@ -35,8 +37,6 @@ type
     cxLabel7: TcxLabel;
     SG_Alertas: TStringGrid;
     cxLabel8: TcxLabel;
-    SG_Historicos: TStringGrid;
-    btnHistorico: TcxButton;
     cxLabel19: TcxLabel;
     cxLabel21: TcxLabel;
     cxLabel22: TcxLabel;
@@ -110,7 +110,6 @@ type
     SG_Configuracion: TStringGrid;
     cxButton1: TcxButton;
     SocketSuscripcion: TClientSocket;
-    cxTabSheet1: TcxTabSheet;
     PLCBlock_RTU2: TPLCBlock;
     RTU2_ST10001: TPLCBlockElement;
     RTU2_ST10002: TPLCBlockElement;
@@ -175,10 +174,20 @@ type
     HMILabel25: THMILabel;
     HMILabel26: THMILabel;
     cxLabel15: TcxLabel;
+    StoredProc_HistorialSensado_Insertar: TADOStoredProc;
+    ADOConnectionHYDRODB: TADOConnection;
+    ADOTable_Sensor: TADOTable;
+    DS_Sensor: TDataSource;
+    DBGrid_Sensor: TDBGrid;
+    btnHistorico: TcxButton;
+    DBCrossTabSource1: TDBCrossTabSource;
+    ADOQuery_Grafico: TADOQuery;
+    DataSource1: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
     procedure RTU1_ACC0003ValueChange(Sender: TObject);
+    procedure btnHistoricoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -193,6 +202,41 @@ implementation
 {$R *.dfm}
 
 
+
+procedure Tfrm_Principal.btnHistoricoClick(Sender: TObject);
+var frmGrafico: Tfrm_Grafico;
+    ID, TimeStamp: string;
+    valor:integer;
+begin
+  //ADOQuery_Grafico
+  frmGrafico:= Tfrm_Grafico.Create(self);
+
+  frmGrafico.lblNomenclatura.Caption:= ADOTable_Sensor.FieldByName('nomenclatura').AsString;
+  frmGrafico.lblDescripcion.Caption:= ADOTable_Sensor.FieldByName('descripcion').AsString;
+  frmGrafico.Chart_HistoricoSensado.Visible:= false;
+  frmGrafico.Chart_HistoricoSensado.Series[0].Clear;
+  
+  ID:= ADOTable_Sensor.FieldByName('ID_sensor').AsString;
+  with ADOQuery_Grafico do
+  begin
+      Close;
+      Parameters.ParamByName('ID').Value:= ID;
+      Open;
+      execsql;
+      First;
+  end;
+
+  while not ADOQuery_Grafico.Eof do
+  begin
+        valor:= ADOQuery_Grafico.FieldByName('valorSensado').AsInteger;
+        TimeStamp:=ADOQuery_Grafico.FieldByName('TimeStamp').AsString;
+       // showmessage(inttostr(valor));
+        frmGrafico.Chart_HistoricoSensado.Series[0].Add(valor,TimeStamp);
+        ADOQuery_Grafico.Next;
+  end;
+  frmGrafico.Chart_HistoricoSensado.Visible:= true;
+  frmGrafico.Show;
+end;
 
 procedure Tfrm_Principal.Button1Click(Sender: TObject);
 begin
@@ -209,11 +253,11 @@ end;
 procedure Tfrm_Principal.FormCreate(Sender: TObject);
 begin
     // Activo el Socket
-    TCP_UDPPort1.Active:= true;
-//    SocketSuscripcion.Active:= false;
-//    SocketSuscripcion.Host:= '127.0.0.1';
-//    SocketSuscripcion.Port:= 9000;
- //   SocketSuscripcion.Active:= true;
+    //TCP_UDPPort1.Active:= true;
+
+
+    ADOConnectionHYDRODB.Connected:= true;
+    ADOTable_Sensor.Active:= true;
 
 
     // StringGrid Alertas
@@ -224,81 +268,11 @@ begin
     SG_Alertas.Cells[5,0]:= 'Elemento';
     SG_Alertas.Cells[6,0]:= 'Valor';
 
-    // StringGrid Historticos
-    SG_Historicos.Cells[1,0]:= 'RTU';
-    SG_Historicos.Cells[2,0]:= 'Nombre';
-    SG_Historicos.Cells[3,0]:= 'Tipo';
-    SG_Historicos.Cells[4,0]:= 'Detalle';
-
-      SG_Historicos.Cells[1,1]:= '1';
-      SG_Historicos.Cells[2,1]:= 'SCC0001';
-      SG_Historicos.Cells[3,1]:= 'Sensor';
-      SG_Historicos.Cells[4,1]:= 'Caudal de Entrada';
-
-      SG_Historicos.Cells[1,2]:= '1';
-      SG_Historicos.Cells[2,2]:= 'SCC0002';
-      SG_Historicos.Cells[3,2]:= 'Sensor';
-      SG_Historicos.Cells[4,2]:= 'Nivel Desborde en Cámara de carga ';
-
-      SG_Historicos.Cells[1,3]:= '1';
-      SG_Historicos.Cells[2,3]:= 'ACC0003';
-      SG_Historicos.Cells[3,3]:= 'Actuador';
-      SG_Historicos.Cells[4,3]:= 'Compuerta de Desvio de Agua';
-
-      SG_Historicos.Cells[1,4]:= '...';
-      SG_Historicos.Cells[2,4]:= '...';
-      SG_Historicos.Cells[3,4]:= '...';
-      SG_Historicos.Cells[4,4]:= '...';
-
-    // StringGrid Configuracion
-    SG_Configuracion.Cells[1,0]:='RTU';
-    SG_Configuracion.Cells[2,0]:='Nombre';
-    SG_Configuracion.Cells[3,0]:='Detalle';
-    SG_Configuracion.Cells[4,0]:='U. Medida';
-    SG_Configuracion.Cells[5,0]:='LL';
-    SG_Configuracion.Cells[6,0]:='L';
-    SG_Configuracion.Cells[7,0]:='H';
-    SG_Configuracion.Cells[8,0]:='HH';
-
-      SG_Configuracion.Cells[1,1]:='1';
-      SG_Configuracion.Cells[2,1]:='SCC0001';
-      SG_Configuracion.Cells[3,1]:='Caudal de Entrada';
-      SG_Configuracion.Cells[4,1]:='m^3 / s';
-      SG_Configuracion.Cells[5,1]:='10';
-      SG_Configuracion.Cells[6,1]:='25';
-      SG_Configuracion.Cells[7,1]:='55';
-      SG_Configuracion.Cells[8,1]:='70';
-
-      SG_Configuracion.Cells[1,2]:='1';
-      SG_Configuracion.Cells[2,2]:='SCC0002';
-      SG_Configuracion.Cells[3,2]:='Nivel Desborde en Cámara de carga';
-      SG_Configuracion.Cells[4,2]:='cm';
-      SG_Configuracion.Cells[5,2]:='-4';
-      SG_Configuracion.Cells[6,2]:='-2';
-      SG_Configuracion.Cells[7,2]:='-0.05';
-      SG_Configuracion.Cells[8,2]:='0';
-
-      SG_Configuracion.Cells[1,3]:='1';
-      SG_Configuracion.Cells[2,3]:='SCC0005';
-      SG_Configuracion.Cells[3,3]:='Presión Tubería Forzada';
-      SG_Configuracion.Cells[4,3]:='bar';
-      SG_Configuracion.Cells[5,3]:='3';
-      SG_Configuracion.Cells[6,3]:='5';
-      SG_Configuracion.Cells[7,3]:='12';
-      SG_Configuracion.Cells[8,3]:='15';
-
-      SG_Configuracion.Cells[1,4]:='...';
-      SG_Configuracion.Cells[2,4]:='...';
-      SG_Configuracion.Cells[3,4]:='...';
-      SG_Configuracion.Cells[4,4]:='...';
-      SG_Configuracion.Cells[5,4]:='...';
-      SG_Configuracion.Cells[6,4]:='...';
-      SG_Configuracion.Cells[7,4]:='...';
-      SG_Configuracion.Cells[8,4]:='...';
-
-
     // Me suscribo a la distribución de información del control automatico
-
+//    SocketSuscripcion.Active:= false;
+//    SocketSuscripcion.Host:= '127.0.0.1';
+//    SocketSuscripcion.Port:= 9000;
+ //   SocketSuscripcion.Active:= true;
 
 
 end;
