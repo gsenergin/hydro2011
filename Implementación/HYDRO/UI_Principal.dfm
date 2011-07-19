@@ -4,7 +4,7 @@ object frm_Principal: Tfrm_Principal
   BorderStyle = bsSingle
   Caption = 'HYDRO'
   ClientHeight = 751
-  ClientWidth = 765
+  ClientWidth = 1045
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -79,7 +79,7 @@ object frm_Principal: Tfrm_Principal
     Top = 63
     Width = 761
     Height = 506
-    ActivePage = tab_Control
+    ActivePage = tab_Historicos
     TabOrder = 1
     ClientRectBottom = 502
     ClientRectLeft = 4
@@ -97,7 +97,7 @@ object frm_Principal: Tfrm_Principal
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D4948445200000300
           0000023208060000007C44AD9C0000000467414D410000B18F0BFC6105000000
-          097048597300000EC100000EC101B8916BED00005ABF49444154785EEDDD4DB6
+          097048597300000EC000000EC0016AD6890900005ABF49444154785EEDDD4DB6
           233792ADED984D0DA3BA77569AD29D43746B185F237BDF10E28AA964893A411E
           C73FCCE04FAE75564A22E0000C2FCCF776C0C91FFFFD7FFEE75794BF7FFDEB5F
           BFFC8901063080010C60000318C00006E631F0238AF87FF6C364CF9B6CB1155B
@@ -1838,39 +1838,59 @@ object frm_Principal: Tfrm_Principal
     object tab_Historicos: TcxTabSheet
       Caption = 'Hist'#243'ricos'
       ImageIndex = 1
-      object SG_Historicos: TStringGrid
-        Left = 24
-        Top = 40
-        Width = 577
-        Height = 257
-        BevelKind = bkSoft
-        Color = clBtnFace
-        DefaultColWidth = 30
-        FixedColor = clScrollBar
-        RowCount = 10
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
-        ParentFont = False
-        ScrollBars = ssVertical
+      object DBGrid_Sensor: TDBGrid
+        Left = 83
+        Top = 51
+        Width = 558
+        Height = 302
+        Align = alCustom
+        DataSource = DS_Sensor
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
         TabOrder = 0
-        ColWidths = (
-          30
-          80
-          84
-          75
-          275)
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FK_Sensor_RTU'
+            Title.Caption = '# RTU'
+            Width = 43
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'nomenclatura'
+            Title.Caption = 'Nomenclatura'
+            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'descripcion'
+            Title.Caption = 'Descripcion'
+            Width = 306
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'unidad_medida'
+            Title.Caption = 'Unidad Medida'
+            Width = 84
+            Visible = True
+          end>
       end
       object btnHistorico: TcxButton
-        Left = 512
-        Top = 326
+        Left = 328
+        Top = 448
         Width = 89
         Height = 25
         Caption = 'Ver Hist'#243'rico'
         TabOrder = 1
+        OnClick = btnHistoricoClick
       end
     end
     object tab_Reportes: TcxTabSheet
@@ -9276,10 +9296,6 @@ object frm_Principal: Tfrm_Principal
         TabOrder = 1
       end
     end
-    object cxTabSheet1: TcxTabSheet
-      Caption = 'Control [v2.0]'
-      ImageIndex = 5
-    end
   end
   object panel_Usuario: TPanel
     Left = 0
@@ -9692,5 +9708,90 @@ object frm_Principal: Tfrm_Principal
     ExclusiveDevice = False
     Left = 784
     Top = 68
+  end
+  object StoredProc_HistorialSensado_Insertar: TADOStoredProc
+    Connection = ADOConnectionHYDRODB
+    ProcedureName = 'HistorialSensado_Insertar'
+    Parameters = <
+      item
+        Name = 'dirMem'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = 'rtu_num'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = 'valor'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 808
+    Top = 4
+  end
+  object ADOConnectionHYDRODB: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
+      'er ID=root;Data Source=HydroDB'
+    ConnectionTimeout = 0
+    DefaultDatabase = 'hydrodb'
+    LoginPrompt = False
+    Mode = cmRead
+    Left = 776
+    Top = 4
+  end
+  object ADOTable_Sensor: TADOTable
+    Active = True
+    Connection = ADOConnectionHYDRODB
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    IndexName = 'PRIMARY'
+    TableName = 'sensor'
+    Left = 776
+    Top = 32
+  end
+  object DS_Sensor: TDataSource
+    DataSet = ADOTable_Sensor
+    Left = 808
+    Top = 32
+  end
+  object DBCrossTabSource1: TDBCrossTabSource
+    CaseSensitive = False
+    Formula = gfCount
+    LabelField = 'TimeStamp'
+    ValueField = 'valorSensado'
+  end
+  object ADOQuery_Grafico: TADOQuery
+    Connection = ADOConnectionHYDRODB
+    CursorType = ctOpenForwardOnly
+    Parameters = <
+      item
+        Name = 'ID'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 136
+        Precision = 255
+        Size = 255
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT * FROM historialsensado WHERE FK_HistorialSensado_Sensor='
+      ':ID ORDER BY TIMESTAMP')
+    Left = 856
+    Top = 72
+  end
+  object DataSource1: TDataSource
+    DataSet = ADOQuery_Grafico
+    Left = 888
+    Top = 72
   end
 end
