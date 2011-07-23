@@ -11,6 +11,7 @@ object frm_Grafico: Tfrm_Grafico
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -22,7 +23,6 @@ object frm_Grafico: Tfrm_Grafico
     BevelInner = bvLowered
     BevelOuter = bvLowered
     TabOrder = 0
-    ExplicitTop = -6
     object Label2: TLabel
       Left = 264
       Top = 14
@@ -59,16 +59,17 @@ object frm_Grafico: Tfrm_Grafico
     object lblDescripcion: TLabel
       Left = 360
       Top = 14
-      Width = 529
+      Width = 64
       Height = 13
       Caption = 'lblDescripcion'
     end
     object bitbtn_Imprimir: TBitBtn
       Left = 1008
-      Top = 8
+      Top = 10
       Width = 35
       Height = 25
       TabOrder = 0
+      OnClick = bitbtn_ImprimirClick
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
         18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -102,61 +103,63 @@ object frm_Grafico: Tfrm_Grafico
     Left = 0
     Top = 41
     Width = 1055
-    Height = 472
-    AllowPanning = pmNone
-    BackImage.Inside = True
-    Legend.Symbol.Squared = True
-    Legend.Title.Text.Strings = (
-      'Ref.')
-    MarginLeft = 0
-    MarginTop = 5
+    Height = 480
+    Cursor = crCross
+    Legend.CheckBoxesStyle = cbsRadio
+    Legend.Visible = False
+    PrintProportional = False
     Title.Font.Height = -13
     Title.Font.Style = [fsBold]
     Title.Text.Strings = (
       'Hist'#243'rico de Sensado')
+    BottomAxis.Automatic = False
+    BottomAxis.AutomaticMinimum = False
+    BottomAxis.MaximumOffset = 3
     BottomAxis.Title.Caption = 'Tiempo'
-    BottomAxis.Title.Font.Height = -12
-    BottomAxis.Title.Font.Style = [fsItalic]
-    LeftAxis.Title.Caption = 'Valor'
-    LeftAxis.Title.Font.Height = -12
-    LeftAxis.Title.Font.Style = [fsItalic]
+    LeftAxis.Title.Caption = 'Valores'
+    LeftAxis.Title.Font.Height = -13
+    MaxPointsPerPage = 60
+    RightAxis.Automatic = False
+    RightAxis.AutomaticMinimum = False
+    RightAxis.MaximumOffset = 3
     View3D = False
-    View3DOptions.Orthogonal = False
-    View3DWalls = False
-    Zoom.Allow = False
-    Zoom.Animated = True
     Align = alTop
-    BevelInner = bvLowered
-    Color = clMenuBar
     TabOrder = 1
-    AutoSize = True
-    ExplicitTop = 39
     PrintMargins = (
-      15
-      28
-      15
-      28)
-    object Series2: TLineSeries
+      5
+      5
+      5
+      5)
+    object Series1: TLineSeries
+      ColorEachLine = False
       ColorEachPoint = True
-      Depth = 0
+      Marks.Arrow.Visible = False
       Marks.Callout.Brush.Color = clBlack
-      Marks.Visible = False
-      Title = 'Historico'
-      Pointer.InflateMargins = False
-      Pointer.Style = psRectangle
+      Marks.Callout.Arrow.Visible = False
+      Marks.Gradient.Balance = 4
+      Marks.Gradient.Direction = gdBottomTop
+      Marks.Gradient.EndColor = 25284
+      Marks.Gradient.MidColor = clWhite
+      Marks.Gradient.StartColor = 27349
+      Marks.Style = smsValue
+      Marks.Visible = True
+      SeriesColor = clBlack
+      Pointer.Gradient.EndColor = clRed
+      Pointer.InflateMargins = True
+      Pointer.Style = psCircle
       Pointer.Visible = True
       XValues.Name = 'X'
       XValues.Order = loAscending
       YValues.Name = 'Y'
       YValues.Order = loNone
       Data = {
-        00190000000000000000987C4000000000001875400000000000987740000000
-        0000F0794000000000005876400000000000E075400000000000007940000000
-        0000387D400000000000807B4000000000000881400000000000088140000000
-        0000187F400000000000E4814000000000009C83400000000000E08540000000
-        0000948640000000000068854000000000001885400000000000CC8540000000
-        00003C84400000000000D081400000000000D482400000000000048040000000
-        00003482400000000000088140}
+        001900000000000000009877400000000000B078400000000000D87D40000000
+        00002077400000000000C07C4000000000000876400000000000607340000000
+        00003873400000000000E06A4000000000009060400000000000A06940000000
+        00001870400000000000906F4000000000004060400000000000C06740000000
+        00001068400000000000E06A4000000000002062400000000000606840000000
+        0000706C40000000000010684000000000004055400000000000506940000000
+        0000F06E400000000000806B40}
     end
   end
 end

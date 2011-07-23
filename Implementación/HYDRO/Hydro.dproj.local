@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
+	<Transactions>
     <Transaction>2011/07/19 09:37:45.011.pas,D:\[Proyecto]\Implementación\HYDRO\Unit1.pas=D:\[Proyecto]\Implementación\HYDRO\UI_Grafico.pas</Transaction>
     <Transaction>2011/07/19 09:37:45.011.dfm,D:\[Proyecto]\Implementación\HYDRO\Unit1.dfm=D:\[Proyecto]\Implementación\HYDRO\UI_Grafico.dfm</Transaction>
   </Transactions>
