@@ -9,13 +9,15 @@ uses
 type
   Tfrm_Grafico = class(TForm)
     Panel1: TPanel;
-    Chart_HistoricoSensado: TChart;
-    Series2: TLineSeries;
     Label2: TLabel;
     Label1: TLabel;
     lblNomenclatura: TLabel;
     lblDescripcion: TLabel;
     bitbtn_Imprimir: TBitBtn;
+    Chart_HistoricoSensado: TChart;
+    Series1: TLineSeries;
+    procedure FormCreate(Sender: TObject);
+    procedure bitbtn_ImprimirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -28,5 +30,15 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tfrm_Grafico.bitbtn_ImprimirClick(Sender: TObject);
+begin
+    Chart_HistoricoSensado.PrintLandscape;
+end;
+
+procedure Tfrm_Grafico.FormCreate(Sender: TObject);
+begin
+    Chart_HistoricoSensado.Visible:= true;
+end;
 
 end.

@@ -3,8 +3,8 @@ object frm_Principal: Tfrm_Principal
   Top = 0
   BorderStyle = bsSingle
   Caption = 'HYDRO'
-  ClientHeight = 751
-  ClientWidth = 1045
+  ClientHeight = 741
+  ClientWidth = 1052
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -79,7 +79,7 @@ object frm_Principal: Tfrm_Principal
     Top = 63
     Width = 761
     Height = 506
-    ActivePage = tab_Historicos
+    ActivePage = tab_Control
     TabOrder = 1
     ClientRectBottom = 502
     ClientRectLeft = 4
@@ -97,7 +97,7 @@ object frm_Principal: Tfrm_Principal
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D4948445200000300
           0000023208060000007C44AD9C0000000467414D410000B18F0BFC6105000000
-          097048597300000EC000000EC0016AD6890900005ABF49444154785EEDDD4DB6
+          097048597300000EBD00000EBD0147FB90AD00005ABF49444154785EEDDD4DB6
           233792ADED984D0DA3BA77569AD29D43746B185F237BDF10E28AA964893A411E
           C73FCCE04FAE75564A22E0000C2FCCF776C0C91FFFFD7FFEE75794BF7FFDEB5F
           BFFC8901063080010C60000318C00006E631F0238AF87FF6C364CF9B6CB1155B
@@ -1901,7 +1901,7 @@ object frm_Principal: Tfrm_Principal
       Caption = 'Simulaci'#243'n'
       ImageIndex = 3
       object img_GolpeAriete: TImage
-        Left = 477
+        Left = 409
         Top = 49
         Width = 436
         Height = 304
@@ -9068,6 +9068,7 @@ object frm_Principal: Tfrm_Principal
           FFFFFFFFFFFFFFFFFF00}
         Proportional = True
         Transparent = True
+        OnClick = img_GolpeArieteClick
       end
       object cxLabel19: TcxLabel
         Left = 18
@@ -9256,44 +9257,287 @@ object frm_Principal: Tfrm_Principal
     object tab_Configuracion: TcxTabSheet
       Caption = 'Configuraci'#243'n'
       ImageIndex = 4
-      object SG_Configuracion: TStringGrid
-        Left = 24
-        Top = 40
-        Width = 721
-        Height = 257
-        BevelKind = bkSoft
-        Color = clBtnFace
-        ColCount = 9
-        DefaultColWidth = 30
-        FixedColor = clScrollBar
-        RowCount = 10
+      object DBText_SensoresMin: TDBText
+        Left = 121
+        Top = 384
+        Width = 65
+        Height = 17
+        DataField = 'min'
+        DataSource = DS_Sensor
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clBlue
         Font.Height = -11
         Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect]
+        Font.Style = []
         ParentFont = False
-        ScrollBars = ssVertical
-        TabOrder = 0
-        ColWidths = (
-          30
-          80
-          84
-          75
-          260
-          38
-          38
-          38
-          40)
       end
-      object cxButton1: TcxButton
-        Left = 656
-        Top = 326
+      object DBText_SensoresLL: TDBText
+        Left = 209
+        Top = 384
+        Width = 65
+        Height = 17
+        DataField = 'valorLL'
+        DataSource = DS_Sensor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText_SensoresL: TDBText
+        Left = 305
+        Top = 384
+        Width = 65
+        Height = 17
+        DataField = 'valorL'
+        DataSource = DS_Sensor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText_SensoresH: TDBText
+        Left = 392
+        Top = 384
+        Width = 65
+        Height = 17
+        DataField = 'valorH'
+        DataSource = DS_Sensor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText_SensoresHH: TDBText
+        Left = 481
+        Top = 384
+        Width = 65
+        Height = 17
+        DataField = 'valorHH'
+        DataSource = DS_Sensor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object DBText_SensoresMax: TDBText
+        Left = 587
+        Top = 384
+        Width = 65
+        Height = 17
+        DataField = 'max'
+        DataSource = DS_Sensor
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object btn_ConfiguracionCambiarValores: TcxButton
+        Left = 664
+        Top = 384
         Width = 89
         Height = 25
-        Caption = 'Editar Valores'
-        TabOrder = 1
+        Caption = 'Cambiar Valores'
+        TabOrder = 15
+        OnClick = btn_ConfiguracionCambiarValoresClick
+      end
+      object DBGrid_Configuracion: TDBGrid
+        Left = 67
+        Top = 19
+        Width = 566
+        Height = 302
+        Align = alCustom
+        DataSource = DS_Sensor
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        ReadOnly = True
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FK_Sensor_RTU'
+            Title.Caption = '# RTU'
+            Width = 43
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'nomenclatura'
+            Title.Caption = 'Nomenclatura'
+            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'descripcion'
+            Title.Caption = 'Descripcion'
+            Width = 306
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'unidad_medida'
+            Title.Caption = 'Unidad Medida'
+            Width = 84
+            Visible = True
+          end>
+      end
+      object cxLabel17: TcxLabel
+        Left = 121
+        Top = 361
+        Caption = 'M'#237'nimo'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+      end
+      object cxLabel18: TcxLabel
+        Left = 209
+        Top = 361
+        Caption = 'LL (Low Low)'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+      end
+      object cxLabel30: TcxLabel
+        Left = 305
+        Top = 361
+        Caption = 'L (Low)'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+      end
+      object cxLabel31: TcxLabel
+        Left = 392
+        Top = 361
+        Caption = 'H (High)'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+      end
+      object cxLabel33: TcxLabel
+        Left = 481
+        Top = 361
+        Caption = 'HH (High High)'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+      end
+      object cxLabel35: TcxLabel
+        Left = 587
+        Top = 361
+        Caption = 'M'#225'ximo'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.IsFontAssigned = True
+      end
+      object cxLabel36: TcxLabel
+        Left = 3
+        Top = 384
+        Caption = 'Valores Actuales:'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.TextColor = clHotLight
+        Style.TextStyle = [fsBold]
+        Style.IsFontAssigned = True
+        Transparent = True
+      end
+      object cxLabel38: TcxLabel
+        Left = 3
+        Top = 424
+        Caption = 'Nuevos Valores:'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.TextColor = clHotLight
+        Style.TextStyle = [fsBold]
+        Style.IsFontAssigned = True
+        Transparent = True
+      end
+      object txt_ConfiguracionSensoresMax: TEdit
+        Left = 587
+        Top = 423
+        Width = 60
+        Height = 21
+        TabOrder = 14
+      end
+      object txt_ConfiguracionSensoresHH: TEdit
+        Left = 481
+        Top = 423
+        Width = 60
+        Height = 21
+        TabOrder = 13
+      end
+      object txt_ConfiguracionSensoresH: TEdit
+        Left = 392
+        Top = 423
+        Width = 60
+        Height = 21
+        TabOrder = 12
+      end
+      object txt_ConfiguracionSensoresL: TEdit
+        Left = 305
+        Top = 423
+        Width = 60
+        Height = 21
+        TabOrder = 11
+      end
+      object txt_ConfiguracionSensoresLL: TEdit
+        Left = 209
+        Top = 423
+        Width = 60
+        Height = 21
+        TabOrder = 10
+      end
+      object txt_ConfiguracionSensoresMin: TEdit
+        Left = 121
+        Top = 423
+        Width = 60
+        Height = 21
+        TabOrder = 9
       end
     end
   end
@@ -9793,5 +10037,89 @@ object frm_Principal: Tfrm_Principal
     DataSet = ADOQuery_Grafico
     Left = 888
     Top = 72
+  end
+  object ADOQuery_SensorUpdate: TADOQuery
+    Connection = ADOConnectionHYDRODB
+    CursorType = ctOpenForwardOnly
+    Parameters = <
+      item
+        Name = 'MIN'
+        Attributes = [paNullable]
+        DataType = ftSmallint
+        NumericScale = 248
+        Precision = 255
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'VALORLL'
+        Attributes = [paNullable]
+        DataType = ftSmallint
+        NumericScale = 248
+        Precision = 255
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'VALORL'
+        Attributes = [paNullable]
+        DataType = ftSmallint
+        NumericScale = 248
+        Precision = 255
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'VALORH'
+        Attributes = [paNullable]
+        DataType = ftSmallint
+        NumericScale = 248
+        Precision = 255
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'VALORHH'
+        Attributes = [paNullable]
+        DataType = ftSmallint
+        NumericScale = 248
+        Precision = 255
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'MAX'
+        Attributes = [paNullable]
+        DataType = ftSmallint
+        NumericScale = 248
+        Precision = 255
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'ID'
+        Attributes = [paNullable]
+        DataType = ftSmallint
+        NumericScale = 248
+        Precision = 255
+        Size = 255
+        Value = Null
+      end>
+    SQL.Strings = (
+      'UPDATE sensor'
+      'SET min = :MIN, '
+      '       valorLL = :VALORLL, '
+      '       valorL = :VALORL, '
+      '       valorH = :VALORH,'
+      '       valorHH = :VALORHH,'
+      '       max = :MAX'
+      'WHERE ID_sensor = :ID')
+    Left = 792
+    Top = 488
+  end
+  object DataSource2: TDataSource
+    DataSet = ADOQuery_SensorUpdate
+    Left = 824
+    Top = 488
   end
 end

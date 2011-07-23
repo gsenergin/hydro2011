@@ -12,7 +12,7 @@ uses
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
   TeeDBCrossTab, Series, TeeProcs, Chart,
-  UI_Grafico;
+  UI_Grafico, Mask;
 
 type
   Tfrm_Principal = class(TForm)
@@ -107,8 +107,7 @@ type
     cxLabel60: TcxLabel;
     cxButton22: TcxButton;
     cxButton23: TcxButton;
-    SG_Configuracion: TStringGrid;
-    cxButton1: TcxButton;
+    btn_ConfiguracionCambiarValores: TcxButton;
     SocketSuscripcion: TClientSocket;
     PLCBlock_RTU2: TPLCBlock;
     RTU2_ST10001: TPLCBlockElement;
@@ -183,11 +182,36 @@ type
     DBCrossTabSource1: TDBCrossTabSource;
     ADOQuery_Grafico: TADOQuery;
     DataSource1: TDataSource;
+    DBGrid_Configuracion: TDBGrid;
+    cxLabel17: TcxLabel;
+    cxLabel18: TcxLabel;
+    cxLabel30: TcxLabel;
+    cxLabel31: TcxLabel;
+    cxLabel33: TcxLabel;
+    cxLabel35: TcxLabel;
+    cxLabel36: TcxLabel;
+    cxLabel38: TcxLabel;
+    DBText_SensoresMin: TDBText;
+    DBText_SensoresLL: TDBText;
+    DBText_SensoresL: TDBText;
+    DBText_SensoresH: TDBText;
+    DBText_SensoresHH: TDBText;
+    DBText_SensoresMax: TDBText;
+    ADOQuery_SensorUpdate: TADOQuery;
+    DataSource2: TDataSource;
+    txt_ConfiguracionSensoresMax: TEdit;
+    txt_ConfiguracionSensoresHH: TEdit;
+    txt_ConfiguracionSensoresH: TEdit;
+    txt_ConfiguracionSensoresL: TEdit;
+    txt_ConfiguracionSensoresLL: TEdit;
+    txt_ConfiguracionSensoresMin: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
     procedure RTU1_ACC0003ValueChange(Sender: TObject);
     procedure btnHistoricoClick(Sender: TObject);
+    procedure img_GolpeArieteClick(Sender: TObject);
+    procedure btn_ConfiguracionCambiarValoresClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -207,15 +231,17 @@ procedure Tfrm_Principal.btnHistoricoClick(Sender: TObject);
 var frmGrafico: Tfrm_Grafico;
     ID, TimeStamp: string;
     valor:integer;
+    cont: integer;
 begin
   //ADOQuery_Grafico
   frmGrafico:= Tfrm_Grafico.Create(self);
 
   frmGrafico.lblNomenclatura.Caption:= ADOTable_Sensor.FieldByName('nomenclatura').AsString;
   frmGrafico.lblDescripcion.Caption:= ADOTable_Sensor.FieldByName('descripcion').AsString;
-  frmGrafico.Chart_HistoricoSensado.Visible:= false;
+
+//  frmGrafico.Chart_HistoricoSensado.Visible:= false;
   frmGrafico.Chart_HistoricoSensado.Series[0].Clear;
-  
+
   ID:= ADOTable_Sensor.FieldByName('ID_sensor').AsString;
   with ADOQuery_Grafico do
   begin
@@ -225,17 +251,71 @@ begin
       execsql;
       First;
   end;
-
+  cont:= 1;
   while not ADOQuery_Grafico.Eof do
   begin
         valor:= ADOQuery_Grafico.FieldByName('valorSensado').AsInteger;
         TimeStamp:=ADOQuery_Grafico.FieldByName('TimeStamp').AsString;
-       // showmessage(inttostr(valor));
-        frmGrafico.Chart_HistoricoSensado.Series[0].Add(valor,TimeStamp);
+        //showmessage(inttostr(valor));
+
+        frmGrafico.Chart_HistoricoSensado.Series[0].AddXY(cont,valor,Timestamp,clBlue);
+        //frmGrafico.Chart_HistoricoSensado.Series[0].Add(valor);
         ADOQuery_Grafico.Next;
+        cont:= cont+1;
   end;
+
   frmGrafico.Chart_HistoricoSensado.Visible:= true;
+  frmGrafico.Chart_HistoricoSensado.refresh;
   frmGrafico.Show;
+end;
+
+procedure Tfrm_Principal.btn_ConfiguracionCambiarValoresClick(Sender: TObject);
+var min,max,LL,L,H,HH: integer;
+    ID: string;
+begin
+    try
+       min:= strtoint(txt_ConfiguracionSensoresMin.text);
+       LL:= strtoint(txt_ConfiguracionSensoresLL.text);
+       L:= strtoint(txt_ConfiguracionSensoresL.text);
+       H:= strtoint(txt_ConfiguracionSensoresH.text);
+       HH:= strtoint(txt_ConfiguracionSensoresHH.text);
+       max:= strtoint(txt_ConfiguracionSensoresMax.text);
+    except
+       ShowMessage('Error en los Valores Ingresados');
+       exit;
+    end;
+    if not ((min<=LL)and(LL<=L)and(L<=H)and(H<=HH)and(HH<=max) ) then
+    begin
+       ShowMessage('Se debe cumplir que Min <= LL <= L <= H <= HH <= Max');
+       exit;
+    end;
+
+    // Si llego hasta aca, no hay errores
+
+
+    ID:= ADOTable_Sensor.FieldByName('ID_sensor').AsString;
+
+    with ADOQuery_SensorUpdate do
+    begin
+      Close;
+      Parameters.ParamByName('ID').Value:= ID;
+      Parameters.ParamByName('MIN').Value:= min;
+      Parameters.ParamByName('VALORLL').Value:= LL;
+      Parameters.ParamByName('VALORL').Value:= L;
+      Parameters.ParamByName('VALORH').Value:= H;
+      Parameters.ParamByName('VALORHH').Value:= HH;
+      Parameters.ParamByName('MAX').Value:= max;
+      Execsql;
+    end;
+    // Refresh
+    ADOTable_Sensor.Active:= false;ADOTable_Sensor.Active:= true;
+    ShowMessage('Valores Actualizados con éxito');
+    txt_ConfiguracionSensoresMin.text:='';
+    txt_ConfiguracionSensoresLL.text:='';
+    txt_ConfiguracionSensoresL.text:='';
+    txt_ConfiguracionSensoresH.text:='';
+    txt_ConfiguracionSensoresHH.text:='';
+    txt_ConfiguracionSensoresmax.text:='';
 end;
 
 procedure Tfrm_Principal.Button1Click(Sender: TObject);
@@ -274,9 +354,14 @@ begin
 //    SocketSuscripcion.Port:= 9000;
  //   SocketSuscripcion.Active:= true;
 
-
+     frm_Principal.Width:= 767;
 end;
 
+
+procedure Tfrm_Principal.img_GolpeArieteClick(Sender: TObject);
+begin
+
+end;
 
 // Cambio en La compuerta de Desvio
 procedure Tfrm_Principal.RTU1_ACC0003ValueChange(Sender: TObject);
