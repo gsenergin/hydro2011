@@ -3,8 +3,8 @@ object PasswordDlg: TPasswordDlg
   Top = 108
   BorderStyle = bsDialog
   Caption = 'HYDRO - Login'
-  ClientHeight = 140
-  ClientWidth = 237
+  ClientHeight = 136
+  ClientWidth = 232
   Color = clBtnFace
   ParentFont = True
   OldCreateOrder = True
@@ -37,6 +37,14 @@ object PasswordDlg: TPasswordDlg
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
+  end
+  object lbltipoUsuario: TLabel
+    Left = 57
+    Top = 13
+    Width = 64
+    Height = 13
+    Caption = 'lbltipoUsuario'
+    Visible = False
   end
   object Password: TEdit
     Left = 8
@@ -73,5 +81,23 @@ object PasswordDlg: TPasswordDlg
     Width = 217
     Height = 21
     TabOrder = 3
+  end
+  object ADOQueryUsuario: TADOQuery
+    Connection = ADOConnectionHYDROLogin
+    Parameters = <>
+    Left = 120
+    Top = 48
+  end
+  object ADOConnectionHYDROLogin: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
+      'er ID=root;Data Source=HydroDB'
+    ConnectionTimeout = 0
+    DefaultDatabase = 'hydrodb'
+    LoginPrompt = False
+    Mode = cmRead
+    Left = 88
+    Top = 44
   end
 end

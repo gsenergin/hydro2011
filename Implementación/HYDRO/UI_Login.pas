@@ -3,7 +3,7 @@ unit UI_Login;
 interface
 
 uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls, 
-  Buttons, UI_Principal;
+  Buttons, UI_Principal, DB, ADODB;
 
 type
   TPasswordDlg = class(TForm)
@@ -13,6 +13,9 @@ type
     btn_Cancel: TButton;
     User: TEdit;
     Label2: TLabel;
+    ADOQueryUsuario: TADOQuery;
+    ADOConnectionHYDROLogin: TADOConnection;
+    lbltipoUsuario: TLabel;
     procedure btn_OKClick(Sender: TObject);
     class function Execute: boolean;
     procedure FormCreate(Sender: TObject);
@@ -31,13 +34,37 @@ implementation
 
 procedure TPasswordDlg.btn_OKClick(Sender: TObject);
 var frm_Principal: Tfrm_Principal;
+    tipoUsuario: integer;
 begin
     // VALIDAR CONTRA LA DB
     // User= ?? Password= ??
-  if (true) then
-    ModalResult := mrOK
-  else
-    ModalResult := mrAbort;
+    ADOConnectionHYDROLogin.Connected:= true;
+    with ADOQueryUsuario do
+    begin
+      Close;
+      //Parameters.ParamByName('user').Value:= user.Text;
+      //Parameters.ParamByName('password').Value:= Password.Text;
+     // Parameters.ParamByName('tipoUsuario').Value:= 0;
+      SQL.Clear;
+      SQL.Add('SELECT FK_Usuario_TipoUsuario AS TIPOUSUARIO FROM usuario WHERE user="'+user.Text+'" and password="'+Password.Text+'"');
+      Open;
+      ExecSQL;
+      tipoUsuario:= FieldByName('TIPOUSUARIO').AsInteger;
+
+      SQL.Clear;
+      SQL.Add('SELECT Descripcion FROM tipousuario WHERE ID_TipoUsuario='+inttostr(tipoUsuario));
+      Open;
+      ExecSQL;
+      lbltipoUsuario.Caption:= FieldByName('Descripcion').AsString;
+    end;
+    ADOConnectionHYDROLogin.Connected:= false;
+
+
+    if (tipoUsuario>0) then
+      ModalResult := mrOK
+    else
+      ModalResult := mrAbort;
+
 end;
 
 
@@ -54,8 +81,8 @@ end;
 
 procedure TPasswordDlg.FormCreate(Sender: TObject);
 begin
-    User.Text:= '';
-    password.Text := '';
+    User.Text:= 'admin';
+    password.Text := '1234';
 end;
 
 end.

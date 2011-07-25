@@ -12,7 +12,7 @@ uses
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
   TeeDBCrossTab, Series, TeeProcs, Chart,
-  UI_Grafico, Mask;
+  UI_Grafico, Mask, HMIUpDown;
 
 type
   Tfrm_Principal = class(TForm)
@@ -33,8 +33,8 @@ type
     cxLabel5: TcxLabel;
     lblUsuario: TcxLabel;
     lblTipoUsuario: TcxLabel;
-    cxLabel6: TcxLabel;
-    cxLabel7: TcxLabel;
+    lblFecha: TcxLabel;
+    lblHora: TcxLabel;
     SG_Alertas: TStringGrid;
     cxLabel8: TcxLabel;
     cxLabel19: TcxLabel;
@@ -68,10 +68,7 @@ type
     cxLabel29: TcxLabel;
     cxLabel32: TcxLabel;
     cxLabel34: TcxLabel;
-    UpDown1: TUpDown;
     cxLabel37: TcxLabel;
-    UpDown2: TUpDown;
-    UpDown3: TUpDown;
     cxLabel41: TcxLabel;
     cxLabel44: TcxLabel;
     cxLabel45: TcxLabel;
@@ -179,7 +176,6 @@ type
     DS_Sensor: TDataSource;
     DBGrid_Sensor: TDBGrid;
     btnHistorico: TcxButton;
-    DBCrossTabSource1: TDBCrossTabSource;
     ADOQuery_Grafico: TADOQuery;
     DataSource1: TDataSource;
     DBGrid_Configuracion: TDBGrid;
@@ -205,6 +201,7 @@ type
     txt_ConfiguracionSensoresL: TEdit;
     txt_ConfiguracionSensoresLL: TEdit;
     txt_ConfiguracionSensoresMin: TEdit;
+    TimerFechaHora: TTimer;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -212,6 +209,8 @@ type
     procedure btnHistoricoClick(Sender: TObject);
     procedure img_GolpeArieteClick(Sender: TObject);
     procedure btn_ConfiguracionCambiarValoresClick(Sender: TObject);
+    procedure TimerFechaHoraTimer(Sender: TObject);
+    procedure cxButton5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -325,15 +324,30 @@ end;
 
 
 
+procedure Tfrm_Principal.cxButton5Click(Sender: TObject);
+begin
+    //ADOConnectionHYDRODB.Connected:= false;
+    //ADOTable_Sensor.Active:= false;
+    try
+      frm_Principal.Close;
+      //Application.Terminate;
+    except
+
+    end;
+
+end;
+
 procedure Tfrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-    SocketSuscripcion.Socket.SendText('BAJA');
+//    SocketSuscripcion.Socket.SendText('BAJA');
 end;
 
 procedure Tfrm_Principal.FormCreate(Sender: TObject);
 begin
+
+
     // Activo el Socket
-    //TCP_UDPPort1.Active:= true;
+    TCP_UDPPort1.Active:= true;
 
 
     ADOConnectionHYDRODB.Connected:= true;
@@ -355,6 +369,7 @@ begin
  //   SocketSuscripcion.Active:= true;
 
      frm_Principal.Width:= 767;
+     TimerFechaHoraTimer(self);
 end;
 
 
@@ -373,5 +388,12 @@ begin
 
 end;
 
+
+procedure Tfrm_Principal.TimerFechaHoraTimer(Sender: TObject);
+begin
+    lblFecha.Caption:= datetostr(now);
+    lblHora.Caption:= FormatDateTime('hh:nn', now);
+//    FormatDateTime(' "Today is " dddd " minute " nn',d)
+end;
 
 end.
