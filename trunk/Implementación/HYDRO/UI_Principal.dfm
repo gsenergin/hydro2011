@@ -97,7 +97,7 @@ object frm_Principal: Tfrm_Principal
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D4948445200000300
           0000023208060000007C44AD9C0000000467414D410000B18F0BFC6105000000
-          097048597300000EBD00000EBD0147FB90AD00005ABF49444154785EEDDD4DB6
+          097048597300000EBC00000EBC0195BC724900005ABF49444154785EEDDD4DB6
           233792ADED984D0DA3BA77569AD29D43746B185F237BDF10E28AA964893A411E
           C73FCCE04FAE75564A22E0000C2FCCF776C0C91FFFFD7FFEE75794BF7FFDEB5F
           BFFC8901063080010C60000318C00006E631F0238AF87FF6C364CF9B6CB1155B
@@ -1349,13 +1349,6 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object UpDown1: TUpDown
-        Left = 619
-        Top = 329
-        Width = 17
-        Height = 28
-        TabOrder = 9
-      end
       object cxLabel37: TcxLabel
         Left = 591
         Top = 295
@@ -1368,20 +1361,6 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
-      end
-      object UpDown2: TUpDown
-        Left = 619
-        Top = 377
-        Width = 17
-        Height = 25
-        TabOrder = 11
-      end
-      object UpDown3: TUpDown
-        Left = 617
-        Top = 160
-        Width = 17
-        Height = 25
-        TabOrder = 12
       end
       object cxLabel41: TcxLabel
         Left = 220
@@ -1482,7 +1461,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 31
         Caption = 'C'
-        TabOrder = 20
+        TabOrder = 17
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 1
       end
@@ -1492,7 +1471,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 31
         Caption = 'C'
-        TabOrder = 21
+        TabOrder = 18
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 2
         SpeedButtonOptions.AllowAllUp = True
@@ -1504,7 +1483,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 31
         Caption = 'A'
-        TabOrder = 22
+        TabOrder = 19
         SpeedButtonOptions.GroupIndex = 2
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1532,6 +1511,7 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
+        Transparent = True
       end
       object cxLabel55: TcxLabel
         Left = 105
@@ -1544,6 +1524,7 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
+        Transparent = True
       end
       object cxLabel56: TcxLabel
         Left = 105
@@ -1556,6 +1537,7 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
+        Transparent = True
       end
       object cxLabel57: TcxLabel
         Left = 105
@@ -1568,6 +1550,7 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
+        Transparent = True
       end
       object cxButton14: TcxButton
         Left = 196
@@ -1575,7 +1558,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 28
+        TabOrder = 25
         SpeedButtonOptions.GroupIndex = 5
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1585,7 +1568,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 29
+        TabOrder = 26
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 5
         SpeedButtonOptions.AllowAllUp = True
@@ -1597,7 +1580,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 30
+        TabOrder = 27
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 6
         SpeedButtonOptions.AllowAllUp = True
@@ -1609,7 +1592,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 31
+        TabOrder = 28
         SpeedButtonOptions.GroupIndex = 6
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1619,7 +1602,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 32
+        TabOrder = 29
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 7
         SpeedButtonOptions.AllowAllUp = True
@@ -1631,7 +1614,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 33
+        TabOrder = 30
         SpeedButtonOptions.GroupIndex = 7
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1641,7 +1624,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 34
+        TabOrder = 31
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 8
         SpeedButtonOptions.AllowAllUp = True
@@ -1653,7 +1636,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 35
+        TabOrder = 32
         SpeedButtonOptions.GroupIndex = 8
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1668,6 +1651,7 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
+        Transparent = True
       end
       object cxButton7: TcxButton
         Left = 196
@@ -1675,7 +1659,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'On'
-        TabOrder = 37
+        TabOrder = 34
         SpeedButtonOptions.GroupIndex = 9
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1685,7 +1669,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'Off'
-        TabOrder = 38
+        TabOrder = 35
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 9
         SpeedButtonOptions.AllowAllUp = True
@@ -1697,7 +1681,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 31
         Caption = 'A'
-        TabOrder = 39
+        TabOrder = 36
         SpeedButtonOptions.GroupIndex = 10
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1707,7 +1691,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 31
         Caption = 'C'
-        TabOrder = 40
+        TabOrder = 37
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 10
         SpeedButtonOptions.AllowAllUp = True
@@ -1732,7 +1716,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'A'
-        TabOrder = 42
+        TabOrder = 39
         SpeedButtonOptions.GroupIndex = 3
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1742,7 +1726,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'C'
-        TabOrder = 43
+        TabOrder = 40
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 3
         SpeedButtonOptions.AllowAllUp = True
@@ -1772,6 +1756,7 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Name = 'Tahoma'
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
+        Transparent = True
       end
       object cxButton22: TcxButton
         Left = 297
@@ -1779,7 +1764,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'A'
-        TabOrder = 46
+        TabOrder = 43
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1789,7 +1774,7 @@ object frm_Principal: Tfrm_Principal
         Width = 33
         Height = 23
         Caption = 'C'
-        TabOrder = 47
+        TabOrder = 44
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
@@ -9502,42 +9487,42 @@ object frm_Principal: Tfrm_Principal
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 14
+        TabOrder = 13
       end
       object txt_ConfiguracionSensoresHH: TEdit
         Left = 481
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 13
+        TabOrder = 12
       end
       object txt_ConfiguracionSensoresH: TEdit
         Left = 392
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 12
+        TabOrder = 11
       end
       object txt_ConfiguracionSensoresL: TEdit
         Left = 305
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 11
+        TabOrder = 10
       end
       object txt_ConfiguracionSensoresLL: TEdit
         Left = 209
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 10
+        TabOrder = 9
       end
       object txt_ConfiguracionSensoresMin: TEdit
         Left = 121
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 9
+        TabOrder = 8
       end
     end
   end
@@ -9576,7 +9561,7 @@ object frm_Principal: Tfrm_Principal
       Style.IsFontAssigned = True
     end
     object cxLabel4: TcxLabel
-      Left = 662
+      Left = 622
       Top = 5
       Caption = 'Fecha'
       ParentFont = False
@@ -9594,6 +9579,7 @@ object frm_Principal: Tfrm_Principal
       Height = 25
       Caption = 'Logout'
       TabOrder = 3
+      OnClick = cxButton5Click
     end
     object cxLabel2: TcxLabel
       Left = 192
@@ -9608,7 +9594,7 @@ object frm_Principal: Tfrm_Principal
       Style.IsFontAssigned = True
     end
     object cxLabel5: TcxLabel
-      Left = 668
+      Left = 628
       Top = 28
       Caption = 'Hora'
       ParentFont = False
@@ -9649,8 +9635,8 @@ object frm_Principal: Tfrm_Principal
       Style.IsFontAssigned = True
       Transparent = True
     end
-    object cxLabel6: TcxLabel
-      Left = 705
+    object lblFecha: TcxLabel
+      Left = 665
       Top = 5
       Caption = 'lblFecha'
       ParentFont = False
@@ -9664,8 +9650,8 @@ object frm_Principal: Tfrm_Principal
       Style.IsFontAssigned = True
       Transparent = True
     end
-    object cxLabel7: TcxLabel
-      Left = 705
+    object lblHora: TcxLabel
+      Left = 665
       Top = 28
       Caption = 'lblHora'
       ParentFont = False
@@ -9683,8 +9669,8 @@ object frm_Principal: Tfrm_Principal
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11
     SkinName = 'McSkin'
-    Left = 600
-    Top = 16
+    Left = 536
+    Top = 8
   end
   object SocketSuscripcion: TClientSocket
     Active = False
@@ -10008,12 +9994,6 @@ object frm_Principal: Tfrm_Principal
     Left = 808
     Top = 32
   end
-  object DBCrossTabSource1: TDBCrossTabSource
-    CaseSensitive = False
-    Formula = gfCount
-    LabelField = 'TimeStamp'
-    ValueField = 'valorSensado'
-  end
   object ADOQuery_Grafico: TADOQuery
     Connection = ADOConnectionHYDRODB
     CursorType = ctOpenForwardOnly
@@ -10121,5 +10101,11 @@ object frm_Principal: Tfrm_Principal
     DataSet = ADOQuery_SensorUpdate
     Left = 824
     Top = 488
+  end
+  object TimerFechaHora: TTimer
+    Interval = 60000
+    OnTimer = TimerFechaHoraTimer
+    Left = 560
+    Top = 24
   end
 end

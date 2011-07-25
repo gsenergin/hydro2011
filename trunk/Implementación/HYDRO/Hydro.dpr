@@ -10,6 +10,9 @@ uses
 
 {$R *.res}
 
+var usuarioActual, tipoUsuarioActual: string;
+    modalResult: integer;
+
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
@@ -17,17 +20,39 @@ begin
 
   //Application.CreateForm(Tfrm_Grafico, frm_Grafico);
   //  Application.CreateForm(Tfrm_splashScreen, frm_splashScreen);
-  if TPasswordDlg.Execute then
-  begin
- //   Tfrm_SplashScreen.Execute;
-    Application.Initialize;
-    Application.CreateForm(Tfrm_Principal, frm_Principal);
-    Application.Run;
-  end
-  else
-  begin
-    Application.MessageBox('Usuario o Password incorrecto', 'HYDRO');
-  end;
+   Application.CreateForm(Tfrm_Principal, frm_Principal);
+   Application.CreateForm(TPasswordDlg, PasswordDlg);
+ // repeat
+    PasswordDlg.Showmodal;
+    modalResult:= PasswordDlg.ModalResult;
 
+    if modalResult = 1 then  //OK
+    //if TPasswordDlg.Execute then
+    begin
+    //   Tfrm_SplashScreen.Execute;
+      usuarioActual:= PasswordDlg.User.Text;
+      tipoUsuarioActual:= PasswordDlg.lbltipoUsuario.Caption;
+
+      PasswordDlg.free;
+
+    //  Application.CreateForm(Tfrm_Principal, frm_Principal);
+      frm_Principal.lblUsuario.Caption:= usuarioActual;
+      frm_Principal.lblTipoUsuario.Caption:= tipoUsuarioActual;
+
+      // Habilitar o desabilitar funciones según tipo de usuario
+      if (tipoUsuarioActual='Visitante') or (tipoUsuarioActual='Operario') then
+      begin
+        frm_Principal.tab_Configuracion.Enabled:= false;
+      end;
+
+      Application.Run;
+
+    end
+    else
+    begin
+      Application.MessageBox('Usuario o Password incorrecto', 'HYDRO');
+    end;
+
+ // until modalResult = 2; //Cancel
 
 end.
