@@ -12,5 +12,17 @@
     <Transaction>2011/07/12 09:50:37.741.pas,D:\[Proyecto]\Implementación\ControlAutomatico\ClienteObservador.pas=</Transaction>
     <Transaction>2011/07/18 10:38:40.234.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit1.pas=D:\[Proyecto]\Implementación\ControlAutomatico\UI_ControlAutomatico.pas</Transaction>
     <Transaction>2011/07/18 10:38:40.234.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\Unit1.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\UI_ControlAutomatico.dfm</Transaction>
+    <Transaction>2011/07/25 20:07:54.009.pas,D:\[Proyecto]\Implementación\ControlAutomatico\ThdTimer.pas=</Transaction>
+    <Transaction>2011/07/25 20:32:51.822.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatos.pas</Transaction>
+    <Transaction>2011/07/25 20:32:51.822.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatos.dfm</Transaction>
+    <Transaction>2011/07/25 20:34:20.995.pas,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatos.pas=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosRTU.pas</Transaction>
+    <Transaction>2011/07/25 20:34:20.995.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatos.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosRTU.dfm</Transaction>
+    <Transaction>2011/07/25 20:34:40.960.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit3.pas=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosBD.pas</Transaction>
+    <Transaction>2011/07/25 20:34:40.960.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\Unit3.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosBD.dfm</Transaction>
+    <Transaction>2011/07/25 20:35:44.438.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit4.pas=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.pas</Transaction>
+    <Transaction>2011/07/25 20:35:44.438.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\Unit4.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.dfm</Transaction>
+    <Transaction>2011/07/25 20:39:11.101.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\ClienteObservador.pas</Transaction>
+    <Transaction>2011/07/25 20:40:54.565.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Consigna.pas</Transaction>
+    <Transaction>2011/07/25 21:28:19.503.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Secuencia.pas</Transaction>
   </Transactions>
 </BorlandProject>
