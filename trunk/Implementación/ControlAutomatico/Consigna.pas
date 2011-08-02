@@ -36,30 +36,13 @@ type
       procedure LogEnable(var MemoLog:Tmemo);  overload;
       procedure LogEnable();  overload;
 
+      procedure LogWrite(mensaje: string);
+
       procedure LogDisable();
       procedure setDelay(milisegundos:cardinal);
   end;
 
 implementation
-
-(*
-try
-       t:= StrToInt(txtConsignaVoltaje.text);
-       if (t>0) and (t<24000) then
-       begin
-         Consigna.Voltaje:= t;
-         Consigna.esCaudal:= false;
-         Consigna.esVoltaje:= true;
-         Consigna.enabled:= true;
-         //TimerConsigna.Enabled:= true;
-         Consigna.Resume;
-
-       end;
-       log.Lines.Add('Consigna de Voltaje: '+inttostr(t)+' Volts');
-    except
-       log.Lines.Add('Error al Setear consigna de Voltaje');
-    end;
-*)
 
 
 constructor TConsigna.Create;
@@ -94,6 +77,13 @@ begin
        enableLog:= true;
 end;
 
+procedure TConsigna.LogWrite(mensaje: string);
+begin
+    // Escribe en el log si esta habilitado el logueo
+    if enableLog then
+      log.lines.Add(mensaje);
+end;
+
 procedure TConsigna.LogEnable(var MemoLog: Tmemo);
 begin
      Log:= MemoLog;
@@ -115,44 +105,34 @@ begin
          self.Caudal:= valor;
          self.esCaudal:= true;
          self.esVoltaje:= false;
-
-         if enableLog then
-             log.Lines.Add('Consigna de Caudal: '+inttostr(valor)+' m^3/seg');
+         LogWrite('Consigna de Caudal: '+inttostr(valor)+' m^3/seg');
+         if Start then RUN;
      end
      else
-     if enableLog then
-       log.Lines.Add('Error al Setear consigna de caudal');
-
-    if Start then RUN;
+         LogWrite('Error al Setear consigna de caudal');
 end;
 
 
-procedure TConsigna.SetConsignaVoltaje(valor: integer; Start: boolean);
+procedure TConsigna.SetConsignaVoltaje(valor: integer; Start: boolean= true);
 begin
      // Se deberia checkear aca contra la BD OJOO!!!!!!!!!!!!!!!!!!!!!!!!!
-     if (valor>=0) and (valor<=40000) then
+     if (valor>=0) and (valor<=24000) then
      begin
          self.Voltaje:= valor;
          self.esCaudal:= false;
          self.esVoltaje:= true;
-
-         if enableLog then
-             log.Lines.Add('Consigna de Voltaje: '+inttostr(valor)+' Volts');
+         LogWrite('Consigna de Voltaje: '+inttostr(valor)+' Volts');
+         if Start then RUN;
      end
      else
-     if enableLog then
-       log.Lines.Add('Error al Setear consigna de voltaje');
-
-    if Start then RUN;
-
+        LogWrite('Error al Setear consigna de voltaje');
 end;
 
 
 procedure TConsigna.SetConsignaManual;
 begin
     STOP;
-    if enableLog then
-       log.Lines.Add('Consigna Deshabilitada. Modo Manual');
+    LogWrite('Consigna Deshabilitada. Modo Manual');
 end;
 
 
@@ -164,6 +144,7 @@ end;
 procedure TConsigna.STOP;
 begin
     enabled:= false;
+    Suspend;
 end;
 
 procedure TConsigna.AjustarConsigna();
@@ -182,97 +163,112 @@ procedure TConsigna.AjustarConsigna();
       else if actuador+cant>100 then result:= 100-trunc(actuador)
       else result:= cant;
   end;
+  
 
-var delta: integer;
-    valorAnt: double;
+  function getDelta( valorAnt:double; directamenteProporcional: boolean; diferencia, ValorConsigna: integer): integer;
+  var delta : integer;
+      porcentajeDiferencia: double;
+  begin
+      porcentajeDiferencia:= abs(diferencia)/ValorConsigna;
+      delta:= random(trunc(porcentajeDiferencia*35))+1;
+
+      if ((diferencia>0) and (not directamenteProporcional))or ((diferencia<0) and (directamenteProporcional)) then
+          result:= - tryDec(valorAnt, delta)
+      else
+          result:= tryInc(valorAnt, delta);
+  end;
+
+var delta, diferencia: integer;
+    valorAnt, porcentajeDiferencia: double;
 begin
-    if enableLog then
-      log.lines.add('Revisando Consigna'+TimeToStr(now));
+
 
     with DM_AccesoDatosRTU do
     begin
         // Consigna de Caudal
+        if esCaudal then
+        begin
 
+          RTU2_ST10013.Read; // Leo el caudal actual
+          diferencia:= Caudal - trunc(RTU2_ST10013.Value);
+          if diferencia<>0 then
+          begin
+              // Alaves  (RTU2_AT10007)
+              valorAnt:= RTU2_AT10007.Value;
+              delta:= getDelta(valorAnt,TRUE,diferencia,Caudal);
+              if delta <>0 then
+              begin
+                 RTU2_AT10007.Value:= valorAnt + delta;
+                 LogWrite('Revisando Consigna de Caudal - %Alaves '+inttostr(delta));
+              end
+              else
+              begin
+                //  Frenos Turbina (RTU2_AT10006)
+                valorAnt:= RTU2_AT10006.Value;
+                delta:= getDelta(valorAnt,FALSE,diferencia,Caudal);
+                if delta<> 0 then
+                begin
+                  RTU2_AT10006.Value:= valorAnt + delta;
+                  LogWrite('Revisando Consigna de Caudal - %Frenos Turbina '+inttostr(delta));
+                end;
+              end;
+          end;
+        end;
 
         // Consigna de Voltaje
         if esVoltaje then
         begin
-          // Estoy produciendo menos de lo que debo producir.
-          if Voltaje > RTU2_ST10021.Value then
+          (*D*)RTU2_ST10021.Read;  // Leo el voltaje actual
+          diferencia := Voltaje - trunc(RTU2_ST10021.Value);
+          porcentajeDiferencia:= abs(diferencia)/voltaje;
+
+          if porcentajeDiferencia>0.01 then
           begin
-            // Relajar Frenos Generador (RTU2_AT10015)
-            valorAnt:= RTU2_AT10015.Value;
-            delta:= tryDec(valorAnt,random(3)+1);
-            if delta<>0 then
-            begin
-                // Si no estan al 0%, los decremento
-                RTU2_AT10015.Value:= valorAnt-delta;
-            end
-            else
-            begin
-              // Si estaban al 0%, pruebo con abrir más los álabes
-                valorAnt:= RTU2_AT10007.Value;
-                delta:= tryInc(valorAnt,random(3)+1);
-                if delta<>0 then
-                begin
-                    // Si no estan al 0%, los decremento
-                    RTU2_AT10007.Value:= valorAnt+delta;
-                end
-                else
-                begin
-                   // Si estaban al 0%, pruebo con relajar los frenos de la turbina
-                   valorAnt:= RTU2_AT10006.Value;
-                   delta:= tryDec(valorAnt,random(3)+1);
-                   if delta<>0 then
+              // Alaves  (RTU2_AT10007)
+              valorAnt:= RTU2_AT10007.Value;
+              delta:= getDelta(valorAnt,TRUE,diferencia,voltaje);
+              if delta <>0 then
+              begin
+                 RTU2_AT10007.Value:= valorAnt + delta;
+                 LogWrite('Revisando Consigna de Voltaje - %Alaves '+inttostr(delta));
+              end
+              else
+              begin
+                  // Frenos de la turbina (RTU2_AT10006)
+                  valorAnt:= RTU2_AT10006.Value;
+                  delta:= getDelta(valorAnt,FALSE,diferencia,voltaje);
+                  if delta <>0 then
+                  begin
+                      RTU2_AT10006.Value:= valorAnt + delta;
+                      LogWrite('Revisando Consigna de Voltaje - %Frenos Turbina '+inttostr(delta));
+                  end
+                  else
+                  begin
+                    // Frenos Generador (RTU2_AT10015)
+                    valorAnt:= RTU2_AT10015.Value;
+                    delta:= getDelta(valorAnt,FALSE,diferencia,voltaje);
+                    if delta <>0 then
                     begin
-                      // Si no estan al 0%, los decremento
-                      RTU2_AT10006.Value:= valorAnt-delta;
-                    end
-                end;
-            end;
-        end else
-
-        // Estoy produciendo MAS de lo que debo producir.
-        if Voltaje < RTU2_ST10021.Value then
-        begin
-            // Aumento Frenos Generador (RTU2_AT10015)
-            valorAnt:= RTU2_AT10015.Value;
-            delta:= tryInc(valorAnt,random(3)+1);
-            if delta<>0 then
-            begin
-                // Si no estan al 100%, los decremento
-                RTU2_AT10015.Value:= valorAnt+delta;
-            end
-            else
-            begin
-                // Si estaban al 100%, pruebo con cerrar más los álabes
-                valorAnt:= RTU2_AT10007.Value;
-                delta:= tryDec(valorAnt,random(3)+1);
-                if delta<>0 then
-                begin
-                    // Si no estan al 100%, los decremento
-                    RTU2_AT10007.Value:= valorAnt-delta;
-                end
-                else
-                begin
-                   // Si estaban al 100%, pruebo con incrementar los frenos de la turbina
-                   valorAnt:= RTU2_AT10006.Value;
-                   delta:= tryInc(valorAnt,random(3)+1);
-                   if delta<>0 then
+                        RTU2_AT10015.Value:= valorAnt + delta;
+                        LogWrite('Revisando Consigna de Voltaje - %Frenos Generador '+inttostr(delta));
+                    end;
+                  end;
+              end;
+          end
+          else
+          begin
+                    // Frenos Generador (RTU2_AT10015)
+                    valorAnt:= RTU2_AT10015.Value;
+                    delta:= getDelta(valorAnt,FALSE,diferencia,voltaje);
+                    if delta <>0 then
                     begin
-                      // Si no estan al 100%, los incrementar
-                      RTU2_AT10006.Value:= valorAnt+delta;
-                    end
-                end;
-            end;
-        end;
-
-      end;
-    end;
-
-
-    if enableLog then
-      log.lines.add('FIN Revisando Consigna'+TimeToStr(now));
+                        RTU2_AT10015.Value:= valorAnt + delta;
+                        LogWrite('Revisando Consigna de Voltaje - %Frenos Generador '+inttostr(delta));
+                    end;
+          end;
+        end; // es Voltaje
+       
+    end; // with DM_AccesoDatosRTU do
 
 end;
 

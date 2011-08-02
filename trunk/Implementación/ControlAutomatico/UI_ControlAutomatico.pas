@@ -99,18 +99,18 @@ type
     btn_SaveLog: TButton;
     SaveLogDialog: TSaveTextFileDialog;
     TimerGuardaDatos: TTimer;
-    btn_SecuenciaEncendido: TButton;
     log: TMemo;
-    btn_SecuenciaApagado: TButton;
+    Panel_SecuenciasConsignas: TPanel;
+    Label40: TLabel;
+    btn_ConsignaCaudal: TButton;
+    btn_ConsignaVoltaje: TButton;
+    btn_ConsignaManual: TButton;
+    txtConsignaVoltaje: TEdit;
     txtConsignaCaudal: TEdit;
     Label38: TLabel;
     Label39: TLabel;
-    txtConsignaVoltaje: TEdit;
-    btn_ConsignaCaudal: TButton;
-    btn_ConsignaVoltaje: TButton;
-
-    btn_ConsignaManual: TButton;
-    Button1: TButton;
+    btn_SecuenciaEncendido: TButton;
+    btn_SecuenciaApagado: TButton;
    // procedure btn_CambiarDatosConexionClick(Sender: TObject);
    // procedure Button2Click(Sender: TObject);
    // procedure Button1Click(Sender: TObject);
@@ -178,6 +178,7 @@ begin
 
     // Creo una consigna, deshabilitada
     Consigna := TConsigna.Create(True);
+    Consigna.setDelay(2000);
     Consigna.LogEnable(log);
 
     // Creo una secuencia.
@@ -254,6 +255,8 @@ begin
       TimerGuardaDatos.Enabled:= true
     else
       TimerGuardaDatos.Enabled:= false;
+
+    Panel_SecuenciasConsignas.Enabled:= true;
       
 end;
 
@@ -299,6 +302,8 @@ begin
     chk_Log.Enabled:= true;
     btn_ConectarRTU.Enabled:= true;
     btn_DesconectarRTU.Enabled:= false;
+
+    Panel_SecuenciasConsignas.Enabled:= false;
 end;
 
 
@@ -317,11 +322,15 @@ end;
 
 procedure Tfrm_ControlAutomatico.btn_SecuenciaApagadoClick(Sender: TObject);
 begin
+    Consigna.SetConsignaManual;
+
     Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
 end;
 
 procedure Tfrm_ControlAutomatico.btn_SecuenciaEncendidoClick(Sender: TObject);
 begin
+    Consigna.SetConsignaManual;
+    
     Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
 end;
 
