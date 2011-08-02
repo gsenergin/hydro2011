@@ -15,32 +15,6 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label38: TLabel
-    Left = 455
-    Top = 370
-    Width = 98
-    Height = 13
-    Caption = 'Caudal Turbinado'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object Label39: TLabel
-    Left = 455
-    Top = 401
-    Width = 98
-    Height = 13
-    Caption = 'Voltaje Generado'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
   object StatusBar1: TStatusBar
     Left = 0
     Top = 488
@@ -918,15 +892,6 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       OnClick = btn_SaveLogClick
     end
   end
-  object btn_SecuenciaEncendido: TButton
-    Left = 455
-    Top = 326
-    Width = 124
-    Height = 25
-    Caption = 'Secuencia de Encendido'
-    TabOrder = 6
-    OnClick = btn_SecuenciaEncendidoClick
-  end
   object log: TMemo
     Left = 8
     Top = 326
@@ -938,65 +903,116 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
     Lines.Strings = (
       'log')
     ScrollBars = ssVertical
-    TabOrder = 7
+    TabOrder = 6
   end
-  object btn_SecuenciaApagado: TButton
-    Left = 585
+  object Panel_SecuenciasConsignas: TPanel
+    Left = 455
     Top = 325
-    Width = 121
-    Height = 25
-    Caption = 'Secuencia de Apagado'
-    TabOrder = 8
-    OnClick = btn_SecuenciaApagadoClick
-  end
-  object txtConsignaCaudal: TEdit
-    Left = 562
-    Top = 367
-    Width = 65
-    Height = 21
-    TabOrder = 9
-  end
-  object txtConsignaVoltaje: TEdit
-    Left = 562
-    Top = 394
-    Width = 65
-    Height = 21
-    TabOrder = 10
-  end
-  object btn_ConsignaCaudal: TButton
-    Left = 641
-    Top = 362
-    Width = 65
-    Height = 25
-    Caption = 'Set Caudal'
-    TabOrder = 11
-    OnClick = btn_ConsignaCaudalClick
-  end
-  object btn_ConsignaVoltaje: TButton
-    Left = 640
-    Top = 393
-    Width = 65
-    Height = 25
-    Caption = 'Set Voltaje'
-    TabOrder = 12
-    OnClick = btn_ConsignaVoltajeClick
-  end
-  object btn_ConsignaManual: TButton
-    Left = 640
-    Top = 424
-    Width = 65
-    Height = 25
-    Caption = 'Set Manual'
-    TabOrder = 13
-    OnClick = btn_ConsignaManualClick
-  end
-  object Button1: TButton
-    Left = 512
-    Top = 440
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
-    TabOrder = 14
+    Width = 250
+    Height = 157
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    Enabled = False
+    Locked = True
+    TabOrder = 7
+    object Label40: TLabel
+      Left = 56
+      Top = 0
+      Width = 151
+      Height = 16
+      Caption = 'Secuencias - Consignas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label38: TLabel
+      Left = 8
+      Top = 72
+      Width = 98
+      Height = 13
+      Caption = 'Caudal Turbinado'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label39: TLabel
+      Left = 9
+      Top = 99
+      Width = 98
+      Height = 13
+      Caption = 'Voltaje Generado'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btn_ConsignaCaudal: TButton
+      Left = 175
+      Top = 65
+      Width = 65
+      Height = 25
+      Caption = 'Set Caudal'
+      TabOrder = 0
+      OnClick = btn_ConsignaCaudalClick
+    end
+    object btn_ConsignaVoltaje: TButton
+      Left = 175
+      Top = 92
+      Width = 65
+      Height = 25
+      Caption = 'Set Voltaje'
+      TabOrder = 1
+      OnClick = btn_ConsignaVoltajeClick
+    end
+    object btn_ConsignaManual: TButton
+      Left = 175
+      Top = 123
+      Width = 65
+      Height = 25
+      Caption = 'Set Manual'
+      TabOrder = 2
+      OnClick = btn_ConsignaManualClick
+    end
+    object txtConsignaVoltaje: TEdit
+      Left = 113
+      Top = 96
+      Width = 56
+      Height = 21
+      TabOrder = 3
+    end
+    object txtConsignaCaudal: TEdit
+      Left = 112
+      Top = 69
+      Width = 57
+      Height = 21
+      TabOrder = 4
+    end
+    object btn_SecuenciaEncendido: TButton
+      Left = 6
+      Top = 30
+      Width = 99
+      Height = 25
+      Caption = 'Sec. de Encendido'
+      TabOrder = 5
+      OnClick = btn_SecuenciaEncendidoClick
+    end
+    object btn_SecuenciaApagado: TButton
+      Left = 128
+      Top = 30
+      Width = 97
+      Height = 25
+      Caption = 'Sec. de Apagado'
+      TabOrder = 6
+      OnClick = btn_SecuenciaApagadoClick
+    end
   end
   object TimerStatusBar: TTimer
     OnTimer = TimerStatusBarTimer

@@ -243,7 +243,6 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
       item
         Width = 50
       end>
-    ExplicitWidth = 716
   end
   object ModBusTCPDriver1: TModBusTCPDriver
     Tag = 1
