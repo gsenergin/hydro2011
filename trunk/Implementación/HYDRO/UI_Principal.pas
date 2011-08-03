@@ -202,6 +202,18 @@ type
     txt_ConfiguracionSensoresLL: TEdit;
     txt_ConfiguracionSensoresMin: TEdit;
     TimerFechaHora: TTimer;
+    Panel_SecuenciasConsignas: TPanel;
+    Label40: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
+    btn_ConsignaCaudal: TButton;
+    btn_ConsignaVoltaje: TButton;
+    btn_ConsignaManual: TButton;
+    txtConsignaVoltaje: TEdit;
+    txtConsignaCaudal: TEdit;
+    btn_SecuenciaEncendido: TButton;
+    btn_SecuenciaApagado: TButton;
+    Button1: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -211,6 +223,11 @@ type
     procedure btn_ConfiguracionCambiarValoresClick(Sender: TObject);
     procedure TimerFechaHoraTimer(Sender: TObject);
     procedure cxButton5Click(Sender: TObject);
+    procedure btn_SecuenciaEncendidoClick(Sender: TObject);
+    procedure btn_SecuenciaApagadoClick(Sender: TObject);
+    procedure btn_ConsignaCaudalClick(Sender: TObject);
+    procedure btn_ConsignaVoltajeClick(Sender: TObject);
+    procedure btn_ConsignaManualClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -317,9 +334,50 @@ begin
     txt_ConfiguracionSensoresmax.text:='';
 end;
 
+
+
+//////////////////////////////////////////////////////////
+////             CONSIGNAS - SECUENCIAS              /////
+//////////////////////////////////////////////////////////
+
+procedure Tfrm_Principal.btn_ConsignaCaudalClick(Sender: TObject);
+begin
+    SocketSuscripcion.Socket.SendText('01'+txtConsignaCaudal.text);
+end;
+
+
+procedure Tfrm_Principal.btn_ConsignaVoltajeClick(Sender: TObject);
+begin
+    SocketSuscripcion.Socket.SendText('02'+txtConsignaVoltaje.text);
+end;
+
+procedure Tfrm_Principal.btn_ConsignaManualClick(Sender: TObject);
+begin
+    SocketSuscripcion.Socket.SendText('03');
+end;
+
+procedure Tfrm_Principal.btn_SecuenciaEncendidoClick(Sender: TObject);
+begin
+    SocketSuscripcion.Socket.SendText('04');
+end;
+
+procedure Tfrm_Principal.btn_SecuenciaApagadoClick(Sender: TObject);
+begin
+    SocketSuscripcion.Socket.SendText('05');
+end;
+
+
+
+
+
 procedure Tfrm_Principal.Button1Click(Sender: TObject);
 begin
-    TCP_UDPPort1.Active:= true;
+// PUREBA!!
+    // Me suscribo a la distribución de información del control automatico
+    SocketSuscripcion.Active:= false;
+    SocketSuscripcion.Host:= '192.168.1.103';
+    SocketSuscripcion.Port:= 9000;
+    SocketSuscripcion.Active:= true;
 end;
 
 
@@ -363,12 +421,12 @@ begin
     SG_Alertas.Cells[6,0]:= 'Valor';
 
     // Me suscribo a la distribución de información del control automatico
-//    SocketSuscripcion.Active:= false;
-//    SocketSuscripcion.Host:= '127.0.0.1';
-//    SocketSuscripcion.Port:= 9000;
- //   SocketSuscripcion.Active:= true;
+ //   SocketSuscripcion.Active:= false;
+  //  SocketSuscripcion.Host:= '127.0.0.1';
+   // SocketSuscripcion.Port:= 9000;
+   // SocketSuscripcion.Active:= true;
 
-     frm_Principal.Width:= 767;
+   //  frm_Principal.Width:= 767;
      TimerFechaHoraTimer(self);
 end;
 
