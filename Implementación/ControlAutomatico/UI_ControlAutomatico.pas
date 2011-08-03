@@ -111,6 +111,7 @@ type
     Label39: TLabel;
     btn_SecuenciaEncendido: TButton;
     btn_SecuenciaApagado: TButton;
+    ServerSocket_GUIDesktop: TServerSocket;
    // procedure btn_CambiarDatosConexionClick(Sender: TObject);
    // procedure Button2Click(Sender: TObject);
    // procedure Button1Click(Sender: TObject);
@@ -130,6 +131,14 @@ type
     procedure btn_ConsignaCaudalClick(Sender: TObject);
     procedure btn_ConsignaVoltajeClick(Sender: TObject);
     procedure btn_ConsignaManualClick(Sender: TObject);
+    procedure ServerSocket_GUIDesktopClientConnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocket_GUIDesktopClientDisconnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocket_GUIDesktopClientRead(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure ServerSocket_GUIDesktopClientWrite(Sender: TObject;
+      Socket: TCustomWinSocket);
 
 
   private
@@ -170,7 +179,7 @@ begin
 
     DM_AccesoDatosRTU.TCP_UDPPort1.Active:= False;
      DM_AccesoDatosObservador.ServerSocket1.Active:= true;
-  *)   
+  *)
     TimerGuardaDatos.Enabled:= false;
     cantRegistrosEscritos:=0;
 
@@ -181,14 +190,58 @@ begin
     Consigna.setDelay(2000);
     Consigna.LogEnable(log);
 
-    // Creo una secuencia.
-    Secuencia:= TSecuencia.Create();
-    Secuencia.LogEnable(log);
-    
+
     // Creo un observador, deshabilitado
     Observador:= TClienteObservador.Create();
     Observador.active:= false;
 end;
+
+
+////////////////////////////////////////////////////////////////
+/////          SERVER TCP SOCKET -> GUI DESKTOP             ////
+////////////////////////////////////////////////////////////////
+
+procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientConnect(
+  Sender: TObject; Socket: TCustomWinSocket);
+begin
+    // Se conecta un cliente
+    log.Lines.Add('Se conectó un cliente! -> '+Socket.RemoteAddress);
+    Observador.RemoteAdress:= Socket.RemoteAddress;
+    Observador.RemotePort:= Socket.RemotePort;
+    Observador.active:= true;
+end;
+    
+procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientDisconnect(
+  Sender: TObject; Socket: TCustomWinSocket);
+begin
+    // Se desconecta un cliente
+    log.Lines.Add('Se desconectó un cliente!'+Socket.RemoteAddress);
+    Observador.active:= false;
+end;
+
+procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientRead(
+  Sender: TObject; Socket: TCustomWinSocket);
+var mensaje: string;
+begin
+    // Se recibe mensaje de un cliente
+    log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+Socket.ReceiveText);
+
+    // Proceso los mensajes del cliente
+    
+    8888888888
+
+end;
+
+procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientWrite(
+  Sender: TObject; Socket: TCustomWinSocket);
+begin
+    // Se envia un mensaje al cliente
+    log.Lines.Add('  > Enviando Mensaje a '+Socket.RemoteAddress+' -> ');
+end;
+
+
+
+
 
 procedure Tfrm_ControlAutomatico.btn_ConectarBDClick(Sender: TObject);
 begin
@@ -322,16 +375,26 @@ end;
 
 procedure Tfrm_ControlAutomatico.btn_SecuenciaApagadoClick(Sender: TObject);
 begin
+    // Creo una secuencia.
+    Secuencia:= TSecuencia.Create();
+    Secuencia.LogEnable(log);
+
     Consigna.SetConsignaManual;
 
     Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
+   // Secuencia.Free;
 end;
 
 procedure Tfrm_ControlAutomatico.btn_SecuenciaEncendidoClick(Sender: TObject);
 begin
+    // Creo una secuencia.
+    Secuencia:= TSecuencia.Create();
+    Secuencia.LogEnable(log);
+
     Consigna.SetConsignaManual;
-    
+
     Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
+  //  Secuencia.Free;
 end;
 
 
@@ -358,47 +421,6 @@ begin
     // Datos de la RTU #3
       DM_AccesoDatosBD.SP_InsertarHistorialSensado(40001,3,RTU3_SSA0001.Value);
    end;
-
-      (*
-
-      if Observador.active then
-      begin
-
-          Trama:= FloatToStr(RTU1_SCC0001.Value) +'#'+FloatToStr(RTU1_SCC0002.Value) +'#'+FloatToStr(RTU1_SCC0005.Value) +'#'+
-                  FloatToStr(RTU2_ST10001.Value) +'#'+FloatToStr(RTU2_ST10002.Value) +'#'+FloatToStr(RTU2_ST10005.Value) +'#'+
-                  FloatToStr(RTU2_ST10008.Value) +'#'+FloatToStr(RTU2_ST10009.Value) +'#'+FloatToStr(RTU2_ST10012.Value) +'#'+
-                  FloatToStr(RTU2_ST10013.Value) +'#'+FloatToStr(RTU2_ST10014.Value) +'#'+FloatToStr(RTU2_ST10020.Value) +'#'+
-                  FloatToStr(RTU2_ST10021.Value) +'#'+FloatToStr(RTU3_SSA0001.Value);
-          //ShowMessage(trama);
-          ServerSocket1.Socket.SendText(Trama);
-          try
-          //  ServerSocket1.Socket.SendText(Trama);
-
-          except
-            exit;
-          end;
-      end;
-      *)
- (* LOS ACTUADORES SE GUARDAN EN BD CUANDO HAN CAMBIADO DE VALOR SOLAMENTE
-    // ACTUADORES
-    // RTU 1
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,1,RTU1_ACC0003.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40004,1,RTU1_ACC0004.Value);
-    // RTU 2
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,2,RTU2_AT10003.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40004,2,RTU2_AT10004.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40006,2,RTU2_AT10006.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40007,2,RTU2_AT10007.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40010,2,RTU2_ST10010.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40011,2,RTU2_AT10011.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40015,2,RTU2_AT10015.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40016,2,RTU2_AT10016.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40017,2,RTU2_AT10017.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40018,2,RTU2_AT10018.Value);
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40019,2,RTU2_AT10019.Value);
-    //RTU 3
-      SP_InsertarHistorialSensado(StoredProc_HistorialSensado_Insertar,40003,3,RTU3_ASA0002.Value);
-   *)
 end;
 
 procedure Tfrm_ControlAutomatico.TimerStatusBarTimer(Sender: TObject);

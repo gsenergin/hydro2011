@@ -70,7 +70,7 @@ begin
       ENCENDIDO: SecuenciaEncendido;
 
   end;
-  Suspend;
+  Free;   //Suspend
 end;
 
 procedure TSecuencia.LogDisable;
@@ -122,12 +122,15 @@ begin
     LogWrite('INICIANDO SECUENCIA DE APAGADO...');
 
     // Cerrar Compuerta de ingreso de Agua a la Tubería
-    RTU1_ACC0004.Value:= CERRADO;
     LogWrite(' :Cerrar Compuerta de ingreso de Agua a la Tubería');
+    if trunc(RTU1_ACC0004.ValueRaw) <> CERRADO then
+      RTU1_ACC0004.Value:= CERRADO;
 
     // Colocar álabes al 100%
-    RTU2_AT10007.Value:= 100;
     LogWrite(' :Colocar álabes al 100%');
+    if trunc(RTU2_AT10007.ValueRaw) <> 100 then
+      RTU2_AT10007.Value:= 100;
+
     LogWrite(' :Esperar a que la presión llegue a 0');
 
     // Cuando Presion A=0, Cerrar Válvula Mariposa
@@ -136,36 +139,43 @@ begin
        Sleep(1000);
        RTU2_ST10001.Read;
     end;
-    RTU2_AT10003.Value:= CERRADO;
     LogWrite(' :Cerrar Válvula Mariposa');
+    RTU2_AT10003.Value:= CERRADO;
 
     // Aplicar Frenos de la turbina al 100%
-    RTU2_AT10006.Value:= 100;
     LogWrite(' :Aplicar Frenos de la turbina al 100%');
+    if trunc(RTU2_AT10006.ValueRaw) <> 100 then
+        RTU2_AT10006.Value:= 100;
 
     // Colocar frenos Generador al 100%
-    RTU2_AT10015.Value:= 100;
     LogWrite(' :Colocar frenos Generador al 100%');
+    if trunc(RTU2_AT10015.ValueRaw) <> 100 then
+      RTU2_AT10015.Value:= 100;
 
     // Apagar Generador
-    RTU2_AT10016. Value:= APAGADO;
     LogWrite(' :Apagar Generador');
+    if trunc(RTU2_AT10016.ValueRaw) <> APAGADO then
+        RTU2_AT10016. Value:= APAGADO;
 
     // Apagar regulador de velocidad
-    RTU2_AT10017. Value:= APAGADO;
     LogWrite(' :Apagar regulador de velocidad');
+    if trunc(RTU2_AT10017.ValueRaw) <> APAGADO then
+        RTU2_AT10017. Value:= APAGADO;
 
     // Apagar Equipo de Excitacion
-    RTU2_AT10018. Value:= APAGADO;
     LogWrite(' :Apagar Equipo de Excitacion');
+    if trunc(RTU2_AT10018.ValueRaw) <> APAGADO then
+      RTU2_AT10018. Value:= APAGADO;
 
     // Apagar Unidad de Sincronizacion
-    RTU2_AT10019. Value:= APAGADO;
     LogWrite(' :Apagar Unidad de Sincronizacion');
+    if trunc(RTU2_AT10019.ValueRaw) <> APAGADO then
+      RTU2_AT10019. Value:= APAGADO;
 
     // Apagar Sistema de Refrigeracion
-    RTU2_AT10011. Value:= APAGADO;
     LogWrite(' :Apagar Sistema de Refrigeracion');
+    if trunc(RTU2_AT10011.ValueRaw) <> APAGADO then
+      RTU2_AT10011. Value:= APAGADO;
 
     LogWrite('FIN SECUENCIA DE APAGADO!');
   end;
@@ -196,48 +206,59 @@ begin
     LogWrite('INICIANDO SECUENCIA DE ENCENDIDO...');
 
     // Encender Sistema de Refrigeracion
-    RTU2_AT10011. Value:= ENCENDIDO;
     LogWrite(' :Encender Sistema de Refrigeracion');
+    if trunc(RTU2_AT10011.ValueRaw) <> ENCENDIDO then
+      RTU2_AT10011. Value:= ENCENDIDO;
 
     // Aplicar Frenos de la turbina al 0%
-    RTU2_AT10006.Value:= 0;
     LogWrite(' :Aplicar Frenos de la turbina al 0%');
+    if trunc(RTU2_AT10006.ValueRaw) <> 0 then
+      RTU2_AT10006.Value:= 0;
 
     // Colocar álabes al 0%
-    RTU2_AT10007.Value:= 0;
     LogWrite(' :Colocar álabes al 0%');
+    if trunc(RTU2_AT10007.ValueRaw) <> 0 then
+       RTU2_AT10007.Value:= 0;
 
     // Colocar frenos Generador al 0%
-    RTU2_AT10015.Value:= 0;
     LogWrite(' :Colocar frenos Generador al 0%');
+    if trunc(RTU2_AT10015.ValueRaw) <> 0 then
+        RTU2_AT10015.Value:= 0;
 
     // Encender Generador
-    RTU2_AT10016.Value:= ENCENDIDO;
     LogWrite(' :Encender Generador');
+    if trunc(RTU2_AT10016.ValueRaw) <> ENCENDIDO then
+        RTU2_AT10016.Value:= ENCENDIDO;
 
     // Encender regulador de velocidad
-    RTU2_AT10017.Value:= ENCENDIDO;
     LogWrite(' :Encender regulador de velocidad');
+    if trunc(RTU2_AT10017.ValueRaw) <> ENCENDIDO then
+        RTU2_AT10017.Value:= ENCENDIDO;
 
     // Encender Equipo de Excitacion
-    RTU2_AT10018.Value:= ENCENDIDO;
     LogWrite(' :Encender Equipo de Excitacion');
+    if trunc(RTU2_AT10018.ValueRaw) <> ENCENDIDO then
+        RTU2_AT10018.Value:= ENCENDIDO;
 
     // Encender Unidad de Sincronizacion
-    RTU2_AT10019.Value:= ENCENDIDO;
     LogWrite(' :Encender Unidad de Sincronizacion');
+    if trunc(RTU2_AT10019.ValueRaw) <> ENCENDIDO then
+        RTU2_AT10019.Value:= ENCENDIDO;
 
     // Abrir Compuertas de Mantenimiento
-    RTU3_ASA0002.Value:= ABIERTO;
     LogWrite(' :Abrir Compuertas de Mantenimiento');
+    if trunc(RTU3_ASA0002.ValueRaw) <> ABIERTO then
+        RTU3_ASA0002.Value:= ABIERTO;
 
     // Cerrar Válvula Mariposa
-    RTU2_AT10003.Value:= CERRADO;
     LogWrite(' :Cerrar Válvula Mariposa');
+    if trunc(RTU2_AT10003.ValueRaw) <> CERRADO then
+        RTU2_AT10003.Value:= CERRADO;
 
     // Abrir Compuerta de ingreso de Agua a la Tubería
-    RTU1_ACC0004.Value:= ABIERTO;
     LogWrite(' :Abrir Compuerta de ingreso de Agua a la Tubería');
+    if trunc(RTU1_ACC0004.ValueRaw) <> ABIERTO then
+        RTU1_ACC0004.Value:= ABIERTO;
 
     // Esperar que llegue al máximo de presión
     LogWrite(' :Esperar que llegue al máximo de presión...');
