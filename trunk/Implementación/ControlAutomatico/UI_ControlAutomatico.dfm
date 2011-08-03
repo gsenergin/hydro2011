@@ -4,7 +4,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
   BorderStyle = bsSingle
   Caption = 'Modulo de Control Autom'#225'tico'
   ClientHeight = 511
-  ClientWidth = 957
+  ClientWidth = 880
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
   object StatusBar1: TStatusBar
     Left = 0
     Top = 488
-    Width = 957
+    Width = 880
     Height = 23
     BorderWidth = 1
     Color = clGray
@@ -47,6 +47,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       item
         Width = 105
       end>
+    ExplicitWidth = 957
   end
   object PanelRTU1: TPanel
     Left = 8
@@ -996,8 +997,8 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       TabOrder = 4
     end
     object btn_SecuenciaEncendido: TButton
-      Left = 6
-      Top = 30
+      Left = 23
+      Top = 22
       Width = 99
       Height = 25
       Caption = 'Sec. de Encendido'
@@ -1005,8 +1006,8 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       OnClick = btn_SecuenciaEncendidoClick
     end
     object btn_SecuenciaApagado: TButton
-      Left = 128
-      Top = 30
+      Left = 136
+      Top = 22
       Width = 97
       Height = 25
       Caption = 'Sec. de Apagado'
@@ -1030,5 +1031,16 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
     OnTimer = TimerGuardaDatosTimer
     Left = 664
     Top = 228
+  end
+  object ServerSocket_GUIDesktop: TServerSocket
+    Active = False
+    Port = 9000
+    ServerType = stNonBlocking
+    OnClientConnect = ServerSocket_GUIDesktopClientConnect
+    OnClientDisconnect = ServerSocket_GUIDesktopClientDisconnect
+    OnClientRead = ServerSocket_GUIDesktopClientRead
+    OnClientWrite = ServerSocket_GUIDesktopClientWrite
+    Left = 672
+    Top = 64
   end
 end
