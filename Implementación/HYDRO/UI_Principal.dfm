@@ -9487,42 +9487,42 @@ object frm_Principal: Tfrm_Principal
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 13
+        TabOrder = 12
       end
       object txt_ConfiguracionSensoresHH: TEdit
         Left = 481
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 12
+        TabOrder = 11
       end
       object txt_ConfiguracionSensoresH: TEdit
         Left = 392
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 11
+        TabOrder = 10
       end
       object txt_ConfiguracionSensoresL: TEdit
         Left = 305
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 10
+        TabOrder = 9
       end
       object txt_ConfiguracionSensoresLL: TEdit
         Left = 209
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 9
+        TabOrder = 8
       end
       object txt_ConfiguracionSensoresMin: TEdit
         Left = 121
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 8
+        TabOrder = 7
       end
     end
   end
@@ -9666,6 +9666,123 @@ object frm_Principal: Tfrm_Principal
       Transparent = True
     end
   end
+  object Panel_SecuenciasConsignas: TPanel
+    Left = 783
+    Top = 334
+    Width = 250
+    Height = 157
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    Locked = True
+    TabOrder = 3
+    object Label40: TLabel
+      Left = 56
+      Top = 0
+      Width = 151
+      Height = 16
+      Caption = 'Secuencias - Consignas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label38: TLabel
+      Left = 8
+      Top = 72
+      Width = 98
+      Height = 13
+      Caption = 'Caudal Turbinado'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label39: TLabel
+      Left = 9
+      Top = 99
+      Width = 98
+      Height = 13
+      Caption = 'Voltaje Generado'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object btn_ConsignaCaudal: TButton
+      Left = 175
+      Top = 65
+      Width = 65
+      Height = 25
+      Caption = 'Set Caudal'
+      TabOrder = 0
+      OnClick = btn_ConsignaCaudalClick
+    end
+    object btn_ConsignaVoltaje: TButton
+      Left = 175
+      Top = 92
+      Width = 65
+      Height = 25
+      Caption = 'Set Voltaje'
+      TabOrder = 1
+      OnClick = btn_ConsignaVoltajeClick
+    end
+    object btn_ConsignaManual: TButton
+      Left = 175
+      Top = 123
+      Width = 65
+      Height = 25
+      Caption = 'Set Manual'
+      TabOrder = 2
+      OnClick = btn_ConsignaManualClick
+    end
+    object txtConsignaVoltaje: TEdit
+      Left = 113
+      Top = 96
+      Width = 56
+      Height = 21
+      TabOrder = 3
+    end
+    object txtConsignaCaudal: TEdit
+      Left = 112
+      Top = 69
+      Width = 57
+      Height = 21
+      TabOrder = 4
+    end
+    object btn_SecuenciaEncendido: TButton
+      Left = 23
+      Top = 22
+      Width = 99
+      Height = 25
+      Caption = 'Sec. de Encendido'
+      TabOrder = 5
+      OnClick = btn_SecuenciaEncendidoClick
+    end
+    object btn_SecuenciaApagado: TButton
+      Left = 136
+      Top = 22
+      Width = 97
+      Height = 25
+      Caption = 'Sec. de Apagado'
+      TabOrder = 6
+      OnClick = btn_SecuenciaApagadoClick
+    end
+  end
+  object Button1: TButton
+    Left = 864
+    Top = 303
+    Width = 105
+    Height = 25
+    Caption = 'Habilitar Socket'
+    TabOrder = 4
+    OnClick = Button1Click
+  end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11
     SkinName = 'McSkin'
@@ -9675,7 +9792,7 @@ object frm_Principal: Tfrm_Principal
   object SocketSuscripcion: TClientSocket
     Active = False
     ClientType = ctNonBlocking
-    Host = '192.168.1.103'
+    Host = '127.0.0.1'
     Port = 9000
     Left = 376
     Top = 8
@@ -10094,13 +10211,13 @@ object frm_Principal: Tfrm_Principal
       '       valorHH = :VALORHH,'
       '       max = :MAX'
       'WHERE ID_sensor = :ID')
-    Left = 792
-    Top = 488
+    Left = 864
+    Top = 16
   end
   object DataSource2: TDataSource
     DataSet = ADOQuery_SensorUpdate
-    Left = 824
-    Top = 488
+    Left = 896
+    Top = 16
   end
   object TimerFechaHora: TTimer
     Interval = 60000

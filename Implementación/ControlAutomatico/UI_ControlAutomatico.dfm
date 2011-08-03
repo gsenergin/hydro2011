@@ -4,7 +4,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
   BorderStyle = bsSingle
   Caption = 'Modulo de Control Autom'#225'tico'
   ClientHeight = 511
-  ClientWidth = 880
+  ClientWidth = 1001
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
   object StatusBar1: TStatusBar
     Left = 0
     Top = 488
-    Width = 880
+    Width = 1001
     Height = 23
     BorderWidth = 1
     Color = clGray
@@ -47,7 +47,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       item
         Width = 105
       end>
-    ExplicitWidth = 957
+    ExplicitWidth = 880
   end
   object PanelRTU1: TPanel
     Left = 8
@@ -1014,6 +1014,15 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       TabOrder = 6
       OnClick = btn_SecuenciaApagadoClick
     end
+  end
+  object Button1: TButton
+    Left = 728
+    Top = 168
+    Width = 75
+    Height = 25
+    Caption = 'Button1'
+    TabOrder = 8
+    OnClick = Button1Click
   end
   object TimerStatusBar: TTimer
     OnTimer = TimerStatusBarTimer

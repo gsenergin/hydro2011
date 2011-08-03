@@ -112,6 +112,7 @@ type
     btn_SecuenciaEncendido: TButton;
     btn_SecuenciaApagado: TButton;
     ServerSocket_GUIDesktop: TServerSocket;
+    Button1: TButton;
    // procedure btn_CambiarDatosConexionClick(Sender: TObject);
    // procedure Button2Click(Sender: TObject);
    // procedure Button1Click(Sender: TObject);
@@ -139,6 +140,7 @@ type
       Socket: TCustomWinSocket);
     procedure ServerSocket_GUIDesktopClientWrite(Sender: TObject;
       Socket: TCustomWinSocket);
+    procedure Button1Click(Sender: TObject);
 
 
   private
@@ -183,6 +185,8 @@ begin
     TimerGuardaDatos.Enabled:= false;
     cantRegistrosEscritos:=0;
 
+    // Activo la escucha de clientes
+    ServerSocket_GUIDesktop.Active:= true;
 
 
     // Creo una consigna, deshabilitada
@@ -222,14 +226,60 @@ end;
 procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientRead(
   Sender: TObject; Socket: TCustomWinSocket);
 var mensaje: string;
+    codFuncion,param: integer;
 begin
     // Se recibe mensaje de un cliente
-    log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+Socket.ReceiveText);
+    mensaje:= socket.ReceiveText;
+    log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+mensaje);
+
+
 
     // Proceso los mensajes del cliente
-    
-    8888888888
+    codFuncion:= strtoint(mensaje[1]+mensaje[2]);
+    case codFuncion of
 
+      1: // 01= Consigna de Caudal
+      begin
+          try
+            param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
+            Consigna.SetConsignaCaudal(param, true);
+          except
+            exit;
+          end;
+      end;
+
+      2: // 02= Consigna de Voltaje
+      begin
+          try
+            param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
+            Consigna.SetConsignaVoltaje(param, true);
+          except
+            exit;
+          end;
+      end;
+
+      3: // 03= Consigna Manual
+      begin
+          Consigna.SetConsignaManual;
+      end;
+
+      4: // 04= Secuencia Encendido
+      begin
+          Secuencia:= TSecuencia.Create();
+          Secuencia.LogEnable(log);
+          Consigna.SetConsignaManual;
+          Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
+      end;
+
+      5: // 05= Secuencia Apagado
+      begin
+          Secuencia:= TSecuencia.Create();
+          Secuencia.LogEnable(log);
+          Consigna.SetConsignaManual;
+          Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
+      end;
+
+    end;
 end;
 
 procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientWrite(
@@ -399,6 +449,20 @@ end;
 
 
 
+procedure Tfrm_ControlAutomatico.Button1Click(Sender: TObject);
+var mensaje:string;
+codFuncion,param:integer;
+begin
+  // BOTON DE PRUEBA
+    mensaje:= '0120000';
+    codFuncion:= strtoint(mensaje[1]+mensaje[2]);
+    param:= strtoint(Copy(mensaje, 3, length(mensaje)-3));
+    showmessage('length='+inttostr(length(mensaje)));
+    showmessage('codfuncion='+inttostr(codfuncion));
+    showmessage('param='+inttostr(param));
+
+end;
+
 procedure Tfrm_ControlAutomatico.TimerGuardaDatosTimer(Sender: TObject);
 begin
    with DM_AccesoDatosRTU do
@@ -447,3 +511,25 @@ end;
 
 
 end.
+
+
+
+
+
+
+
+
+(*
+count:integer;
+begin
+count := ServerSocket1.Socket.ActiveConnections;
+ShowMessage(IntToStr(Count));
+end;
+
+and when your sending text, you have to specify which connection your sending it to
+
+begin
+ServerSocket1.Socket.Connections[0].SendText('Blabla');
+end;
+
+*)
