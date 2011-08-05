@@ -226,14 +226,13 @@ end;
 procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientRead(
   Sender: TObject; Socket: TCustomWinSocket);
 var mensaje: string;
-    codFuncion,param: integer;
+    codFuncion,param, offset,valor: integer;
 begin
     // Se recibe mensaje de un cliente
     mensaje:= socket.ReceiveText;
     log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+mensaje);
 
-
-
+    
     // Proceso los mensajes del cliente
     codFuncion:= strtoint(mensaje[1]+mensaje[2]);
     case codFuncion of
@@ -279,7 +278,32 @@ begin
           Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
       end;
 
-    end;
+      6: // 06: Seteo de Actuador
+      // Formato: 6<ID-RTU><DirMem Ej: 40002>VALOR    -->06140001
+      begin
+          offset:= strtoint(Copy(mensaje, 4, 5))-40001;
+          valor:= strtoint(Copy(mensaje, 9, length(mensaje)-9+1));
+          log.Lines.Add(' offset= '+inttostr(offset)+' valor= '+inttostr(valor));
+          // Ojo que no verifico q se defase en funcion si es actuador gradual o binario
+          if offset>0 then
+          try
+              case mensaje[3] of
+                '1':begin
+                  DM_AccesoDatosRTU.PLCBlock_RTU1.ValueRaw[offset]:= valor;
+                end;
+                '2':begin
+                  DM_AccesoDatosRTU.PLCBlock_RTU2.ValueRaw[offset]:= valor;
+                end;
+                '3':begin
+                  DM_AccesoDatosRTU.PLCBlock_RTU3.ValueRaw[offset]:= valor;
+                end;
+              end;
+          except
+
+          end;
+      end;
+
+    end;//CASE
 end;
 
 procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientWrite(

@@ -1077,34 +1077,6 @@ object frm_Principal: Tfrm_Principal
         PLCTag = RTU2_AT10007
         Sufix = ' %'
       end
-      object HMILabel16: THMILabel
-        Left = 274
-        Top = 356
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU2_AT10011
-      end
-      object HMILabel17: THMILabel
-        Left = 274
-        Top = 375
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlue
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU2_ST10012
-      end
       object HMILabel18: THMILabel
         Left = 462
         Top = 385
@@ -1149,62 +1121,6 @@ object frm_Principal: Tfrm_Principal
         NumberFormat = '#0'
         PLCTag = RTU2_AT10015
         Sufix = ' %'
-      end
-      object HMILabel21: THMILabel
-        Left = 274
-        Top = 281
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU2_AT10016
-      end
-      object HMILabel22: THMILabel
-        Left = 274
-        Top = 331
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU2_AT10017
-      end
-      object HMILabel23: THMILabel
-        Left = 274
-        Top = 306
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU2_AT10018
-      end
-      object HMILabel24: THMILabel
-        Left = 274
-        Top = 256
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU2_AT10019
       end
       object HMILabel25: THMILabel
         Left = 680
@@ -1262,13 +1178,15 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object btnCompuertaDesvioAbierta: TcxButton
+      object btn_CompuertaDesvio_OPEN: TcxButton
         Left = 30
         Top = 113
         Width = 33
         Height = 31
         Caption = 'A'
         TabOrder = 2
+        OnClick = btn_CompuertaDesvio_OPENClick
+        OnMouseDown = btn_CompuertaDesvio_OPENMouseDown
         SpeedButtonOptions.GroupIndex = 1
       end
       object cxLabel14: TcxLabel
@@ -1376,8 +1294,8 @@ object frm_Principal: Tfrm_Principal
         Transparent = True
       end
       object cxLabel44: TcxLabel
-        Left = 213
-        Top = 375
+        Left = 105
+        Top = 377
         Caption = 'Estado: '
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
@@ -1455,35 +1373,39 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object btnCompuertaDesvioCerrada: TcxButton
+      object btn_CompuertaDesvio_CLOSE: TcxButton
         Left = 69
         Top = 113
         Width = 33
         Height = 31
         Caption = 'C'
         TabOrder = 17
+        OnClick = btn_CompuertaDesvio_CLOSEClick
+        OnMouseDown = btn_CompuertaDesvio_CLOSEMouseDown
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 1
       end
-      object btnCompuertaIngresoCerrada: TcxButton
+      object btn_CompuertaIngreso_CLOSE: TcxButton
         Left = 147
         Top = 96
         Width = 33
         Height = 31
         Caption = 'C'
         TabOrder = 18
+        OnClick = btn_CompuertaIngreso_CLOSEClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 2
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
       end
-      object btnCompuertaIngresoAbierta: TcxButton
+      object btn_CompuertaIngreso_OPEN: TcxButton
         Left = 108
         Top = 96
         Width = 33
         Height = 31
         Caption = 'A'
         TabOrder = 19
+        OnClick = btn_CompuertaIngreso_OPENClick
         SpeedButtonOptions.GroupIndex = 2
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1552,91 +1474,99 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxButton14: TcxButton
+      object btn_USincronismo_ON: TcxButton
         Left = 196
         Top = 252
         Width = 33
         Height = 23
         Caption = 'On'
         TabOrder = 25
+        OnClick = btn_USincronismo_ONClick
         SpeedButtonOptions.GroupIndex = 5
         SpeedButtonOptions.AllowAllUp = True
       end
-      object cxButton15: TcxButton
+      object btn_USincronismo_OFF: TcxButton
         Left = 235
         Top = 252
         Width = 33
         Height = 23
         Caption = 'Off'
         TabOrder = 26
+        OnClick = btn_USincronismo_OFFClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 5
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
       end
-      object cxButton16: TcxButton
+      object btn_Generador_OFF: TcxButton
         Left = 235
         Top = 277
         Width = 33
         Height = 23
         Caption = 'Off'
         TabOrder = 27
+        OnClick = btn_Generador_OFFClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 6
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
       end
-      object cxButton17: TcxButton
+      object btn_Generador_ON: TcxButton
         Left = 196
         Top = 277
         Width = 33
         Height = 23
         Caption = 'On'
         TabOrder = 28
+        OnClick = btn_Generador_ONClick
         SpeedButtonOptions.GroupIndex = 6
         SpeedButtonOptions.AllowAllUp = True
       end
-      object cxButton18: TcxButton
+      object btn_EquipoExcitacion_OFF: TcxButton
         Left = 235
         Top = 302
         Width = 33
         Height = 23
         Caption = 'Off'
         TabOrder = 29
+        OnClick = btn_EquipoExcitacion_OFFClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 7
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
       end
-      object cxButton19: TcxButton
+      object btn_EquipoExcitacion_ON: TcxButton
         Left = 196
         Top = 302
         Width = 33
         Height = 23
         Caption = 'On'
         TabOrder = 30
+        OnClick = btn_EquipoExcitacion_ONClick
         SpeedButtonOptions.GroupIndex = 7
         SpeedButtonOptions.AllowAllUp = True
       end
-      object cxButton20: TcxButton
+      object btn_ReguladorVelocidad_OFF: TcxButton
         Left = 235
         Top = 327
         Width = 33
         Height = 23
         Caption = 'Off'
         TabOrder = 31
+        OnClick = btn_ReguladorVelocidad_OFFClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 8
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
       end
-      object cxButton21: TcxButton
+      object btn_ReguladorVelocidad_ON: TcxButton
         Left = 196
         Top = 327
         Width = 33
         Height = 23
         Caption = 'On'
         TabOrder = 32
+        OnClick = btn_ReguladorVelocidad_ONClick
         SpeedButtonOptions.GroupIndex = 8
         SpeedButtonOptions.AllowAllUp = True
       end
@@ -1653,45 +1583,49 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxButton7: TcxButton
+      object btn_Refrigeracion_ON: TcxButton
         Left = 196
         Top = 352
         Width = 33
         Height = 23
         Caption = 'On'
         TabOrder = 34
+        OnClick = btn_Refrigeracion_ONClick
         SpeedButtonOptions.GroupIndex = 9
         SpeedButtonOptions.AllowAllUp = True
       end
-      object cxButton8: TcxButton
+      object btn_Refrigeracion_OFF: TcxButton
         Left = 235
         Top = 352
         Width = 33
         Height = 23
         Caption = 'Off'
         TabOrder = 35
+        OnClick = btn_Refrigeracion_OFFClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 9
         SpeedButtonOptions.AllowAllUp = True
         SpeedButtonOptions.Down = True
       end
-      object cxButton9: TcxButton
+      object btn_CompuertasMantenimiento_OPEN: TcxButton
         Left = 83
         Top = 410
         Width = 33
         Height = 31
         Caption = 'A'
         TabOrder = 36
+        OnClick = btn_CompuertasMantenimiento_OPENClick
         SpeedButtonOptions.GroupIndex = 10
         SpeedButtonOptions.AllowAllUp = True
       end
-      object cxButton10: TcxButton
+      object btn_CompuertasMantenimiento_CLOSE: TcxButton
         Left = 139
         Top = 410
         Width = 33
         Height = 31
         Caption = 'C'
         TabOrder = 37
+        OnClick = btn_CompuertasMantenimiento_CLOSEClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 10
         SpeedButtonOptions.AllowAllUp = True
@@ -1710,23 +1644,25 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxButton6: TcxButton
+      object btn_Bypass_OPEN: TcxButton
         Left = 297
         Top = 111
         Width = 33
         Height = 23
         Caption = 'A'
         TabOrder = 39
+        OnClick = btn_Bypass_OPENClick
         SpeedButtonOptions.GroupIndex = 3
         SpeedButtonOptions.AllowAllUp = True
       end
-      object cxButton11: TcxButton
+      object btn_Bypass_CLOSE: TcxButton
         Left = 332
         Top = 111
         Width = 33
         Height = 23
         Caption = 'C'
         TabOrder = 40
+        OnClick = btn_Bypass_CLOSEClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 3
         SpeedButtonOptions.AllowAllUp = True
@@ -1758,23 +1694,25 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object cxButton22: TcxButton
+      object btn_Mariposa_OPEN: TcxButton
         Left = 297
         Top = 212
         Width = 33
         Height = 23
         Caption = 'A'
         TabOrder = 43
+        OnClick = btn_Mariposa_OPENClick
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
       end
-      object cxButton23: TcxButton
+      object btn_Mariposa_CLOSE: TcxButton
         Left = 332
         Top = 212
         Width = 33
         Height = 23
         Caption = 'C'
         TabOrder = 44
+        OnClick = btn_Mariposa_CLOSEClick
         LookAndFeel.NativeStyle = False
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
@@ -1783,7 +1721,7 @@ object frm_Principal: Tfrm_Principal
       object cxLabel10: TcxLabel
         Left = 642
         Top = 327
-        Caption = 'Apertura '#193'laves'
+        Caption = 'Apertura '#193'labes'
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
         Style.Font.Color = clWindowText
@@ -1818,6 +1756,195 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
+      end
+      object btn_FrenosGenerador: TcxButton
+        Left = 678
+        Top = 170
+        Width = 52
+        Height = 23
+        Caption = 'Set'
+        TabOrder = 48
+        OnClick = btn_FrenosGeneradorClick
+        SpeedButtonOptions.GroupIndex = 4
+        SpeedButtonOptions.AllowAllUp = True
+      end
+      object btn_AperturaAlabe: TcxButton
+        Left = 678
+        Top = 341
+        Width = 52
+        Height = 23
+        Caption = 'Set'
+        TabOrder = 49
+        OnClick = btn_AperturaAlabeClick
+        SpeedButtonOptions.GroupIndex = 4
+        SpeedButtonOptions.AllowAllUp = True
+      end
+      object btn_FrenosTurbina: TcxButton
+        Left = 678
+        Top = 391
+        Width = 52
+        Height = 23
+        Caption = 'Set'
+        TabOrder = 50
+        OnClick = btn_FrenosTurbinaClick
+        SpeedButtonOptions.GroupIndex = 4
+        SpeedButtonOptions.AllowAllUp = True
+      end
+      object HMICheckBox1: THMICheckBox
+        Left = 83
+        Top = 256
+        Width = 16
+        Height = 17
+        Enabled = False
+        ParentFont = False
+        TabOrder = 51
+        PLCTag = RTU2_AT10019
+        FontFalse.Charset = DEFAULT_CHARSET
+        FontFalse.Color = clWindowText
+        FontFalse.Height = -11
+        FontFalse.Name = 'Tahoma'
+        FontFalse.Style = []
+        FontTrue.Charset = DEFAULT_CHARSET
+        FontTrue.Color = clWindowText
+        FontTrue.Height = -11
+        FontTrue.Name = 'Tahoma'
+        FontTrue.Style = []
+        FontGrayed.Charset = DEFAULT_CHARSET
+        FontGrayed.Color = clWindowText
+        FontGrayed.Height = -11
+        FontGrayed.Name = 'Tahoma'
+        FontGrayed.Style = []
+        ValueTrue = 1.000000000000000000
+      end
+      object HMICheckBox2: THMICheckBox
+        Left = 83
+        Top = 279
+        Width = 16
+        Height = 17
+        Enabled = False
+        ParentFont = False
+        TabOrder = 52
+        PLCTag = RTU2_AT10016
+        FontFalse.Charset = DEFAULT_CHARSET
+        FontFalse.Color = clWindowText
+        FontFalse.Height = -11
+        FontFalse.Name = 'Tahoma'
+        FontFalse.Style = []
+        FontTrue.Charset = DEFAULT_CHARSET
+        FontTrue.Color = clWindowText
+        FontTrue.Height = -11
+        FontTrue.Name = 'Tahoma'
+        FontTrue.Style = []
+        FontGrayed.Charset = DEFAULT_CHARSET
+        FontGrayed.Color = clWindowText
+        FontGrayed.Height = -11
+        FontGrayed.Name = 'Tahoma'
+        FontGrayed.Style = []
+        ValueTrue = 1.000000000000000000
+      end
+      object HMICheckBox3: THMICheckBox
+        Left = 83
+        Top = 304
+        Width = 16
+        Height = 17
+        Enabled = False
+        ParentFont = False
+        TabOrder = 53
+        PLCTag = RTU2_AT10018
+        FontFalse.Charset = DEFAULT_CHARSET
+        FontFalse.Color = clWindowText
+        FontFalse.Height = -11
+        FontFalse.Name = 'Tahoma'
+        FontFalse.Style = []
+        FontTrue.Charset = DEFAULT_CHARSET
+        FontTrue.Color = clWindowText
+        FontTrue.Height = -11
+        FontTrue.Name = 'Tahoma'
+        FontTrue.Style = []
+        FontGrayed.Charset = DEFAULT_CHARSET
+        FontGrayed.Color = clWindowText
+        FontGrayed.Height = -11
+        FontGrayed.Name = 'Tahoma'
+        FontGrayed.Style = []
+        ValueTrue = 1.000000000000000000
+      end
+      object HMICheckBox4: THMICheckBox
+        Left = 83
+        Top = 327
+        Width = 16
+        Height = 17
+        Enabled = False
+        ParentFont = False
+        TabOrder = 54
+        PLCTag = RTU2_AT10017
+        FontFalse.Charset = DEFAULT_CHARSET
+        FontFalse.Color = clWindowText
+        FontFalse.Height = -11
+        FontFalse.Name = 'Tahoma'
+        FontFalse.Style = []
+        FontTrue.Charset = DEFAULT_CHARSET
+        FontTrue.Color = clWindowText
+        FontTrue.Height = -11
+        FontTrue.Name = 'Tahoma'
+        FontTrue.Style = []
+        FontGrayed.Charset = DEFAULT_CHARSET
+        FontGrayed.Color = clWindowText
+        FontGrayed.Height = -11
+        FontGrayed.Name = 'Tahoma'
+        FontGrayed.Style = []
+        ValueTrue = 1.000000000000000000
+      end
+      object HMICheckBox5: THMICheckBox
+        Left = 83
+        Top = 355
+        Width = 16
+        Height = 17
+        Enabled = False
+        ParentFont = False
+        TabOrder = 55
+        PLCTag = RTU2_AT10011
+        FontFalse.Charset = DEFAULT_CHARSET
+        FontFalse.Color = clWindowText
+        FontFalse.Height = -11
+        FontFalse.Name = 'Tahoma'
+        FontFalse.Style = []
+        FontTrue.Charset = DEFAULT_CHARSET
+        FontTrue.Color = clWindowText
+        FontTrue.Height = -11
+        FontTrue.Name = 'Tahoma'
+        FontTrue.Style = []
+        FontGrayed.Charset = DEFAULT_CHARSET
+        FontGrayed.Color = clWindowText
+        FontGrayed.Height = -11
+        FontGrayed.Name = 'Tahoma'
+        FontGrayed.Style = []
+        ValueTrue = 1.000000000000000000
+      end
+      object HMICheckBox6: THMICheckBox
+        Left = 159
+        Top = 377
+        Width = 16
+        Height = 17
+        Enabled = False
+        ParentFont = False
+        TabOrder = 56
+        PLCTag = RTU2_ST10012
+        FontFalse.Charset = DEFAULT_CHARSET
+        FontFalse.Color = clWindowText
+        FontFalse.Height = -11
+        FontFalse.Name = 'Tahoma'
+        FontFalse.Style = []
+        FontTrue.Charset = DEFAULT_CHARSET
+        FontTrue.Color = clWindowText
+        FontTrue.Height = -11
+        FontTrue.Name = 'Tahoma'
+        FontTrue.Style = []
+        FontGrayed.Charset = DEFAULT_CHARSET
+        FontGrayed.Color = clWindowText
+        FontGrayed.Height = -11
+        FontGrayed.Name = 'Tahoma'
+        FontGrayed.Style = []
+        ValueTrue = 1.000000000000000000
       end
     end
     object tab_Historicos: TcxTabSheet
@@ -9053,7 +9180,6 @@ object frm_Principal: Tfrm_Principal
           FFFFFFFFFFFFFFFFFF00}
         Proportional = True
         Transparent = True
-        OnClick = img_GolpeArieteClick
       end
       object cxLabel19: TcxLabel
         Left = 18
@@ -9487,42 +9613,42 @@ object frm_Principal: Tfrm_Principal
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 12
+        TabOrder = 11
       end
       object txt_ConfiguracionSensoresHH: TEdit
         Left = 481
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 11
+        TabOrder = 10
       end
       object txt_ConfiguracionSensoresH: TEdit
         Left = 392
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 10
+        TabOrder = 9
       end
       object txt_ConfiguracionSensoresL: TEdit
         Left = 305
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 9
+        TabOrder = 8
       end
       object txt_ConfiguracionSensoresLL: TEdit
         Left = 209
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 8
+        TabOrder = 7
       end
       object txt_ConfiguracionSensoresMin: TEdit
         Left = 121
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 7
+        TabOrder = 6
       end
     end
   end
@@ -9572,14 +9698,14 @@ object frm_Principal: Tfrm_Principal
       Style.Font.Style = [fsBold]
       Style.IsFontAssigned = True
     end
-    object cxButton5: TcxButton
+    object btn_Logout: TcxButton
       Left = 453
       Top = 17
       Width = 75
       Height = 25
       Caption = 'Logout'
       TabOrder = 3
-      OnClick = cxButton5Click
+      OnClick = btn_LogoutClick
     end
     object cxLabel2: TcxLabel
       Left = 192
@@ -9668,16 +9794,16 @@ object frm_Principal: Tfrm_Principal
   end
   object Panel_SecuenciasConsignas: TPanel
     Left = 783
-    Top = 334
+    Top = 312
     Width = 250
-    Height = 157
+    Height = 179
     BevelInner = bvRaised
     BevelOuter = bvLowered
     Locked = True
     TabOrder = 3
     object Label40: TLabel
       Left = 56
-      Top = 0
+      Top = 33
       Width = 151
       Height = 16
       Caption = 'Secuencias - Consignas'
@@ -9690,7 +9816,7 @@ object frm_Principal: Tfrm_Principal
     end
     object Label38: TLabel
       Left = 8
-      Top = 72
+      Top = 96
       Width = 98
       Height = 13
       Caption = 'Caudal Turbinado'
@@ -9703,7 +9829,7 @@ object frm_Principal: Tfrm_Principal
     end
     object Label39: TLabel
       Left = 9
-      Top = 99
+      Top = 123
       Width = 98
       Height = 13
       Caption = 'Voltaje Generado'
@@ -9716,7 +9842,7 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_ConsignaCaudal: TButton
       Left = 175
-      Top = 65
+      Top = 89
       Width = 65
       Height = 25
       Caption = 'Set Caudal'
@@ -9725,7 +9851,7 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_ConsignaVoltaje: TButton
       Left = 175
-      Top = 92
+      Top = 116
       Width = 65
       Height = 25
       Caption = 'Set Voltaje'
@@ -9734,7 +9860,7 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_ConsignaManual: TButton
       Left = 175
-      Top = 123
+      Top = 147
       Width = 65
       Height = 25
       Caption = 'Set Manual'
@@ -9743,21 +9869,21 @@ object frm_Principal: Tfrm_Principal
     end
     object txtConsignaVoltaje: TEdit
       Left = 113
-      Top = 96
+      Top = 120
       Width = 56
       Height = 21
       TabOrder = 3
     end
     object txtConsignaCaudal: TEdit
       Left = 112
-      Top = 69
+      Top = 93
       Width = 57
       Height = 21
       TabOrder = 4
     end
     object btn_SecuenciaEncendido: TButton
-      Left = 23
-      Top = 22
+      Left = 31
+      Top = 55
       Width = 99
       Height = 25
       Caption = 'Sec. de Encendido'
@@ -9766,22 +9892,22 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_SecuenciaApagado: TButton
       Left = 136
-      Top = 22
+      Top = 55
       Width = 97
       Height = 25
       Caption = 'Sec. de Apagado'
       TabOrder = 6
       OnClick = btn_SecuenciaApagadoClick
     end
-  end
-  object Button1: TButton
-    Left = 864
-    Top = 303
-    Width = 105
-    Height = 25
-    Caption = 'Habilitar Socket'
-    TabOrder = 4
-    OnClick = Button1Click
+    object Button1: TButton
+      Left = 81
+      Top = 2
+      Width = 105
+      Height = 25
+      Caption = 'Habilitar Socket'
+      TabOrder = 7
+      OnClick = Button1Click
+    end
   end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11
@@ -9829,6 +9955,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10003: TPLCBlockElement
     TagGUID = '{F4CD7470-5C16-45AA-B70C-495F792BA308}'
+    OnValueChangeLast = RTU2_AT10003ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 2
     Left = 792
@@ -9836,6 +9963,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10004: TPLCBlockElement
     TagGUID = '{B6AEA738-B57D-493A-9DBA-594B6485E3EE}'
+    OnValueChangeLast = RTU2_AT10004ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 3
     Left = 792
@@ -9885,6 +10013,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10011: TPLCBlockElement
     TagGUID = '{3F5863AA-86DE-492C-9B8C-91B289766281}'
+    OnValueChangeLast = RTU2_AT10011ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 10
     Left = 856
@@ -9920,6 +10049,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10016: TPLCBlockElement
     TagGUID = '{A75D22CC-40C9-444D-A6F3-436AC2547439}'
+    OnValueChangeLast = RTU2_AT10016ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 15
     Left = 888
@@ -9927,6 +10057,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10017: TPLCBlockElement
     TagGUID = '{AE8F86AF-7ADB-4AA9-A7F5-F4CAA91DF23D}'
+    OnValueChangeLast = RTU2_AT10017ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 16
     Left = 888
@@ -9934,6 +10065,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10018: TPLCBlockElement
     TagGUID = '{2038AFB5-E3B2-434F-96E4-16DAAAFA5FB7}'
+    OnValueChangeLast = RTU2_AT10018ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 17
     Left = 888
@@ -9941,6 +10073,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10019: TPLCBlockElement
     TagGUID = '{DB6C3F85-F90F-4864-B3B9-A1696E0B0553}'
+    OnValueChangeLast = RTU2_AT10019ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 18
     Left = 888
@@ -9978,6 +10111,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU3_ASA0002: TPLCBlockElement
     TagGUID = '{63E9CF73-2245-412A-B395-B32BFB889183}'
+    OnValueChangeLast = RTU3_ASA0002ValueChange
     PLCBlock = PLCBlock_RTU3
     Index = 1
     Left = 1008
@@ -10030,6 +10164,7 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU1_ACC0004: TPLCBlockElement
     TagGUID = '{BEF91A26-5724-4C8A-93BF-3F4EDAEE4490}'
+    OnValueChangeLast = RTU1_ACC0004ValueChange
     PLCBlock = PLCBlock_RTU1
     Index = 3
     Left = 960
