@@ -12,7 +12,7 @@ uses
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
   TeeDBCrossTab, Series, TeeProcs, Chart,
-  UI_Grafico, Mask, HMIUpDown;
+  UI_Grafico, Mask, HMIUpDown, HMICheckBox;
 
 type
   Tfrm_Principal = class(TForm)
@@ -27,7 +27,7 @@ type
     cxLabel1: TcxLabel;
     cxLabel3: TcxLabel;
     cxLabel4: TcxLabel;
-    cxButton5: TcxButton;
+    btn_Logout: TcxButton;
     dxSkinController1: TdxSkinController;
     cxLabel2: TcxLabel;
     cxLabel5: TcxLabel;
@@ -58,10 +58,9 @@ type
     cxTextEdit7: TcxTextEdit;
     cxTextEdit8: TcxTextEdit;
     cxTextEdit9: TcxTextEdit;
-    Image1: TImage;
     cxLabel11: TcxLabel;
     cxLabel13: TcxLabel;
-    btnCompuertaDesvioAbierta: TcxButton;
+    btn_CompuertaDesvio_OPEN: TcxButton;
     cxLabel14: TcxLabel;
     cxLabel16: TcxLabel;
     cxLabel20: TcxLabel;
@@ -76,34 +75,34 @@ type
     cxLabel48: TcxLabel;
     cxLabel50: TcxLabel;
     cxLabel52: TcxLabel;
-    btnCompuertaDesvioCerrada: TcxButton;
-    btnCompuertaIngresoCerrada: TcxButton;
-    btnCompuertaIngresoAbierta: TcxButton;
+    btn_CompuertaDesvio_CLOSE: TcxButton;
+    btn_CompuertaIngreso_CLOSE: TcxButton;
+    btn_CompuertaIngreso_OPEN: TcxButton;
     cxLabel53: TcxLabel;
     cxLabel54: TcxLabel;
     cxLabel55: TcxLabel;
     cxLabel56: TcxLabel;
     cxLabel57: TcxLabel;
-    cxButton14: TcxButton;
-    cxButton15: TcxButton;
-    cxButton16: TcxButton;
-    cxButton17: TcxButton;
-    cxButton18: TcxButton;
-    cxButton19: TcxButton;
-    cxButton20: TcxButton;
-    cxButton21: TcxButton;
+    btn_USincronismo_ON: TcxButton;
+    btn_USincronismo_OFF: TcxButton;
+    btn_Generador_OFF: TcxButton;
+    btn_Generador_ON: TcxButton;
+    btn_EquipoExcitacion_OFF: TcxButton;
+    btn_EquipoExcitacion_ON: TcxButton;
+    btn_ReguladorVelocidad_OFF: TcxButton;
+    btn_ReguladorVelocidad_ON: TcxButton;
     cxLabel58: TcxLabel;
-    cxButton7: TcxButton;
-    cxButton8: TcxButton;
-    cxButton9: TcxButton;
-    cxButton10: TcxButton;
+    btn_Refrigeracion_ON: TcxButton;
+    btn_Refrigeracion_OFF: TcxButton;
+    btn_CompuertasMantenimiento_OPEN: TcxButton;
+    btn_CompuertasMantenimiento_CLOSE: TcxButton;
     cxLabel59: TcxLabel;
-    cxButton6: TcxButton;
-    cxButton11: TcxButton;
+    btn_Bypass_OPEN: TcxButton;
+    btn_Bypass_CLOSE: TcxButton;
     cxLabel43: TcxLabel;
     cxLabel60: TcxLabel;
-    cxButton22: TcxButton;
-    cxButton23: TcxButton;
+    btn_Mariposa_OPEN: TcxButton;
+    btn_Mariposa_CLOSE: TcxButton;
     btn_ConfiguracionCambiarValores: TcxButton;
     SocketSuscripcion: TClientSocket;
     PLCBlock_RTU2: TPLCBlock;
@@ -158,15 +157,9 @@ type
     HMILabel12: THMILabel;
     cxLabel10: TcxLabel;
     cxLabel12: TcxLabel;
-    HMILabel16: THMILabel;
-    HMILabel17: THMILabel;
     HMILabel18: THMILabel;
     HMILabel19: THMILabel;
     HMILabel20: THMILabel;
-    HMILabel21: THMILabel;
-    HMILabel22: THMILabel;
-    HMILabel23: THMILabel;
-    HMILabel24: THMILabel;
     HMILabel25: THMILabel;
     HMILabel26: THMILabel;
     cxLabel15: TcxLabel;
@@ -213,21 +206,71 @@ type
     txtConsignaCaudal: TEdit;
     btn_SecuenciaEncendido: TButton;
     btn_SecuenciaApagado: TButton;
+    btn_FrenosGenerador: TcxButton;
+    btn_AperturaAlabe: TcxButton;
+    btn_FrenosTurbina: TcxButton;
     Button1: TButton;
+    HMICheckBox1: THMICheckBox;
+    HMICheckBox2: THMICheckBox;
+    HMICheckBox3: THMICheckBox;
+    HMICheckBox4: THMICheckBox;
+    HMICheckBox5: THMICheckBox;
+    HMICheckBox6: THMICheckBox;
+    Image1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
     procedure RTU1_ACC0003ValueChange(Sender: TObject);
     procedure btnHistoricoClick(Sender: TObject);
-    procedure img_GolpeArieteClick(Sender: TObject);
     procedure btn_ConfiguracionCambiarValoresClick(Sender: TObject);
     procedure TimerFechaHoraTimer(Sender: TObject);
-    procedure cxButton5Click(Sender: TObject);
+    procedure btn_LogoutClick(Sender: TObject);
     procedure btn_SecuenciaEncendidoClick(Sender: TObject);
     procedure btn_SecuenciaApagadoClick(Sender: TObject);
     procedure btn_ConsignaCaudalClick(Sender: TObject);
     procedure btn_ConsignaVoltajeClick(Sender: TObject);
     procedure btn_ConsignaManualClick(Sender: TObject);
+    procedure btn_USincronismo_ONClick(Sender: TObject);
+    procedure btn_USincronismo_OFFClick(Sender: TObject);
+
+    procedure SetValorActuador(IDRTU,DirMem,Valor:integer);
+    procedure RTU2_AT10019ValueChange(Sender: TObject);
+    procedure btn_Generador_ONClick(Sender: TObject);
+    procedure btn_Generador_OFFClick(Sender: TObject);
+    procedure btn_EquipoExcitacion_ONClick(Sender: TObject);
+    procedure btn_EquipoExcitacion_OFFClick(Sender: TObject);
+    procedure btn_ReguladorVelocidad_ONClick(Sender: TObject);
+    procedure btn_ReguladorVelocidad_OFFClick(Sender: TObject);
+    procedure btn_Refrigeracion_ONClick(Sender: TObject);
+    procedure btn_Refrigeracion_OFFClick(Sender: TObject);
+    procedure btn_CompuertasMantenimiento_OPENClick(Sender: TObject);
+    procedure btn_CompuertasMantenimiento_CLOSEClick(Sender: TObject);
+    procedure btn_CompuertaDesvio_OPENClick(Sender: TObject);
+    procedure btn_CompuertaDesvio_CLOSEClick(Sender: TObject);
+    procedure btn_CompuertaIngreso_OPENClick(Sender: TObject);
+    procedure btn_CompuertaIngreso_CLOSEClick(Sender: TObject);
+    procedure btn_Mariposa_OPENClick(Sender: TObject);
+    procedure btn_Mariposa_CLOSEClick(Sender: TObject);
+    procedure btn_Bypass_OPENClick(Sender: TObject);
+    procedure btn_Bypass_CLOSEClick(Sender: TObject);
+    procedure RTU2_AT10004ValueChange(Sender: TObject);
+    procedure RTU1_ACC0004ValueChange(Sender: TObject);
+    procedure RTU3_ASA0002ValueChange(Sender: TObject);
+    procedure RTU2_AT10003ValueChange(Sender: TObject);
+    procedure RTU2_AT10011ValueChange(Sender: TObject);
+    procedure RTU2_AT10016ValueChange(Sender: TObject);
+    procedure RTU2_AT10017ValueChange(Sender: TObject);
+    procedure RTU2_AT10018ValueChange(Sender: TObject);
+    procedure btn_FrenosTurbinaClick(Sender: TObject);
+    procedure btn_AperturaAlabeClick(Sender: TObject);
+    procedure btn_FrenosGeneradorClick(Sender: TObject);
+
+
+    procedure HabilitarBotonesActuadores(valor: boolean);
+    procedure btn_CompuertaDesvio_OPENMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure btn_CompuertaDesvio_CLOSEMouseDown(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
   public
@@ -236,6 +279,7 @@ type
 
 var
   frm_Principal: Tfrm_Principal;
+  btnHabilitados: boolean;
 
 implementation
 
@@ -284,6 +328,8 @@ begin
   frmGrafico.Chart_HistoricoSensado.refresh;
   frmGrafico.Show;
 end;
+
+
 
 procedure Tfrm_Principal.btn_ConfiguracionCambiarValoresClick(Sender: TObject);
 var min,max,LL,L,H,HH: integer;
@@ -340,20 +386,31 @@ end;
 ////             CONSIGNAS - SECUENCIAS              /////
 //////////////////////////////////////////////////////////
 
+{$REGION 'CONSIGNAS - SECUENCIAS'}
+
 procedure Tfrm_Principal.btn_ConsignaCaudalClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('01'+txtConsignaCaudal.text);
+    // DESHabilito botones de comando de actuadores
+//    HabilitarBotonesActuadores(false);
 end;
 
 
 procedure Tfrm_Principal.btn_ConsignaVoltajeClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('02'+txtConsignaVoltaje.text);
+    // DESHabilito botones de comando de actuadores
+//    HabilitarBotonesActuadores(false);
 end;
+
+
 
 procedure Tfrm_Principal.btn_ConsignaManualClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('03');
+    // Habilito botones de comando de actuadores
+  //  HabilitarBotonesActuadores(true);
+
 end;
 
 procedure Tfrm_Principal.btn_SecuenciaEncendidoClick(Sender: TObject);
@@ -366,10 +423,294 @@ begin
     SocketSuscripcion.Socket.SendText('05');
 end;
 
+{$ENDREGION}
+
+//////////////////////////////////////////////////////////
+////             SETEO DE ACTUADORES                 /////
+//////////////////////////////////////////////////////////
+
+{$REGION 'Seteo de Actuadores -> Botones ON/OFF A/C'}
+procedure Tfrm_Principal.SetValorActuador(IDRTU, DirMem, Valor: integer);
+begin
+     SocketSuscripcion.Socket.SendText('06'+inttostr(IDRTU)+inttostr(DirMem)+IntToStr(valor));
+end;
+
+procedure Tfrm_Principal.btn_CompuertaDesvio_CLOSEClick(Sender: TObject);
+begin
+    if btnHabilitados then
+      SetValorActuador(1,40003,0);
+end;
+
+//   /PRUEABAAAA
+procedure Tfrm_Principal.btn_CompuertaDesvio_CLOSEMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin       //PRUEABAAAA
+    if btnHabilitados then
+      (Sender As TcxButton).Down:= true
+    else
+      (Sender As TcxButton).Down:= false;
+end;
+
+
+ //PRUEABAAAA
+procedure Tfrm_Principal.btn_CompuertaDesvio_OPENMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin     /PRUEABAAAA
+    if btnHabilitados then
+      (Sender As TcxButton).Down:= true
+    else
+      (Sender As TcxButton).Down:= false;
+end;
 
 
 
 
+
+
+procedure Tfrm_Principal.btn_CompuertaDesvio_OPENClick(Sender: TObject);
+begin
+    if btnHabilitados then
+      SetValorActuador(1,40003,1);
+end;
+
+procedure Tfrm_Principal.btn_CompuertaIngreso_CLOSEClick(Sender: TObject);
+begin
+    SetValorActuador(1,40004,0);
+end;
+
+procedure Tfrm_Principal.btn_CompuertaIngreso_OPENClick(Sender: TObject);
+begin
+    SetValorActuador(1,40004,1);
+end;
+
+
+procedure Tfrm_Principal.btn_Mariposa_CLOSEClick(Sender: TObject);
+begin
+    SetValorActuador(2,40003,0);
+end;
+
+procedure Tfrm_Principal.btn_Mariposa_OPENClick(Sender: TObject);
+begin
+    SetValorActuador(2,40003,1);
+end;
+
+
+
+procedure Tfrm_Principal.btn_Bypass_CLOSEClick(Sender: TObject);
+begin
+    SetValorActuador(2,40004,0);
+end;
+
+procedure Tfrm_Principal.btn_Bypass_OPENClick(Sender: TObject);
+begin
+    SetValorActuador(2,40004,1);
+end;
+
+
+
+procedure Tfrm_Principal.btn_Refrigeracion_OFFClick(Sender: TObject);
+begin
+    SetValorActuador(2,40011,0);
+end;
+
+procedure Tfrm_Principal.btn_Refrigeracion_ONClick(Sender: TObject);
+begin
+    SetValorActuador(2,40011,1);
+end;
+
+
+procedure Tfrm_Principal.btn_Generador_OFFClick(Sender: TObject);
+begin
+    SetValorActuador(2,40016,0);
+end;
+
+procedure Tfrm_Principal.btn_Generador_ONClick(Sender: TObject);
+begin
+    SetValorActuador(2,40016,1);
+end;
+
+procedure Tfrm_Principal.btn_ReguladorVelocidad_OFFClick(Sender: TObject);
+begin
+    SetValorActuador(2,40017,0);
+end;
+
+procedure Tfrm_Principal.btn_ReguladorVelocidad_ONClick(Sender: TObject);
+begin
+    SetValorActuador(2,40017,1);
+end;
+
+procedure Tfrm_Principal.btn_EquipoExcitacion_OFFClick(Sender: TObject);
+begin
+    SetValorActuador(2,40018,0);
+end;
+
+procedure Tfrm_Principal.btn_EquipoExcitacion_ONClick(Sender: TObject);
+begin
+    SetValorActuador(2,40018,1);
+end;
+
+
+procedure Tfrm_Principal.btn_USincronismo_OFFClick(Sender: TObject);
+begin
+    SetValorActuador(2,40019,0);
+end;
+
+procedure Tfrm_Principal.btn_USincronismo_ONClick(Sender: TObject);
+begin
+    SetValorActuador(2,40019,1);
+end;
+
+procedure Tfrm_Principal.btn_CompuertasMantenimiento_CLOSEClick(
+  Sender: TObject);
+begin
+    SetValorActuador(3,40002,0);
+end;
+
+procedure Tfrm_Principal.btn_CompuertasMantenimiento_OPENClick(Sender: TObject);
+begin
+    SetValorActuador(3,40002,1);
+end;
+
+procedure Tfrm_Principal.btn_FrenosGeneradorClick(Sender: TObject);
+var valor: integer;
+begin
+    try
+      valor:= strtoint( InputBox('SetValor','Ingrese el Porcentaje de aplicación de Frenos del Generador (0-100)','0'));
+    except
+      Showmessage('Valor Incorrecto');
+      exit;
+    end;
+    SetValorActuador(2,40015,valor);
+end;
+
+procedure Tfrm_Principal.btn_FrenosTurbinaClick(Sender: TObject);
+var valor: integer;
+begin
+    try
+      valor:= strtoint( InputBox('SetValor','Ingrese el Porcentaje de aplicación de Frenos de la Turbina (0-100)','0'));
+    except
+      Showmessage('Valor Incorrecto');
+      exit;
+    end;
+    SetValorActuador(2,40006,valor);
+end;
+
+procedure Tfrm_Principal.btn_AperturaAlabeClick(Sender: TObject);
+var valor: integer;
+begin
+    try
+      valor:= strtoint( InputBox('SetValor','Ingrese el Porcentaje de apertura de los álabes (0-100)','100'));
+    except
+      Showmessage('Valor Incorrecto');
+      exit;
+    end;
+    SetValorActuador(2,40007,valor);
+end;
+
+
+{$ENDREGION}
+
+
+{$REGION 'Actualizacion GUI según cambio de valores en Actuadores'}
+
+procedure Tfrm_Principal.RTU1_ACC0003ValueChange(Sender: TObject);
+begin
+    // Compuerta de Desvío de Agua
+    case trunc(RTU1_ACC0003.ValueRaw) of
+      0: btn_CompuertaDesvio_CLOSE.Down:=true;
+      1: btn_CompuertaDesvio_OPEN.Down:=true;
+    end;
+end;
+
+procedure Tfrm_Principal.RTU1_ACC0004ValueChange(Sender: TObject);
+begin
+    // Compuerta de Ingreso de Agua a Tubería Forzada
+    case trunc(RTU1_ACC0004.ValueRaw) of
+      0: btn_CompuertaIngreso_CLOSE.Down:=true;
+      1: btn_CompuertaIngreso_OPEN.Down:=true;
+    end;
+end;
+
+procedure Tfrm_Principal.RTU2_AT10003ValueChange(Sender: TObject);
+begin
+    //  Válvula mariposa
+    case trunc(RTU2_AT10003.ValueRaw) of
+      0: btn_Mariposa_CLOSE.Down:=true;
+      1: btn_Mariposa_OPEN.Down:=true;
+    end;
+end;
+
+procedure Tfrm_Principal.RTU2_AT10004ValueChange(Sender: TObject);
+begin
+    // Bypass Válvula mariposa
+    case trunc(RTU2_AT10004.ValueRaw) of
+      0: btn_Bypass_CLOSE.Down:=true;
+      1: btn_Bypass_OPEN.Down:=true;
+    end;
+end;
+
+
+procedure Tfrm_Principal.RTU2_AT10011ValueChange(Sender: TObject);
+begin
+    // Sistema de Refrigeracion
+    case trunc(RTU2_AT10011.ValueRaw) of
+      0: btn_Refrigeracion_OFF.Down:=true;
+      1: btn_Refrigeracion_ON.Down:=true;
+    end;
+end;
+
+
+procedure Tfrm_Principal.RTU2_AT10016ValueChange(Sender: TObject);
+begin
+    // Generador
+    case trunc(RTU2_AT10016.ValueRaw) of
+      0: btn_Generador_OFF.Down:=true; //OFF
+      1: btn_Generador_ON.Down:=true;  //ON
+    end;
+end;
+
+procedure Tfrm_Principal.RTU2_AT10017ValueChange(Sender: TObject);
+begin
+    // Regulador de Velocidad
+    case trunc(RTU2_AT10017.ValueRaw) of
+      0: btn_ReguladorVelocidad_OFF.Down:=true; //OFF
+      1: btn_ReguladorVelocidad_ON.Down:=true;  //ON
+    end;
+end;
+
+procedure Tfrm_Principal.RTU2_AT10018ValueChange(Sender: TObject);
+begin
+    // Equipo de Excitacion
+    case trunc(RTU2_AT10018.ValueRaw) of
+      0: btn_EquipoExcitacion_OFF.Down:=true; //OFF
+      1: btn_EquipoExcitacion_ON.Down:=true;  //ON
+    end;
+end;
+
+procedure Tfrm_Principal.RTU2_AT10019ValueChange(Sender: TObject);
+begin
+    // Unidad de Sincronizacion
+    case trunc(RTU2_AT10019.ValueRaw) of
+      0: btn_USincronismo_OFF.Down:=true;
+      1: btn_USincronismo_ON.Down:=true;
+    end;
+end;
+
+procedure Tfrm_Principal.RTU3_ASA0002ValueChange(Sender: TObject);
+begin
+    // Compuertas de Mantenimiento
+    case trunc(RTU3_ASA0002.ValueRaw) of
+      0: btn_CompuertasMantenimiento_CLOSE.Down:=true;
+      1: btn_CompuertasMantenimiento_OPEN.Down:=true;
+    end;
+end;
+
+{$ENDREGION}
+
+
+
+
+     
 procedure Tfrm_Principal.Button1Click(Sender: TObject);
 begin
 // PUREBA!!
@@ -380,9 +721,7 @@ begin
     SocketSuscripcion.Active:= true;
 end;
 
-
-
-procedure Tfrm_Principal.cxButton5Click(Sender: TObject);
+procedure Tfrm_Principal.btn_LogoutClick(Sender: TObject);
 begin
     //ADOConnectionHYDRODB.Connected:= false;
     //ADOTable_Sensor.Active:= false;
@@ -394,6 +733,10 @@ begin
     end;
 
 end;
+
+
+
+
 
 procedure Tfrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
@@ -428,30 +771,43 @@ begin
 
    //  frm_Principal.Width:= 767;
      TimerFechaHoraTimer(self);
+
+//     HabilitarBotonesActuadores(false);
+     btnHabilitados:= false;
 end;
 
 
-procedure Tfrm_Principal.img_GolpeArieteClick(Sender: TObject);
+procedure Tfrm_Principal.HabilitarBotonesActuadores(valor: boolean);
 begin
-
+    btn_CompuertaDesvio_OPEN.Enabled:= valor;
+    btn_CompuertaDesvio_CLOSE.Enabled:= valor;
+    btn_CompuertaIngreso_CLOSE.Enabled:= valor;
+    btn_CompuertaIngreso_OPEN.Enabled:= valor;
+    btn_USincronismo_ON.Enabled:= valor;
+    btn_USincronismo_OFF.Enabled:= valor;
+    btn_Generador_OFF.Enabled:= valor;
+    btn_Generador_ON.Enabled:= valor;
+    btn_EquipoExcitacion_OFF.Enabled:= valor;
+    btn_EquipoExcitacion_ON.Enabled:= valor;
+    btn_ReguladorVelocidad_OFF.Enabled:= valor;
+    btn_ReguladorVelocidad_ON.Enabled:= valor;
+    btn_Refrigeracion_ON.Enabled:= valor;
+    btn_Refrigeracion_OFF.Enabled:= valor;
+    btn_CompuertasMantenimiento_OPEN.Enabled:= valor;
+    btn_CompuertasMantenimiento_CLOSE.Enabled:= valor;
+    btn_Bypass_OPEN.Enabled:= valor;
+    btn_Bypass_CLOSE.Enabled:= valor;
+    btn_Mariposa_OPEN.Enabled:= valor;
+    btn_Mariposa_CLOSE.Enabled:= valor;
+    btn_FrenosGenerador.Enabled:= valor;
+    btn_AperturaAlabe.Enabled:= valor;
+    btn_FrenosTurbina.Enabled:= valor;
 end;
-
-// Cambio en La compuerta de Desvio
-procedure Tfrm_Principal.RTU1_ACC0003ValueChange(Sender: TObject);
-begin
-    if trunc(RTU1_ACC0003.Value)=1 then
-        btnCompuertaDesvioAbierta.SetFocus
-    else
-        btnCompuertaDesvioCerrada.SetFocus;
-
-end;
-
 
 procedure Tfrm_Principal.TimerFechaHoraTimer(Sender: TObject);
 begin
     lblFecha.Caption:= datetostr(now);
     lblHora.Caption:= FormatDateTime('hh:nn', now);
-//    FormatDateTime(' "Today is " dddd " minute " nn',d)
 end;
 
 end.

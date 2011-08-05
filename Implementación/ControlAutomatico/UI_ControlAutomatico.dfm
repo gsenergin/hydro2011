@@ -47,7 +47,6 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       item
         Width = 105
       end>
-    ExplicitWidth = 880
   end
   object PanelRTU1: TPanel
     Left = 8
