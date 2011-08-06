@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/07/27 09:14:00.194.pas,C:\Users\Adry\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Adry\Documents\RAD Studio\Projects\SG2_Generador\Unit1.pas</Transaction>
+    <Transaction>2011/07/27 09:14:00.195.dfm,C:\Users\Adry\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Adry\Documents\RAD Studio\Projects\SG2_Generador\Unit1.dfm</Transaction>
+    <Transaction>2011/07/27 09:14:08.543.dproj,C:\Users\Adry\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Adry\Documents\RAD Studio\Projects\SG2_Generador\SG2_Generador.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
