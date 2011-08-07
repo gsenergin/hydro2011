@@ -308,37 +308,32 @@ procedure Tfrm_GeneracionDatos.ActualizarValoresSensores;
   var valorNuevo: double;
       dado, dadoDelta: double;
   begin
-       
-      // repeat
-           dado:= random();
-           if dado <= probabilidadMantenerse then
-           begin
-              // Se mantiene el valor anterior
-              valorNuevo:= valorAnterior;
-           end
-           else
-           begin
-              repeat
-                dadoDelta:= random(rangoIncremento)+1;
-              until dadoDelta<>0;
+      dado:= random();
+      if dado <= probabilidadMantenerse then
+      begin
+          // Se mantiene el valor anterior
+          valorNuevo:= valorAnterior;
+      end
+      else
+      begin
+          repeat
+             dadoDelta:= random(rangoIncremento)+1;
+          until dadoDelta<>0;
 
-              if (dado<=(probabilidadMantenerse+probabilidadIncrementar)) or
-                 (valorAnterior<LimiteInferior) then
-              begin
-                  // Se incrementa el valor
-                  valorNuevo:= valorAnterior + dadoDelta;
-                  if valorNuevo>LimiteSuperior then valorNuevo:= LimiteSuperior;
-              end
-              else
-              begin
-                  // Se decrementa el valor
-                  valorNuevo:= valorAnterior - dadoDelta;
-                  if valorNuevo<LimiteInferior then valorNuevo:= LimiteInferior;
-              end;
-
-           end;
-      // until (valorNuevo>=LimiteInferior) and(valorNuevo<=LimiteSuperior);
-
+          if (dado<=(probabilidadMantenerse+probabilidadIncrementar)) or
+             (valorAnterior<LimiteInferior) then
+          begin
+              // Se incrementa el valor
+              valorNuevo:= valorAnterior + dadoDelta;
+              if valorNuevo>LimiteSuperior then valorNuevo:= LimiteSuperior;
+          end
+          else
+          begin
+              // Se decrementa el valor
+              valorNuevo:= valorAnterior - dadoDelta;
+              if valorNuevo<LimiteInferior then valorNuevo:= LimiteInferior;
+          end;
+      end;
       result:= trunc(valorNuevo);
   end;
 
@@ -614,7 +609,7 @@ begin
    (*----      ST10008 - Sensores[7] - Temperatura Cojinetes Superiores    ----*)
    (*----      ST10009 - Sensores[8] - Temperatura Cojinetes Inferiores    ----*)
    (*----      ST10010 - Sensores[9] - Temperatura Cojinetes Guia Turbina  ----*)
-	 // Afectado por Sensor[12] y Actuador
+	 // Afectado por Sensor[10] y Actuador
 	 // RTU_ST10012 = Sistema de Refrigeracion
 	 i:= incIndex(Sensores[7].index);
    i:= incIndex(Sensores[8].index);
