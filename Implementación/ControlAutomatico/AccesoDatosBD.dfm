@@ -31,14 +31,39 @@ object DM_AccesoDatosBD: TDM_AccesoDatosBD
     Top = 100
   end
   object ADOConnection1: TADOConnection
+    Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
       'er ID=root;Data Source=HydroDB'
     ConnectionTimeout = 0
     DefaultDatabase = 'hydrodb'
     LoginPrompt = False
-    Provider = 'MSDASQL.1'
     Left = 88
     Top = 12
+  end
+  object StoredProc_RegistroEventos_Insertar: TADOStoredProc
+    Connection = ADOConnection1
+    ProcedureName = 'RegistroEventos_Insertar'
+    Parameters = <
+      item
+        Name = 'dirMem'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = 'rtu_num'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end
+      item
+        Name = 'valor'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+      end>
+    Left = 248
+    Top = 28
   end
 end

@@ -193,6 +193,7 @@ begin
     Consigna := TConsigna.Create(True);
     Consigna.setDelay(2000);
     Consigna.LogEnable(log);
+    Consigna.Priority:= tpHighest;
 
 
     // Creo un observador, deshabilitado
@@ -232,7 +233,9 @@ begin
     mensaje:= socket.ReceiveText;
     log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+mensaje);
 
-    
+
+
+    5555 agregar delimitador inicio y fin trama
     // Proceso los mensajes del cliente
     codFuncion:= strtoint(mensaje[1]+mensaje[2]);
     case codFuncion of
@@ -266,6 +269,7 @@ begin
       begin
           Secuencia:= TSecuencia.Create();
           Secuencia.LogEnable(log);
+          Secuencia.Priority:= tpHighest;
           Consigna.SetConsignaManual;
           Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
       end;
@@ -274,6 +278,7 @@ begin
       begin
           Secuencia:= TSecuencia.Create();
           Secuencia.LogEnable(log);
+          Secuencia.Priority:= tpHighest;
           Consigna.SetConsignaManual;
           Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
       end;
