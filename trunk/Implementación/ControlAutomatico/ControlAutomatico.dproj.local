@@ -24,5 +24,9 @@
     <Transaction>2011/07/25 20:39:11.101.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\ClienteObservador.pas</Transaction>
     <Transaction>2011/07/25 20:40:54.565.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Consigna.pas</Transaction>
     <Transaction>2011/07/25 21:28:19.503.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Secuencia.pas</Transaction>
+    <Transaction>2011/08/08 21:39:07.385.pas,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.pas=</Transaction>
+    <Transaction>2011/08/08 21:39:07.385.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.dfm=</Transaction>
+    <Transaction>2011/08/08 21:43:12.539.pas,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.pas=</Transaction>
+    <Transaction>2011/08/08 21:43:12.539.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.dfm=</Transaction>
   </Transactions>
 </BorlandProject>
