@@ -140,6 +140,9 @@ type
       Socket: TCustomWinSocket);
     procedure ServerSocket_GUIDesktopClientWrite(Sender: TObject;
       Socket: TCustomWinSocket);
+    function procesarTramaTCP(codFuncion: integer; mensaje:string):boolean;
+    function getTramas(mensaje:string):TStringList;
+
     procedure Button1Click(Sender: TObject);
 
 
@@ -202,6 +205,9 @@ begin
 end;
 
 
+
+
+
 ////////////////////////////////////////////////////////////////
 /////          SERVER TCP SOCKET -> GUI DESKTOP             ////
 ////////////////////////////////////////////////////////////////
@@ -224,29 +230,20 @@ begin
     Observador.active:= false;
 end;
 
-procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientRead(
-  Sender: TObject; Socket: TCustomWinSocket);
-var mensaje: string;
-    codFuncion,param, offset,valor: integer;
+
+
+function Tfrm_ControlAutomatico.procesarTramaTCP(codFuncion: integer; mensaje:string): boolean;
+var param, offset, valor: integer;
 begin
-    // Se recibe mensaje de un cliente
-    mensaje:= socket.ReceiveText;
-    log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+mensaje);
 
-
-
-    5555 agregar delimitador inicio y fin trama
-    // Proceso los mensajes del cliente
-    codFuncion:= strtoint(mensaje[1]+mensaje[2]);
     case codFuncion of
-
       1: // 01= Consigna de Caudal
       begin
           try
             param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
             Consigna.SetConsignaCaudal(param, true);
           except
-            exit;
+            result:= false;
           end;
       end;
 
@@ -256,7 +253,7 @@ begin
             param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
             Consigna.SetConsignaVoltaje(param, true);
           except
-            exit;
+            result:= false;
           end;
       end;
 
@@ -267,20 +264,28 @@ begin
 
       4: // 04= Secuencia Encendido
       begin
-          Secuencia:= TSecuencia.Create();
-          Secuencia.LogEnable(log);
-          Secuencia.Priority:= tpHighest;
-          Consigna.SetConsignaManual;
-          Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
+          try
+            Secuencia:= TSecuencia.Create();
+            Secuencia.LogEnable(log);
+            Secuencia.Priority:= tpHighest;
+            Consigna.SetConsignaManual;
+            Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
+          except
+             result:= false;
+          end;
       end;
 
       5: // 05= Secuencia Apagado
       begin
-          Secuencia:= TSecuencia.Create();
-          Secuencia.LogEnable(log);
-          Secuencia.Priority:= tpHighest;
-          Consigna.SetConsignaManual;
-          Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
+          try
+            Secuencia:= TSecuencia.Create();
+            Secuencia.LogEnable(log);
+            Secuencia.Priority:= tpHighest;
+            Consigna.SetConsignaManual;
+            Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
+          except
+             result:= false;
+          end;
       end;
 
       6: // 06: Seteo de Actuador
@@ -293,22 +298,71 @@ begin
           if offset>0 then
           try
               case mensaje[3] of
-                '1':begin
-                  DM_AccesoDatosRTU.PLCBlock_RTU1.ValueRaw[offset]:= valor;
-                end;
-                '2':begin
-                  DM_AccesoDatosRTU.PLCBlock_RTU2.ValueRaw[offset]:= valor;
-                end;
-                '3':begin
-                  DM_AccesoDatosRTU.PLCBlock_RTU3.ValueRaw[offset]:= valor;
-                end;
+                '1':DM_AccesoDatosRTU.PLCBlock_RTU1.ValueRaw[offset]:= valor;
+                '2':DM_AccesoDatosRTU.PLCBlock_RTU2.ValueRaw[offset]:= valor;
+                '3':DM_AccesoDatosRTU.PLCBlock_RTU3.ValueRaw[offset]:= valor;
               end;
           except
-
+              result:= false;
           end;
       end;
 
     end;//CASE
+
+    result:= true;
+end;
+
+function Tfrm_ControlAutomatico.getTramas(mensaje: string): TStringList;
+var tramas: TStringList;
+    j,posI,posF: integer;
+    abierto:boolean;
+begin
+    // Divide una tramalarga en subtramas, en caso que se acumulen en el socket
+    // Ej: trama -> #05200##01##03500# --> 05200; 01; 03500
+    tramas := TStringList.Create;
+
+    abierto:=false;
+    for j:=1 to length(mensaje) do
+        if mensaje[j]='#' then
+        begin
+            abierto:= not abierto;
+            if abierto then
+            begin
+              posI:= j;
+            end else
+            begin
+              posF:= j;
+              tramas.Add( copy(mensaje,posI+1,posF-posI-1) );
+            end;
+        end;
+    result:= tramas;
+end;
+
+procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientRead(
+  Sender: TObject; Socket: TCustomWinSocket);
+var mensaje, subtrama: string;
+    codFuncion,cantidadTramas, j: integer;
+    tramas: TStringList;
+
+    posI,posF: integer;
+    abierto:boolean;
+begin
+    // Se recibe mensaje de un cliente
+    mensaje:= socket.ReceiveText;
+    log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+mensaje);
+
+//    tramas := TStringList.Create;
+
+    tramas := getTramas(mensaje);
+
+    for j:=0 to tramas.Count-1 do
+    begin
+      subtrama:= tramas[j];
+      // Proceso los mensajes del cliente
+      procesarTramaTCP( strtoint(subtrama[1]+subtrama[2]) ,subtrama);
+    end;
+
+    tramas.Free;
 end;
 
 procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientWrite(
@@ -479,16 +533,39 @@ end;
 
 
 procedure Tfrm_ControlAutomatico.Button1Click(Sender: TObject);
-var mensaje:string;
-codFuncion,param:integer;
+var mensaje, subtrama: string;
+    codFuncion,cantidadTramas, j: integer;
+    tramas: TStringList;
+
+    posI,posF: integer;
+    abierto:boolean;
+
 begin
-  // BOTON DE PRUEBA
-    mensaje:= '0120000';
-    codFuncion:= strtoint(mensaje[1]+mensaje[2]);
-    param:= strtoint(Copy(mensaje, 3, length(mensaje)-3));
-    showmessage('length='+inttostr(length(mensaje)));
-    showmessage('codfuncion='+inttostr(codfuncion));
-    showmessage('param='+inttostr(param));
+    mensaje:='#012000##03##05##01200#';
+
+    tramas := TStringList.Create;
+
+    abierto:=false;
+    for j:=1 to length(mensaje) do
+        if mensaje[j]='#' then
+        begin
+            abierto:= not abierto;
+            if abierto then
+            begin
+              posI:= j;
+            end else
+            begin
+              posF:= j;
+              tramas.Add( copy(mensaje,posI+1,posF-posI-1) );
+            end;
+        end;
+        
+    for j:=0 to tramas.Count-1 do
+    begin
+        showmessage(tramas[j]);
+    end;
+
+    tramas.Free;
 
 end;
 
