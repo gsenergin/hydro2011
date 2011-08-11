@@ -3,8 +3,8 @@ object frm_Principal: Tfrm_Principal
   Top = 0
   BorderStyle = bsSingle
   Caption = 'HYDRO'
-  ClientHeight = 741
-  ClientWidth = 1052
+  ClientHeight = 758
+  ClientWidth = 765
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object frm_Principal: Tfrm_Principal
   object panel_Alertas: TPanel
     Left = 0
     Top = 571
-    Width = 761
+    Width = 505
     Height = 174
     BevelInner = bvLowered
     BevelKind = bkSoft
@@ -29,7 +29,7 @@ object frm_Principal: Tfrm_Principal
     object SG_Alertas: TStringGrid
       Left = 10
       Top = 27
-      Width = 739
+      Width = 487
       Height = 136
       BevelInner = bvLowered
       BevelKind = bkSoft
@@ -53,13 +53,13 @@ object frm_Principal: Tfrm_Principal
         45
         80
         57
-        310
+        116
         44
         79
-        92)
+        46)
     end
     object cxLabel8: TcxLabel
-      Left = 306
+      Left = 202
       Top = 4
       Caption = 'EVENTOS Y ALERTAS'
       ParentFont = False
@@ -857,34 +857,6 @@ object frm_Principal: Tfrm_Principal
         PLCTag = RTU1_SCC0002
         Sufix = ' mm'
       end
-      object HMILabel4: THMILabel
-        Left = 16
-        Top = 120
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU1_ACC0003
-      end
-      object HMILabel5: THMILabel
-        Left = 200
-        Top = 78
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU1_ACC0004
-      end
       object HMILabel6: THMILabel
         Left = 161
         Top = 174
@@ -914,20 +886,6 @@ object frm_Principal: Tfrm_Principal
         NumberFormat = '#0.0'
         PLCTag = RTU3_SSA0001
         Sufix = ' m^3/seg'
-      end
-      object HMILabel28: THMILabel
-        Left = 141
-        Top = 440
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU3_ASA0002
       end
       object HMILabel1: THMILabel
         Left = 215
@@ -1018,34 +976,6 @@ object frm_Principal: Tfrm_Principal
         NumberFormat = '#0'
         PLCTag = RTU2_ST10010
         Sufix = ' '#186' C'
-      end
-      object HMILabel8: THMILabel
-        Left = 368
-        Top = 241
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU2_AT10003
-      end
-      object HMILabel9: THMILabel
-        Left = 358
-        Top = 92
-        Width = 47
-        Height = 13
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clRed
-        Font.Height = -11
-        Font.Name = 'Tahoma'
-        Font.Style = [fsBold]
-        ParentFont = False
-        NumberFormat = '#0'
-        PLCTag = RTU1_ACC0004
       end
       object HMILabel11: THMILabel
         Left = 642
@@ -1152,6 +1082,654 @@ object frm_Principal: Tfrm_Principal
         PLCTag = RTU2_ST10021
         Sufix = ' V'
       end
+      object CLR_RTU2_AT10019: THMIText
+        Left = 201
+        Top = 253
+        Width = 33
+        Height = 20
+        Alignment = taCenter
+        Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU2_AT10019DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_AT10019
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'OFF'
+            Color = clMaroon
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'ON'
+            Color = clGreen
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU2_AT10016: THMIText
+        Left = 201
+        Top = 277
+        Width = 33
+        Height = 20
+        Alignment = taCenter
+        Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU2_AT10016DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_AT10016
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'OFF'
+            Color = clMaroon
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'ON'
+            Color = clGreen
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU2_AT10018: THMIText
+        Left = 200
+        Top = 303
+        Width = 33
+        Height = 20
+        Alignment = taCenter
+        Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU2_AT10018DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_AT10018
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'OFF'
+            Color = clMaroon
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'ON'
+            Color = clGreen
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU2_AT10017: THMIText
+        Left = 200
+        Top = 327
+        Width = 33
+        Height = 20
+        Alignment = taCenter
+        Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU2_AT10017DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_AT10017
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'OFF'
+            Color = clMaroon
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'ON'
+            Color = clGreen
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU2_AT10011: THMIText
+        Left = 200
+        Top = 353
+        Width = 33
+        Height = 20
+        Alignment = taCenter
+        Color = clMaroon
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU2_AT10011DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_AT10011
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'OFF'
+            Color = clMaroon
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'ON'
+            Color = clGreen
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU2_ST10012: THMIText
+        Left = 200
+        Top = 379
+        Width = 33
+        Height = 20
+        Alignment = taCenter
+        Color = clGreen
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_ST10012
+        Zones = <
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 5
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'ERR'
+            Color = clMaroon
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'OK'
+            Color = clGreen
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU1_ACC0003: THMIText
+        Left = 42
+        Top = 118
+        Width = 35
+        Height = 33
+        Alignment = taCenter
+        Color = clGray
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU1_ACC0003DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU1_ACC0003
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'C'
+            Color = clGray
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'A'
+            Color = clNavy
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU1_ACC0004: THMIText
+        Left = 113
+        Top = 86
+        Width = 34
+        Height = 40
+        Alignment = taCenter
+        Color = clGray
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU1_ACC0004DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU1_ACC0004
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'C'
+            Color = clGray
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'A'
+            Color = clNavy
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU2_AT10003: THMIText
+        Left = 319
+        Top = 174
+        Width = 34
+        Height = 36
+        Alignment = taCenter
+        Color = clGray
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU2_AT10003DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_AT10003
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'C'
+            Color = clGray
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'A'
+            Color = clNavy
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU2_AT10004: THMIText
+        Left = 319
+        Top = 131
+        Width = 34
+        Height = 37
+        Alignment = taCenter
+        Color = clGray
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU2_AT10004DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU2_AT10004
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'C'
+            Color = clGray
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'A'
+            Color = clNavy
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
+      object CLR_RTU3_ASA0002: THMIText
+        Left = 113
+        Top = 408
+        Width = 26
+        Height = 45
+        Alignment = taCenter
+        Color = clGray
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+        OnDblClick = CLR_RTU3_ASA0002DblClick
+        NumberFormat = '#0.0'
+        PLCTag = RTU3_ASA0002
+        Zones = <
+          item
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'C'
+            Color = clGray
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end
+          item
+            Value1 = 1.000000000000000000
+            Value2 = 1.000000000000000000
+            IncludeValue1 = True
+            IncludeValue2 = True
+            BlinkTime = 0
+            BlinkWith = -1
+            DefaultZone = False
+            ZoneType = ztEqual
+            HorizontalAlignment = taCenter
+            VerticalAlignment = tlCenter
+            Text = 'A'
+            Color = clNavy
+            Transparent = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = [fsBold]
+          end>
+      end
       object cxLabel11: TcxLabel
         Left = 161
         Top = 5
@@ -1177,17 +1755,6 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
-      end
-      object btn_CompuertaDesvio_OPEN: TcxButton
-        Left = 30
-        Top = 113
-        Width = 33
-        Height = 31
-        Caption = 'A'
-        TabOrder = 2
-        OnClick = btn_CompuertaDesvio_OPENClick
-        OnMouseDown = btn_CompuertaDesvio_OPENMouseDown
-        SpeedButtonOptions.GroupIndex = 1
       end
       object cxLabel14: TcxLabel
         Left = 127
@@ -1294,8 +1861,8 @@ object frm_Principal: Tfrm_Principal
         Transparent = True
       end
       object cxLabel44: TcxLabel
-        Left = 105
-        Top = 377
+        Left = 146
+        Top = 379
         Caption = 'Estado: '
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
@@ -1373,45 +1940,9 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object btn_CompuertaDesvio_CLOSE: TcxButton
-        Left = 69
-        Top = 113
-        Width = 33
-        Height = 31
-        Caption = 'C'
-        TabOrder = 17
-        OnClick = btn_CompuertaDesvio_CLOSEClick
-        OnMouseDown = btn_CompuertaDesvio_CLOSEMouseDown
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 1
-      end
-      object btn_CompuertaIngreso_CLOSE: TcxButton
-        Left = 147
-        Top = 96
-        Width = 33
-        Height = 31
-        Caption = 'C'
-        TabOrder = 18
-        OnClick = btn_CompuertaIngreso_CLOSEClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 2
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
-      end
-      object btn_CompuertaIngreso_OPEN: TcxButton
-        Left = 108
-        Top = 96
-        Width = 33
-        Height = 31
-        Caption = 'A'
-        TabOrder = 19
-        OnClick = btn_CompuertaIngreso_OPENClick
-        SpeedButtonOptions.GroupIndex = 2
-        SpeedButtonOptions.AllowAllUp = True
-      end
       object cxLabel53: TcxLabel
-        Left = 186
-        Top = 97
+        Left = 169
+        Top = 88
         Caption = ' C. Ingreso'
         ParentFont = False
         Style.Font.Charset = DEFAULT_CHARSET
@@ -1474,102 +2005,6 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object btn_USincronismo_ON: TcxButton
-        Left = 196
-        Top = 252
-        Width = 33
-        Height = 23
-        Caption = 'On'
-        TabOrder = 25
-        OnClick = btn_USincronismo_ONClick
-        SpeedButtonOptions.GroupIndex = 5
-        SpeedButtonOptions.AllowAllUp = True
-      end
-      object btn_USincronismo_OFF: TcxButton
-        Left = 235
-        Top = 252
-        Width = 33
-        Height = 23
-        Caption = 'Off'
-        TabOrder = 26
-        OnClick = btn_USincronismo_OFFClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 5
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
-      end
-      object btn_Generador_OFF: TcxButton
-        Left = 235
-        Top = 277
-        Width = 33
-        Height = 23
-        Caption = 'Off'
-        TabOrder = 27
-        OnClick = btn_Generador_OFFClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 6
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
-      end
-      object btn_Generador_ON: TcxButton
-        Left = 196
-        Top = 277
-        Width = 33
-        Height = 23
-        Caption = 'On'
-        TabOrder = 28
-        OnClick = btn_Generador_ONClick
-        SpeedButtonOptions.GroupIndex = 6
-        SpeedButtonOptions.AllowAllUp = True
-      end
-      object btn_EquipoExcitacion_OFF: TcxButton
-        Left = 235
-        Top = 302
-        Width = 33
-        Height = 23
-        Caption = 'Off'
-        TabOrder = 29
-        OnClick = btn_EquipoExcitacion_OFFClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 7
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
-      end
-      object btn_EquipoExcitacion_ON: TcxButton
-        Left = 196
-        Top = 302
-        Width = 33
-        Height = 23
-        Caption = 'On'
-        TabOrder = 30
-        OnClick = btn_EquipoExcitacion_ONClick
-        SpeedButtonOptions.GroupIndex = 7
-        SpeedButtonOptions.AllowAllUp = True
-      end
-      object btn_ReguladorVelocidad_OFF: TcxButton
-        Left = 235
-        Top = 327
-        Width = 33
-        Height = 23
-        Caption = 'Off'
-        TabOrder = 31
-        OnClick = btn_ReguladorVelocidad_OFFClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 8
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
-      end
-      object btn_ReguladorVelocidad_ON: TcxButton
-        Left = 196
-        Top = 327
-        Width = 33
-        Height = 23
-        Caption = 'On'
-        TabOrder = 32
-        OnClick = btn_ReguladorVelocidad_ONClick
-        SpeedButtonOptions.GroupIndex = 8
-        SpeedButtonOptions.AllowAllUp = True
-      end
       object cxLabel58: TcxLabel
         Left = 105
         Top = 354
@@ -1583,54 +2018,6 @@ object frm_Principal: Tfrm_Principal
         Style.IsFontAssigned = True
         Transparent = True
       end
-      object btn_Refrigeracion_ON: TcxButton
-        Left = 196
-        Top = 352
-        Width = 33
-        Height = 23
-        Caption = 'On'
-        TabOrder = 34
-        OnClick = btn_Refrigeracion_ONClick
-        SpeedButtonOptions.GroupIndex = 9
-        SpeedButtonOptions.AllowAllUp = True
-      end
-      object btn_Refrigeracion_OFF: TcxButton
-        Left = 235
-        Top = 352
-        Width = 33
-        Height = 23
-        Caption = 'Off'
-        TabOrder = 35
-        OnClick = btn_Refrigeracion_OFFClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 9
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
-      end
-      object btn_CompuertasMantenimiento_OPEN: TcxButton
-        Left = 83
-        Top = 410
-        Width = 33
-        Height = 31
-        Caption = 'A'
-        TabOrder = 36
-        OnClick = btn_CompuertasMantenimiento_OPENClick
-        SpeedButtonOptions.GroupIndex = 10
-        SpeedButtonOptions.AllowAllUp = True
-      end
-      object btn_CompuertasMantenimiento_CLOSE: TcxButton
-        Left = 139
-        Top = 410
-        Width = 33
-        Height = 31
-        Caption = 'C'
-        TabOrder = 37
-        OnClick = btn_CompuertasMantenimiento_CLOSEClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 10
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
-      end
       object cxLabel59: TcxLabel
         Left = 74
         Top = 459
@@ -1643,30 +2030,6 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
-      end
-      object btn_Bypass_OPEN: TcxButton
-        Left = 297
-        Top = 111
-        Width = 33
-        Height = 23
-        Caption = 'A'
-        TabOrder = 39
-        OnClick = btn_Bypass_OPENClick
-        SpeedButtonOptions.GroupIndex = 3
-        SpeedButtonOptions.AllowAllUp = True
-      end
-      object btn_Bypass_CLOSE: TcxButton
-        Left = 332
-        Top = 111
-        Width = 33
-        Height = 23
-        Caption = 'C'
-        TabOrder = 40
-        OnClick = btn_Bypass_CLOSEClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 3
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
       end
       object cxLabel43: TcxLabel
         Left = 308
@@ -1693,30 +2056,6 @@ object frm_Principal: Tfrm_Principal
         Style.Font.Style = [fsBold]
         Style.IsFontAssigned = True
         Transparent = True
-      end
-      object btn_Mariposa_OPEN: TcxButton
-        Left = 297
-        Top = 212
-        Width = 33
-        Height = 23
-        Caption = 'A'
-        TabOrder = 43
-        OnClick = btn_Mariposa_OPENClick
-        SpeedButtonOptions.GroupIndex = 4
-        SpeedButtonOptions.AllowAllUp = True
-      end
-      object btn_Mariposa_CLOSE: TcxButton
-        Left = 332
-        Top = 212
-        Width = 33
-        Height = 23
-        Caption = 'C'
-        TabOrder = 44
-        OnClick = btn_Mariposa_CLOSEClick
-        LookAndFeel.NativeStyle = False
-        SpeedButtonOptions.GroupIndex = 4
-        SpeedButtonOptions.AllowAllUp = True
-        SpeedButtonOptions.Down = True
       end
       object cxLabel10: TcxLabel
         Left = 642
@@ -1763,7 +2102,7 @@ object frm_Principal: Tfrm_Principal
         Width = 52
         Height = 23
         Caption = 'Set'
-        TabOrder = 48
+        TabOrder = 28
         OnClick = btn_FrenosGeneradorClick
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
@@ -1774,7 +2113,7 @@ object frm_Principal: Tfrm_Principal
         Width = 52
         Height = 23
         Caption = 'Set'
-        TabOrder = 49
+        TabOrder = 29
         OnClick = btn_AperturaAlabeClick
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
@@ -1785,166 +2124,10 @@ object frm_Principal: Tfrm_Principal
         Width = 52
         Height = 23
         Caption = 'Set'
-        TabOrder = 50
+        TabOrder = 30
         OnClick = btn_FrenosTurbinaClick
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
-      end
-      object HMICheckBox1: THMICheckBox
-        Left = 83
-        Top = 256
-        Width = 16
-        Height = 17
-        Enabled = False
-        ParentFont = False
-        TabOrder = 51
-        PLCTag = RTU2_AT10019
-        FontFalse.Charset = DEFAULT_CHARSET
-        FontFalse.Color = clWindowText
-        FontFalse.Height = -11
-        FontFalse.Name = 'Tahoma'
-        FontFalse.Style = []
-        FontTrue.Charset = DEFAULT_CHARSET
-        FontTrue.Color = clWindowText
-        FontTrue.Height = -11
-        FontTrue.Name = 'Tahoma'
-        FontTrue.Style = []
-        FontGrayed.Charset = DEFAULT_CHARSET
-        FontGrayed.Color = clWindowText
-        FontGrayed.Height = -11
-        FontGrayed.Name = 'Tahoma'
-        FontGrayed.Style = []
-        ValueTrue = 1.000000000000000000
-      end
-      object HMICheckBox2: THMICheckBox
-        Left = 83
-        Top = 279
-        Width = 16
-        Height = 17
-        Enabled = False
-        ParentFont = False
-        TabOrder = 52
-        PLCTag = RTU2_AT10016
-        FontFalse.Charset = DEFAULT_CHARSET
-        FontFalse.Color = clWindowText
-        FontFalse.Height = -11
-        FontFalse.Name = 'Tahoma'
-        FontFalse.Style = []
-        FontTrue.Charset = DEFAULT_CHARSET
-        FontTrue.Color = clWindowText
-        FontTrue.Height = -11
-        FontTrue.Name = 'Tahoma'
-        FontTrue.Style = []
-        FontGrayed.Charset = DEFAULT_CHARSET
-        FontGrayed.Color = clWindowText
-        FontGrayed.Height = -11
-        FontGrayed.Name = 'Tahoma'
-        FontGrayed.Style = []
-        ValueTrue = 1.000000000000000000
-      end
-      object HMICheckBox3: THMICheckBox
-        Left = 83
-        Top = 304
-        Width = 16
-        Height = 17
-        Enabled = False
-        ParentFont = False
-        TabOrder = 53
-        PLCTag = RTU2_AT10018
-        FontFalse.Charset = DEFAULT_CHARSET
-        FontFalse.Color = clWindowText
-        FontFalse.Height = -11
-        FontFalse.Name = 'Tahoma'
-        FontFalse.Style = []
-        FontTrue.Charset = DEFAULT_CHARSET
-        FontTrue.Color = clWindowText
-        FontTrue.Height = -11
-        FontTrue.Name = 'Tahoma'
-        FontTrue.Style = []
-        FontGrayed.Charset = DEFAULT_CHARSET
-        FontGrayed.Color = clWindowText
-        FontGrayed.Height = -11
-        FontGrayed.Name = 'Tahoma'
-        FontGrayed.Style = []
-        ValueTrue = 1.000000000000000000
-      end
-      object HMICheckBox4: THMICheckBox
-        Left = 83
-        Top = 327
-        Width = 16
-        Height = 17
-        Enabled = False
-        ParentFont = False
-        TabOrder = 54
-        PLCTag = RTU2_AT10017
-        FontFalse.Charset = DEFAULT_CHARSET
-        FontFalse.Color = clWindowText
-        FontFalse.Height = -11
-        FontFalse.Name = 'Tahoma'
-        FontFalse.Style = []
-        FontTrue.Charset = DEFAULT_CHARSET
-        FontTrue.Color = clWindowText
-        FontTrue.Height = -11
-        FontTrue.Name = 'Tahoma'
-        FontTrue.Style = []
-        FontGrayed.Charset = DEFAULT_CHARSET
-        FontGrayed.Color = clWindowText
-        FontGrayed.Height = -11
-        FontGrayed.Name = 'Tahoma'
-        FontGrayed.Style = []
-        ValueTrue = 1.000000000000000000
-      end
-      object HMICheckBox5: THMICheckBox
-        Left = 83
-        Top = 355
-        Width = 16
-        Height = 17
-        Enabled = False
-        ParentFont = False
-        TabOrder = 55
-        PLCTag = RTU2_AT10011
-        FontFalse.Charset = DEFAULT_CHARSET
-        FontFalse.Color = clWindowText
-        FontFalse.Height = -11
-        FontFalse.Name = 'Tahoma'
-        FontFalse.Style = []
-        FontTrue.Charset = DEFAULT_CHARSET
-        FontTrue.Color = clWindowText
-        FontTrue.Height = -11
-        FontTrue.Name = 'Tahoma'
-        FontTrue.Style = []
-        FontGrayed.Charset = DEFAULT_CHARSET
-        FontGrayed.Color = clWindowText
-        FontGrayed.Height = -11
-        FontGrayed.Name = 'Tahoma'
-        FontGrayed.Style = []
-        ValueTrue = 1.000000000000000000
-      end
-      object HMICheckBox6: THMICheckBox
-        Left = 159
-        Top = 377
-        Width = 16
-        Height = 17
-        Enabled = False
-        ParentFont = False
-        TabOrder = 56
-        PLCTag = RTU2_ST10012
-        FontFalse.Charset = DEFAULT_CHARSET
-        FontFalse.Color = clWindowText
-        FontFalse.Height = -11
-        FontFalse.Name = 'Tahoma'
-        FontFalse.Style = []
-        FontTrue.Charset = DEFAULT_CHARSET
-        FontTrue.Color = clWindowText
-        FontTrue.Height = -11
-        FontTrue.Name = 'Tahoma'
-        FontTrue.Style = []
-        FontGrayed.Charset = DEFAULT_CHARSET
-        FontGrayed.Color = clWindowText
-        FontGrayed.Height = -11
-        FontGrayed.Name = 'Tahoma'
-        FontGrayed.Style = []
-        ValueTrue = 1.000000000000000000
       end
     end
     object tab_Historicos: TcxTabSheet
@@ -9613,42 +9796,42 @@ object frm_Principal: Tfrm_Principal
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 11
+        TabOrder = 9
       end
       object txt_ConfiguracionSensoresHH: TEdit
         Left = 481
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 10
+        TabOrder = 8
       end
       object txt_ConfiguracionSensoresH: TEdit
         Left = 392
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 9
+        TabOrder = 7
       end
       object txt_ConfiguracionSensoresL: TEdit
         Left = 305
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 8
+        TabOrder = 6
       end
       object txt_ConfiguracionSensoresLL: TEdit
         Left = 209
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 7
+        TabOrder = 5
       end
       object txt_ConfiguracionSensoresMin: TEdit
         Left = 121
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 6
+        TabOrder = 4
       end
     end
   end
@@ -9793,17 +9976,18 @@ object frm_Principal: Tfrm_Principal
     end
   end
   object Panel_SecuenciasConsignas: TPanel
-    Left = 783
-    Top = 312
+    Left = 511
+    Top = 575
     Width = 250
-    Height = 179
+    Height = 158
     BevelInner = bvRaised
     BevelOuter = bvLowered
     Locked = True
+    ParentBackground = False
     TabOrder = 3
     object Label40: TLabel
       Left = 56
-      Top = 33
+      Top = 0
       Width = 151
       Height = 16
       Caption = 'Secuencias - Consignas'
@@ -9816,7 +10000,7 @@ object frm_Principal: Tfrm_Principal
     end
     object Label38: TLabel
       Left = 8
-      Top = 96
+      Top = 80
       Width = 98
       Height = 13
       Caption = 'Caudal Turbinado'
@@ -9829,7 +10013,7 @@ object frm_Principal: Tfrm_Principal
     end
     object Label39: TLabel
       Left = 9
-      Top = 123
+      Top = 107
       Width = 98
       Height = 13
       Caption = 'Voltaje Generado'
@@ -9842,7 +10026,7 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_ConsignaCaudal: TButton
       Left = 175
-      Top = 89
+      Top = 73
       Width = 65
       Height = 25
       Caption = 'Set Caudal'
@@ -9851,7 +10035,7 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_ConsignaVoltaje: TButton
       Left = 175
-      Top = 116
+      Top = 100
       Width = 65
       Height = 25
       Caption = 'Set Voltaje'
@@ -9860,7 +10044,7 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_ConsignaManual: TButton
       Left = 175
-      Top = 147
+      Top = 131
       Width = 65
       Height = 25
       Caption = 'Set Manual'
@@ -9869,21 +10053,21 @@ object frm_Principal: Tfrm_Principal
     end
     object txtConsignaVoltaje: TEdit
       Left = 113
-      Top = 120
+      Top = 104
       Width = 56
       Height = 21
       TabOrder = 3
     end
     object txtConsignaCaudal: TEdit
       Left = 112
-      Top = 93
+      Top = 77
       Width = 57
       Height = 21
       TabOrder = 4
     end
     object btn_SecuenciaEncendido: TButton
-      Left = 31
-      Top = 55
+      Left = 15
+      Top = 30
       Width = 99
       Height = 25
       Caption = 'Sec. de Encendido'
@@ -9892,22 +10076,45 @@ object frm_Principal: Tfrm_Principal
     end
     object btn_SecuenciaApagado: TButton
       Left = 136
-      Top = 55
+      Top = 30
       Width = 97
       Height = 25
       Caption = 'Sec. de Apagado'
       TabOrder = 6
       OnClick = btn_SecuenciaApagadoClick
     end
-    object Button1: TButton
-      Left = 81
-      Top = 2
-      Width = 105
-      Height = 25
-      Caption = 'Habilitar Socket'
-      TabOrder = 7
-      OnClick = Button1Click
+    object lbl_ModoConsigna: TcxLabel
+      Left = 0
+      Top = 141
+      Caption = 'Modo Autom'#225'tico'
+      ParentFont = False
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -11
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = [fsItalic]
+      Style.IsFontAssigned = True
+      Transparent = True
     end
+  end
+  object StatusBar: TStatusBar
+    Left = 0
+    Top = 739
+    Width = 765
+    Height = 19
+    Panels = <
+      item
+        Width = 150
+      end
+      item
+        Width = 150
+      end
+      item
+        Width = 150
+      end>
+    ExplicitLeft = 560
+    ExplicitTop = 736
+    ExplicitWidth = 0
   end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11
@@ -9955,7 +10162,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10003: TPLCBlockElement
     TagGUID = '{F4CD7470-5C16-45AA-B70C-495F792BA308}'
-    OnValueChangeLast = RTU2_AT10003ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 2
     Left = 792
@@ -9963,7 +10169,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10004: TPLCBlockElement
     TagGUID = '{B6AEA738-B57D-493A-9DBA-594B6485E3EE}'
-    OnValueChangeLast = RTU2_AT10004ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 3
     Left = 792
@@ -10013,7 +10218,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10011: TPLCBlockElement
     TagGUID = '{3F5863AA-86DE-492C-9B8C-91B289766281}'
-    OnValueChangeLast = RTU2_AT10011ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 10
     Left = 856
@@ -10049,7 +10253,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10016: TPLCBlockElement
     TagGUID = '{A75D22CC-40C9-444D-A6F3-436AC2547439}'
-    OnValueChangeLast = RTU2_AT10016ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 15
     Left = 888
@@ -10057,7 +10260,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10017: TPLCBlockElement
     TagGUID = '{AE8F86AF-7ADB-4AA9-A7F5-F4CAA91DF23D}'
-    OnValueChangeLast = RTU2_AT10017ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 16
     Left = 888
@@ -10065,7 +10267,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10018: TPLCBlockElement
     TagGUID = '{2038AFB5-E3B2-434F-96E4-16DAAAFA5FB7}'
-    OnValueChangeLast = RTU2_AT10018ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 17
     Left = 888
@@ -10073,7 +10274,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU2_AT10019: TPLCBlockElement
     TagGUID = '{DB6C3F85-F90F-4864-B3B9-A1696E0B0553}'
-    OnValueChangeLast = RTU2_AT10019ValueChange
     PLCBlock = PLCBlock_RTU2
     Index = 18
     Left = 888
@@ -10111,7 +10311,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU3_ASA0002: TPLCBlockElement
     TagGUID = '{63E9CF73-2245-412A-B395-B32BFB889183}'
-    OnValueChangeLast = RTU3_ASA0002ValueChange
     PLCBlock = PLCBlock_RTU3
     Index = 1
     Left = 1008
@@ -10156,7 +10355,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU1_ACC0003: TPLCBlockElement
     TagGUID = '{270E8ACD-4E1F-4C9E-ABF5-D09753F2F0D7}'
-    OnValueChangeLast = RTU1_ACC0003ValueChange
     PLCBlock = PLCBlock_RTU1
     Index = 2
     Left = 960
@@ -10164,7 +10362,6 @@ object frm_Principal: Tfrm_Principal
   end
   object RTU1_ACC0004: TPLCBlockElement
     TagGUID = '{BEF91A26-5724-4C8A-93BF-3F4EDAEE4490}'
-    OnValueChangeLast = RTU1_ACC0004ValueChange
     PLCBlock = PLCBlock_RTU1
     Index = 3
     Left = 960
@@ -10359,5 +10556,11 @@ object frm_Principal: Tfrm_Principal
     OnTimer = TimerFechaHoraTimer
     Left = 560
     Top = 24
+  end
+  object TimerStatusBar: TTimer
+    Interval = 2000
+    OnTimer = TimerStatusBarTimer
+    Left = 616
+    Top = 48
   end
 end
