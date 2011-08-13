@@ -7,7 +7,11 @@ uses
   AccesoDatosBD in 'AccesoDatosBD.pas' {DM_AccesoDatosBD: TDataModule},
   ClienteObservador in 'ClienteObservador.pas',
   Secuencia in 'Secuencia.pas',
-  Consigna in 'Consigna.pas';
+  Consigna in 'Consigna.pas',
+  Dispositivo in 'Dispositivo.pas',
+  Sensor in 'Sensor.pas',
+  Actuador in 'Actuador.pas',
+  Log in 'Log.pas';
 
 {$R *.res}
 
