@@ -28,5 +28,9 @@
     <Transaction>2011/08/08 21:39:07.385.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.dfm=</Transaction>
     <Transaction>2011/08/08 21:43:12.539.pas,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.pas=</Transaction>
     <Transaction>2011/08/08 21:43:12.539.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\AccesoDatosObservador.dfm=</Transaction>
+    <Transaction>2011/08/11 11:22:08.712.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Dispositivo.pas</Transaction>
+    <Transaction>2011/08/11 11:40:28.039.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Sensor.pas</Transaction>
+    <Transaction>2011/08/11 11:49:03.628.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Actuador.pas</Transaction>
+    <Transaction>2011/08/11 12:10:59.944.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Log.pas</Transaction>
   </Transactions>
 </BorlandProject>
