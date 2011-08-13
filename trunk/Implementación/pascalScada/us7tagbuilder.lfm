@@ -1,0 +1,567 @@
+object frmS7TagBuilder: TfrmS7TagBuilder
+  Left = 285
+  Height = 441
+  Top = 113
+  Width = 756
+  BorderStyle = bsDialog
+  Caption = 'Siemens S7 Tag builder..'
+  ClientHeight = 441
+  ClientWidth = 756
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '0.9.28.2'
+  object Panel2: TPanel
+    Left = 0
+    Height = 404
+    Top = 0
+    Width = 756
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 404
+    ClientWidth = 756
+    TabOrder = 1
+    object PageControl1: TPageControl
+      Left = 0
+      Height = 404
+      Top = 0
+      Width = 756
+      ActivePage = TabSheet1
+      Align = alClient
+      TabIndex = 0
+      TabOrder = 0
+      OnChanging = PageControl1Changing
+      object TabSheet1: TTabSheet
+        Caption = 'Area e Tipo'
+        ClientHeight = 378
+        ClientWidth = 748
+        OnShow = TabSheet1Show
+        object MemoryArea: TRadioGroup
+          Left = 0
+          Height = 144
+          Top = 57
+          Width = 748
+          Align = alTop
+          AutoFill = True
+          Caption = 'Qual é a área de memória que deseja endereçar'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 2
+          ClientHeight = 126
+          ClientWidth = 744
+          Columns = 2
+          ItemIndex = 0
+          Items.Strings = (
+            'Digital Inputs, S7 200/300/400/1200'
+            'Digital Outputs, S7 200/300/400/1200'
+            'Flags, M''s, S7 200/300/400/1200'
+            'DB''s, S7 300/400/1200'
+            'Counter, S7 300/400/1200'
+            'Timer, S7 300/400/1200'
+            'Special Memory, SM, S7-200'
+            'Analog Input, S7-200'
+            'Analog output, S7-200'
+            'Counter, S7-200'
+            'Timer, S7-200                                   '
+            'Analog Input (PIW), S7-300/400/1200'
+            'VB, VW, VD, S7-200'
+          )
+          OnClick = MemoryAreaClick
+          TabOrder = 1
+        end
+        object Panel3: TPanel
+          Left = 0
+          Height = 6
+          Top = 201
+          Width = 748
+          Align = alTop
+          BevelOuter = bvNone
+          TabOrder = 2
+        end
+        object Panel4: TPanel
+          Left = 0
+          Height = 57
+          Top = 0
+          Width = 748
+          Align = alTop
+          BevelOuter = bvNone
+          ClientHeight = 57
+          ClientWidth = 748
+          TabOrder = 0
+          object PLCAddress: TGroupBox
+            Left = 0
+            Height = 53
+            Top = 0
+            Width = 748
+            Align = alTop
+            Caption = 'PLC Address'
+            ClientHeight = 35
+            ClientWidth = 744
+            TabOrder = 0
+            object Label1: TLabel
+              Left = 8
+              Height = 22
+              Top = 6
+              Width = 53
+              AutoSize = False
+              Caption = 'PLCStation'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object Label2: TLabel
+              Left = 176
+              Height = 22
+              Top = 6
+              Width = 45
+              AutoSize = False
+              Caption = 'PLCStlot'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object Label3: TLabel
+              Left = 333
+              Height = 22
+              Top = 6
+              Width = 49
+              AutoSize = False
+              Caption = 'PLCRack'
+              Layout = tlCenter
+              ParentColor = False
+            end
+            object PLCStation: TSpinEdit
+              Left = 65
+              Height = 21
+              Top = 6
+              Width = 73
+              MaxValue = 255
+              TabOrder = 0
+              Value = 2
+            end
+            object PLCSlot: TSpinEdit
+              Left = 225
+              Height = 21
+              Top = 6
+              Width = 73
+              MaxValue = 255
+              TabOrder = 1
+            end
+            object PLCRack: TSpinEdit
+              Left = 385
+              Height = 21
+              Top = 6
+              Width = 73
+              MaxValue = 255
+              TabOrder = 2
+            end
+          end
+        end
+        object grptagtype: TGroupBox
+          Left = 0
+          Height = 171
+          Top = 207
+          Width = 748
+          Align = alClient
+          Caption = 'Qual o tipo do tag que deseja usar para endereçar a(s) memoria(s) selecionada(s)'
+          ClientHeight = 153
+          ClientWidth = 744
+          TabOrder = 3
+          object lblBlockType: TLabel
+            Left = 56
+            Height = 21
+            Top = 56
+            Width = 66
+            AutoSize = False
+            Caption = 'Tipo de dado:'
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object lblBlockScan: TLabel
+            Left = 365
+            Height = 21
+            Top = 56
+            Width = 66
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Scan (ms):'
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object lblStructScan: TLabel
+            Left = 30
+            Height = 21
+            Top = 124
+            Width = 66
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Scan (ms):'
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object optplctagnumber: TRadioButton
+            Left = 16
+            Height = 17
+            Top = 8
+            Width = 177
+            Caption = 'PLCTagNumber (tags separados)'
+            OnClick = optplcblockClick
+            TabOrder = 0
+            TabStop = False
+          end
+          object optplcblock: TRadioButton
+            Left = 16
+            Height = 17
+            Top = 32
+            Width = 262
+            Caption = 'PLCBlock (tag agrupados do mesmo tipo de dados)'
+            Checked = True
+            OnClick = optplcblockClick
+            State = cbChecked
+            TabOrder = 1
+          end
+          object optplcStruct: TRadioButton
+            Left = 16
+            Height = 17
+            Top = 104
+            Width = 289
+            Caption = 'PLCStruck (tags agrupados de diferentes tipos de dados)'
+            OnClick = optplcblockClick
+            TabOrder = 3
+            TabStop = False
+          end
+          object BlockType: TComboBox
+            Left = 128
+            Height = 21
+            Top = 56
+            Width = 225
+            ItemHeight = 13
+            ItemIndex = 0
+            Items.Strings = (
+              'pttDefault,  Protocol defined word size'
+              'pttShortInt, Integer, 8 bits, signaled'
+              'pttByte,      Integer, 8 bits, unsignaled'
+              'pttSmallInt, Integer, 16 bits, signaled'
+              'pttWord,     Integer, 16 bits, unsignaled'
+              'pttInteger,   Integer, 32 bits, signaled'
+              'pttDWord,   Integer, 32 bits, unsignaled'
+              'pttFloat       32 bits real'
+            )
+            OnChange = BlockTypeChange
+            Style = csDropDownList
+            TabOrder = 2
+            Text = 'pttDefault,  Protocol defined word size'
+          end
+          object BlockScan: TSpinEdit
+            Left = 432
+            Height = 21
+            Top = 56
+            Width = 81
+            MaxValue = 2147483647
+            MinValue = 1
+            TabOrder = 4
+            Value = 1000
+          end
+          object BlockSwapBytes: TCheckBox
+            Left = 128
+            Height = 17
+            Top = 82
+            Width = 75
+            Caption = 'Swap bytes'
+            Checked = True
+            State = cbChecked
+            TabOrder = 5
+          end
+          object BlockSwapWords: TCheckBox
+            Left = 232
+            Height = 17
+            Top = 82
+            Width = 78
+            Caption = 'Swap words'
+            Checked = True
+            State = cbChecked
+            TabOrder = 6
+          end
+          object StructScan: TSpinEdit
+            Left = 97
+            Height = 21
+            Top = 124
+            Width = 81
+            MaxValue = 2147483647
+            MinValue = 1
+            TabOrder = 7
+            Value = 1000
+          end
+        end
+      end
+      object TabSheet4: TTabSheet
+        Caption = 'Declaração dos itens'
+        ClientHeight = 378
+        ClientWidth = 748
+        ImageIndex = 3
+        OnShow = TabSheet4Show
+        object Panel5: TPanel
+          Left = 0
+          Height = 71
+          Top = 0
+          Width = 748
+          Align = alTop
+          BevelOuter = bvNone
+          ClientHeight = 71
+          ClientWidth = 748
+          TabOrder = 0
+          object lblNumItems: TLabel
+            Left = 24
+            Height = 22
+            Top = 2
+            Width = 167
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Número de estruturas a criar'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            Layout = tlCenter
+            ParentColor = False
+            ParentFont = False
+          end
+          object lblStartAddress: TLabel
+            Left = -1
+            Height = 22
+            Top = 26
+            Width = 191
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Endereço inicial do primeiro item'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            Layout = tlCenter
+            ParentColor = False
+            ParentFont = False
+          end
+          object lblDBNumber: TLabel
+            Left = 271
+            Height = 22
+            Top = 26
+            Width = 102
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Número do DB'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            Layout = tlCenter
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label28: TLabel
+            Left = 3
+            Height = 13
+            Top = 56
+            Width = 152
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Item Name'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label29: TLabel
+            Left = 155
+            Height = 13
+            Top = 56
+            Width = 78
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Item Type'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label30: TLabel
+            Left = 239
+            Height = 13
+            Top = 56
+            Width = 54
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Scan'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label31: TLabel
+            Left = 298
+            Height = 13
+            Top = 56
+            Width = 101
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'SWAP'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Label32: TLabel
+            Left = 397
+            Height = 13
+            Top = 56
+            Width = 45
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'SKIP'
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object lblBlockName: TLabel
+            Left = 275
+            Height = 22
+            Top = 2
+            Width = 97
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Nome do bloco'
+            Color = clBtnFace
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            Layout = tlCenter
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+          end
+          object spinNumItens: TSpinEdit
+            Left = 192
+            Height = 21
+            Top = 2
+            Width = 73
+            MaxValue = 100000000
+            MinValue = 1
+            OnChange = spinStartAddressChange
+            TabOrder = 0
+            Value = 1
+          end
+          object spinStartAddress: TSpinEdit
+            Left = 192
+            Height = 21
+            Top = 26
+            Width = 73
+            MaxValue = 100000000
+            OnChange = spinStartAddressChange
+            TabOrder = 1
+          end
+          object spinDBNumber: TSpinEdit
+            Left = 375
+            Height = 21
+            Top = 26
+            Width = 101
+            MaxValue = 100000000
+            MinValue = 1
+            TabOrder = 3
+            Value = 1
+          end
+          object Button1: TButton
+            Left = 656
+            Height = 49
+            Top = 8
+            Width = 88
+            Caption = '&Add structitem'
+            OnClick = Button1Click
+            TabOrder = 4
+          end
+          object BlockName: TEdit
+            Left = 375
+            Height = 21
+            Top = 2
+            Width = 274
+            TabOrder = 2
+            Text = 'BlockName'
+          end
+        end
+        object ScrollBox1: TScrollBox
+          Left = 0
+          Height = 307
+          Top = 71
+          Width = 748
+          Align = alClient
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 37
+    Top = 404
+    Width = 756
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 37
+    ClientWidth = 756
+    TabOrder = 0
+    object btnCancel: TButton
+      Left = 416
+      Height = 25
+      Top = 8
+      Width = 75
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object btnBack: TButton
+      Left = 496
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'Back'
+      OnClick = btnBackClick
+      TabOrder = 1
+    end
+    object btnNext: TButton
+      Left = 576
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'Next'
+      OnClick = btnNextClick
+      TabOrder = 2
+    end
+    object btnFinish: TButton
+      Left = 656
+      Height = 25
+      Top = 8
+      Width = 75
+      Caption = 'Finish'
+      Default = True
+      ModalResult = 1
+      TabOrder = 3
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 5
+    OnTimer = Timer1Timer
+    left = 496
+    top = 48
+  end
+end

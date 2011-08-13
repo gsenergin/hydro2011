@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="3">
+    <PathDelim Value="\"/>
+    <Name Value="pascalscada"/>
+    <CompilerOptions>
+      <Version Value="10"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <SyntaxMode Value="Delphi"/>
+          <CStyleOperator Value="False"/>
+          <StaticKeyword Value="True"/>
+          <UseAnsiStrings Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
+      <CodeGeneration>
+        <SmartLinkUnit Value="True"/>
+        <Optimizations>
+          <VariablesInRegisters Value="True"/>
+          <UncertainOptimizations Value="True"/>
+        </Optimizations>
+      </CodeGeneration>
+      <Linking>
+        <Debugging>
+          <GenerateDebugInfo Value="True"/>
+        </Debugging>
+      </Linking>
+      <Other>
+        <WriteFPCLogo Value="False"/>
+        <CompilerMessages>
+          <IgnoredMessages idx5024="True" idx5057="True"/>
+          <UseMsgFile Value="True"/>
+        </CompilerMessages>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Version Minor="7" Release="1"/>
+    <Files Count="71">
+      <Item1>
+        <Filename Value="commport.pas"/>
+        <UnitName Value="CommPort"/>
+      </Item1>
+      <Item2>
+        <Filename Value="commtypes.pas"/>
+        <UnitName Value="commtypes"/>
+      </Item2>
+      <Item3>
+        <Filename Value="crc16utils.pas"/>
+        <UnitName Value="crc16utils"/>
+      </Item3>
+      <Item4>
+        <Filename Value="crossevent.pas"/>
+        <UnitName Value="CrossEvent"/>
+      </Item4>
+      <Item5>
+        <Filename Value="crosskeyevents.pas"/>
+        <UnitName Value="crosskeyevents"/>
+      </Item5>
+      <Item6>
+        <Filename Value="hmianimation.pas"/>
+        <UnitName Value="HMIAnimation"/>
+      </Item6>
+      <Item7>
+        <Filename Value="hmibutton.pas"/>
+        <UnitName Value="HMIButton"/>
+      </Item7>
+      <Item8>
+        <Filename Value="hmicheckbox.pas"/>
+        <UnitName Value="HMICheckBox"/>
+      </Item8>
+      <Item9>
+        <Filename Value="hmicontroldislocatoranimation.pas"/>
+        <UnitName Value="HMIControlDislocatorAnimation"/>
+      </Item9>
+      <Item10>
+        <Filename Value="hmiedit.pas"/>
+        <UnitName Value="HMIEdit"/>
+      </Item10>
+      <Item11>
+        <Filename Value="hmilabel.pas"/>
+        <UnitName Value="HMILabel"/>
+      </Item11>
+      <Item12>
+        <Filename Value="hmiprogressbar.pas"/>
+        <UnitName Value="HMIProgressBar"/>
+      </Item12>
+      <Item13>
+        <Filename Value="hmipropeditor.pas"/>
+        <UnitName Value="hmipropeditor"/>
+      </Item13>
+      <Item14>
+        <Filename Value="hmiradiobutton.pas"/>
+        <UnitName Value="HMIRadioButton"/>
+      </Item14>
+      <Item15>
+        <Filename Value="hmiradiogroup.pas"/>
+        <UnitName Value="HMIRadioGroup"/>
+      </Item15>
+      <Item16>
+        <Filename Value="hmiscrollbar.pas"/>
+        <UnitName Value="HMIScrollBar"/>
+      </Item16>
+      <Item17>
+        <Filename Value="hmitext.pas"/>
+        <UnitName Value="HMIText"/>
+      </Item17>
+      <Item18>
+        <Filename Value="hmitrackbar.pas"/>
+        <UnitName Value="HMITrackBar"/>
+      </Item18>
+      <Item19>
+        <Filename Value="hmitypes.pas"/>
+        <UnitName Value="HMITypes"/>
+      </Item19>
+      <Item20>
+        <Filename Value="hmiupdown.pas"/>
+        <UnitName Value="HMIUpDown"/>
+      </Item20>
+      <Item21>
+        <Filename Value="hmizones.pas"/>
+        <UnitName Value="HMIZones"/>
+      </Item21>
+      <Item22>
+        <Filename Value="hsstrings.pas"/>
+        <UnitName Value="hsstrings"/>
+      </Item22>
+      <Item23>
+        <Filename Value="hsutils.pas"/>
+        <UnitName Value="hsutils"/>
+      </Item23>
+      <Item24>
+        <Filename Value="iboxdriver.pas"/>
+        <UnitName Value="IBoxDriver"/>
+      </Item24>
+      <Item25>
+        <Filename Value="isotcpdriver.pas"/>
+        <UnitName Value="ISOTCPDriver"/>
+      </Item25>
+      <Item26>
+        <Filename Value="lazlclversion.pas"/>
+        <UnitName Value="lazlclversion"/>
+      </Item26>
+      <Item27>
+        <Filename Value="linearscaleprocessor.pas"/>
+        <UnitName Value="LinearScaleProcessor"/>
+      </Item27>
+      <Item28>
+        <Filename Value="messagespool.pas"/>
+        <UnitName Value="MessageSpool"/>
+      </Item28>
+      <Item29>
+        <Filename Value="modbusdriver.pas"/>
+        <UnitName Value="ModBusDriver"/>
+      </Item29>
+      <Item30>
+        <Filename Value="modbusserial.pas"/>
+        <UnitName Value="ModBusSerial"/>
+      </Item30>
+      <Item31>
+        <Filename Value="modbustcp.pas"/>
+        <UnitName Value="ModBusTCP"/>
+      </Item31>
+      <Item32>
+        <Filename Value="plcblock.pas"/>
+        <UnitName Value="PLCBlock"/>
+      </Item32>
+      <Item33>
+        <Filename Value="plcblockelement.pas"/>
+        <UnitName Value="PLCBlockElement"/>
+      </Item33>
+      <Item34>
+        <Filename Value="plcmemorymanager.pas"/>
+        <UnitName Value="PLCMemoryManager"/>
+      </Item34>
+      <Item35>
+        <Filename Value="plcnumber.pas"/>
+        <UnitName Value="PLCNumber"/>
+      </Item35>
+      <Item36>
+        <Filename Value="plcstring.pas"/>
+        <UnitName Value="PLCString"/>
+      </Item36>
+      <Item37>
+        <Filename Value="plcstruct.pas"/>
+        <UnitName Value="PLCStruct"/>
+      </Item37>
+      <Item38>
+        <Filename Value="plcstructelement.pas"/>
+        <UnitName Value="PLCStructElement"/>
+      </Item38>
+      <Item39>
+        <Filename Value="plctag.pas"/>
+        <UnitName Value="PLCTag"/>
+      </Item39>
+      <Item40>
+        <Filename Value="plctagnumber.pas"/>
+        <UnitName Value="PLCTagNumber"/>
+      </Item40>
+      <Item41>
+        <Filename Value="protocoldriver.pas"/>
+        <UnitName Value="ProtocolDriver"/>
+      </Item41>
+      <Item42>
+        <Filename Value="protocoltypes.pas"/>
+        <UnitName Value="ProtocolTypes"/>
+      </Item42>
+      <Item43>
+        <Filename Value="protscan.pas"/>
+        <UnitName Value="protscan"/>
+      </Item43>
+      <Item44>
+        <Filename Value="protscanupdate.pas"/>
+        <UnitName Value="protscanupdate"/>
+      </Item44>
+      <Item45>
+        <Filename Value="s7family.pas"/>
+        <UnitName Value="s7family"/>
+      </Item45>
+      <Item46>
+        <Filename Value="s7types.pas"/>
+        <UnitName Value="S7Types"/>
+      </Item46>
+      <Item47>
+        <Filename Value="scadapropeditor.pas"/>
+        <UnitName Value="scadapropeditor"/>
+      </Item47>
+      <Item48>
+        <Filename Value="scadareg.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="scadareg"/>
+      </Item48>
+      <Item49>
+        <Filename Value="serialport.pas"/>
+        <UnitName Value="SerialPort"/>
+      </Item49>
+      <Item50>
+        <Filename Value="tag.pas"/>
+        <UnitName Value="Tag"/>
+      </Item50>
+      <Item51>
+        <Filename Value="tagbit.pas"/>
+        <UnitName Value="TagBit"/>
+      </Item51>
+      <Item52>
+        <Filename Value="tagblock.pas"/>
+        <UnitName Value="TagBlock"/>
+      </Item52>
+      <Item53>
+        <Filename Value="tagcollection.pas"/>
+        <UnitName Value="tagcollection"/>
+      </Item53>
+      <Item54>
+        <Filename Value="tcp_udpport.pas"/>
+        <UnitName Value="tcp_udpport"/>
+      </Item54>
+      <Item55>
+        <Filename Value="ubitmapper.pas"/>
+        <UnitName Value="ubitmapper"/>
+      </Item55>
+      <Item56>
+        <Filename Value="ubitmapper.lfm"/>
+        <Type Value="LFM"/>
+      </Item56>
+      <Item57>
+        <Filename Value="uelementmapper.pas"/>
+        <UnitName Value="uelementmapper"/>
+      </Item57>
+      <Item58>
+        <Filename Value="uelementmapper.lfm"/>
+        <Type Value="LFM"/>
+      </Item58>
+      <Item59>
+        <Filename Value="umodbustagbuilder.pas"/>
+        <UnitName Value="uModbusTagBuilder"/>
+      </Item59>
+      <Item60>
+        <Filename Value="umodbustagbuilder.lfm"/>
+        <Type Value="LFM"/>
+      </Item60>
+      <Item61>
+        <Filename Value="unumerickeyboard.pas"/>
+        <UnitName Value="unumerickeyboard"/>
+      </Item61>
+      <Item62>
+        <Filename Value="unumerickeyboard.lfm"/>
+        <Type Value="LFM"/>
+      </Item62>
+      <Item63>
+        <Filename Value="us7tagbuilder.pas"/>
+        <UnitName Value="us7tagbuilder"/>
+      </Item63>
+      <Item64>
+        <Filename Value="us7tagbuilder.lfm"/>
+        <Type Value="LFM"/>
+      </Item64>
+      <Item65>
+        <Filename Value="userscale.pas"/>
+        <UnitName Value="UserScale"/>
+      </Item65>
+      <Item66>
+        <Filename Value="ustructuremapper.pas"/>
+        <UnitName Value="ustructuremapper"/>
+      </Item66>
+      <Item67>
+        <Filename Value="ustructuremapper.lfm"/>
+        <Type Value="LFM"/>
+      </Item67>
+      <Item68>
+        <Filename Value="uwesttagbuilder.pas"/>
+        <UnitName Value="uwesttagbuilder"/>
+      </Item68>
+      <Item69>
+        <Filename Value="uwesttagbuilder.lfm"/>
+        <Type Value="LFM"/>
+      </Item69>
+      <Item70>
+        <Filename Value="valueprocessor.pas"/>
+        <UnitName Value="ValueProcessor"/>
+      </Item70>
+      <Item71>
+        <Filename Value="westasciidriver.pas"/>
+        <UnitName Value="WestASCIIDriver"/>
+      </Item71>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="IDEIntf"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+        <MinVersion Major="1" Valid="True"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <CustomOptions Value="-dUseCThreads"/>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
