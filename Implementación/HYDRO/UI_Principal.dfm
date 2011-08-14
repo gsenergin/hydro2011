@@ -2133,6 +2133,10 @@ object frm_Principal: Tfrm_Principal
     object tab_Historicos: TcxTabSheet
       Caption = 'Hist'#243'ricos'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBGrid_Sensor: TDBGrid
         Left = 83
         Top = 51
@@ -2191,6 +2195,10 @@ object frm_Principal: Tfrm_Principal
     object tab_Reportes: TcxTabSheet
       Caption = 'Reportes'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
     end
     object tab_Simulacion: TcxTabSheet
       Caption = 'Simulaci'#243'n'
@@ -9796,42 +9804,42 @@ object frm_Principal: Tfrm_Principal
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 9
+        TabOrder = 6
       end
       object txt_ConfiguracionSensoresHH: TEdit
         Left = 481
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 8
+        TabOrder = 5
       end
       object txt_ConfiguracionSensoresH: TEdit
         Left = 392
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 7
+        TabOrder = 4
       end
       object txt_ConfiguracionSensoresL: TEdit
         Left = 305
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 6
+        TabOrder = 3
       end
       object txt_ConfiguracionSensoresLL: TEdit
         Left = 209
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 5
+        TabOrder = 2
       end
       object txt_ConfiguracionSensoresMin: TEdit
         Left = 121
         Top = 423
         Width = 60
         Height = 21
-        TabOrder = 4
+        TabOrder = 1
       end
     end
   end
@@ -10112,9 +10120,6 @@ object frm_Principal: Tfrm_Principal
       item
         Width = 150
       end>
-    ExplicitLeft = 560
-    ExplicitTop = 736
-    ExplicitWidth = 0
   end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11
@@ -10417,19 +10422,17 @@ object frm_Principal: Tfrm_Principal
     Top = 4
   end
   object ADOConnectionHYDRODB: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
-      'er ID=root;Data Source=HydroDB'
+      'er ID=root;Data Source=HydroDB;Mode=Read'
     ConnectionTimeout = 0
     DefaultDatabase = 'hydrodb'
     LoginPrompt = False
-    Mode = cmRead
+    Provider = 'MSDASQL.1'
     Left = 776
     Top = 4
   end
   object ADOTable_Sensor: TADOTable
-    Active = True
     Connection = ADOConnectionHYDRODB
     CursorType = ctStatic
     LockType = ltReadOnly
