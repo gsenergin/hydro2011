@@ -670,10 +670,10 @@ begin
 
    i:= incIndex(Sensores[11].index);
 
-   Xalaves:= ( RTU2_AT10007.Value * Sensores[11].max) / 100;
-   Xfrenos:= ( (100-RTU2_AT10006.Value) * Sensores[11].max) / 100;
+   Xalaves:= ( RTU2_AT10007.ValueRaw * Sensores[11].max) / 100;
+   Xfrenos:= ( (100-RTU2_AT10006.ValueRaw) * Sensores[11].max) / 100;
    //Xpresion:= Sensores[5].Valores [ Sensores[5].index ] * Sensores[5].LimiteSuperior / 100;
-   Sensores[11].valores[i]:= trunc((Xalaves-XFrenos)/2*(Sensores[5].Valores[i]/Sensores[5].LimiteSuperior));
+   Sensores[11].valores[i]:= trunc((Xalaves+XFrenos)/2*(Sensores[5].Valores[i]/Sensores[5].LimiteSuperior));
 
    (*----      ST10014 - Sensores[12] - Velocidad Giro Turbina   ----*)
    i:= incIndex(Sensores[12].index);

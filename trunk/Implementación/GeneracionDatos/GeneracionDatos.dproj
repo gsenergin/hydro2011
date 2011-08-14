@@ -1,4 +1,5 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{6969d5f5-6eac-4cce-b924-1ea820fbebaa}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -17,10 +18,10 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <Version>7.0</Version>
     <DCC_Define>DEBUG</DCC_Define>
-    <DCC_UnitSearchPath>C:\Program Files\CodeGear\RAD Studio\LibreriasExtras\pascalscada</DCC_UnitSearchPath>
-    <DCC_ResourcePath>C:\Program Files\CodeGear\RAD Studio\LibreriasExtras\pascalscada</DCC_ResourcePath>
-    <DCC_ObjPath>C:\Program Files\CodeGear\RAD Studio\LibreriasExtras\pascalscada</DCC_ObjPath>
-    <DCC_IncludePath>C:\Program Files\CodeGear\RAD Studio\LibreriasExtras\pascalscada</DCC_IncludePath>
+    <DCC_UnitSearchPath>..\pascalscada\</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\pascalscada\</DCC_ResourcePath>
+    <DCC_ObjPath>..\pascalscada\</DCC_ObjPath>
+    <DCC_IncludePath>..\pascalscada\</DCC_IncludePath>
   </PropertyGroup>
   <ProjectExtensions>
     <Borland.Personality>Delphi.Personality</Borland.Personality>

@@ -12,7 +12,9 @@ uses
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
   TeeDBCrossTab, Series, TeeProcs, Chart,
-  UI_Grafico, Mask, HMIUpDown, HMICheckBox;
+  UI_Grafico, Mask, HMIUpDown, HMICheckBox, dxSkinOffice2007Black,
+  dxSkinOffice2007Blue, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver;
 
 type
   Tfrm_Principal = class(TForm)

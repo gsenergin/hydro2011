@@ -1,0 +1,160 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{0e454465-acb4-49d6-a8f7-a62021ea41fd}</ProjectGuid>
+    <MainSource>pascalscada.dpk</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>C:\Users\Public\Documents\RAD Studio\5.0\Bpl\pascalscada.bpl</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_IOChecking>False</DCC_IOChecking>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>Package</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject xmlns=""> <Delphi.Personality>   <Parameters>
+      <Parameters Name="UseLauncher">False</Parameters>
+      <Parameters Name="LoadAllSymbols">True</Parameters>
+      <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+    </Parameters>
+    <Package_Options>
+      <Package_Options Name="PackageDescription">PascalSCADA</Package_Options>
+      <Package_Options Name="ImplicitBuild">False</Package_Options>
+      <Package_Options Name="DesigntimeOnly">False</Package_Options>
+      <Package_Options Name="RuntimeOnly">False</Package_Options>
+    </Package_Options>
+    <VersionInfo>
+      <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+      <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+      <VersionInfo Name="MajorVer">0</VersionInfo>
+      <VersionInfo Name="MinorVer">6</VersionInfo>
+      <VersionInfo Name="Release">4</VersionInfo>
+      <VersionInfo Name="Build">0</VersionInfo>
+      <VersionInfo Name="Debug">False</VersionInfo>
+      <VersionInfo Name="PreRelease">False</VersionInfo>
+      <VersionInfo Name="Special">False</VersionInfo>
+      <VersionInfo Name="Private">False</VersionInfo>
+      <VersionInfo Name="DLL">False</VersionInfo>
+      <VersionInfo Name="Locale">1046</VersionInfo>
+      <VersionInfo Name="CodePage">1252</VersionInfo>
+    </VersionInfo>
+    <VersionInfoKeys>
+      <VersionInfoKeys Name="CompanyName"></VersionInfoKeys>
+      <VersionInfoKeys Name="FileDescription"></VersionInfoKeys>
+      <VersionInfoKeys Name="FileVersion">0.6.4.0</VersionInfoKeys>
+      <VersionInfoKeys Name="InternalName"></VersionInfoKeys>
+      <VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys>
+      <VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
+      <VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys>
+      <VersionInfoKeys Name="ProductName"></VersionInfoKeys>
+      <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+      <VersionInfoKeys Name="Comments"></VersionInfoKeys>
+    </VersionInfoKeys>
+    <Source>
+      <Source Name="MainSource">pascalscada.dpk</Source>
+    </Source>
+  </Delphi.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <ItemGroup />
+  <ItemGroup>
+    <DelphiCompile Include="pascalscada.dpk">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="commport.pas" />
+    <DCCReference Include="commtypes.pas" />
+    <DCCReference Include="crc16utils.pas" />
+    <DCCReference Include="crossevent.pas" />
+    <DCCReference Include="crosskeyevents.pas" />
+    <DCCReference Include="designide.dcp" />
+    <DCCReference Include="hmianimation.pas" />
+    <DCCReference Include="HMICheckBox.pas" />
+    <DCCReference Include="hmicontroldislocatoranimation.pas" />
+    <DCCReference Include="HMIEdit.pas" />
+    <DCCReference Include="HMILabel.pas" />
+    <DCCReference Include="HMIProgressBar.pas" />
+    <DCCReference Include="hmipropeditor.pas" />
+    <DCCReference Include="HMIRadioButton.pas" />
+    <DCCReference Include="hmiradiogroup.pas" />
+    <DCCReference Include="hmiscrollbar.pas" />
+    <DCCReference Include="hmitext.pas" />
+    <DCCReference Include="HMITrackBar.pas" />
+    <DCCReference Include="HMITypes.pas" />
+    <DCCReference Include="HMIUpDown.pas" />
+    <DCCReference Include="HMIZones.pas" />
+    <DCCReference Include="hsstrings.pas" />
+    <DCCReference Include="hsutils.pas" />
+    <DCCReference Include="iboxdriver.pas" />
+    <DCCReference Include="isotcpdriver.pas" />
+    <DCCReference Include="LinearScaleProcessor.pas" />
+    <DCCReference Include="messagespool.pas" />
+    <DCCReference Include="modbusdriver.pas" />
+    <DCCReference Include="modbusserial.pas" />
+    <DCCReference Include="modbustcp.pas" />
+    <DCCReference Include="PLCBlock.pas" />
+    <DCCReference Include="PLCBlockElement.pas" />
+    <DCCReference Include="plcmemorymanager.pas" />
+    <DCCReference Include="plcnumber.pas" />
+    <DCCReference Include="PLCString.pas" />
+    <DCCReference Include="plcstruct.pas" />
+    <DCCReference Include="plcstructelement.pas" />
+    <DCCReference Include="plctag.pas" />
+    <DCCReference Include="plctagnumber.pas" />
+    <DCCReference Include="protocoldriver.pas" />
+    <DCCReference Include="ProtocolTypes.pas" />
+    <DCCReference Include="protscan.pas" />
+    <DCCReference Include="protscanupdate.pas" />
+    <DCCReference Include="rtl.dcp" />
+    <DCCReference Include="s7family.pas" />
+    <DCCReference Include="s7types.pas" />
+    <DCCReference Include="scadapropeditor.pas" />
+    <DCCReference Include="scadareg.pas" />
+    <DCCReference Include="serialport.pas" />
+    <DCCReference Include="tag.pas" />
+    <DCCReference Include="tagbit.pas" />
+    <DCCReference Include="TagBlock.pas" />
+    <DCCReference Include="tagcollection.pas" />
+    <DCCReference Include="tcp_udpport.pas" />
+    <DCCReference Include="ubitmapper.pas">
+      <Form>frmBitMapper</Form>
+    </DCCReference>
+    <DCCReference Include="uelementmapper.pas">
+      <Form>frmMapElements</Form>
+    </DCCReference>
+    <DCCReference Include="umodbustagbuilder.pas">
+      <Form>frmModbusTagBuilder</Form>
+    </DCCReference>
+    <DCCReference Include="unumerickeyboard.pas">
+      <Form>NumericKeyBoard</Form>
+    </DCCReference>
+    <DCCReference Include="us7tagbuilder.pas">
+      <Form>frmS7TagBuilder</Form>
+    </DCCReference>
+    <DCCReference Include="UserScale.pas" />
+    <DCCReference Include="ustructuremapper.pas">
+      <Form>frmStructureEditor</Form>
+    </DCCReference>
+    <DCCReference Include="uwesttagbuilder.pas">
+      <Form>WestTagBuilder</Form>
+    </DCCReference>
+    <DCCReference Include="valueprocessor.pas" />
+    <DCCReference Include="vcl.dcp" />
+    <DCCReference Include="vclactnband.dcp" />
+    <DCCReference Include="VclSmp.dcp" />
+    <DCCReference Include="vclx.dcp" />
+    <DCCReference Include="westasciidriver.pas" />
+    <DCCReference Include="xmlrtl.dcp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+</Project>
