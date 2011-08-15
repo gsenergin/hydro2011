@@ -8,7 +8,11 @@ uses
   tcp_udpport, ProtocolDriver, ModBusDriver, ModBusTCP, PLCBlock, ExtCtrls,
   HMILabel, PLCNumber, PLCBlockElement, HMIEdit, ComCtrls, HMIUpDown,
   HMIAnimation, HMICheckBox, ExtDlgs, ScktComp,
-  Consigna, ClienteObservador, Secuencia, Dialogs ;
+  GestorComandosRemotos,
+  ClienteObservador, Dialogs,
+  Log,
+  ThreadGuardarDatos ;
+  // COnsigna, Secuencia
 
 type
 
@@ -96,7 +100,6 @@ type
     chk_Log: TCheckBox;
     btn_SaveLog: TButton;
     SaveLogDialog: TSaveTextFileDialog;
-    TimerGuardaDatos: TTimer;
     log: TMemo;
     Panel_SecuenciasConsignas: TPanel;
     Label40: TLabel;
@@ -109,8 +112,6 @@ type
     Label39: TLabel;
     btn_SecuenciaEncendido: TButton;
     btn_SecuenciaApagado: TButton;
-    ServerSocket_GUIDesktop: TServerSocket;
-    Button1: TButton;
    // procedure btn_CambiarDatosConexionClick(Sender: TObject);
    // procedure Button2Click(Sender: TObject);
    // procedure Button1Click(Sender: TObject);
@@ -122,7 +123,6 @@ type
     procedure btn_DesconectarRTUClick(Sender: TObject);
     procedure btn_ConectarBDClick(Sender: TObject);
     procedure btn_DesconectarBDClick(Sender: TObject);
-    procedure TimerGuardaDatosTimer(Sender: TObject);
     procedure btn_SecuenciaEncendidoClick(Sender: TObject);
 
 
@@ -130,35 +130,20 @@ type
     procedure btn_ConsignaCaudalClick(Sender: TObject);
     procedure btn_ConsignaVoltajeClick(Sender: TObject);
     procedure btn_ConsignaManualClick(Sender: TObject);
-    procedure ServerSocket_GUIDesktopClientConnect(Sender: TObject;
-      Socket: TCustomWinSocket);
-    procedure ServerSocket_GUIDesktopClientDisconnect(Sender: TObject;
-      Socket: TCustomWinSocket);
-    procedure ServerSocket_GUIDesktopClientRead(Sender: TObject;
-      Socket: TCustomWinSocket);
-    procedure ServerSocket_GUIDesktopClientWrite(Sender: TObject;
-      Socket: TCustomWinSocket);
-    function procesarTramaTCP(codFuncion: integer; mensaje:string):boolean;
-    function getTramas(mensaje:string):TStringList;
-
-    procedure Button1Click(Sender: TObject);
-
 
   private
     { Private declarations }
     cantRegistrosEscritos: int64;
-    Observador: TClienteObservador;
-    Consigna: TConsigna;
-    Secuencia: TSecuencia;
-
   public
     { Public declarations }
-
-
   end;
 
 var
   frm_ControlAutomatico: Tfrm_ControlAutomatico;
+
+  Logger: TLog;
+
+  TTGuardarDatos: TThreadGuardarDatos;
 
 const ABIERTO=1; ENCENDIDO=1; ERROR=1;
 		CERRADO=0; APAGADO=0;   CORRECTO=0;
@@ -174,224 +159,52 @@ uses
 //////              FROM CREATE                ///////
 //////////////////////////////////////////////////////
 procedure Tfrm_ControlAutomatico.FormCreate(Sender: TObject);
-
 begin
-(*
-   En el Form Create no se puede hacer esto xq al parecer aun no se crean estos componentes
-    DM_AccesoDatosBD.ADOConnection1.Connected:= False;
+    (*
+    En el Form Create no se puede hacer esto xq al parecer aun no se crean estos componentes
 
+    DM_AccesoDatosBD.ADOConnection1.Connected:= False;
     DM_AccesoDatosRTU.TCP_UDPPort1.Active:= False;
-     DM_AccesoDatosObservador.ServerSocket1.Active:= true;
-  *)
-    TimerGuardaDatos.Enabled:= false;
+    DM_GestorComandosRemotos.ServerSocket_GUIDesktop.Active:= True;
+
+    *)
+
     cantRegistrosEscritos:=0;
 
-    // Activo la escucha de clientes
-    ServerSocket_GUIDesktop.Active:= true;
+    // Activo el logueo
+    Logger:= TLog.Create;
+    Logger.LogEnable(log);
 
+    //TimerGuardaDatos.Enabled:= false;
+    TTGuardarDatos:= TThreadGuardarDatos.Create(1000, tpHighest, false);
 
-    // Creo una consigna, deshabilitada
-    Consigna := TConsigna.Create(True);
-    Consigna.setDelay(2000);
-    Consigna.LogEnable(log);
-    Consigna.Priority:= tpHighest;
-
-
-    // Creo un observador, deshabilitado
-    Observador:= TClienteObservador.Create();
-    Observador.active:= false;
 end;
-
-
-
-
-
-////////////////////////////////////////////////////////////////
-/////          SERVER TCP SOCKET -> GUI DESKTOP             ////
-////////////////////////////////////////////////////////////////
-
-procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientConnect(
-  Sender: TObject; Socket: TCustomWinSocket);
-begin
-    // Se conecta un cliente
-    log.Lines.Add('Se conectó un cliente! -> '+Socket.RemoteAddress);
-    Observador.RemoteAdress:= Socket.RemoteAddress;
-    Observador.RemotePort:= Socket.RemotePort;
-    Observador.active:= true;
-end;
-    
-procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientDisconnect(
-  Sender: TObject; Socket: TCustomWinSocket);
-begin
-    // Se desconecta un cliente
-    log.Lines.Add('Se desconectó un cliente!'+Socket.RemoteAddress);
-    Observador.active:= false;
-end;
-
-
-
-function Tfrm_ControlAutomatico.procesarTramaTCP(codFuncion: integer; mensaje:string): boolean;
-var param, offset, valor: integer;
-begin
-
-    case codFuncion of
-      1: // 01= Consigna de Caudal
-      begin
-          try
-            param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
-            Consigna.SetConsignaCaudal(param, true);
-          except
-            result:= false;
-          end;
-      end;
-
-      2: // 02= Consigna de Voltaje
-      begin
-          try
-            param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
-            Consigna.SetConsignaVoltaje(param, true);
-          except
-            result:= false;
-          end;
-      end;
-
-      3: // 03= Consigna Manual
-      begin
-          Consigna.SetConsignaManual;
-      end;
-
-      4: // 04= Secuencia Encendido
-      begin
-          try
-            Secuencia:= TSecuencia.Create();
-            Secuencia.LogEnable(log);
-            Secuencia.Priority:= tpHighest;
-            Consigna.SetConsignaManual;
-            Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
-          except
-             result:= false;
-          end;
-      end;
-
-      5: // 05= Secuencia Apagado
-      begin
-          try
-            Secuencia:= TSecuencia.Create();
-            Secuencia.LogEnable(log);
-            Secuencia.Priority:= tpHighest;
-            Consigna.SetConsignaManual;
-            Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
-          except
-             result:= false;
-          end;
-      end;
-
-      6: // 06: Seteo de Actuador
-      // Formato: 6<ID-RTU><DirMem Ej: 40002>VALOR    -->06140001
-      begin
-          offset:= strtoint(Copy(mensaje, 4, 5))-40001;
-          valor:= strtoint(Copy(mensaje, 9, length(mensaje)-9+1));
-          log.Lines.Add(' offset= '+inttostr(offset)+' valor= '+inttostr(valor));
-          // Ojo que no verifico q se defase en funcion si es actuador gradual o binario
-          if offset>0 then
-          try
-              case mensaje[3] of
-                '1':DM_AccesoDatosRTU.PLCBlock_RTU1.ValueRaw[offset]:= valor;
-                '2':DM_AccesoDatosRTU.PLCBlock_RTU2.ValueRaw[offset]:= valor;
-                '3':DM_AccesoDatosRTU.PLCBlock_RTU3.ValueRaw[offset]:= valor;
-              end;
-          except
-              result:= false;
-          end;
-      end;
-
-    end;//CASE
-
-    result:= true;
-end;
-
-function Tfrm_ControlAutomatico.getTramas(mensaje: string): TStringList;
-var tramas: TStringList;
-    j,posI,posF: integer;
-    abierto:boolean;
-begin
-    // Divide una tramalarga en subtramas, en caso que se acumulen en el socket
-    // Ej: trama -> #05200##01##03500# --> 05200; 01; 03500
-    tramas := TStringList.Create;
-
-    abierto:=false;
-    for j:=1 to length(mensaje) do
-        if mensaje[j]='#' then
-        begin
-            abierto:= not abierto;
-            if abierto then
-            begin
-              posI:= j;
-            end else
-            begin
-              posF:= j;
-              tramas.Add( copy(mensaje,posI+1,posF-posI-1) );
-            end;
-        end;
-    result:= tramas;
-end;
-
-procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientRead(
-  Sender: TObject; Socket: TCustomWinSocket);
-var mensaje, subtrama: string;
-    codFuncion,cantidadTramas, j: integer;
-    tramas: TStringList;
-
-    posI,posF: integer;
-    abierto:boolean;
-begin
-    // Se recibe mensaje de un cliente
-    mensaje:= socket.ReceiveText;
-    log.Lines.Add('  < Recibido Mensaje de '+Socket.RemoteAddress+' -> '+mensaje);
-
-//    tramas := TStringList.Create;
-
-    tramas := getTramas(mensaje);
-
-    for j:=0 to tramas.Count-1 do
-    begin
-      subtrama:= tramas[j];
-      // Proceso los mensajes del cliente
-      procesarTramaTCP( strtoint(subtrama[1]+subtrama[2]) ,subtrama);
-    end;
-
-    tramas.Free;
-end;
-
-procedure Tfrm_ControlAutomatico.ServerSocket_GUIDesktopClientWrite(
-  Sender: TObject; Socket: TCustomWinSocket);
-begin
-    // Se envia un mensaje al cliente
-    log.Lines.Add('  > Enviando Mensaje a '+Socket.RemoteAddress+' -> ');
-end;
-
-
-
-
 
 procedure Tfrm_ControlAutomatico.btn_ConectarBDClick(Sender: TObject);
 begin
     DM_AccesoDatosBD.ADOConnection1.Connected:= true;
-
-    btn_ConectarBD.Enabled:= false;
     btn_DesconectarBD.Enabled:= true;
+    btn_ConectarBD.Enabled:= false;
+
 
     // Disparo el timer si estoy recibiendo datos de la RTU
     if DM_AccesoDatosRTU.TCP_UDPPort1.Active then
-      TimerGuardaDatos.Enabled:= true
+    begin
+        TTGuardarDatos.Start;
+//      TimerGuardaDatos.Enabled:= true
+    end
     else
-      TimerGuardaDatos.Enabled:= false;
+    begin
+      TTGuardarDatos.Stop;
+//      TimerGuardaDatos.Enabled:= false;
+    end;
 end;
 
 procedure Tfrm_ControlAutomatico.btn_DesconectarBDClick(Sender: TObject);
 begin
     DM_AccesoDatosBD.ADOConnection1.Connected:= false;
-    TimerGuardaDatos.Enabled:= false;
+    //TimerGuardaDatos.Enabled:= false;
+    TTGuardarDatos.Stop;
 
     btn_ConectarBD.Enabled:= true;
     btn_DesconectarBD.Enabled:= false;
@@ -416,7 +229,7 @@ begin
         PLCBlock_RTU1.RefreshTime:= strtoint(txt_Refresco.text);
         PLCBlock_RTU2.RefreshTime:= strtoint(txt_Refresco.text);
         PLCBlock_RTU3.RefreshTime:= strtoint(txt_Refresco.text);
-        TimerGuardaDatos.Interval:= strtoint(txt_Refresco.text);
+       // TimerGuardaDatos.Interval:= strtoint(txt_Refresco.text);
 
         if chk_Log.Checked then
           TCP_UDPPort1.LogFile:= txt_LogPath.text;
@@ -436,20 +249,29 @@ begin
 
     // Disparo el timer si la DB esta activa
     if DM_AccesoDatosBD.ADOConnection1.Connected then
-      TimerGuardaDatos.Enabled:= true
+      //TimerGuardaDatos.Enabled:= true
+      TTGuardarDatos.Start
     else
-      TimerGuardaDatos.Enabled:= false;
+      //TimerGuardaDatos.Enabled:= false;
+      TTGuardarDatos.Stop;
 
     Panel_SecuenciasConsignas.Enabled:= true;
       
 end;
 
 procedure Tfrm_ControlAutomatico.btn_ConsignaCaudalClick(Sender: TObject);
-var t:integer;
 begin
     try
-       t:= StrToInt(txtConsignaCaudal.text);
-       Consigna.SetConsignaCaudal(t,true);
+        DM_GestorComandosRemotos.procesarTramaTCP(01,'01'+txtConsignaCaudal.text);
+    except
+        exit;
+    end;
+end;
+   
+procedure Tfrm_ControlAutomatico.btn_ConsignaVoltajeClick(Sender: TObject);
+begin
+    try
+        DM_GestorComandosRemotos.procesarTramaTCP(02,'02'+txtConsignaVoltaje.text);
     except
         exit;
     end;
@@ -457,24 +279,28 @@ end;
 
 procedure Tfrm_ControlAutomatico.btn_ConsignaManualClick(Sender: TObject);
 begin
-    Consigna.SetConsignaManual;
-end;
-
-procedure Tfrm_ControlAutomatico.btn_ConsignaVoltajeClick(Sender: TObject);
-var t:integer;
-begin
     try
-       t:= StrToInt(txtConsignaVoltaje.text);
-       Consigna.SetConsignaVoltaje(t,true);
+        DM_GestorComandosRemotos.procesarTramaTCP(03,'--Consigna Manual--');
     except
         exit;
     end;
 end;
 
+procedure Tfrm_ControlAutomatico.btn_SecuenciaEncendidoClick(Sender: TObject);
+begin
+    DM_GestorComandosRemotos.procesarTramaTCP(04,'--Secuencia Encendido--');
+end;
+  
+procedure Tfrm_ControlAutomatico.btn_SecuenciaApagadoClick(Sender: TObject);
+begin
+    DM_GestorComandosRemotos.procesarTramaTCP(05,'--Secuencia Apagado--');
+end;
+
  procedure Tfrm_ControlAutomatico.btn_DesconectarRTUClick(Sender: TObject);
 begin
     // Detengo la guarda de datos en BD
-    TimerGuardaDatos.Enabled:= false;
+    //TimerGuardaDatos.Enabled:= false;
+    TTGuardarDatos.Stop;
 
     // Cierro la conexión TCP/UDP
     DM_AccesoDatosRTU.TCP_UDPPort1.Active:= false;
@@ -489,10 +315,7 @@ begin
 
     Panel_SecuenciasConsignas.Enabled:= false;
 end;
-
-
-
-
+      
 procedure Tfrm_ControlAutomatico.chk_LogClick(Sender: TObject);
 begin
     if chk_Log.Checked then
@@ -501,118 +324,6 @@ begin
       btn_SaveLog.Enabled:= false;
 end;
 
-
-
-
-procedure Tfrm_ControlAutomatico.btn_SecuenciaApagadoClick(Sender: TObject);
-begin
-    // Creo una secuencia.
-    Secuencia:= TSecuencia.Create();
-    Secuencia.LogEnable(log);
-
-    Consigna.SetConsignaManual;
-
-    Secuencia.EjecutarSecuencia(TSecuencia.APAGADO);
-   // Secuencia.Free;
-end;
-
-procedure Tfrm_ControlAutomatico.btn_SecuenciaEncendidoClick(Sender: TObject);
-begin
-    // Creo una secuencia.
-    Secuencia:= TSecuencia.Create();
-    Secuencia.LogEnable(log);
-
-    Consigna.SetConsignaManual;
-
-    Secuencia.EjecutarSecuencia(TSecuencia.ENCENDIDO);
-  //  Secuencia.Free;
-end;
-
-
-
-procedure Tfrm_ControlAutomatico.Button1Click(Sender: TObject);
-var mensaje, subtrama: string;
-    codFuncion,cantidadTramas, j: integer;
-    tramas: TStringList;
-
-    posI,posF: integer;
-    abierto:boolean;
-
-begin
-    mensaje:='#012000##03##05##01200#';
-
-    tramas := TStringList.Create;
-
-    abierto:=false;
-    for j:=1 to length(mensaje) do
-        if mensaje[j]='#' then
-        begin
-            abierto:= not abierto;
-            if abierto then
-            begin
-              posI:= j;
-            end else
-            begin
-              posF:= j;
-              tramas.Add( copy(mensaje,posI+1,posF-posI-1) );
-            end;
-        end;
-        
-    for j:=0 to tramas.Count-1 do
-    begin
-        showmessage(tramas[j]);
-    end;
-
-    tramas.Free;
-
-end;
-
-procedure Tfrm_ControlAutomatico.TimerGuardaDatosTimer(Sender: TObject);
-begin
-   // Guardo Los sensores en la tabla HistorialSensado
-   with DM_AccesoDatosRTU do
-   begin
-     // Datos de la RTU #1
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40001,1,RTU1_SCC0001.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40002,1,RTU1_SCC0002.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40005,1,RTU1_SCC0005.ValueRaw);
-    // Datos de la RTU #2
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40001,2,RTU2_ST10001.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40002,2,RTU2_ST10002.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40005,2,RTU2_ST10005.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40008,2,RTU2_ST10008.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40009,2,RTU2_ST10009.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40012,2,RTU2_ST10012.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40013,2,RTU2_ST10013.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40014,2,RTU2_ST10014.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40020,2,RTU2_ST10020.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40021,2,RTU2_ST10021.ValueRaw);
-    // Datos de la RTU #3
-      DM_AccesoDatosBD.SP_InsertarHistorialSensado(40001,3,RTU3_SSA0001.ValueRaw);
-   end;
-
-   // Guardo Los sensores en la tabla RegistroEventos
-   with DM_AccesoDatosRTU do
-   begin
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40003,1,RTU1_ACC0003.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40004,1,RTU1_ACC0004.ValueRaw);
-
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40003,2,RTU2_AT10003.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40004,2,RTU2_AT10004.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40006,2,RTU2_AT10006.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40007,2,RTU2_AT10007.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40011,2,RTU2_AT10011.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40015,2,RTU2_AT10015.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40016,2,RTU2_AT10016.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40017,2,RTU2_AT10017.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40018,2,RTU2_AT10018.ValueRaw);
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40019,2,RTU2_AT10019.ValueRaw);
-
-      DM_AccesoDatosBD.SP_InsertarRegistroEventos(40002,3,RTU3_ASA0002.ValueRaw);
-   end;
-
-
-end;
 
 procedure Tfrm_ControlAutomatico.TimerStatusBarTimer(Sender: TObject);
 begin
@@ -639,24 +350,4 @@ end;
 
 end.
 
-
-
-
-
-
-
-
-(*
-count:integer;
-begin
-count := ServerSocket1.Socket.ActiveConnections;
-ShowMessage(IntToStr(Count));
-end;
-
-and when your sending text, you have to specify which connection your sending it to
-
-begin
-ServerSocket1.Socket.Connections[0].SendText('Blabla');
-end;
-
-*)
+      

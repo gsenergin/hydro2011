@@ -32,5 +32,9 @@
     <Transaction>2011/08/11 11:40:28.039.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Sensor.pas</Transaction>
     <Transaction>2011/08/11 11:49:03.628.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Actuador.pas</Transaction>
     <Transaction>2011/08/11 12:10:59.944.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\Log.pas</Transaction>
+    <Transaction>2011/08/14 20:08:24.931.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\GestorComandosRemotos.pas</Transaction>
+    <Transaction>2011/08/14 20:08:24.931.dfm,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.dfm=D:\[Proyecto]\Implementación\ControlAutomatico\GestorComandosRemotos.dfm</Transaction>
+    <Transaction>2011/08/14 22:05:48.393.pas,D:\[Proyecto]\Implementación\ControlAutomatico\Unit2.pas=D:\[Proyecto]\Implementación\ControlAutomatico\TThreadGuardarDatos.pas</Transaction>
+    <Transaction>2011/08/14 22:06:17.012.pas,D:\[Proyecto]\Implementación\ControlAutomatico\TThreadGuardarDatos.pas=D:\[Proyecto]\Implementación\ControlAutomatico\ThreadGuardarDatos.pas</Transaction>
   </Transactions>
 </BorlandProject>

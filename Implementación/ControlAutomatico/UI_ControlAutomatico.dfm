@@ -4,7 +4,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
   BorderStyle = bsSingle
   Caption = 'Modulo de Control Autom'#225'tico'
   ClientHeight = 511
-  ClientWidth = 716
+  ClientWidth = 708
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
   object StatusBar1: TStatusBar
     Left = 0
     Top = 488
-    Width = 716
+    Width = 708
     Height = 23
     BorderWidth = 1
     Color = clGray
@@ -47,7 +47,7 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       item
         Width = 105
       end>
-    ExplicitWidth = 902
+    ExplicitWidth = 716
   end
   object PanelRTU1: TPanel
     Left = 8
@@ -1015,15 +1015,6 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
       OnClick = btn_SecuenciaApagadoClick
     end
   end
-  object Button1: TButton
-    Left = 728
-    Top = 168
-    Width = 75
-    Height = 25
-    Caption = 'Button1'
-    TabOrder = 8
-    OnClick = Button1Click
-  end
   object TimerStatusBar: TTimer
     OnTimer = TimerStatusBarTimer
     Left = 672
@@ -1034,22 +1025,5 @@ object frm_ControlAutomatico: Tfrm_ControlAutomatico
     Title = 'Log de Entrada y Salida'
     Left = 624
     Top = 156
-  end
-  object TimerGuardaDatos: TTimer
-    Enabled = False
-    OnTimer = TimerGuardaDatosTimer
-    Left = 664
-    Top = 228
-  end
-  object ServerSocket_GUIDesktop: TServerSocket
-    Active = False
-    Port = 9000
-    ServerType = stNonBlocking
-    OnClientConnect = ServerSocket_GUIDesktopClientConnect
-    OnClientDisconnect = ServerSocket_GUIDesktopClientDisconnect
-    OnClientRead = ServerSocket_GUIDesktopClientRead
-    OnClientWrite = ServerSocket_GUIDesktopClientWrite
-    Left = 672
-    Top = 64
   end
 end

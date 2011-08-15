@@ -2,58 +2,60 @@ unit Log;
 
 interface
 uses StdCtrls, // Unidad para los TMemo
-  SysUtils;
+      SysUtils;
 
-type TLog = Class(TObject)
+type TLog = Class(TObject) // SINGLETON
   private
       flog: TMemo;
-      fenableLog: boolean;
+      fenableLog: boolean;            
   public
-      constructor Create;
-      destructor Destroy; override;
 
-      function getLog(): TLog;
+      class function NewInstance: TObject; override;
+      procedure FreeInstance; override;
+      class function RefCount: Integer;
+
       procedure LogEnable(var MemoLog:Tmemo);  overload;
       procedure LogEnable();  overload;
       procedure LogDisable();
       procedure LogWrite(mensaje: string);
 End;
 
-var   Log_Singleton: TLog;
+var
+    Instance  : TLog  = nil;
+    Ref_Count : Integer     = 0;
 
 
 implementation
 
-constructor TLog.Create;
+procedure TLog.FreeInstance;
 begin
-    if Log_Singleton <> nil then
-      exit
-    else
-       Log_Singleton := Self;
+  Dec( Ref_Count );
+  if ( Ref_Count = 0 ) then
+  begin
+    Instance := nil;
+    // Destroy private variables here
+    inherited FreeInstance;
+  end;
 end;
-
-destructor TLog.Destroy;
+ 
+class function TLog.NewInstance: TObject;
 begin
-    if Log_Singleton = Self then
-        Log_Singleton := nil;
-    inherited Destroy;
+  if ( not Assigned( Instance ) ) then
+  begin
+    Instance := (inherited NewInstance) as TLog;
+    // Initialize private variables here, like this:
+    // TSingleton(Result).Variable := Value;
+    TLog(Result).fenableLog:= false;
+    
+  end;
+  Result := Instance;
+  Inc( Ref_Count );
 end;
-
-function TLog.getLog: TLog;
+ 
+class function TLog.RefCount: Integer;
 begin
-     if Log_Singleton <> nil then
-        result := Log_Singleton
-     else
-        result:= TLog.Create();
+  Result := Ref_Count;
 end;
-
-procedure FreeGlobalObjects; far;
-begin
-    if Log_Singleton <> nil then
-       Log_Singleton.Free;
-end;
-
-
 
 procedure TLog.LogDisable;
 begin
@@ -79,13 +81,6 @@ begin
       flog.lines.Add(mensaje);
 end;
 
-
-
-
-
-begin
-
-  AddExitProc(FreeGlobalObjects);
 
 end.
 
