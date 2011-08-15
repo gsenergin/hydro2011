@@ -1,9 +1,13 @@
 object DM_AccesoDatosBD: TDM_AccesoDatosBD
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 373
   Width = 681
   object StoredProc_HistorialSensado_Insertar: TADOStoredProc
-    Connection = ADOConnection1
+    ConnectionString = 
+      'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
+      'er ID=root;Data Source=HydroDB;Mode=ReadWrite;Initial Catalog=hy' +
+      'drodb'
     ProcedureName = 'HistorialSensado_Insertar'
     Parameters = <
       item
@@ -30,19 +34,11 @@ object DM_AccesoDatosBD: TDM_AccesoDatosBD
     Left = 88
     Top = 100
   end
-  object ADOConnection1: TADOConnection
+  object StoredProc_RegistroEventos_Insertar: TADOStoredProc
     ConnectionString = 
       'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
-      'er ID=root;Data Source=HydroDB'
-    ConnectionTimeout = 0
-    DefaultDatabase = 'hydrodb'
-    LoginPrompt = False
-    Provider = 'MSDASQL.1'
-    Left = 88
-    Top = 12
-  end
-  object StoredProc_RegistroEventos_Insertar: TADOStoredProc
-    Connection = ADOConnection1
+      'er ID=root;Data Source=HydroDB;Mode=ReadWrite;Initial Catalog=hy' +
+      'drodb'
     ProcedureName = 'RegistroEventos_Insertar'
     Parameters = <
       item
@@ -68,5 +64,18 @@ object DM_AccesoDatosBD: TDM_AccesoDatosBD
       end>
     Left = 248
     Top = 28
+  end
+  object ADOConnection1: TADOConnection
+    ConnectionString = 
+      'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
+      'er ID=root;Data Source=HydroDB;Mode=ReadWrite;Initial Catalog=hy' +
+      'drodb'
+    ConnectionTimeout = 0
+    DefaultDatabase = 'hydroDB'
+    LoginPrompt = False
+    Mode = cmReadWrite
+    Provider = 'MSDASQL.1'
+    Left = 80
+    Top = 33
   end
 end

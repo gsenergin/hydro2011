@@ -11,7 +11,9 @@ uses
   Dispositivo in 'Dispositivo.pas',
   Sensor in 'Sensor.pas',
   Actuador in 'Actuador.pas',
-  Log in 'Log.pas';
+  Log in 'Log.pas',
+  GestorComandosRemotos in 'GestorComandosRemotos.pas' {DM_GestorComandosRemotos: TDataModule},
+  ThreadGuardarDatos in 'ThreadGuardarDatos.pas';
 
 {$R *.res}
 
@@ -21,5 +23,6 @@ begin
   Application.CreateForm(Tfrm_ControlAutomatico, frm_ControlAutomatico);
   Application.CreateForm(TDM_AccesoDatosRTU, DM_AccesoDatosRTU);
   Application.CreateForm(TDM_AccesoDatosBD, DM_AccesoDatosBD);
+  Application.CreateForm(TDM_GestorComandosRemotos, DM_GestorComandosRemotos);
   Application.Run;
 end.
