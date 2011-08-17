@@ -13,9 +13,9 @@ type
     btn_Cancel: TButton;
     User: TEdit;
     Label2: TLabel;
-    ADOQueryUsuario: TADOQuery;
     ADOConnectionHYDROLogin: TADOConnection;
     lbltipoUsuario: TLabel;
+    ADOQueryUsuario: TADOQuery;
     procedure btn_OKClick(Sender: TObject);
     class function Execute: boolean;
     procedure FormCreate(Sender: TObject);
@@ -33,8 +33,7 @@ implementation
 {$R *.dfm}
 
 procedure TPasswordDlg.btn_OKClick(Sender: TObject);
-var frm_Principal: Tfrm_Principal;
-    tipoUsuario: integer;
+var tipoUsuario: integer;
 begin
     // VALIDAR CONTRA LA DB
     // User= ?? Password= ??

@@ -3,10 +3,12 @@ program Hydro;
 uses
   Forms,
   UI_Principal in 'UI_Principal.pas' {frm_Principal},
-  AccesoDatos in 'AccesoDatos.pas' {DM_Hydro: TDataModule},
+  AccesoDatos in 'AccesoDatos.pas' {DM_AccesoDatos: TDataModule},
   UI_Login in 'UI_Login.pas' {PasswordDlg},
   UI_Splash in 'UI_Splash.pas' {frm_splashScreen},
-  UI_Grafico in 'UI_Grafico.pas' {frm_Grafico};
+  UI_Grafico in 'UI_Grafico.pas' {frm_Grafico},
+  Mensajes in 'Mensajes.pas',
+  UI_AgregarUsuario in 'UI_AgregarUsuario.pas' {frm_ABMUsuarios};
 
 {$R *.res}
 
@@ -20,11 +22,17 @@ begin
 
   //Application.CreateForm(Tfrm_Grafico, frm_Grafico);
   //  Application.CreateForm(Tfrm_splashScreen, frm_splashScreen);
-   Application.CreateForm(Tfrm_Principal, frm_Principal);
-   Application.CreateForm(TPasswordDlg, PasswordDlg);
- // repeat
-    PasswordDlg.Showmodal;
-    modalResult:= PasswordDlg.ModalResult;
+  Application.CreateForm(TDM_AccesoDatos, DM_AccesoDatos);
+  Application.CreateForm(Tfrm_Principal, frm_Principal);
+  Application.CreateForm(TPasswordDlg, PasswordDlg);
+  Application.CreateForm(Tfrm_ABMUsuarios, frm_ABMUsuarios);
+  // repeat
+
+    Application.Run; // esta linea sacarla luego...
+    // DESCOMENTAR LAS LINEAS SIGUIENTES PARA VALIDAR USUARIOS!!!
+    (*
+      PasswordDlg.Showmodal;
+      modalResult:= PasswordDlg.ModalResult;
 
     if modalResult = 1 then  //OK
     //if TPasswordDlg.Execute then
@@ -34,7 +42,6 @@ begin
       tipoUsuarioActual:= PasswordDlg.lbltipoUsuario.Caption;
 
       PasswordDlg.free;
-
     //  Application.CreateForm(Tfrm_Principal, frm_Principal);
       frm_Principal.lblUsuario.Caption:= usuarioActual;
       frm_Principal.lblTipoUsuario.Caption:= tipoUsuarioActual;
@@ -54,5 +61,5 @@ begin
     end;
 
  // until modalResult = 2; //Cancel
-
+   *)
 end.
