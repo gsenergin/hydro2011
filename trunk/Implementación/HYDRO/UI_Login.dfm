@@ -3,8 +3,8 @@ object PasswordDlg: TPasswordDlg
   Top = 108
   BorderStyle = bsDialog
   Caption = 'HYDRO - Login'
-  ClientHeight = 136
-  ClientWidth = 232
+  ClientHeight = 134
+  ClientWidth = 231
   Color = clBtnFace
   ParentFont = True
   OldCreateOrder = True
@@ -82,12 +82,6 @@ object PasswordDlg: TPasswordDlg
     Height = 21
     TabOrder = 3
   end
-  object ADOQueryUsuario: TADOQuery
-    Connection = ADOConnectionHYDROLogin
-    Parameters = <>
-    Left = 120
-    Top = 48
-  end
   object ADOConnectionHYDROLogin: TADOConnection
     Connected = True
     ConnectionString = 
@@ -99,5 +93,11 @@ object PasswordDlg: TPasswordDlg
     Mode = cmRead
     Left = 88
     Top = 44
+  end
+  object ADOQueryUsuario: TADOQuery
+    Connection = ADOConnectionHYDROLogin
+    Parameters = <>
+    Left = 128
+    Top = 40
   end
 end

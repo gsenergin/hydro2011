@@ -12,9 +12,14 @@ uses
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
   TeeDBCrossTab, Series, TeeProcs, Chart,
-  UI_Grafico, Mask, HMIUpDown, HMICheckBox, dxSkinOffice2007Black,
+  UI_Grafico, UI_AgregarUsuario,
+
+  Mask, HMIUpDown, HMICheckBox, dxSkinOffice2007Black,
   dxSkinOffice2007Blue, dxSkinOffice2007Silver, dxSkinOffice2010Black,
-  dxSkinOffice2010Blue, dxSkinOffice2010Silver;
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver,
+  AccesoDatos, mensajes,
+
+  dblookup, cxListBox, cxMaskEdit, cxDropDownEdit;
 
 type
   Tfrm_Principal = class(TForm)
@@ -85,7 +90,6 @@ type
     cxLabel59: TcxLabel;
     cxLabel43: TcxLabel;
     cxLabel60: TcxLabel;
-    btn_ConfiguracionCambiarValores: TcxButton;
     SocketSuscripcion: TClientSocket;
     PLCBlock_RTU2: TPLCBlock;
     RTU2_ST10001: TPLCBlockElement;
@@ -140,37 +144,8 @@ type
     HMILabel25: THMILabel;
     HMILabel26: THMILabel;
     cxLabel15: TcxLabel;
-    StoredProc_HistorialSensado_Insertar: TADOStoredProc;
-    ADOConnectionHYDRODB: TADOConnection;
-    ADOTable_Sensor: TADOTable;
-    DS_Sensor: TDataSource;
     DBGrid_Sensor: TDBGrid;
     btnHistorico: TcxButton;
-    ADOQuery_Grafico: TADOQuery;
-    DataSource1: TDataSource;
-    DBGrid_Configuracion: TDBGrid;
-    cxLabel17: TcxLabel;
-    cxLabel18: TcxLabel;
-    cxLabel30: TcxLabel;
-    cxLabel31: TcxLabel;
-    cxLabel33: TcxLabel;
-    cxLabel35: TcxLabel;
-    cxLabel36: TcxLabel;
-    cxLabel38: TcxLabel;
-    DBText_SensoresMin: TDBText;
-    DBText_SensoresLL: TDBText;
-    DBText_SensoresL: TDBText;
-    DBText_SensoresH: TDBText;
-    DBText_SensoresHH: TDBText;
-    DBText_SensoresMax: TDBText;
-    ADOQuery_SensorUpdate: TADOQuery;
-    DataSource2: TDataSource;
-    txt_ConfiguracionSensoresMax: TEdit;
-    txt_ConfiguracionSensoresHH: TEdit;
-    txt_ConfiguracionSensoresH: TEdit;
-    txt_ConfiguracionSensoresL: TEdit;
-    txt_ConfiguracionSensoresLL: TEdit;
-    txt_ConfiguracionSensoresMin: TEdit;
     TimerFechaHora: TTimer;
     Panel_SecuenciasConsignas: TPanel;
     Label40: TLabel;
@@ -201,6 +176,38 @@ type
     StatusBar: TStatusBar;
     TimerStatusBar: TTimer;
     lbl_ModoConsigna: TcxLabel;
+    cxPageControl1: TcxPageControl;
+    cxTabConfiguracionAlertas: TcxTabSheet;
+    cxTabConfiguracionUsuarios: TcxTabSheet;
+    DBText_SensoresMin: TDBText;
+    DBText_SensoresLL: TDBText;
+    DBText_SensoresL: TDBText;
+    DBText_SensoresH: TDBText;
+    DBText_SensoresHH: TDBText;
+    DBText_SensoresMax: TDBText;
+    btn_ConfiguracionCambiarValores: TcxButton;
+    DBGrid_Configuracion: TDBGrid;
+    cxLabel17: TcxLabel;
+    cxLabel18: TcxLabel;
+    cxLabel30: TcxLabel;
+    cxLabel31: TcxLabel;
+    cxLabel33: TcxLabel;
+    cxLabel35: TcxLabel;
+    cxLabel36: TcxLabel;
+    cxLabel38: TcxLabel;
+    txt_ConfiguracionSensoresMax: TEdit;
+    txt_ConfiguracionSensoresHH: TEdit;
+    txt_ConfiguracionSensoresH: TEdit;
+    txt_ConfiguracionSensoresL: TEdit;
+    txt_ConfiguracionSensoresLL: TEdit;
+    txt_ConfiguracionSensoresMin: TEdit;
+    btn_ConfiguracionEliminar: TcxButton;
+    btn_ConfiguracionResetearPassword: TcxButton;
+    btn_ConfiguracionAgregarUsuario: TcxButton;
+    DBGrid_Usuarios: TDBGrid;
+    cxLabel6: TcxLabel;
+    DBLookupCombo_TipoUsuario: TDBLookupComboBox;
+    cxLabel7: TcxLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
@@ -256,6 +263,11 @@ type
     procedure CLR_RTU2_AT10003DblClick(Sender: TObject);
     procedure CLR_RTU3_ASA0002DblClick(Sender: TObject);
     procedure TimerStatusBarTimer(Sender: TObject);
+    procedure SocketSuscripcionError(Sender: TObject; Socket: TCustomWinSocket;
+      ErrorEvent: TErrorEvent; var ErrorCode: Integer);
+    procedure btn_ConfiguracionResetearPasswordClick(Sender: TObject);
+    procedure btn_ConfiguracionEliminarClick(Sender: TObject);
+    procedure btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -282,14 +294,14 @@ begin
   //ADOQuery_Grafico
   frmGrafico:= Tfrm_Grafico.Create(self);
 
-  frmGrafico.lblNomenclatura.Caption:= ADOTable_Sensor.FieldByName('nomenclatura').AsString;
-  frmGrafico.lblDescripcion.Caption:= ADOTable_Sensor.FieldByName('descripcion').AsString;
+  frmGrafico.lblNomenclatura.Caption:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('nomenclatura').AsString;
+  frmGrafico.lblDescripcion.Caption:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('descripcion').AsString;
 
 //  frmGrafico.Chart_HistoricoSensado.Visible:= false;
   frmGrafico.Chart_HistoricoSensado.Series[0].Clear;
 
-  ID:= ADOTable_Sensor.FieldByName('ID_sensor').AsString;
-  with ADOQuery_Grafico do
+  ID:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('ID_sensor').AsString;
+  with DM_AccesoDatos.ADOQuery_Grafico do
   begin
       Close;
       Parameters.ParamByName('ID').Value:= ID;
@@ -298,15 +310,15 @@ begin
       First;
   end;
   cont:= 1;
-  while not ADOQuery_Grafico.Eof do
+  while not DM_AccesoDatos.ADOQuery_Grafico.Eof do
   begin
-        valor:= ADOQuery_Grafico.FieldByName('valorSensado').AsInteger;
-        TimeStamp:=ADOQuery_Grafico.FieldByName('TimeStamp').AsString;
+        valor:= DM_AccesoDatos.ADOQuery_Grafico.FieldByName('valorSensado').AsInteger;
+        TimeStamp:=DM_AccesoDatos.ADOQuery_Grafico.FieldByName('TimeStamp').AsString;
         //showmessage(inttostr(valor));
 
         frmGrafico.Chart_HistoricoSensado.Series[0].AddXY(cont,valor,Timestamp,clBlue);
         //frmGrafico.Chart_HistoricoSensado.Series[0].Add(valor);
-        ADOQuery_Grafico.Next;
+        DM_AccesoDatos.ADOQuery_Grafico.Next;
         cont:= cont+1;
   end;
 
@@ -314,6 +326,8 @@ begin
   frmGrafico.Chart_HistoricoSensado.refresh;
   frmGrafico.Show;
 end;
+
+
 
 
 
@@ -341,9 +355,9 @@ begin
     // Si llego hasta aca, no hay errores
 
 
-    ID:= ADOTable_Sensor.FieldByName('ID_sensor').AsString;
+    ID:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('ID_sensor').AsString;
 
-    with ADOQuery_SensorUpdate do
+    with DM_AccesoDatos.ADOQuery_SensorUpdate do
     begin
       Close;
       Parameters.ParamByName('ID').Value:= ID;
@@ -356,7 +370,8 @@ begin
       Execsql;
     end;
     // Refresh
-    ADOTable_Sensor.Active:= false;ADOTable_Sensor.Active:= true;
+    DM_AccesoDatos.ADOTable_Sensor.Active:= false;
+    DM_AccesoDatos.ADOTable_Sensor.Active:= true;
     ShowMessage('Valores Actualizados con éxito');
     txt_ConfiguracionSensoresMin.text:='';
     txt_ConfiguracionSensoresLL.text:='';
@@ -367,6 +382,33 @@ begin
 end;
 
 
+
+procedure Tfrm_Principal.btn_ConfiguracionEliminarClick(Sender: TObject);
+var nombre_usuario: string;
+begin
+    try
+      nombre_usuario:= DM_AccesoDatos.ADOTable_Usuario.FieldByName('user').AsString;
+      DM_AccesoDatos.SP_Usuario_Delete(nombre_usuario);
+    except
+      msError('Error al Eliminar al usuario','HYDRO Desktop');
+      exit;
+    end;
+    msInfo('Usuario '+nombre_usuario+' eliminado exitosamente','HYDRO Desktop');
+end;
+
+procedure Tfrm_Principal.btn_ConfiguracionResetearPasswordClick(
+  Sender: TObject);
+var nombre_usuario: string;
+begin
+    try
+      nombre_usuario:= DM_AccesoDatos.ADOTable_Usuario.FieldByName('user').AsString;
+      DM_AccesoDatos.SP_Usuario_RestorePassword(nombre_usuario);
+    except
+      msError('Error al Resetear la Clave','HYDRO Desktop');
+      exit;
+    end;
+    msInfo('Clave Reseteada con éxito a -> '+nombre_usuario,'HYDRO Desktop');
+end;
 
 //////////////////////////////////////////////////////////
 ////             CONSIGNAS - SECUENCIAS              /////
@@ -427,6 +469,13 @@ begin
        SocketSuscripcion.Socket.SendText('#06'+inttostr(IDRTU)+inttostr(DirMem)+IntToStr(valor)+'#');
 end;
 
+procedure Tfrm_Principal.SocketSuscripcionError(Sender: TObject;
+  Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
+begin
+    showmessage('Error al establecer conexión con el Módulo de Control Automático');
+//    Application.Terminate;
+end;
+
 procedure Tfrm_Principal.btn_CompuertaDesvio_CLOSEClick(Sender: TObject);
 begin
     if btnHabilitados then
@@ -456,7 +505,43 @@ end;
 
 
 
+procedure Tfrm_Principal.btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
+var nombre_usuario:string;
+    IDTipoUsuario: integer;
+    frm_AgregarUsuario: Tfrm_ABMUsuarios;
+begin
+    frm_AgregarUsuario:= Tfrm_ABMUsuarios.Create(Self);
+    frm_AgregarUsuario.cmb_TipoUsuario.Clear;
+    frm_AgregarUsuario.cmb_IDTipoUsuario.Clear;
 
+    DM_AccesoDatos.ADOTable_TipoUsuario.First;
+
+    while not DM_AccesoDatos.ADOTable_TipoUsuario.Eof do
+      with DM_AccesoDatos.ADOTable_TipoUsuario do
+      begin
+
+        frm_AgregarUsuario.cmb_TipoUsuario.Properties.Items.Add(FieldByName('Descripcion').AsString);
+        frm_AgregarUsuario.cmb_IDTipoUsuario.Items.Add(FieldByName('ID_TipoUsuario').AsString);
+        Next;
+      end;
+
+    frm_AgregarUsuario.ShowModal;
+
+    if frm_AgregarUsuario.ModalResult = mrYes then
+    begin
+         nombre_usuario:= frm_AgregarUsuario.txt_NombreUsuario.Text;
+         IDTipoUsuario:= strtoint(frm_AgregarUsuario.cmb_IDTipoUsuario.Text);
+          try
+            if not DM_AccesoDatos.SF_Usuario_Existente(nombre_usuario) then
+              DM_AccesoDatos.SP_Usuario_Insert(nombre_usuario, IDTipoUsuario)
+            else
+              msinfo('Error: El nombre de usuario que ingresó ya existe','Hydro Desktop');
+          except
+            msinfo('Error al agregar el usuario','Hydro Desktop');
+          end;
+    end;
+    // CLose?
+end;
 
 
 procedure Tfrm_Principal.btn_CompuertaDesvio_OPENClick(Sender: TObject);
@@ -726,9 +811,9 @@ begin
     TCP_UDPPort1.Active:= true;
 
 
-    ADOConnectionHYDRODB.Connected:= true;
-    ADOTable_Sensor.Active:= true;
 
+    //DM_AccesoDatos.ADOConnectionHYDRODB.Connected:= true;
+    //DM_AccesoDatos.ADOTable_Sensor.Active:= true;
 
     // StringGrid Alertas
     SG_Alertas.Cells[1,0]:= 'Fecha';
@@ -768,7 +853,7 @@ end;
 procedure Tfrm_Principal.TimerStatusBarTimer(Sender: TObject);
 begin
       StatusBar.Panels[0].text:= 'C.A: Online: '+ BoolToStr(SocketSuscripcion.Active,true);
-      StatusBar.Panels[1].text:= 'BD Online: '+ BoolToStr(ADOConnectionHYDRODB.Connected,true);
+      StatusBar.Panels[1].text:= 'BD Online: '+ BoolToStr(DM_AccesoDatos.ADOConnectionHYDRODB.Connected,true);
       StatusBar.Panels[2].text:= 'RTU Online: '+ BoolToStr( TCP_UDPPort1.Active,true);
 end;
 
