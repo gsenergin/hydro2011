@@ -2,9 +2,13 @@ unit Mensajes;
 
 interface
 uses forms, windows;
+const TITULOMENSAJE='Hydro Desktop';
 
-procedure msError (mensaje, titulo : String);
-procedure msInfo (mensaje, titulo : String);
+procedure msError (mensaje, titulo : String); overload;
+procedure msError (mensaje : String); overload;
+procedure msInfo (mensaje, titulo : String);  overload;
+procedure msInfo (mensaje : String);  overload;
+
 function msSiNo (mensaje, titulo : String) : boolean;
 function msSiNon (mensaje, titulo : String) : boolean;
 function msOKCancel (mensaje, titulo : String) : boolean;
@@ -14,18 +18,33 @@ procedure msAtencion (mensaje, titulo : String);
 implementation
 
 //mensaje de error, con el botón "Aceptar"
-procedure msError (mensaje, titulo : String);
+procedure msError (mensaje, titulo : String); overload;
 begin
   application.MessageBox(pchar(mensaje),
       pchar(titulo), (MB_OK + MB_ICONSTOP));
 end;
 
+//mensaje de error, con el botón "Aceptar"
+procedure msError (mensaje : String); overload;
+begin
+  application.MessageBox(pchar(mensaje),
+      pchar(TITULOMENSAJE), (MB_OK + MB_ICONSTOP));
+end;
+
 //mensaje de información, con el botón "Aceptar"
-procedure msInfo (mensaje, titulo : String);
+procedure msInfo (mensaje, titulo : String); overload;
 begin
   application.MessageBox(pchar(mensaje),
       pchar(titulo), (MB_OK + MB_ICONINFORMATION));
 end;
+
+//mensaje de información, con el botón "Aceptar"
+procedure msInfo (mensaje : String); overload;
+begin
+  application.MessageBox(pchar(mensaje),
+      pchar(TITULOMENSAJE), (MB_OK + MB_ICONINFORMATION));
+end;
+
 
 //mensaje de confirmación, con los botones Sí/No, devuelve True si se pulsa "Sí"
 //el botón por defecto será "Sí"

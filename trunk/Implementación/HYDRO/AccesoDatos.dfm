@@ -177,6 +177,7 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end>
     Left = 496
     Top = 276
@@ -190,12 +191,14 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end
       item
         Name = 'IDTipoUsuario'
         Attributes = [paNullable]
         DataType = ftInteger
         Precision = 10
+        Value = Null
       end>
     Left = 496
     Top = 324
@@ -209,28 +212,63 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+      end
+      item
+        Name = 'nueva_clave'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
       end>
     Left = 496
     Top = 372
   end
-  object StoredFunc_Usuario_Existente: TADOStoredProc
+  object ADOQuery_UsuarioExistente: TADOQuery
     Connection = ADOConnectionHYDRODB
-    ProcedureName = 'Usuario_Existente'
+    CursorType = ctOpenForwardOnly
+    Parameters = <
+      item
+        Name = 'nombre_usuario'
+        Attributes = [paNullable]
+        DataType = ftString
+        NumericScale = 176
+        Precision = 255
+        Size = 255
+        Value = Null
+      end>
+    SQL.Strings = (
+      'SELECT COUNT(*) AS cantidad '
+      'FROM usuario'
+      'WHERE usuario.user=:nombre_usuario')
+    Left = 648
+    Top = 280
+  end
+  object ADOQuery_ExUsuarios: TADOQuery
+    Connection = ADOConnectionHYDRODB
+    CursorType = ctOpenForwardOnly
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT * FROM usuario'
+      'WHERE Baja=1')
+    Left = 800
+    Top = 272
+  end
+  object DS_ExUsuarios: TDataSource
+    DataSet = ADOQuery_ExUsuarios
+    Left = 800
+    Top = 328
+  end
+  object StoredProc_UsuarioRestaurar: TADOStoredProc
+    Connection = ADOConnectionHYDRODB
+    ProcedureName = 'Usuario_Restaurar'
     Parameters = <
       item
         Name = 'nombre_usuario'
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
-      end
-      item
-        Name = 'cantidad'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Direction = pdInputOutput
-        Precision = 10
+        Value = Null
       end>
-    Left = 656
-    Top = 276
+    Left = 496
+    Top = 420
   end
 end

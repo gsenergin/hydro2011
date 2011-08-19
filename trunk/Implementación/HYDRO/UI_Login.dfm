@@ -46,6 +46,14 @@ object PasswordDlg: TPasswordDlg
     Caption = 'lbltipoUsuario'
     Visible = False
   end
+  object lblPassword: TLabel
+    Left = 127
+    Top = 13
+    Width = 56
+    Height = 13
+    Caption = 'lblPassword'
+    Visible = False
+  end
   object Password: TEdit
     Left = 8
     Top = 76

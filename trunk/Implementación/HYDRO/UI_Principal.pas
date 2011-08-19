@@ -12,7 +12,7 @@ uses
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
   TeeDBCrossTab, Series, TeeProcs, Chart,
-  UI_Grafico, UI_AgregarUsuario,
+  UI_Grafico, UI_AgregarUsuario,GestionUsuarios,
 
   Mask, HMIUpDown, HMICheckBox, dxSkinOffice2007Black,
   dxSkinOffice2007Blue, dxSkinOffice2007Silver, dxSkinOffice2010Black,
@@ -24,10 +24,9 @@ uses
 type
   Tfrm_Principal = class(TForm)
     panel_Alertas: TPanel;
-    PageControl: TcxPageControl;
+    PageControl_MenuPrincipal: TcxPageControl;
     tab_Control: TcxTabSheet;
     tab_Historicos: TcxTabSheet;
-    tab_Reportes: TcxTabSheet;
     tab_Simulacion: TcxTabSheet;
     tab_Configuracion: TcxTabSheet;
     panel_Usuario: TPanel;
@@ -176,9 +175,9 @@ type
     StatusBar: TStatusBar;
     TimerStatusBar: TTimer;
     lbl_ModoConsigna: TcxLabel;
-    cxPageControl1: TcxPageControl;
-    cxTabConfiguracionAlertas: TcxTabSheet;
-    cxTabConfiguracionUsuarios: TcxTabSheet;
+    PageControl_Configuracion: TcxPageControl;
+    TabConfiguracion_TabAlertas: TcxTabSheet;
+    TabConfiguracion_TabUsuarios: TcxTabSheet;
     DBText_SensoresMin: TDBText;
     DBText_SensoresLL: TDBText;
     DBText_SensoresL: TDBText;
@@ -201,16 +200,32 @@ type
     txt_ConfiguracionSensoresL: TEdit;
     txt_ConfiguracionSensoresLL: TEdit;
     txt_ConfiguracionSensoresMin: TEdit;
+    PanelConfiguracionUsuariosActuales: TPanel;
     btn_ConfiguracionEliminar: TcxButton;
     btn_ConfiguracionResetearPassword: TcxButton;
-    btn_ConfiguracionAgregarUsuario: TcxButton;
     DBGrid_Usuarios: TDBGrid;
-    cxLabel6: TcxLabel;
     DBLookupCombo_TipoUsuario: TDBLookupComboBox;
     cxLabel7: TcxLabel;
+    PanelConfiguracionCambioClave: TPanel;
+    cxLabel39: TcxLabel;
+    btnCambiarPassword: TcxButton;
+    cxLabel40: TcxLabel;
+    cxLabel42: TcxLabel;
+    cxLabel47: TcxLabel;
+    txt_ConfiguracionClaveAnterior: TEdit;
+    txt_ConfiguracionClaveNueva: TEdit;
+    txt_ConfiguracionClaveNueva2: TEdit;
+    cxLabel49: TcxLabel;
+    PanelConfiguracionUsuariosNuevos: TPanel;
+    btn_ConfiguracionAgregarUsuario: TcxButton;
+    cxLabel51: TcxLabel;
+    PanelConfiguracionExUsuarios: TPanel;
+    btn_ConfiguracionRestaurarUsuario: TcxButton;
+    DBGrid_ExUsuarios: TDBGrid;
+    cxLabel63: TcxLabel;
+    lblPassword: TcxLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Button1Click(Sender: TObject);
     procedure btnHistoricoClick(Sender: TObject);
     procedure btn_ConfiguracionCambiarValoresClick(Sender: TObject);
     procedure TimerFechaHoraTimer(Sender: TObject);
@@ -220,10 +235,12 @@ type
     procedure btn_ConsignaCaudalClick(Sender: TObject);
     procedure btn_ConsignaVoltajeClick(Sender: TObject);
     procedure btn_ConsignaManualClick(Sender: TObject);
+    procedure SetValorActuador(IDRTU,DirMem,Valor:integer);
+    (*
     procedure btn_USincronismo_ONClick(Sender: TObject);
     procedure btn_USincronismo_OFFClick(Sender: TObject);
 
-    procedure SetValorActuador(IDRTU,DirMem,Valor:integer);
+
     procedure btn_Generador_ONClick(Sender: TObject);
     procedure btn_Generador_OFFClick(Sender: TObject);
     procedure btn_EquipoExcitacion_ONClick(Sender: TObject);
@@ -242,16 +259,14 @@ type
     procedure btn_Mariposa_CLOSEClick(Sender: TObject);
     procedure btn_Bypass_OPENClick(Sender: TObject);
     procedure btn_Bypass_CLOSEClick(Sender: TObject);
+    *)
     procedure btn_FrenosTurbinaClick(Sender: TObject);
     procedure btn_AperturaAlabeClick(Sender: TObject);
     procedure btn_FrenosGeneradorClick(Sender: TObject);
 
 
     procedure HabilitarBotonesActuadores(valor: boolean);
-    procedure btn_CompuertaDesvio_OPENMouseDown(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure btn_CompuertaDesvio_CLOSEMouseDown(Sender: TObject;
-      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+
     procedure CLR_RTU2_AT10011DblClick(Sender: TObject);
     procedure CLR_RTU2_AT10017DblClick(Sender: TObject);
     procedure CLR_RTU2_AT10018DblClick(Sender: TObject);
@@ -268,6 +283,8 @@ type
     procedure btn_ConfiguracionResetearPasswordClick(Sender: TObject);
     procedure btn_ConfiguracionEliminarClick(Sender: TObject);
     procedure btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
+    procedure btn_ConfiguracionRestaurarUsuarioClick(Sender: TObject);
+    procedure btnCambiarPasswordClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -382,45 +399,34 @@ begin
 end;
 
 
-
-procedure Tfrm_Principal.btn_ConfiguracionEliminarClick(Sender: TObject);
-var nombre_usuario: string;
+   
+procedure Tfrm_Principal.SocketSuscripcionError(Sender: TObject;
+  Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
 begin
-    try
-      nombre_usuario:= DM_AccesoDatos.ADOTable_Usuario.FieldByName('user').AsString;
-      DM_AccesoDatos.SP_Usuario_Delete(nombre_usuario);
-    except
-      msError('Error al Eliminar al usuario','HYDRO Desktop');
-      exit;
-    end;
-    msInfo('Usuario '+nombre_usuario+' eliminado exitosamente','HYDRO Desktop');
+    showmessage('Error al establecer conexión con el Módulo de Control Automático');
+//    Application.Terminate;
 end;
 
-procedure Tfrm_Principal.btn_ConfiguracionResetearPasswordClick(
-  Sender: TObject);
-var nombre_usuario: string;
-begin
-    try
-      nombre_usuario:= DM_AccesoDatos.ADOTable_Usuario.FieldByName('user').AsString;
-      DM_AccesoDatos.SP_Usuario_RestorePassword(nombre_usuario);
-    except
-      msError('Error al Resetear la Clave','HYDRO Desktop');
-      exit;
-    end;
-    msInfo('Clave Reseteada con éxito a -> '+nombre_usuario,'HYDRO Desktop');
-end;
+
+
+
+
+
 
 //////////////////////////////////////////////////////////
 ////             CONSIGNAS - SECUENCIAS              /////
 //////////////////////////////////////////////////////////
-
 {$REGION 'CONSIGNAS - SECUENCIAS'}
 
 procedure Tfrm_Principal.btn_ConsignaCaudalClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#01'+txtConsignaCaudal.text+'#');
     // DESHabilito botones de comando de actuadores
-//    HabilitarBotonesActuadores(false);
+    // HabilitarBotonesActuadores(false);
+    btn_FrenosGenerador.Visible:= false;
+    btn_FrenosTurbina.Visible:= false;
+    btn_AperturaAlabe.Visible:= false;
+
     modoManual:= false;
     lbl_ModoConsigna.Caption:= 'Modo Automático';
 end;
@@ -430,7 +436,11 @@ procedure Tfrm_Principal.btn_ConsignaVoltajeClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#02'+txtConsignaVoltaje.text+'#');
     // DESHabilito botones de comando de actuadores
-//    HabilitarBotonesActuadores(false);
+   //  HabilitarBotonesActuadores(false);
+    btn_FrenosGenerador.Visible:= false;
+    btn_FrenosTurbina.Visible:= false;
+    btn_AperturaAlabe.Visible:= false;
+
     modoManual:= false;
     lbl_ModoConsigna.Caption:= 'Modo Automático';
 end;
@@ -441,6 +451,10 @@ procedure Tfrm_Principal.btn_ConsignaManualClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#03#');
     // Habilito botones de comando de actuadores
+    btn_FrenosGenerador.Visible:= true;
+    btn_FrenosTurbina.Visible:= true;
+    btn_AperturaAlabe.Visible:= true;
+
   //  HabilitarBotonesActuadores(true);
     modoManual:= true;
     lbl_ModoConsigna.Caption:= 'Modo Manual';
@@ -458,195 +472,26 @@ end;
 
 {$ENDREGION}
 
-//////////////////////////////////////////////////////////
-////             SETEO DE ACTUADORES                 /////
-//////////////////////////////////////////////////////////
 
-{$REGION 'Seteo de Actuadores -> Botones ON/OFF A/C'}
+//////////////////////////////////////////////////////////
+////    CONTROL DE ACTUADORES  EN MODO MANUAL        /////
+//////////////////////////////////////////////////////////
+{$REGION 'Control de Actuadores Modo Manual'}
+
+procedure Tfrm_Principal.HabilitarBotonesActuadores(valor: boolean);
+begin
+    btn_FrenosGenerador.Enabled:= valor;
+    btn_AperturaAlabe.Enabled:= valor;
+    btn_FrenosTurbina.Enabled:= valor;
+end;
+
+
 procedure Tfrm_Principal.SetValorActuador(IDRTU, DirMem, Valor: integer);
 begin
      if modoManual then
        SocketSuscripcion.Socket.SendText('#06'+inttostr(IDRTU)+inttostr(DirMem)+IntToStr(valor)+'#');
 end;
 
-procedure Tfrm_Principal.SocketSuscripcionError(Sender: TObject;
-  Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
-begin
-    showmessage('Error al establecer conexión con el Módulo de Control Automático');
-//    Application.Terminate;
-end;
-
-procedure Tfrm_Principal.btn_CompuertaDesvio_CLOSEClick(Sender: TObject);
-begin
-    if btnHabilitados then
-      SetValorActuador(1,40003,0);
-end;
-
-//   /PRUEABAAAA
-procedure Tfrm_Principal.btn_CompuertaDesvio_CLOSEMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin       //PRUEABAAAA
-    if btnHabilitados then
-      (Sender As TcxButton).Down:= true
-    else
-      (Sender As TcxButton).Down:= false;
-end;
-
-
- //PRUEABAAAA
-procedure Tfrm_Principal.btn_CompuertaDesvio_OPENMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin     //PRUEABAAAA
-    if btnHabilitados then
-      (Sender As TcxButton).Down:= true
-    else
-      (Sender As TcxButton).Down:= false;
-end;
-
-
-
-procedure Tfrm_Principal.btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
-var nombre_usuario:string;
-    IDTipoUsuario: integer;
-    frm_AgregarUsuario: Tfrm_ABMUsuarios;
-begin
-    frm_AgregarUsuario:= Tfrm_ABMUsuarios.Create(Self);
-    frm_AgregarUsuario.cmb_TipoUsuario.Clear;
-    frm_AgregarUsuario.cmb_IDTipoUsuario.Clear;
-
-    DM_AccesoDatos.ADOTable_TipoUsuario.First;
-
-    while not DM_AccesoDatos.ADOTable_TipoUsuario.Eof do
-      with DM_AccesoDatos.ADOTable_TipoUsuario do
-      begin
-
-        frm_AgregarUsuario.cmb_TipoUsuario.Properties.Items.Add(FieldByName('Descripcion').AsString);
-        frm_AgregarUsuario.cmb_IDTipoUsuario.Items.Add(FieldByName('ID_TipoUsuario').AsString);
-        Next;
-      end;
-
-    frm_AgregarUsuario.ShowModal;
-
-    if frm_AgregarUsuario.ModalResult = mrYes then
-    begin
-         nombre_usuario:= frm_AgregarUsuario.txt_NombreUsuario.Text;
-         IDTipoUsuario:= strtoint(frm_AgregarUsuario.cmb_IDTipoUsuario.Text);
-          try
-            if not DM_AccesoDatos.SF_Usuario_Existente(nombre_usuario) then
-              DM_AccesoDatos.SP_Usuario_Insert(nombre_usuario, IDTipoUsuario)
-            else
-              msinfo('Error: El nombre de usuario que ingresó ya existe','Hydro Desktop');
-          except
-            msinfo('Error al agregar el usuario','Hydro Desktop');
-          end;
-    end;
-    // CLose?
-end;
-
-
-procedure Tfrm_Principal.btn_CompuertaDesvio_OPENClick(Sender: TObject);
-begin
-    if btnHabilitados then
-      SetValorActuador(1,40003,1);
-end;
-
-procedure Tfrm_Principal.btn_CompuertaIngreso_CLOSEClick(Sender: TObject);
-begin
-    SetValorActuador(1,40004,0);
-end;
-
-procedure Tfrm_Principal.btn_CompuertaIngreso_OPENClick(Sender: TObject);
-begin
-    SetValorActuador(1,40004,1);
-end;
-
-
-procedure Tfrm_Principal.btn_Mariposa_CLOSEClick(Sender: TObject);
-begin
-    SetValorActuador(2,40003,0);
-end;
-
-procedure Tfrm_Principal.btn_Mariposa_OPENClick(Sender: TObject);
-begin
-    SetValorActuador(2,40003,1);
-end;
-
-
-
-procedure Tfrm_Principal.btn_Bypass_CLOSEClick(Sender: TObject);
-begin
-    SetValorActuador(2,40004,0);
-end;
-
-procedure Tfrm_Principal.btn_Bypass_OPENClick(Sender: TObject);
-begin
-    SetValorActuador(2,40004,1);
-end;
-
-
-
-procedure Tfrm_Principal.btn_Refrigeracion_OFFClick(Sender: TObject);
-begin
-    SetValorActuador(2,40011,0);
-end;
-
-procedure Tfrm_Principal.btn_Refrigeracion_ONClick(Sender: TObject);
-begin
-    SetValorActuador(2,40011,1);
-end;
-
-
-procedure Tfrm_Principal.btn_Generador_OFFClick(Sender: TObject);
-begin
-    SetValorActuador(2,40016,0);
-end;
-
-procedure Tfrm_Principal.btn_Generador_ONClick(Sender: TObject);
-begin
-    SetValorActuador(2,40016,1);
-end;
-
-procedure Tfrm_Principal.btn_ReguladorVelocidad_OFFClick(Sender: TObject);
-begin
-    SetValorActuador(2,40017,0);
-end;
-
-procedure Tfrm_Principal.btn_ReguladorVelocidad_ONClick(Sender: TObject);
-begin
-    SetValorActuador(2,40017,1);
-end;
-
-procedure Tfrm_Principal.btn_EquipoExcitacion_OFFClick(Sender: TObject);
-begin
-    SetValorActuador(2,40018,0);
-end;
-
-procedure Tfrm_Principal.btn_EquipoExcitacion_ONClick(Sender: TObject);
-begin
-    SetValorActuador(2,40018,1);
-end;
-
-
-procedure Tfrm_Principal.btn_USincronismo_OFFClick(Sender: TObject);
-begin
-    SetValorActuador(2,40019,0);
-end;
-
-procedure Tfrm_Principal.btn_USincronismo_ONClick(Sender: TObject);
-begin
-    SetValorActuador(2,40019,1);
-end;
-
-procedure Tfrm_Principal.btn_CompuertasMantenimiento_CLOSEClick(
-  Sender: TObject);
-begin
-    SetValorActuador(3,40002,0);
-end;
-
-procedure Tfrm_Principal.btn_CompuertasMantenimiento_OPENClick(Sender: TObject);
-begin
-    SetValorActuador(3,40002,1);
-end;
 
 procedure Tfrm_Principal.btn_FrenosGeneradorClick(Sender: TObject);
 var valor: integer;
@@ -688,18 +533,6 @@ begin
 end;
 
 
-{$ENDREGION}
-
-     
-procedure Tfrm_Principal.Button1Click(Sender: TObject);
-begin
-// PUREBA!!
-    // Me suscribo a la distribución de información del control automatico
-    SocketSuscripcion.Active:= false;
-    SocketSuscripcion.Host:= '192.168.1.103';
-    SocketSuscripcion.Port:= 9000;
-    SocketSuscripcion.Active:= true;
-end;
 
 procedure Tfrm_Principal.CLR_RTU1_ACC0003DblClick(Sender: TObject);
 begin
@@ -739,8 +572,6 @@ begin
         SetValorActuador(2,40011,0)
     else
         SetValorActuador(2,40011,1);
-    
-
 end;
 
 procedure Tfrm_Principal.CLR_RTU2_AT10016DblClick(Sender: TObject);
@@ -783,6 +614,47 @@ begin
         SetValorActuador(3,40002,1);
 end;
 
+{$ENDREGION }
+
+            
+//////////////////////////////////////////////////////////
+////              GESTIÓN DE USUARIOS                /////
+//////////////////////////////////////////////////////////
+{$REGION 'Gestion de Usuarios'}
+
+procedure Tfrm_Principal.btnCambiarPasswordClick(Sender: TObject);
+begin
+    GestionUsuarios_CambiarClave(lblUsuario.Caption,
+                                 lblPassword.Caption,
+                                 txt_ConfiguracionClaveAnterior.text,
+                                 txt_ConfiguracionClaveNueva.text,
+                                 txt_ConfiguracionClaveNueva2.text);
+end;
+     
+procedure Tfrm_Principal.btn_ConfiguracionEliminarClick(Sender: TObject);
+begin
+    GestionUsuarios_EliminarUsuario('');
+end;
+
+procedure Tfrm_Principal.btn_ConfiguracionResetearPasswordClick(Sender: TObject);
+begin
+    GestionUsuarios_ResetearPassword('');
+end;
+
+procedure Tfrm_Principal.btn_ConfiguracionRestaurarUsuarioClick(Sender: TObject);
+begin
+    GestionUsuarios_RestaurarUsuario(DBGrid_ExUsuarios.SelectedField.AsString);
+end;
+
+procedure Tfrm_Principal.btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
+begin
+    GestionUsuarios_AgregarUsuario();
+end;
+
+{$ENDREGION}
+
+
+
 procedure Tfrm_Principal.btn_LogoutClick(Sender: TObject);
 begin
     //ADOConnectionHYDRODB.Connected:= false;
@@ -797,20 +669,19 @@ begin
 end;
 
 
-
-
-
 procedure Tfrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 //    SocketSuscripcion.Socket.SendText('BAJA');
+
+    SocketSuscripcion.Active:= false;
+    TCP_UDPPort1.Active:= false;
+    ModBusTCPDriver1.Free;
 end;
 
 procedure Tfrm_Principal.FormCreate(Sender: TObject);
 begin
     // Activo el Socket
     TCP_UDPPort1.Active:= true;
-
-
 
     //DM_AccesoDatos.ADOConnectionHYDRODB.Connected:= true;
     //DM_AccesoDatos.ADOTable_Sensor.Active:= true;
@@ -832,17 +703,11 @@ begin
    //  frm_Principal.Width:= 767;
      TimerFechaHoraTimer(self);
 
-//     HabilitarBotonesActuadores(false);
      btnHabilitados:= false;
 end;
 
 
-procedure Tfrm_Principal.HabilitarBotonesActuadores(valor: boolean);
-begin
-    btn_FrenosGenerador.Enabled:= valor;
-    btn_AperturaAlabe.Enabled:= valor;
-    btn_FrenosTurbina.Enabled:= valor;
-end;
+
 
 procedure Tfrm_Principal.TimerFechaHoraTimer(Sender: TObject);
 begin
