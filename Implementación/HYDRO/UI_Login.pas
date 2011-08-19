@@ -16,6 +16,7 @@ type
     ADOConnectionHYDROLogin: TADOConnection;
     lbltipoUsuario: TLabel;
     ADOQueryUsuario: TADOQuery;
+    lblPassword: TLabel;
     procedure btn_OKClick(Sender: TObject);
     class function Execute: boolean;
     procedure FormCreate(Sender: TObject);
@@ -55,6 +56,8 @@ begin
       Open;
       ExecSQL;
       lbltipoUsuario.Caption:= FieldByName('Descripcion').AsString;
+      lblPassword.Caption:= Password.Text;
+
     end;
     ADOConnectionHYDROLogin.Connected:= false;
 
@@ -75,7 +78,7 @@ begin
     Result := ShowModal = mrOk;
   finally
     Free;
-  end;
+  end;      
 end;
 
 procedure TPasswordDlg.FormCreate(Sender: TObject);

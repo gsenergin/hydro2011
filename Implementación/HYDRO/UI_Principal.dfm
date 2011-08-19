@@ -4,7 +4,7 @@ object frm_Principal: Tfrm_Principal
   BorderStyle = bsSingle
   Caption = 'HYDRO'
   ClientHeight = 758
-  ClientWidth = 765
+  ClientWidth = 965
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -74,12 +74,12 @@ object frm_Principal: Tfrm_Principal
       Transparent = True
     end
   end
-  object PageControl: TcxPageControl
+  object PageControl_MenuPrincipal: TcxPageControl
     Left = 0
     Top = 63
     Width = 761
     Height = 506
-    ActivePage = tab_Configuracion
+    ActivePage = tab_Control
     TabOrder = 1
     ClientRectBottom = 502
     ClientRectLeft = 4
@@ -2103,6 +2103,7 @@ object frm_Principal: Tfrm_Principal
         Height = 23
         Caption = 'Set'
         TabOrder = 28
+        Visible = False
         OnClick = btn_FrenosGeneradorClick
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
@@ -2114,6 +2115,7 @@ object frm_Principal: Tfrm_Principal
         Height = 23
         Caption = 'Set'
         TabOrder = 29
+        Visible = False
         OnClick = btn_AperturaAlabeClick
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
@@ -2125,6 +2127,7 @@ object frm_Principal: Tfrm_Principal
         Height = 23
         Caption = 'Set'
         TabOrder = 30
+        Visible = False
         OnClick = btn_FrenosTurbinaClick
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
@@ -2187,10 +2190,6 @@ object frm_Principal: Tfrm_Principal
         TabOrder = 1
         OnClick = btnHistoricoClick
       end
-    end
-    object tab_Reportes: TcxTabSheet
-      Caption = 'Reportes'
-      ImageIndex = 2
     end
     object tab_Simulacion: TcxTabSheet
       Caption = 'Simulaci'#243'n'
@@ -9551,13 +9550,12 @@ object frm_Principal: Tfrm_Principal
     object tab_Configuracion: TcxTabSheet
       Caption = 'Configuraci'#243'n'
       ImageIndex = 4
-      ExplicitLeft = 5
-      object cxPageControl1: TcxPageControl
+      object PageControl_Configuracion: TcxPageControl
         Left = 0
         Top = 16
         Width = 750
         Height = 460
-        ActivePage = cxTabConfiguracionUsuarios
+        ActivePage = TabConfiguracion_TabAlertas
         NavigatorPosition = npLeftTop
         ParentBackground = False
         Rotate = True
@@ -9567,11 +9565,9 @@ object frm_Principal: Tfrm_Principal
         ClientRectLeft = 63
         ClientRectRight = 746
         ClientRectTop = 5
-        object cxTabConfiguracionAlertas: TcxTabSheet
+        object TabConfiguracion_TabAlertas: TcxTabSheet
           Caption = 'Alertas'
           ImageIndex = 0
-          ExplicitWidth = 222
-          ExplicitHeight = 184
           object DBText_SensoresMin: TDBText
             Left = 132
             Top = 344
@@ -9855,94 +9851,265 @@ object frm_Principal: Tfrm_Principal
             TabOrder = 15
           end
         end
-        object cxTabConfiguracionUsuarios: TcxTabSheet
+        object TabConfiguracion_TabUsuarios: TcxTabSheet
           Caption = 'Usuarios'
           ImageIndex = 1
-          ExplicitLeft = 64
-          ExplicitTop = 3
-          object btn_ConfiguracionEliminar: TcxButton
-            Left = 205
-            Top = 128
-            Width = 108
-            Height = 25
-            Caption = 'Eliminar'
+          object PanelConfiguracionUsuariosActuales: TPanel
+            Left = 3
+            Top = 167
+            Width = 350
+            Height = 226
+            BevelInner = bvRaised
+            BevelOuter = bvLowered
             TabOrder = 0
-            OnClick = btn_ConfiguracionEliminarClick
+            object btn_ConfiguracionEliminar: TcxButton
+              Left = 213
+              Top = 144
+              Width = 108
+              Height = 25
+              Caption = 'Eliminar'
+              TabOrder = 0
+              OnClick = btn_ConfiguracionEliminarClick
+            end
+            object btn_ConfiguracionResetearPassword: TcxButton
+              Left = 213
+              Top = 104
+              Width = 108
+              Height = 25
+              Caption = 'Resetear Password'
+              TabOrder = 1
+              OnClick = btn_ConfiguracionResetearPasswordClick
+            end
+            object DBGrid_Usuarios: TDBGrid
+              Left = 17
+              Top = 41
+              Width = 136
+              Height = 160
+              DataSource = DM_AccesoDatos.DS_Usuario
+              Options = [dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+              TabOrder = 2
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'user'
+                  ReadOnly = True
+                  Width = 86
+                  Visible = True
+                end>
+            end
+            object DBLookupCombo_TipoUsuario: TDBLookupComboBox
+              Left = 195
+              Top = 49
+              Width = 145
+              Height = 21
+              DataField = 'FK_Usuario_TipoUsuario'
+              DataSource = DM_AccesoDatos.DS_Usuario
+              KeyField = 'ID_TipoUsuario'
+              ListField = 'Descripcion'
+              ListSource = DM_AccesoDatos.DS_TipoUsuario
+              TabOrder = 3
+            end
+            object cxLabel7: TcxLabel
+              Left = 195
+              Top = 26
+              Caption = 'Tipo de Usuario'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -11
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
+            object cxLabel49: TcxLabel
+              Left = 0
+              Top = 0
+              Caption = 'Usuarios Actuales'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
           end
-          object btn_ConfiguracionResetearPassword: TcxButton
-            Left = 205
-            Top = 88
-            Width = 108
-            Height = 25
-            Caption = 'Resetear Password'
+          object PanelConfiguracionCambioClave: TPanel
+            Left = 3
+            Top = 3
+            Width = 677
+            Height = 158
+            BevelInner = bvRaised
+            BevelOuter = bvLowered
             TabOrder = 1
-            OnClick = btn_ConfiguracionResetearPasswordClick
+            object cxLabel39: TcxLabel
+              Left = 0
+              Top = 0
+              Caption = 'Cambio de Clave'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
+            object btnCambiarPassword: TcxButton
+              Left = 364
+              Top = 80
+              Width = 108
+              Height = 25
+              Caption = 'Cambiar'
+              TabOrder = 1
+              OnClick = btnCambiarPasswordClick
+            end
+            object cxLabel40: TcxLabel
+              Left = 53
+              Top = 44
+              Caption = 'Clave Anterior'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -11
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
+            object cxLabel42: TcxLabel
+              Left = 65
+              Top = 84
+              Caption = 'Nueva Clave'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -11
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
+            object cxLabel47: TcxLabel
+              Left = 25
+              Top = 124
+              Caption = 'Repita Nueva Clave'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -11
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
+            object txt_ConfiguracionClaveAnterior: TEdit
+              Left = 151
+              Top = 40
+              Width = 120
+              Height = 21
+              PasswordChar = '*'
+              TabOrder = 5
+            end
+            object txt_ConfiguracionClaveNueva: TEdit
+              Left = 151
+              Top = 80
+              Width = 120
+              Height = 21
+              PasswordChar = '*'
+              TabOrder = 6
+            end
+            object txt_ConfiguracionClaveNueva2: TEdit
+              Left = 151
+              Top = 120
+              Width = 120
+              Height = 21
+              PasswordChar = '*'
+              TabOrder = 7
+            end
           end
-          object btn_ConfiguracionAgregarUsuario: TcxButton
-            Left = 33
-            Top = 206
-            Width = 108
-            Height = 25
-            Caption = 'Agregar Usuario'
+          object PanelConfiguracionUsuariosNuevos: TPanel
+            Left = 3
+            Top = 398
+            Width = 677
+            Height = 50
+            BevelInner = bvRaised
+            BevelOuter = bvLowered
             TabOrder = 2
-            OnClick = btn_ConfiguracionAgregarUsuarioClick
+            object btn_ConfiguracionAgregarUsuario: TcxButton
+              Left = 213
+              Top = 9
+              Width = 108
+              Height = 25
+              Caption = 'Agregar Usuario'
+              TabOrder = 0
+              OnClick = btn_ConfiguracionAgregarUsuarioClick
+            end
+            object cxLabel51: TcxLabel
+              Left = 0
+              Top = 1
+              Caption = 'Agregar Usuario'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
           end
-          object DBGrid_Usuarios: TDBGrid
-            Left = 33
-            Top = 40
-            Width = 120
-            Height = 137
-            DataSource = DM_AccesoDatos.DS_Usuario
+          object PanelConfiguracionExUsuarios: TPanel
+            Left = 359
+            Top = 167
+            Width = 321
+            Height = 226
+            BevelInner = bvRaised
+            BevelOuter = bvLowered
             TabOrder = 3
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'user'
-                ReadOnly = True
-                Width = 86
-                Visible = True
-              end>
-          end
-          object cxLabel6: TcxLabel
-            Left = 33
-            Top = 17
-            Caption = 'Usuarios Actuales'
-            ParentFont = False
-            Style.Font.Charset = DEFAULT_CHARSET
-            Style.Font.Color = clWindowText
-            Style.Font.Height = -11
-            Style.Font.Name = 'Tahoma'
-            Style.Font.Style = [fsBold]
-            Style.IsFontAssigned = True
-          end
-          object DBLookupCombo_TipoUsuario: TDBLookupComboBox
-            Left = 192
-            Top = 40
-            Width = 145
-            Height = 21
-            DataField = 'FK_Usuario_TipoUsuario'
-            DataSource = DM_AccesoDatos.DS_Usuario
-            KeyField = 'ID_TipoUsuario'
-            ListField = 'Descripcion'
-            ListSource = DM_AccesoDatos.DS_TipoUsuario
-            TabOrder = 5
-          end
-          object cxLabel7: TcxLabel
-            Left = 192
-            Top = 17
-            Caption = 'Tipo de Usuario'
-            ParentFont = False
-            Style.Font.Charset = DEFAULT_CHARSET
-            Style.Font.Color = clWindowText
-            Style.Font.Height = -11
-            Style.Font.Name = 'Tahoma'
-            Style.Font.Style = [fsBold]
-            Style.IsFontAssigned = True
+            object btn_ConfiguracionRestaurarUsuario: TcxButton
+              Left = 197
+              Top = 104
+              Width = 108
+              Height = 25
+              Caption = 'Restaurar'
+              TabOrder = 0
+              OnClick = btn_ConfiguracionRestaurarUsuarioClick
+            end
+            object DBGrid_ExUsuarios: TDBGrid
+              Left = 25
+              Top = 41
+              Width = 128
+              Height = 160
+              DataSource = DM_AccesoDatos.DS_ExUsuarios
+              Options = [dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+              TabOrder = 1
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Tahoma'
+              TitleFont.Style = []
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'user'
+                  ReadOnly = True
+                  Width = 86
+                  Visible = True
+                end>
+            end
+            object cxLabel63: TcxLabel
+              Left = 0
+              Top = 0
+              Caption = 'Ex-Usuarios'
+              ParentFont = False
+              Style.Font.Charset = DEFAULT_CHARSET
+              Style.Font.Color = clWindowText
+              Style.Font.Height = -13
+              Style.Font.Name = 'Tahoma'
+              Style.Font.Style = [fsBold]
+              Style.IsFontAssigned = True
+            end
           end
         end
       end
@@ -10087,6 +10254,22 @@ object frm_Principal: Tfrm_Principal
       Style.IsFontAssigned = True
       Transparent = True
     end
+    object lblPassword: TcxLabel
+      Left = 176
+      Top = 5
+      Caption = 'lblPassword(Hidden)'
+      ParentFont = False
+      Style.Font.Charset = DEFAULT_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -11
+      Style.Font.Name = 'Tahoma'
+      Style.Font.Style = [fsBold]
+      Style.TextColor = clHotLight
+      Style.TextStyle = [fsBold]
+      Style.IsFontAssigned = True
+      Transparent = True
+      Visible = False
+    end
   end
   object Panel_SecuenciasConsignas: TPanel
     Left = 511
@@ -10213,7 +10396,7 @@ object frm_Principal: Tfrm_Principal
   object StatusBar: TStatusBar
     Left = 0
     Top = 739
-    Width = 765
+    Width = 965
     Height = 19
     Panels = <
       item
@@ -10225,6 +10408,7 @@ object frm_Principal: Tfrm_Principal
       item
         Width = 150
       end>
+    ExplicitWidth = 765
   end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11

@@ -35,6 +35,87 @@
       
       
       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\5.0\Bpl\acnt2007.bpl">AlphaControls</Excluded_Packages>
     </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
   </ProjectExtensions>
@@ -46,6 +127,7 @@
     <DCCReference Include="AccesoDatos.pas">
       <Form>DM_AccesoDatos</Form>
     </DCCReference>
+    <DCCReference Include="GestionUsuarios.pas" />
     <DCCReference Include="Mensajes.pas" />
     <DCCReference Include="UI_AgregarUsuario.pas">
       <Form>frm_ABMUsuarios</Form>
