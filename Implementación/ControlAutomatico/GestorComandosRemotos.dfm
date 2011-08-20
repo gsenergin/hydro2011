@@ -1,8 +1,8 @@
 object DM_GestorComandosRemotos: TDM_GestorComandosRemotos
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Height = 572
-  Width = 896
+  Height = 168
+  Width = 290
   object ServerSocket_GUIDesktop: TServerSocket
     Active = False
     Port = 9000

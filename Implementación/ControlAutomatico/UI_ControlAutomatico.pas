@@ -10,13 +10,12 @@ uses
   HMIAnimation, HMICheckBox, ExtDlgs, ScktComp,
   GestorComandosRemotos,
   ClienteObservador, Dialogs,
-  Log,
-  ThreadGuardarDatos ;
-  // COnsigna, Secuencia
+  Log;
 
 type
 
   Tfrm_ControlAutomatico = class(TForm)
+  {$REGION 'BOTONES DEL FORM'}
     TimerStatusBar: TTimer;
     StatusBar1: TStatusBar;
     PanelRTU1: TPanel;
@@ -112,9 +111,8 @@ type
     Label39: TLabel;
     btn_SecuenciaEncendido: TButton;
     btn_SecuenciaApagado: TButton;
-   // procedure btn_CambiarDatosConexionClick(Sender: TObject);
-   // procedure Button2Click(Sender: TObject);
-   // procedure Button1Click(Sender: TObject);
+
+    {$ENDREGION}
     procedure FormCreate(Sender: TObject);
     procedure TimerStatusBarTimer(Sender: TObject);
     procedure btn_SaveLogClick(Sender: TObject);
@@ -133,7 +131,6 @@ type
 
   private
     { Private declarations }
-    cantRegistrosEscritos: int64;
   public
     { Public declarations }
   end;
@@ -142,8 +139,6 @@ var
   frm_ControlAutomatico: Tfrm_ControlAutomatico;
 
   Logger: TLog;
-
-  TTGuardarDatos: TThreadGuardarDatos;
 
 const ABIERTO=1; ENCENDIDO=1; ERROR=1;
 		CERRADO=0; APAGADO=0;   CORRECTO=0;
@@ -169,15 +164,9 @@ begin
 
     *)
 
-    cantRegistrosEscritos:=0;
-
     // Activo el logueo
     Logger:= TLog.Create;
     Logger.LogEnable(log);
-
-    //TimerGuardaDatos.Enabled:= false;
-    TTGuardarDatos:= TThreadGuardarDatos.Create(1000, tpHighest, false);
-
 end;
 
 procedure Tfrm_ControlAutomatico.btn_ConectarBDClick(Sender: TObject);
@@ -186,37 +175,26 @@ begin
     btn_DesconectarBD.Enabled:= true;
     btn_ConectarBD.Enabled:= false;
 
+    // Disparo el timer si estoy recibiendo datos de la RTU y la BD está conectada
+    DM_AccesoDatosBD.HabilitarGuardaEnBD();
 
-    // Disparo el timer si estoy recibiendo datos de la RTU
-    if DM_AccesoDatosRTU.TCP_UDPPort1.Active then
-    begin
-        TTGuardarDatos.Start;
-//      TimerGuardaDatos.Enabled:= true
-    end
+ (*   if DM_AccesoDatosRTU.TCP_UDPPort1.Active then
+        TTGuardarDatos.Start
     else
-    begin
-      TTGuardarDatos.Stop;
-//      TimerGuardaDatos.Enabled:= false;
-    end;
+        TTGuardarDatos.Stop;    *)
 end;
 
 procedure Tfrm_ControlAutomatico.btn_DesconectarBDClick(Sender: TObject);
 begin
+    // Deshabilito la Guarda en BD
+    DM_AccesoDatosBD.HabilitarGuardaEnBD(false);
+    // Desconecto la BD
     DM_AccesoDatosBD.ADOConnection1.Connected:= false;
-    //TimerGuardaDatos.Enabled:= false;
-    TTGuardarDatos.Stop;
-
+    // Actualizo botones en la GUI
     btn_ConectarBD.Enabled:= true;
     btn_DesconectarBD.Enabled:= false;
 end;
 
-procedure Tfrm_ControlAutomatico.btn_SaveLogClick(Sender: TObject);
-begin
- if SaveLogDialog.Execute() then
-    begin
-      txt_LogPath.Text:= SaveLogDialog.FileName;
-    end;
-end;
 
 
 procedure Tfrm_ControlAutomatico.btn_ConectarRTUClick(Sender: TObject);
@@ -247,17 +225,37 @@ begin
     btn_ConectarRTU.Enabled:= false;
     btn_DesconectarRTU.Enabled:= true;
 
-    // Disparo el timer si la DB esta activa
-    if DM_AccesoDatosBD.ADOConnection1.Connected then
-      //TimerGuardaDatos.Enabled:= true
-      TTGuardarDatos.Start
-    else
-      //TimerGuardaDatos.Enabled:= false;
-      TTGuardarDatos.Stop;
+    // Disparo el timer si estoy recibiendo datos de la RTU y la BD está conectada
+    DM_AccesoDatosBD.HabilitarGuardaEnBD();
 
     Panel_SecuenciasConsignas.Enabled:= true;
-      
 end;
+
+
+ procedure Tfrm_ControlAutomatico.btn_DesconectarRTUClick(Sender: TObject);
+begin
+    // Deshabilito la Guarda en BD
+    DM_AccesoDatosBD.HabilitarGuardaEnBD(false);
+
+    // Cierro la conexión TCP/UDP
+    DM_AccesoDatosRTU.TCP_UDPPort1.Active:= false;
+
+    // Habilito los controles para setear configuraciones
+    txt_Refresco.Enabled:= true;
+    txt_Host.Enabled:= true;
+    txt_Puerto.Enabled:= true;
+    chk_Log.Enabled:= true;
+    btn_ConectarRTU.Enabled:= true;
+    btn_DesconectarRTU.Enabled:= false;
+
+    Panel_SecuenciasConsignas.Enabled:= false;
+end;
+
+
+
+
+
+{$REGION 'Panel -Consignas-Secuencias '}
 
 procedure Tfrm_ControlAutomatico.btn_ConsignaCaudalClick(Sender: TObject);
 begin
@@ -296,26 +294,10 @@ begin
     DM_GestorComandosRemotos.procesarTramaTCP(05,'--Secuencia Apagado--');
 end;
 
- procedure Tfrm_ControlAutomatico.btn_DesconectarRTUClick(Sender: TObject);
-begin
-    // Detengo la guarda de datos en BD
-    //TimerGuardaDatos.Enabled:= false;
-    TTGuardarDatos.Stop;
 
-    // Cierro la conexión TCP/UDP
-    DM_AccesoDatosRTU.TCP_UDPPort1.Active:= false;
+{$ENDREGION }
 
-    // Habilito los controles para setear configuraciones
-    txt_Refresco.Enabled:= true;
-    txt_Host.Enabled:= true;
-    txt_Puerto.Enabled:= true;
-    chk_Log.Enabled:= true;
-    btn_ConectarRTU.Enabled:= true;
-    btn_DesconectarRTU.Enabled:= false;
 
-    Panel_SecuenciasConsignas.Enabled:= false;
-end;
-      
 procedure Tfrm_ControlAutomatico.chk_LogClick(Sender: TObject);
 begin
     if chk_Log.Checked then
@@ -324,6 +306,14 @@ begin
       btn_SaveLog.Enabled:= false;
 end;
 
+
+procedure Tfrm_ControlAutomatico.btn_SaveLogClick(Sender: TObject);
+begin
+ if SaveLogDialog.Execute() then
+    begin
+      txt_LogPath.Text:= SaveLogDialog.FileName;
+    end;
+end;
 
 procedure Tfrm_ControlAutomatico.TimerStatusBarTimer(Sender: TObject);
 begin
@@ -334,7 +324,7 @@ begin
       StatusBar1.Panels[2].Text:= 'TX: '+FormatFloat('#0.0',TCP_UDPPort1.TXBytesSecond/1024)+' KB/s';
       StatusBar1.Panels[3].Text:= 'RX: '+FormatFloat('#0.0',TCP_UDPPort1.RXBytes/1024)+' KB';
       StatusBar1.Panels[4].Text:= 'TX: '+FormatFloat('#0.0',TCP_UDPPort1.TXBytes/1024)+' KB';
-      StatusBar1.Panels[5].Text:= 'Reg: '+inttostr(cantRegistrosEscritos);
+      StatusBar1.Panels[5].Text:= 'Reg: '+inttostr(DM_AccesoDatosBD.getCantidadRegistrosEscritos());
       StatusBar1.Panels[6].text:= 'BD Online: '+ BoolToStr(DM_AccesoDatosBD.ADOConnection1.Connected,true);
       StatusBar1.Panels[7].text:= 'RTU Online: '+ BoolToStr( TCP_UDPPort1.Active,true);
    end;
