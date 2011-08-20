@@ -78,4 +78,16 @@ object DM_AccesoDatosBD: TDM_AccesoDatosBD
     Left = 80
     Top = 33
   end
+  object ADOQuery_Insertar: TADOQuery
+    Connection = ADOConnection1
+    Parameters = <>
+    Left = 328
+    Top = 161
+  end
+  object TimerGuardaDatos: TTimer
+    Enabled = False
+    OnTimer = TimerGuardaDatosTimer
+    Left = 432
+    Top = 80
+  end
 end

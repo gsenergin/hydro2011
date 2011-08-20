@@ -4,7 +4,7 @@ object frm_Principal: Tfrm_Principal
   BorderStyle = bsSingle
   Caption = 'HYDRO'
   ClientHeight = 758
-  ClientWidth = 965
+  ClientWidth = 761
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -10396,7 +10396,7 @@ object frm_Principal: Tfrm_Principal
   object StatusBar: TStatusBar
     Left = 0
     Top = 739
-    Width = 965
+    Width = 761
     Height = 19
     Panels = <
       item
@@ -10408,7 +10408,7 @@ object frm_Principal: Tfrm_Principal
       item
         Width = 150
       end>
-    ExplicitWidth = 765
+    ExplicitWidth = 965
   end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11

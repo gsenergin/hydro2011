@@ -155,7 +155,7 @@ begin
       5: // 05= Secuencia Apagado
       begin
           try
-            Consigna.SetConsignaManual;
+            Consigna.SetConsignaManual;                    
             Secuencia:= TSecuencia.Create(TSecuencia.APAGADO, tpHighest, true);
           except
              result:= false;

@@ -85,7 +85,7 @@ end;
 procedure TSecuencia.SecuenciaApagado;
 var Logger: TLog;
 begin
-     Logger:=  TLog.Create;
+     Logger:=  TLog.Create; 
     (*
     1. Cerrar Compuerta de ingreso de Agua a la Tubería
     2. Colocar álabes al 100%
