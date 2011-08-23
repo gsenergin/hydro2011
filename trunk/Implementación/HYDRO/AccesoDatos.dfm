@@ -212,12 +212,14 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end
       item
         Name = 'nueva_clave'
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end>
     Left = 496
     Top = 372
@@ -270,5 +272,28 @@ object DM_AccesoDatos: TDM_AccesoDatos
       end>
     Left = 496
     Top = 420
+  end
+  object ADOQuery_AlertasUltimaHora: TADOQuery
+    Connection = ADOConnectionHYDRODB
+    CursorType = ctOpenForwardOnly
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select Sensor.descripcion as SensorNombre, Alertas.descripcion, ' +
+        'Alertas.TimeStamp '
+      
+        'FROM ALERTAS JOIN Sensor ON Alertas.FK_Alertas_Sensor=Sensor.Id_' +
+        'Sensor '
+      
+        'Where TIMESTAMPDIFF(HOUR,alertas.TimeStamp,CURRENT_TIMESTAMP())=' +
+        '0;')
+    Left = 88
+    Top = 272
+  end
+  object DS_AlertasUltimaHora: TDataSource
+    AutoEdit = False
+    DataSet = ADOQuery_AlertasUltimaHora
+    Left = 88
+    Top = 336
   end
 end

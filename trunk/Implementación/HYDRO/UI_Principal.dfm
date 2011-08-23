@@ -23,41 +23,9 @@ object frm_Principal: Tfrm_Principal
     Height = 174
     BevelInner = bvLowered
     BevelKind = bkSoft
-    Color = clBackground
+    Color = clBlack
     ParentBackground = False
     TabOrder = 0
-    object SG_Alertas: TStringGrid
-      Left = 10
-      Top = 27
-      Width = 487
-      Height = 136
-      BevelInner = bvLowered
-      BevelKind = bkSoft
-      BorderStyle = bsNone
-      Color = 951029
-      ColCount = 7
-      DefaultColWidth = 95
-      DefaultRowHeight = 20
-      FixedColor = clGray
-      RowCount = 6
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -11
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-      Options = [goFixedVertLine, goFixedHorzLine, goHorzLine, goColSizing, goRowSelect]
-      ParentFont = False
-      ScrollBars = ssVertical
-      TabOrder = 0
-      ColWidths = (
-        45
-        80
-        57
-        116
-        44
-        79
-        46)
-    end
     object cxLabel8: TcxLabel
       Left = 202
       Top = 4
@@ -72,6 +40,62 @@ object frm_Principal: Tfrm_Principal
       Style.TextStyle = [fsBold]
       Style.IsFontAssigned = True
       Transparent = True
+    end
+    object DBGrid_Alertas: TDBGrid
+      Left = 7
+      Top = 33
+      Width = 487
+      Height = 129
+      Color = clBlack
+      DataSource = DM_AccesoDatos.DS_AlertasUltimaHora
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Color = 951029
+          Expanded = False
+          FieldName = 'descripcion'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Title.Caption = 'Descripci'#243'n'
+          Width = 132
+          Visible = True
+        end
+        item
+          Color = 951029
+          Expanded = False
+          FieldName = 'SensorNombre'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Title.Caption = 'Sensor'
+          Width = 192
+          Visible = True
+        end
+        item
+          Color = 951029
+          Expanded = False
+          FieldName = 'TimeStamp'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          Title.Caption = 'Fecha y Hora'
+          Width = 126
+          Visible = True
+        end>
     end
   end
   object PageControl_MenuPrincipal: TcxPageControl
@@ -10408,7 +10432,6 @@ object frm_Principal: Tfrm_Principal
       item
         Width = 150
       end>
-    ExplicitWidth = 965
   end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11

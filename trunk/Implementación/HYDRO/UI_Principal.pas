@@ -41,7 +41,6 @@ type
     lblTipoUsuario: TcxLabel;
     lblFecha: TcxLabel;
     lblHora: TcxLabel;
-    SG_Alertas: TStringGrid;
     cxLabel8: TcxLabel;
     cxLabel19: TcxLabel;
     cxLabel21: TcxLabel;
@@ -224,6 +223,7 @@ type
     DBGrid_ExUsuarios: TDBGrid;
     cxLabel63: TcxLabel;
     lblPassword: TcxLabel;
+    DBGrid_Alertas: TDBGrid;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnHistoricoClick(Sender: TObject);
@@ -686,14 +686,6 @@ begin
     //DM_AccesoDatos.ADOConnectionHYDRODB.Connected:= true;
     //DM_AccesoDatos.ADOTable_Sensor.Active:= true;
 
-    // StringGrid Alertas
-    SG_Alertas.Cells[1,0]:= 'Fecha';
-    SG_Alertas.Cells[2,0]:= 'Hora';
-    SG_Alertas.Cells[3,0]:= 'Evento';
-    SG_Alertas.Cells[4,0]:= 'RTU';
-    SG_Alertas.Cells[5,0]:= 'Elemento';
-    SG_Alertas.Cells[6,0]:= 'Valor';
-
     // Me suscribo a la distribución de información del control automatico
     SocketSuscripcion.Active:= false;
     SocketSuscripcion.Host:= '127.0.0.1';
@@ -717,6 +709,9 @@ end;
 
 procedure Tfrm_Principal.TimerStatusBarTimer(Sender: TObject);
 begin
+      DM_AccesoDatos.ADOQuery_AlertasUltimaHora.Close;
+      DM_AccesoDatos.ADOQuery_AlertasUltimaHora.Open;
+
       StatusBar.Panels[0].text:= 'C.A: Online: '+ BoolToStr(SocketSuscripcion.Active,true);
       StatusBar.Panels[1].text:= 'BD Online: '+ BoolToStr(DM_AccesoDatos.ADOConnectionHYDRODB.Connected,true);
       StatusBar.Panels[2].text:= 'RTU Online: '+ BoolToStr( TCP_UDPPort1.Active,true);
