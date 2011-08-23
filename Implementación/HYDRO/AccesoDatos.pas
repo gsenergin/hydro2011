@@ -26,6 +26,8 @@ type
     ADOQuery_ExUsuarios: TADOQuery;
     DS_ExUsuarios: TDataSource;
     StoredProc_UsuarioRestaurar: TADOStoredProc;
+    ADOQuery_AlertasUltimaHora: TADOQuery;
+    DS_AlertasUltimaHora: TDataSource;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure ADOQuery_ExUsuarios_REFRESH();
@@ -59,6 +61,7 @@ begin
     ADOTable_Usuario.Active:= true;
     ADOTable_TipoUsuario.Active:= true;
     ADOQuery_ExUsuarios.Open;
+    ADOQuery_AlertasUltimaHora.Open;
 
 end;
 
