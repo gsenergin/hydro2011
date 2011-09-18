@@ -2160,6 +2160,10 @@ object frm_Principal: Tfrm_Principal
     object tab_Historicos: TcxTabSheet
       Caption = 'Hist'#243'ricos'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object DBGrid_Sensor: TDBGrid
         Left = 83
         Top = 51
@@ -9574,6 +9578,10 @@ object frm_Principal: Tfrm_Principal
     object tab_Configuracion: TcxTabSheet
       Caption = 'Configuraci'#243'n'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object PageControl_Configuracion: TcxPageControl
         Left = 0
         Top = 16
@@ -9878,6 +9886,10 @@ object frm_Principal: Tfrm_Principal
         object TabConfiguracion_TabUsuarios: TcxTabSheet
           Caption = 'Usuarios'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object PanelConfiguracionUsuariosActuales: TPanel
             Left = 3
             Top = 167

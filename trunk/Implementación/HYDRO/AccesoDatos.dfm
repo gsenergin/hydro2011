@@ -144,19 +144,19 @@ object DM_AccesoDatos: TDM_AccesoDatos
     LockType = ltReadOnly
     IndexName = 'ID_TipoUsuario'
     TableName = 'tipousuario'
-    Left = 480
-    Top = 128
+    Left = 440
+    Top = 136
   end
   object DS_TipoUsuario: TDataSource
     AutoEdit = False
     DataSet = ADOTable_TipoUsuario
-    Left = 480
-    Top = 184
+    Left = 440
+    Top = 192
   end
   object DS_Usuario: TDataSource
     DataSet = ADOTable_Usuario
-    Left = 592
-    Top = 184
+    Left = 552
+    Top = 192
   end
   object ADOTable_Usuario: TADOTable
     Active = True
@@ -165,8 +165,8 @@ object DM_AccesoDatos: TDM_AccesoDatos
     Filter = 'Baja=0'
     Filtered = True
     TableName = 'usuario'
-    Left = 592
-    Top = 128
+    Left = 552
+    Top = 136
   end
   object StoredProc_Usuario_Delete: TADOStoredProc
     Connection = ADOConnectionHYDRODB
@@ -179,8 +179,8 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Size = 50
         Value = Null
       end>
-    Left = 496
-    Top = 276
+    Left = 440
+    Top = 300
   end
   object StoredProc_Usuario_Insertar: TADOStoredProc
     Connection = ADOConnectionHYDRODB
@@ -200,8 +200,8 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Precision = 10
         Value = Null
       end>
-    Left = 496
-    Top = 324
+    Left = 440
+    Top = 348
   end
   object StoredProc_Usuario_RestorePassword: TADOStoredProc
     Connection = ADOConnectionHYDRODB
@@ -221,8 +221,8 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Size = 50
         Value = Null
       end>
-    Left = 496
-    Top = 372
+    Left = 440
+    Top = 396
   end
   object ADOQuery_UsuarioExistente: TADOQuery
     Connection = ADOConnectionHYDRODB
@@ -241,8 +241,8 @@ object DM_AccesoDatos: TDM_AccesoDatos
       'SELECT COUNT(*) AS cantidad '
       'FROM usuario'
       'WHERE usuario.user=:nombre_usuario')
-    Left = 648
-    Top = 280
+    Left = 264
+    Top = 296
   end
   object ADOQuery_ExUsuarios: TADOQuery
     Connection = ADOConnectionHYDRODB
@@ -251,13 +251,13 @@ object DM_AccesoDatos: TDM_AccesoDatos
     SQL.Strings = (
       'SELECT * FROM usuario'
       'WHERE Baja=1')
-    Left = 800
-    Top = 272
+    Left = 264
+    Top = 376
   end
   object DS_ExUsuarios: TDataSource
     DataSet = ADOQuery_ExUsuarios
-    Left = 800
-    Top = 328
+    Left = 264
+    Top = 432
   end
   object StoredProc_UsuarioRestaurar: TADOStoredProc
     Connection = ADOConnectionHYDRODB
@@ -270,8 +270,8 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Size = 50
         Value = Null
       end>
-    Left = 496
-    Top = 420
+    Left = 440
+    Top = 444
   end
   object ADOQuery_AlertasUltimaHora: TADOQuery
     Connection = ADOConnectionHYDRODB
