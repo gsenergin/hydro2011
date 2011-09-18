@@ -1,6 +1,5 @@
 object DM_AccesoDatosBD: TDM_AccesoDatosBD
   OldCreateOrder = False
-  OnCreate = DataModuleCreate
   Height = 373
   Width = 681
   object StoredProc_HistorialSensado_Insertar: TADOStoredProc
@@ -83,11 +82,5 @@ object DM_AccesoDatosBD: TDM_AccesoDatosBD
     Parameters = <>
     Left = 328
     Top = 161
-  end
-  object TimerGuardaDatos: TTimer
-    Enabled = False
-    OnTimer = TimerGuardaDatosTimer
-    Left = 432
-    Top = 80
   end
 end

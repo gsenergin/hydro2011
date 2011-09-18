@@ -19,7 +19,9 @@ uses
   dxSkinOffice2010Blue, dxSkinOffice2010Silver,
   AccesoDatos, mensajes,
 
-  dblookup, cxListBox, cxMaskEdit, cxDropDownEdit;
+  dblookup, cxListBox, cxMaskEdit, cxDropDownEdit,
+
+  IniFiles;
 
 type
   Tfrm_Principal = class(TForm)
@@ -697,6 +699,10 @@ end;
 
 (*Ingreso al sistema. Habilita las comunicaciones*)
 procedure Tfrm_Principal.FormCreate(Sender: TObject);
+var
+   IniFile : TIniFile;
+   IP: string;
+   PUERTO: integer;
 begin
     // Activo el Socket
     TCP_UDPPort1.Active:= true;
@@ -706,8 +712,17 @@ begin
 
     // Me suscribo a la distribución de información del control automatico
     SocketSuscripcion.Active:= false;
-    SocketSuscripcion.Host:= '127.0.0.1';
-    SocketSuscripcion.Port:= 9000;
+
+    IniFile := TIniFile.Create(ChangeFileExt(Application.ExeName,'.ini')) ;
+      IP := IniFile.ReadString('CONFIG','IP','127.0.0.1');
+      PUERTO := IniFile.ReadInteger('CONFIG','PUERTO',9000);
+    IniFile.Free;
+
+    SocketSuscripcion.Host:= IP;
+    SocketSuscripcion.Port:= PUERTO;
+
+    //SocketSuscripcion.Host:= '127.0.0.1';
+    //SocketSuscripcion.Port:= 9000;
     SocketSuscripcion.Active:= true;
 
    //  frm_Principal.Width:= 767;

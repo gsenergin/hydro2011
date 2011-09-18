@@ -206,6 +206,7 @@ end;
 procedure Tfrm_GeneracionDatos.FormCreate(Sender: TObject);
 var i,j: integer;
 begin
+    // Inicializo Variables
     frm_GeneracionDatos.Width:= 410;
     randomize();
     for i:=1 to 15 do

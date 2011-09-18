@@ -10,7 +10,8 @@ uses
   HMIAnimation, HMICheckBox, ExtDlgs, ScktComp,
   GestorComandosRemotos,
   ClienteObservador, Dialogs,
-  Log;
+  Log,
+  ThreadGuardarDatos;
 
 type
 
@@ -137,6 +138,7 @@ type
 
 var
   frm_ControlAutomatico: Tfrm_ControlAutomatico;
+  TTGuardarDatos: TThreadGuardarDatos;
 
   Logger: TLog;
 
@@ -164,6 +166,9 @@ begin
 
     *)
 
+    // Creo un thread para guardar datos, deshabilitado
+    TTGuardarDatos:= TThreadGuardarDatos.Create(true, 1000, tpHigher);
+
     // Activo el logueo
     Logger:= TLog.Create;
     Logger.LogEnable(log);
@@ -174,20 +179,10 @@ begin
     DM_AccesoDatosBD.ADOConnection1.Connected:= true;
     btn_DesconectarBD.Enabled:= true;
     btn_ConectarBD.Enabled:= false;
-
-    // Disparo el timer si estoy recibiendo datos de la RTU y la BD está conectada
-    DM_AccesoDatosBD.HabilitarGuardaEnBD();
-
- (*   if DM_AccesoDatosRTU.TCP_UDPPort1.Active then
-        TTGuardarDatos.Start
-    else
-        TTGuardarDatos.Stop;    *)
 end;
 
 procedure Tfrm_ControlAutomatico.btn_DesconectarBDClick(Sender: TObject);
 begin
-    // Deshabilito la Guarda en BD
-    DM_AccesoDatosBD.HabilitarGuardaEnBD(false);
     // Desconecto la BD
     DM_AccesoDatosBD.ADOConnection1.Connected:= false;
     // Actualizo botones en la GUI
@@ -224,19 +219,12 @@ begin
     chk_Log.Enabled:= false;
     btn_ConectarRTU.Enabled:= false;
     btn_DesconectarRTU.Enabled:= true;
-
-    // Disparo el timer si estoy recibiendo datos de la RTU y la BD está conectada
-    DM_AccesoDatosBD.HabilitarGuardaEnBD();
-
     Panel_SecuenciasConsignas.Enabled:= true;
 end;
 
 
  procedure Tfrm_ControlAutomatico.btn_DesconectarRTUClick(Sender: TObject);
 begin
-    // Deshabilito la Guarda en BD
-    DM_AccesoDatosBD.HabilitarGuardaEnBD(false);
-
     // Cierro la conexión TCP/UDP
     DM_AccesoDatosRTU.TCP_UDPPort1.Active:= false;
 
@@ -324,19 +312,17 @@ begin
       StatusBar1.Panels[2].Text:= 'TX: '+FormatFloat('#0.0',TCP_UDPPort1.TXBytesSecond/1024)+' KB/s';
       StatusBar1.Panels[3].Text:= 'RX: '+FormatFloat('#0.0',TCP_UDPPort1.RXBytes/1024)+' KB';
       StatusBar1.Panels[4].Text:= 'TX: '+FormatFloat('#0.0',TCP_UDPPort1.TXBytes/1024)+' KB';
-      StatusBar1.Panels[5].Text:= 'Reg: '+inttostr(DM_AccesoDatosBD.getCantidadRegistrosEscritos());
+      StatusBar1.Panels[5].Text:= 'Reg: '+inttostr(TTGuardarDatos.getCantidadRegistrosEscritos());
       StatusBar1.Panels[6].text:= 'BD Online: '+ BoolToStr(DM_AccesoDatosBD.ADOConnection1.Connected,true);
       StatusBar1.Panels[7].text:= 'RTU Online: '+ BoolToStr( TCP_UDPPort1.Active,true);
    end;
+
+   //Guardo en la BD si estoy conectado a las RTU y a la BD
+   if (DM_AccesoDatosBD.ADOConnection1.Connected and DM_AccesoDatosRTU.TCP_UDPPort1.Active) then
+     TTGuardarDatos.GuardarDatos();
+
+   
 end;
-
-
-
-
-
-{ TConsigna }
-
-
 
 end.
 
