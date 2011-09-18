@@ -163,8 +163,11 @@ end;
 
 procedure TThreadGuardarDatos.Start;
 begin
-    threadEnabled:= true;
-    Self.Execute;
+    if (DM_AccesoDatosBD.ADOConnection1.Connected and DM_AccesoDatosRTU.TCP_UDPPort1.Active) then
+    begin
+      threadEnabled:= true;
+      Self.Execute;
+    end;
 end;
 
 procedure TThreadGuardarDatos.Stop;
