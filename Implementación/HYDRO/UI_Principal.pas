@@ -236,34 +236,9 @@ type
     procedure btn_ConsignaVoltajeClick(Sender: TObject);
     procedure btn_ConsignaManualClick(Sender: TObject);
     procedure SetValorActuador(IDRTU,DirMem,Valor:integer);
-    (*
-    procedure btn_USincronismo_ONClick(Sender: TObject);
-    procedure btn_USincronismo_OFFClick(Sender: TObject);
-
-
-    procedure btn_Generador_ONClick(Sender: TObject);
-    procedure btn_Generador_OFFClick(Sender: TObject);
-    procedure btn_EquipoExcitacion_ONClick(Sender: TObject);
-    procedure btn_EquipoExcitacion_OFFClick(Sender: TObject);
-    procedure btn_ReguladorVelocidad_ONClick(Sender: TObject);
-    procedure btn_ReguladorVelocidad_OFFClick(Sender: TObject);
-    procedure btn_Refrigeracion_ONClick(Sender: TObject);
-    procedure btn_Refrigeracion_OFFClick(Sender: TObject);
-    procedure btn_CompuertasMantenimiento_OPENClick(Sender: TObject);
-    procedure btn_CompuertasMantenimiento_CLOSEClick(Sender: TObject);
-    procedure btn_CompuertaDesvio_OPENClick(Sender: TObject);
-    procedure btn_CompuertaDesvio_CLOSEClick(Sender: TObject);
-    procedure btn_CompuertaIngreso_OPENClick(Sender: TObject);
-    procedure btn_CompuertaIngreso_CLOSEClick(Sender: TObject);
-    procedure btn_Mariposa_OPENClick(Sender: TObject);
-    procedure btn_Mariposa_CLOSEClick(Sender: TObject);
-    procedure btn_Bypass_OPENClick(Sender: TObject);
-    procedure btn_Bypass_CLOSEClick(Sender: TObject);
-    *)
     procedure btn_FrenosTurbinaClick(Sender: TObject);
     procedure btn_AperturaAlabeClick(Sender: TObject);
     procedure btn_FrenosGeneradorClick(Sender: TObject);
-
 
     procedure HabilitarBotonesActuadores(valor: boolean);
 
@@ -301,7 +276,8 @@ implementation
 {$R *.dfm}
 
 
-
+(* Busca los datos históricos del sensor seleccionado, arma un grafico en
+frmGrafico y lo muestra *)
 procedure Tfrm_Principal.btnHistoricoClick(Sender: TObject);
 var frmGrafico: Tfrm_Grafico;
     ID, TimeStamp: string;
@@ -347,7 +323,8 @@ end;
 
 
 
-
+(* Cambia los valores de las alertas para un sensor determinado, a partir
+de los ingresados por el usuario  *)
 procedure Tfrm_Principal.btn_ConfiguracionCambiarValoresClick(Sender: TObject);
 var min,max,LL,L,H,HH: integer;
     ID: string;
@@ -371,8 +348,7 @@ begin
 
     // Si llego hasta aca, no hay errores
 
-
-    ID:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('ID_sensor').AsString;
+   ID:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('ID_sensor').AsString;
 
     with DM_AccesoDatos.ADOQuery_SensorUpdate do
     begin
@@ -399,7 +375,7 @@ begin
 end;
 
 
-   
+(* Evento que se genera cuando no se puede conectar al modulo de control *)
 procedure Tfrm_Principal.SocketSuscripcionError(Sender: TObject;
   Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
 begin
@@ -418,6 +394,8 @@ end;
 //////////////////////////////////////////////////////////
 {$REGION 'CONSIGNAS - SECUENCIAS'}
 
+(* Envía al Módulo de control automático la consigna de caudal,
+e inhabilita los comandos manuales *)
 procedure Tfrm_Principal.btn_ConsignaCaudalClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#01'+txtConsignaCaudal.text+'#');
@@ -431,7 +409,8 @@ begin
     lbl_ModoConsigna.Caption:= 'Modo Automático';
 end;
 
-
+(* Envía al Módulo de control automático la consigna de voltaje,
+e inhabilita los comandos manuales *)
 procedure Tfrm_Principal.btn_ConsignaVoltajeClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#02'+txtConsignaVoltaje.text+'#');
@@ -446,7 +425,8 @@ begin
 end;
 
 
-
+(* Envía al Módulo de control automático la consigna de modo Manual,
+y habilita los comandos manuales *)
 procedure Tfrm_Principal.btn_ConsignaManualClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#03#');
@@ -460,11 +440,15 @@ begin
     lbl_ModoConsigna.Caption:= 'Modo Manual';
 end;
 
+(* Envía al Módulo de control automático la consigna realizar una
+secuencia de encendido *)
 procedure Tfrm_Principal.btn_SecuenciaEncendidoClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#04#');
 end;
 
+(* Envía al Módulo de control automático la consigna realizar una
+secuencia de apagado *)
 procedure Tfrm_Principal.btn_SecuenciaApagadoClick(Sender: TObject);
 begin
     SocketSuscripcion.Socket.SendText('#05#');
@@ -478,6 +462,7 @@ end;
 //////////////////////////////////////////////////////////
 {$REGION 'Control de Actuadores Modo Manual'}
 
+(* Habilita o Deshabilita botones del modo manual *)
 procedure Tfrm_Principal.HabilitarBotonesActuadores(valor: boolean);
 begin
     btn_FrenosGenerador.Enabled:= valor;
@@ -485,14 +470,16 @@ begin
     btn_FrenosTurbina.Enabled:= valor;
 end;
 
-
+(* Envía al Módulo de control automático el cambio de valor
+en un actuador. Solo para modo manual *)
 procedure Tfrm_Principal.SetValorActuador(IDRTU, DirMem, Valor: integer);
 begin
      if modoManual then
        SocketSuscripcion.Socket.SendText('#06'+inttostr(IDRTU)+inttostr(DirMem)+IntToStr(valor)+'#');
 end;
 
-
+(* Envía al Módulo de control automático el cambio de valor en los frenos
+del generador, si esta habilitado el modo manual y el valor es correcto *)
 procedure Tfrm_Principal.btn_FrenosGeneradorClick(Sender: TObject);
 var valor: integer;
 begin
@@ -506,6 +493,8 @@ begin
     SetValorActuador(2,40015,valor);
 end;
 
+(* Envía al Módulo de control automático el cambio de valor en los frenos
+de la turbina, si esta habilitado el modo manual y el valor es correcto *)
 procedure Tfrm_Principal.btn_FrenosTurbinaClick(Sender: TObject);
 var valor: integer;
 begin
@@ -519,6 +508,8 @@ begin
     SetValorActuador(2,40006,valor);
 end;
 
+(* Envía al Módulo de control automático el cambio de valor en la apertura
+de los alabes, si esta habilitado el modo manual y el valor es correcto *)
 procedure Tfrm_Principal.btn_AperturaAlabeClick(Sender: TObject);
 var valor: integer;
 begin
@@ -533,7 +524,8 @@ begin
 end;
 
 
-
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(abierto o cerrado) *)
 procedure Tfrm_Principal.CLR_RTU1_ACC0003DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'A' then
@@ -542,6 +534,8 @@ begin
         SetValorActuador(1,40003,1);
 end;
 
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(abierto o cerrado) *)
 procedure Tfrm_Principal.CLR_RTU1_ACC0004DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'A' then
@@ -550,6 +544,8 @@ begin
         SetValorActuador(1,40004,1);
 end;
 
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(abierto o cerrado) *)
 procedure Tfrm_Principal.CLR_RTU2_AT10003DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'A' then
@@ -557,7 +553,9 @@ begin
     else
         SetValorActuador(2,40003,1);
 end;
-
+                      
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(abierto o cerrado) *)
 procedure Tfrm_Principal.CLR_RTU2_AT10004DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'A' then
@@ -565,7 +563,9 @@ begin
     else
         SetValorActuador(2,40004,1);
 end;
-
+                      
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(abierto o cerrado) *)
 procedure Tfrm_Principal.CLR_RTU2_AT10011DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'ON' then
@@ -573,7 +573,9 @@ begin
     else
         SetValorActuador(2,40011,1);
 end;
-
+            
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(encendido o apagado) *)
 procedure Tfrm_Principal.CLR_RTU2_AT10016DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'ON' then
@@ -582,6 +584,8 @@ begin
       SetValorActuador(2,40016,1);
 end;
 
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(encendido o apagado) *)
 procedure Tfrm_Principal.CLR_RTU2_AT10017DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'ON' then
@@ -589,7 +593,9 @@ begin
     else
         SetValorActuador(2,40017,1);
 end;
-
+    
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(encendido o apagado) *)
 procedure Tfrm_Principal.CLR_RTU2_AT10018DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'ON' then
@@ -597,7 +603,9 @@ begin
     else
         SetValorActuador(2,40018,1);
 end;
-
+      
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(encendido o apagado) *)
 procedure Tfrm_Principal.CLR_RTU2_AT10019DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'ON' then
@@ -605,7 +613,9 @@ begin
     else
       SetValorActuador(2,40019,1);
 end;
-
+         
+(* Envía al Módulo de control automático el cambio de valor en un actuador,
+(encendido o apagado) *)
 procedure Tfrm_Principal.CLR_RTU3_ASA0002DblClick(Sender: TObject);
 begin
     if (Sender as THMIText).Caption = 'A' then
@@ -622,6 +632,8 @@ end;
 //////////////////////////////////////////////////////////
 {$REGION 'Gestion de Usuarios'}
 
+(* Llama a la unidad de gestión de usuarios, para cambiar la clave
+según los valores ingresados *)
 procedure Tfrm_Principal.btnCambiarPasswordClick(Sender: TObject);
 begin
     GestionUsuarios_CambiarClave(lblUsuario.Caption,
@@ -630,22 +642,27 @@ begin
                                  txt_ConfiguracionClaveNueva.text,
                                  txt_ConfiguracionClaveNueva2.text);
 end;
-     
+
+(* Llama a la unidad de gestión de usuarios, para eliminar al usuario *)
 procedure Tfrm_Principal.btn_ConfiguracionEliminarClick(Sender: TObject);
 begin
     GestionUsuarios_EliminarUsuario('');
 end;
 
+(* Llama a la unidad de gestión de usuarios, para resetear la clave del usuario *)
 procedure Tfrm_Principal.btn_ConfiguracionResetearPasswordClick(Sender: TObject);
 begin
     GestionUsuarios_ResetearPassword('');
 end;
 
+(* Llama a la unidad de gestión de usuarios, para restaurar al usuario seleccionado
+previamente eliminado *)
 procedure Tfrm_Principal.btn_ConfiguracionRestaurarUsuarioClick(Sender: TObject);
 begin
     GestionUsuarios_RestaurarUsuario(DBGrid_ExUsuarios.SelectedField.AsString);
 end;
 
+(* Llama a la unidad de gestión de usuarios, para agregar un nuevo usuario *)
 procedure Tfrm_Principal.btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
 begin
     GestionUsuarios_AgregarUsuario();
@@ -654,7 +671,7 @@ end;
 {$ENDREGION}
 
 
-
+(*Click en LOGOUT. Sale del sistema*)
 procedure Tfrm_Principal.btn_LogoutClick(Sender: TObject);
 begin
     //ADOConnectionHYDRODB.Connected:= false;
@@ -668,7 +685,7 @@ begin
 
 end;
 
-
+(*Click en LOGOUT/[X]. Libera recursos*)
 procedure Tfrm_Principal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
 //    SocketSuscripcion.Socket.SendText('BAJA');
@@ -678,6 +695,7 @@ begin
     ModBusTCPDriver1.Free;
 end;
 
+(*Ingreso al sistema. Habilita las comunicaciones*)
 procedure Tfrm_Principal.FormCreate(Sender: TObject);
 begin
     // Activo el Socket
@@ -700,13 +718,14 @@ end;
 
 
 
-
+(*Actualiza la fecha y hora cada 1 minuto*)
 procedure Tfrm_Principal.TimerFechaHoraTimer(Sender: TObject);
 begin
     lblFecha.Caption:= datetostr(now);
     lblHora.Caption:= FormatDateTime('hh:nn', now);
 end;
 
+(*Actualiza la barra de estados.*)
 procedure Tfrm_Principal.TimerStatusBarTimer(Sender: TObject);
 begin
       DM_AccesoDatos.ADOQuery_AlertasUltimaHora.Close;

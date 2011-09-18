@@ -14,7 +14,7 @@ procedure GestionUsuarios_AgregarUsuario();
 
 implementation
 
-
+(* GestionUsuarios_CambiarClave= Cambia la clave de logueo para un usuario *)
 procedure GestionUsuarios_CambiarClave(nombre_usuario, claveLogin, claveAnterior,ClaveNueva,ClaveNueva2:string);
 begin
     if claveAnterior=claveLogin then
@@ -37,7 +37,9 @@ begin
     else msError('Error: La clave anterior no es correcta');
 end;
 
-
+(* GestionUsuarios_ResetearPassword= Restaura la clave de un usuario al mismo
+nombre que el de su login, en caso que la haya perdido. Solo habilitada para el
+administrador del sistema *)
 procedure GestionUsuarios_ResetearPassword(nombre_usuario:string);
 begin
     try
@@ -51,7 +53,8 @@ begin
     msInfo('Clave de <'+nombre_usuario+'> Reseteada con éxito a <'+nombre_usuario+'>');
 end;
 
-
+(* GestionUsuarios_EliminarUsuario= Elimina un usuario. Solo habilitado para el
+administrador del sistema *)
 procedure GestionUsuarios_EliminarUsuario(nombre_usuario:string);
 begin
     try
@@ -65,7 +68,8 @@ begin
     msInfo('Usuario <'+nombre_usuario+'> eliminado exitosamente');
 end;
 
-
+(* GestionUsuarios_RestaurarUsuario= Restaura un usuario previamente eliminado.
+Solo habilitado para el administrador del sistema *)
 procedure GestionUsuarios_RestaurarUsuario(nombre_usuario:string);
 begin
     if nombre_usuario<>'' then    
@@ -77,6 +81,8 @@ begin
     end;
 end;
 
+(* GestionUsuarios_AgregarUsuario= Agrega un usuario, con clave por defecto
+igual a su nombre. Solo habilitado para el administrador del sistema *)
 procedure GestionUsuarios_AgregarUsuario();
 var nombre_usuario:string;
     IDTipoUsuario: integer;
