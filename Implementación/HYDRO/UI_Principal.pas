@@ -32,7 +32,6 @@ type
     tab_Simulacion: TcxTabSheet;
     tab_Configuracion: TcxTabSheet;
     panel_Usuario: TPanel;
-    cxLabel1: TcxLabel;
     cxLabel3: TcxLabel;
     cxLabel4: TcxLabel;
     btn_Logout: TcxButton;
