@@ -11,6 +11,7 @@ object DM_GestorComandosRemotos: TDM_GestorComandosRemotos
     OnClientDisconnect = ServerSocket_GUIDesktopClientDisconnect
     OnClientRead = ServerSocket_GUIDesktopClientRead
     OnClientWrite = ServerSocket_GUIDesktopClientWrite
+    OnClientError = ServerSocket_GUIDesktopClientError
     Left = 64
     Top = 24
   end

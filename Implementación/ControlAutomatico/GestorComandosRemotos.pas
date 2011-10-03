@@ -18,6 +18,9 @@ type
     procedure ServerSocket_GUIDesktopClientWrite(Sender: TObject;
       Socket: TCustomWinSocket);
     procedure DataModuleCreate(Sender: TObject);
+    procedure ServerSocket_GUIDesktopClientError(Sender: TObject;
+      Socket: TCustomWinSocket; ErrorEvent: TErrorEvent;
+      var ErrorCode: Integer);
   private
     { Private declarations }
 
@@ -39,6 +42,8 @@ var
 
   Secuencia: TSecuencia;
 
+  SistemaEncendido: boolean;
+
 
   
 
@@ -58,9 +63,9 @@ begin
 
     // Creo una consigna, deshabilitada, dely=2000ms, de alta prioridad
     Consigna := TConsigna.Create(True,2000,tpHighest);
+
+    SistemaEncendido:= false;
 end;
-
-
 
 
 procedure TDM_GestorComandosRemotos.ServerSocket_GUIDesktopClientConnect(Sender: TObject;
@@ -78,6 +83,18 @@ begin
     Logger.LogWrite('Se desconectó un cliente!'+Socket.RemoteAddress);
     // Desactivo al observador
     Observador.Desactivar;
+end;
+
+procedure TDM_GestorComandosRemotos.ServerSocket_GUIDesktopClientError(
+  Sender: TObject; Socket: TCustomWinSocket; ErrorEvent: TErrorEvent;
+  var ErrorCode: Integer);
+begin
+     // Desactivo el informe de errores (problema: Async. socket error)
+     ErrorCode:= 0;
+
+     Logger.LogWrite('Error en la conexión con el cliente!'+Socket.RemoteAddress);
+      // Desactivo al observador
+     Observador.Desactivar;
 end;
 
 procedure TDM_GestorComandosRemotos.ServerSocket_GUIDesktopClientWrite(Sender: TObject;  Socket: TCustomWinSocket);
@@ -117,6 +134,7 @@ begin
     case codFuncion of
       1: // 01= Consigna de Caudal
       begin
+          if SistemaEncendido then
           try
             param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
             Consigna.SetConsignaCaudal(param, true);
@@ -128,6 +146,7 @@ begin
 
       2: // 02= Consigna de Voltaje
       begin
+          if SistemaEncendido then
           try
             param:= strtoint(Copy(mensaje, 3, length(mensaje)-3+1));
             Consigna.SetConsignaVoltaje(param, true);
@@ -145,6 +164,7 @@ begin
       4: // 04= Secuencia Encendido
       begin
           try
+            SistemaEncendido:= true;
             Consigna.SetConsignaManual;
             Secuencia:= TSecuencia.Create(TSecuencia.ENCENDIDO, tpHighest, true);
           except
@@ -155,7 +175,8 @@ begin
       5: // 05= Secuencia Apagado
       begin
           try
-            Consigna.SetConsignaManual;                    
+            SistemaEncendido:= false;
+            Consigna.SetConsignaManual;
             Secuencia:= TSecuencia.Create(TSecuencia.APAGADO, tpHighest, true);
           except
              result:= false;

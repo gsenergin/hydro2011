@@ -209,7 +209,15 @@ begin
         TCP_UDPPort1.LogIOActions:= chk_Log.Checked;
 
         // Abro la conexión TCP/UDP
-        TCP_UDPPort1.Active:= true;
+        if EstaAbierto(TCP_UDPPort1.Host, TCP_UDPPort1.Port) then
+        begin
+          TCP_UDPPort1.Active:= true;
+        end else
+        begin
+          ShowMessage('El host de destino no está conectado');
+          exit;
+        end;
+
     end;
 
     // Bloqueo los controles para setear configuraciones

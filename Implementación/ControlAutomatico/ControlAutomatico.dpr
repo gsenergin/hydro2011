@@ -20,6 +20,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Control Automatico';
   Application.CreateForm(Tfrm_ControlAutomatico, frm_ControlAutomatico);
   Application.CreateForm(TDM_AccesoDatosRTU, DM_AccesoDatosRTU);
   Application.CreateForm(TDM_AccesoDatosBD, DM_AccesoDatosBD);
