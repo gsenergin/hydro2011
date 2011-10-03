@@ -23,8 +23,8 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     NumberFormat = '#0.0'
   end
   object btn_ComenzarGeneracion: TButton
-    Left = 231
-    Top = 310
+    Left = 239
+    Top = 311
     Width = 121
     Height = 25
     Caption = 'Comenzar Generaci'#243'n'
@@ -164,7 +164,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
       Items.Strings = (
         'Poco'
         'Mucho'
-        'Valor Fijo (=20)'
+        'Valor Fijo (=30)'
         'Valor Fijo (=60)')
       ParentFont = False
       TabOrder = 0
@@ -255,6 +255,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     Port = 502
     Timeout = 0
     ExclusiveDevice = False
+    OnCommPortCloseError = TCP_UDPPort1CommPortCloseError
     Left = 64
     Top = 124
   end
@@ -671,7 +672,7 @@ object frm_GeneracionDatos: Tfrm_GeneracionDatos
     MemReadFunction = 3
     MemWriteFunction = 16
     ProtocolDriver = ModBusTCPDriver1
-    Left = 624
+    Left = 616
     Top = 24
   end
   object RTU3_SSA0001: TPLCTagNumber

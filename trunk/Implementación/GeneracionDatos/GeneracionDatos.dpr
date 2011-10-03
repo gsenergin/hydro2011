@@ -9,6 +9,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Generacion de Datos';
   Application.CreateForm(Tfrm_GeneracionDatos, frm_GeneracionDatos);
   Application.Run;
 end.

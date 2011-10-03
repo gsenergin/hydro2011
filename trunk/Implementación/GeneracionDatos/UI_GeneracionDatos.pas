@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, ExtCtrls, CommPort, tcp_udpport, ProtocolDriver,
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, ScktComp, Sockets, Grids, DBGrids, DB, ADODB, HMILabel, PLCTagNumber,
-  ComCtrls;
+  ComCtrls, WinSock;
 
 type
 
@@ -84,6 +84,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure radioRangoSensoresClick(Sender: TObject);
     procedure radioCaudalEntradaClick(Sender: TObject);
+    procedure TCP_UDPPort1CommPortCloseError(Sender: TObject);
   private
     { Private declarations }
   public
@@ -106,6 +107,42 @@ implementation
 
 
 
+function EstaAbierto(Host: string; Puerto: Integer): Boolean;
+var
+  WSAData: TWSADATA;
+  Address: u_long;
+  HostEnt: phostent;
+  Addr: sockaddr_in;
+  CSocket: Tsocket;
+begin
+  Result:= FALSE;
+  if WSAStartup(MAKEWORD(1, 1), WSADATA) = 0 then
+  begin
+    Address:= inet_addr(Pchar(Host));
+    if Address = INADDR_NONE then
+    begin
+      HostEnt:= gethostbyname(PChar(Host));
+      if HostEnt <> nil then
+        Address:= PInteger(HostEnt.h_addr_list^)^;
+    end;
+    if Address <> INADDR_NONE then
+    begin
+      CSocket:= socket(AF_INET, SOCK_STREAM, 0);
+      if CSocket <> INVALID_SOCKET then
+      begin
+        Addr.sin_family:= AF_INET;
+        Addr.sin_addr.S_addr:= Address;
+        Addr.sin_port:= htons(Puerto);
+        Result:= connect(CSocket, Addr, Sizeof(Addr)) <> SOCKET_ERROR;
+        Closesocket(CSocket);
+      end;
+    end;
+    WSACleanup;
+  end;
+end;
+
+
+
 
 procedure Tfrm_GeneracionDatos.btn_ComenzarGeneracionClick(Sender: TObject);
 
@@ -113,23 +150,25 @@ begin
     TCP_UDPPort1.Host:= txt_Host.text;
     TCP_UDPPort1.Port:= strtoint(txt_Puerto.Text);
     TCP_UDPPort1.Lock(ModBusTCPDriver1.DriverID);
-    
+
 //    PLCBlock_RTU1.RefreshTime:= strtoint(txt_Refresco.text);
 //    PLCBlock_RTU2.RefreshTime:= strtoint(txt_Refresco.text);
 //    PLCBlock_RTU3.RefreshTime:= strtoint(txt_Refresco.text);
     TimerGeneracion.Interval:= strtoint(txt_Refresco.text);
 
     // Abro la conexión TCP/UDP
-    TCP_UDPPort1.Active:= true;
+    if EstaAbierto(TCP_UDPPort1.Host, TCP_UDPPort1.Port) then
+    begin
+      TCP_UDPPort1.Active:= true;
 
-    // Bloqueo los controles para setear configuraciones
-    txt_Refresco.Enabled:= false;
-    txt_Host.Enabled:= false;
-    txt_Puerto.Enabled:= false;
-    btn_ComenzarGeneracion.Enabled:= false;
-    btn_DetenerGeneracion.Enabled:= true;
+      // Bloqueo los controles para setear configuraciones
+      txt_Refresco.Enabled:= false;
+      txt_Host.Enabled:= false;
+      txt_Puerto.Enabled:= false;
+      btn_ComenzarGeneracion.Enabled:= false;
+      btn_DetenerGeneracion.Enabled:= true;
 
-    // Cargo los datos actuales de la RTU en memoria
+      // Cargo los datos actuales de la RTU en memoria
         //Sensores[1].Valores[0]:= trunc(RTU1_SCC0001.value);
         Sensores[2].Valores[0]:= trunc(RTU1_SCC0002.value);
         Sensores[3].Valores[0]:= trunc(RTU1_SCC0005.value);
@@ -148,8 +187,13 @@ begin
 
         Sensores[15].Valores[0]:= trunc(RTU3_SSA0001.value);
 
-    // Disparo el timer
-    TimerGeneracion.Enabled:= true
+      // Disparo el timer
+      TimerGeneracion.Enabled:= true;
+    end
+    else
+    begin
+      ShowMessage('El host de destino no está conectado');
+    end;
 end;
 
 procedure Tfrm_GeneracionDatos.btn_DetenerGeneracionClick(Sender: TObject);
@@ -158,6 +202,7 @@ begin
     TCP_UDPPort1.Active:= false;
     // Detengo el timer
     TimerGeneracion.Enabled:= false;
+    StatusBar1.Panels[0].Text:='TCP Desconectado';
     
     // Desbloqueo los controles para setear configuraciones
     txt_Refresco.Enabled:= true;
@@ -719,12 +764,21 @@ begin
    (*----      SSA0001 - Sensores[15] - Nivel Desfogue   ----*)
    i:= incIndex(Sensores[15].index);
    // Igual al maximo de caudal turbinado
-   Sensores[15].valores[i]:= Sensores[11].max;
+   if Sensores[11].Valores[i]<>0 then   
+      Sensores[15].valores[i]:= Sensores[11].max
+   else
+      Sensores[15].valores[i]:= 0;
+
 
 end;
 
 
 
+
+procedure Tfrm_GeneracionDatos.TCP_UDPPort1CommPortCloseError(Sender: TObject);
+begin
+    ShowMessage('Error al comunicarse con la RTU Virtual');
+end;
 
 procedure Tfrm_GeneracionDatos.TimerGeneracionTimer(Sender: TObject);
 var i:integer;
