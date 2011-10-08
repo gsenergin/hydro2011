@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Untitled Gantt Project" company="" webLink="http://" view-date="2012-01-07" view-index="0" gantt-divider-location="316" resource-divider-location="301" version="2.0">
+    <description/>
+    <view zooming-state="default:0" id="gantt-chart"/>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="55" order="0"/>
+        <field id="1" name="Función" width="44" order="0"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks>
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="&#9;Preparación de la infraestructura edilicia para instalar y/o adecuar los elementos de hardware" color="#8cb6ce" meeting="false" start="2011-10-10" duration="10" complete="0" priority="1" expand="true">
+            <depend id="1" type="2" difference="0" hardness="Strong"/>
+            <depend id="2" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="1" name="&#9;Instalación de hardware y software necesario para implantar el sistema" color="#8cb6ce" meeting="false" start="2011-10-24" duration="10" complete="0" priority="1" expand="true">
+            <depend id="3" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="2" name="&#9;Generación del manual de procedimientos" meeting="false" start="2011-10-24" duration="5" complete="0" priority="1" expand="true">
+            <depend id="3" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="3" name="&#9;Establecimiento del plan de Capacitación" meeting="false" start="2011-11-07" duration="5" complete="0" priority="1" expand="true">
+            <depend id="4" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="4" name="&#9;Formación necesaria para la implantación (Capacitación)" meeting="false" start="2011-11-14" duration="15" complete="0" priority="1" expand="true">
+            <depend id="5" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="5" name="&#9;Pruebas de implantación del sistema" meeting="false" start="2011-12-05" duration="10" complete="0" priority="1" expand="true">
+            <depend id="6" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="6" name="&#9;Incorporación del sistema al entorno de Operación" meeting="false" start="2011-12-19" duration="10" complete="0" priority="1" expand="true">
+            <depend id="7" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="7" name="&#9;Carga y configuración inicial de datos" meeting="false" start="2012-01-02" duration="5" complete="0" priority="1" expand="true">
+            <depend id="8" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="8" name="&#9;Pruebas de aceptación" meeting="false" start="2012-01-09" duration="10" complete="0" priority="1" expand="true">
+            <depend id="9" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="9" name="&#9;Generación de procedimientos de mantenimiento" meeting="false" start="2012-01-23" duration="5" complete="0" priority="1" expand="true"/>
+    </tasks>
+    <resources>
+        <resource id="0" name="Scrum Master" function="Default:0" contacts="" phone=""/>
+        <resource id="1" name="Analísta" function="Default:0" contacts="" phone=""/>
+        <resource id="2" name="Programador" function="Default:0" contacts="" phone=""/>
+        <resource id="3" name="Diseñador" function="Default:0" contacts="" phone=""/>
+        <resource id="4" name="Product Owner" function="Default:0" contacts="" phone=""/>
+        <resource id="5" name="Resp. Técnico" function="Default:0" contacts="" phone=""/>
+        <resource id="6" name="Operarios" function="Default:0" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="0" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="0" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="0" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="1" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="1" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="1" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="3" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="3" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="4" resource-id="6" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="4" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="5" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="5" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="6" resource-id="6" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="6" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="7" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="7" resource-id="6" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="7" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="7" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="7" resource-id="1" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="8" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="8" resource-id="6" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="8" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="3" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="0" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="9" resource-id="6" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="4" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="2" function="Default:0" responsible="false" load="100.0"/>
+        <allocation task-id="9" resource-id="5" function="Default:0" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpd3" order="0" width="132"/>
+        <displaycolumn property-id="tpd4" order="1" width="47"/>
+        <displaycolumn property-id="tpd5" order="2" width="46"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
