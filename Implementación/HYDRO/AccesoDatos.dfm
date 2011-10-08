@@ -41,10 +41,25 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Precision = 255
         Size = 255
         Value = Null
+      end
+      item
+        Name = 'TSDesde'
+        DataType = ftString
+        Size = -1
+        Value = Null
+      end
+      item
+        Name = 'TSHasta'
+        DataType = ftString
+        Size = -1
+        Value = Null
       end>
     SQL.Strings = (
       'SELECT * FROM historialsensado WHERE FK_HistorialSensado_Sensor='
-      ':ID ORDER BY TIMESTAMP')
+      ':ID '
+      'AND Timestamp >= :TSDesde '
+      'AND Timestamp <= :TSHasta '
+      'ORDER BY TIMESTAMP')
     Left = 200
     Top = 120
   end

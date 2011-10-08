@@ -11,7 +11,7 @@ uses
   HMIControlDislocatorAnimation, CommPort, tcp_udpport, ProtocolDriver,
   ModBusDriver, ModBusTCP, PLCNumber, PLCBlockElement, Tag, PLCTag, TagBlock,
   PLCBlock, HMILabel, HMIText, DB, ADODB, DBCtrls, TeEngine, TeeDBEdit,
-  TeeDBCrossTab, Series, TeeProcs, Chart,
+  TeeDBCrossTab, Series, TeeProcs, Chart, DateUtils,
   UI_Grafico, UI_AgregarUsuario,GestionUsuarios,
 
   Mask, HMIUpDown, HMICheckBox, dxSkinOffice2007Black,
@@ -21,7 +21,7 @@ uses
 
   dblookup, cxListBox, cxMaskEdit, cxDropDownEdit,
 
-  IniFiles;
+  IniFiles, cxCalendar, cxSpinEdit, cxTimeEdit;
 
 type
   Tfrm_Principal = class(TForm)
@@ -225,6 +225,12 @@ type
     cxLabel63: TcxLabel;
     lblPassword: TcxLabel;
     DBGrid_Alertas: TDBGrid;
+    cxLabel1: TcxLabel;
+    cxLabel6: TcxLabel;
+    cxHistoricoHoraDesde: TcxTimeEdit;
+    cxHistoricoFechaDesde: TcxDateEdit;
+    cxHistoricoHoraHasta: TcxTimeEdit;
+    cxHistoricoFechaHasta: TcxDateEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnHistoricoClick(Sender: TObject);
@@ -261,6 +267,10 @@ type
     procedure btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
     procedure btn_ConfiguracionRestaurarUsuarioClick(Sender: TObject);
     procedure btnCambiarPasswordClick(Sender: TObject);
+    procedure btnSimularClick(Sender: TObject);
+    procedure tab_HistoricosShow(Sender: TObject);
+    procedure btnHistoricoAlertasClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -279,11 +289,17 @@ implementation
 
 (* Busca los datos históricos del sensor seleccionado, arma un grafico en
 frmGrafico y lo muestra *)
+procedure Tfrm_Principal.btnHistoricoAlertasClick(Sender: TObject);
+begin
+aaa
+end;
+
 procedure Tfrm_Principal.btnHistoricoClick(Sender: TObject);
 var frmGrafico: Tfrm_Grafico;
     ID, TimeStamp: string;
     valor:integer;
     cont: integer;
+    TSDesde, TSHasta: TDatetime;
 begin
   //ADOQuery_Grafico
   frmGrafico:= Tfrm_Grafico.Create(self);
@@ -294,23 +310,37 @@ begin
 //  frmGrafico.Chart_HistoricoSensado.Visible:= false;
   frmGrafico.Chart_HistoricoSensado.Series[0].Clear;
 
+
+
+  TSDesde:= cxHistoricoFechaDesde.Date + cxHistoricoHoraDesde.Time ;
+  TSHasta:= cxHistoricoFechaHasta.Date + cxHistoricoHoraHasta.Time ;
+
   ID:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('ID_sensor').AsString;
   with DM_AccesoDatos.ADOQuery_Grafico do
   begin
       Close;
       Parameters.ParamByName('ID').Value:= ID;
+      Parameters.ParamByName('TSDesde').Value:= FormatDatetime('yyyy-mm-dd HH:MM:SS',TSDesde);   // '"'+   +'"'
+      Parameters.ParamByName('TSHasta').Value:= FormatDatetime('yyyy-mm-dd HH:MM:SS',TSHasta);
+
       Open;
       execsql;
+      //Filter:= 'Timestamp Between "'+ FormatDatetime('yyyy-mm-dd HH:MM:SS',TSDesde) +'" and "'+ FormatDatetime('yyyy-mm-dd HH:MM:SS',TSHasta) +'"';
+      //msInfo(Filter);
       First;
   end;
   cont:= 1;
   while not DM_AccesoDatos.ADOQuery_Grafico.Eof do
   begin
         valor:= DM_AccesoDatos.ADOQuery_Grafico.FieldByName('valorSensado').AsInteger;
-        TimeStamp:=DM_AccesoDatos.ADOQuery_Grafico.FieldByName('TimeStamp').AsString;
+        //TimeStamp:=DM_AccesoDatos.ADOQuery_Grafico.FieldByName('TimeStamp').AsString;
+        TimeStamp:= FormatDatetime('mm-dd HH:MM:SS',DM_AccesoDatos.ADOQuery_Grafico.FieldByName('TimeStamp').AsDateTime);
+
+
         //showmessage(inttostr(valor));
 
         frmGrafico.Chart_HistoricoSensado.Series[0].AddXY(cont,valor,Timestamp,clBlue);
+
         //frmGrafico.Chart_HistoricoSensado.Series[0].Add(valor);
         DM_AccesoDatos.ADOQuery_Grafico.Next;
         cont:= cont+1;
@@ -323,6 +353,11 @@ end;
 
 
 
+
+procedure Tfrm_Principal.btnSimularClick(Sender: TObject);
+begin
+   WinExec(PChar('notepad.exe'),SW_SHOWNORMAL);
+end;
 
 (* Cambia los valores de las alertas para un sensor determinado, a partir
 de los ingresados por el usuario  *)
@@ -389,6 +424,21 @@ end;
 
 
 
+
+procedure Tfrm_Principal.tab_HistoricosShow(Sender: TObject);
+var fecha: TDate;
+    hora: TTime;
+begin
+    // Refresco los valores de los filtros para  el último minuto
+    hora:= now();
+
+    cxHistoricoFechaDesde.Text:= DateToStr(now());
+    cxHistoricoHoraDesde.Text:= TimeToStr(IncMinute(hora,-1));
+
+    cxHistoricoFechaHasta.Text:= DateToStr(now());
+    cxHistoricoHoraHasta.Text:= TimeToStr( hora );
+
+end;
 
 //////////////////////////////////////////////////////////
 ////             CONSIGNAS - SECUENCIAS              /////
@@ -742,12 +792,12 @@ end;
 (*Actualiza la barra de estados.*)
 procedure Tfrm_Principal.TimerStatusBarTimer(Sender: TObject);
 begin
-      DM_AccesoDatos.ADOQuery_AlertasUltimaHora.Close;
-      DM_AccesoDatos.ADOQuery_AlertasUltimaHora.Open;
-
+      DM_AccesoDatos.RefrescarAlertas();
       StatusBar.Panels[0].text:= 'C.A: Online: '+ BoolToStr(SocketSuscripcion.Active,true);
       StatusBar.Panels[1].text:= 'BD Online: '+ BoolToStr(DM_AccesoDatos.ADOConnectionHYDRODB.Connected,true);
       StatusBar.Panels[2].text:= 'RTU Online: '+ BoolToStr( TCP_UDPPort1.Active,true);
 end;
 
 end.
+
+
