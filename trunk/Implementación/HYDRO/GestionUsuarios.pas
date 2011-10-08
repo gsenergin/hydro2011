@@ -102,7 +102,9 @@ begin
         frm_AgregarUsuario.cmb_IDTipoUsuario.Items.Add(FieldByName('ID_TipoUsuario').AsString);
         Next;
       end;
-
+    frm_AgregarUsuario.cmb_IDTipoUsuario.ItemIndex:= 0;
+    frm_AgregarUsuario.cmb_TipoUsuario.ItemIndex:= 0;
+    
     frm_AgregarUsuario.ShowModal;
 
     if frm_AgregarUsuario.ModalResult = mrYes then

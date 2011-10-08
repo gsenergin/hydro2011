@@ -37,6 +37,7 @@ type
     procedure SP_Usuario_Insert(nombre_usuario:string; IDTipoUsuario:integer);
     procedure SP_Usuario_RestorePassword(nombre_usuario, nueva_clave:string);
     procedure SP_Usuario_Restaurar(nombre_usuario:string);
+    procedure RefrescarAlertas();
 
 
    // function SF_Usuario_Existente(nombre_usuario:string):boolean;
@@ -63,6 +64,12 @@ begin
     ADOQuery_ExUsuarios.Open;
     ADOQuery_AlertasUltimaHora.Open;
 
+end;
+
+procedure TDM_AccesoDatos.RefrescarAlertas();
+begin
+     ADOQuery_AlertasUltimaHora.Close;
+     ADOQuery_AlertasUltimaHora.Open;
 end;
 
 procedure TDM_AccesoDatos.ADOQuery_ExUsuarios_REFRESH;
