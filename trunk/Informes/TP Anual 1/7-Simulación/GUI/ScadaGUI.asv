@@ -22,7 +22,7 @@ function varargout = ScadaGUI(varargin)
 
 % Edit the above text to modify the response to help ScadaGUI
 
-% Last Modified by GUIDE v2.5 10-Oct-2011 17:46:55
+% Last Modified by GUIDE v2.5 10-Oct-2011 19:34:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -125,31 +125,35 @@ function ejecutar_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 % W Referencia
-temp = get(handles.wReferencia,'String');
-wRef = str2double(temp);
+%temp = get(handles.wReferencia,'String');
+wRef = get(handles.wReferencia,'String');%str2double(temp);
 % P Referencia
-temp = get(handles.pReferencia,'String');
-pRef = str2double(temp);
+%temp = get(handles.pReferencia,'String');
+pRef = get(handles.pReferencia,'String');
 %  Consumo
-temp = get(handles.consumo,'String');
-consumo = str2double(temp);
+consumo = get(handles.consumo,'String');
+
 %  Potencia
-temp = get(handles.potencia,'String');
-potencia = str2double(temp);
+potencia = get(handles.potencia,'String');
+
 %  Tension
-temp = get(handles.tension,'String');
-tension = str2double(temp);
+tension = get(handles.tension,'String');
+
 %  Frecuencia
-temp = get(handles.frecuencia,'String');
-frecuencia = str2double(temp);
+frecuencia = get(handles.frecuencia,'String');
+
 % SIMULAR
+ParametrosGenerador = ['[',potencia,' ',tension,' ',frecuencia,']'];
 
 find_system('Name','ModeloTurbinaGovernorPID');
 open_system('ModeloTurbinaGovernorPID');
 set_param('ModeloTurbinaGovernorPID/velocidadRef','Value',wRef);
 set_param('ModeloTurbinaGovernorPID/potenciaMecRef','Value',pRef);
 set_param('ModeloTurbinaGovernorPID/redConsumo','Voltage',consumo);
-set_param('ModeloTurbinaGovernorPID/velocidadRef','Value',potencia);
+set_param('ModeloTurbinaGovernorPID/generador','NominalParameters',ParametrosGenerador);
+
+set_param(gcs,'SimulationCommand','Start');
+
 
 function consumo_Callback(hObject, eventdata, handles)
 % hObject    handle to consumo (see GCBO)
@@ -232,6 +236,79 @@ function frecuencia_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function frecuencia_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to frecuencia (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set_param(gcs,'SimulationCommand','Stop');
+vars=evalin('base','who');
+
+set(handles.listaVar,'String',vars);
+
+
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+listaVariables=get(handles.listaVar,'String')
+index=get(handles.listaVar,'Value');
+nameVarToPlot=listaVariables{index(1)};
+varToPlot=evalin('base',nameVarToPlot);
+if(varToPlot == 'corrienteEstator'){
+    
+    }else if ()
+
+plot(handles.axes1,tensionVa.signals.values);
+
+% --- Executes on selection change in listaVar.
+function listaVar_Callback(hObject, eventdata, handles)
+% hObject    handle to listaVar (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns listaVar contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listaVar
+
+
+% --- Executes during object creation, after setting all properties.
+function listaVar_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listaVar (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function varToPlot_Callback(hObject, eventdata, handles)
+% hObject    handle to varToPlot (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of varToPlot as text
+%        str2double(get(hObject,'String')) returns contents of varToPlot as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function varToPlot_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to varToPlot (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
