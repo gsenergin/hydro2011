@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Sistema de Monitoreo y Control de Centrales Hidroelectricas" company="SCRUM Team" webLink="http://" view-date="2011-10-12" view-index="0" gantt-divider-location="431" resource-divider-location="301" version="2.0">
+<project name="Sistema de Monitoreo y Control de Centrales Hidroelectricas" company="SCRUM Team" webLink="http://" view-date="2011-03-21" view-index="0" gantt-divider-location="431" resource-divider-location="301" version="2.0">
     <description><![CDATA[Planificacion Inicial del Sistema de Informacion: "Sistema de Monitoreo y Control de Centrales Hidroelectricas" de la catedra PROYECTO, de la carrera Ingenieria en Sistemas de Informacion.]]></description>
-    <view zooming-state="default:0" id="gantt-chart"/>
+    <view zooming-state="default:5" id="gantt-chart"/>
     <view id="resource-table">
         <field id="0" name="Nombre" width="55" order="0"/>
         <field id="1" name="Función" width="44" order="1"/>
@@ -113,14 +113,55 @@
         <task id="50" name="Imp. #5" color="#8cb6ce" meeting="false" start="2011-07-08" duration="8" complete="0" priority="1" expand="false">
             <depend id="48" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="48" name="Prb. #5" color="#8cb6ce" meeting="false" start="2011-07-20" duration="4" complete="0" priority="1" expand="false"/>
-        <task id="60" name="Dis. #6" color="#8cb6ce" meeting="false" start="2011-07-26" duration="4" complete="0" priority="1" expand="false">
+        <task id="48" name="Prb. #5" color="#8cb6ce" meeting="false" start="2011-07-20" duration="4" complete="0" priority="1" expand="false">
+            <depend id="60" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="60" name="Dis. #6" color="#8cb6ce" meeting="false" start="2011-07-26" duration="3" complete="0" priority="1" expand="false">
             <depend id="58" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="58" name="Imp. #6" color="#8cb6ce" meeting="false" start="2011-08-01" duration="6" complete="0" priority="1" expand="false">
+        <task id="58" name="Imp. #6" color="#8cb6ce" meeting="false" start="2011-07-29" duration="10" complete="0" priority="1" expand="false">
             <depend id="56" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="56" name="Prb. #6" color="#8cb6ce" meeting="false" start="2011-08-09" duration="2" complete="0" priority="1" expand="false"/>
+        <task id="56" name="Prb. #6" color="#8cb6ce" meeting="false" start="2011-08-12" duration="1" complete="0" priority="1" expand="false">
+            <depend id="68" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="68" name="Req. #7" color="#8cb6ce" meeting="false" start="2011-08-15" duration="7" complete="0" priority="1" expand="false">
+            <depend id="66" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="66" name="Dis. #7" color="#8cb6ce" meeting="false" start="2011-08-24" duration="3" complete="0" priority="1" expand="false">
+            <depend id="64" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="64" name="Imp. #7" color="#8cb6ce" meeting="false" start="2011-08-29" duration="6" complete="0" priority="1" expand="false">
+            <depend id="62" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="62" name="Prb. #7" color="#8cb6ce" meeting="false" start="2011-09-06" duration="8" complete="0" priority="1" expand="false">
+            <depend id="77" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="77" name="Doc. #8" color="#8cb6ce" meeting="false" start="2011-09-16" duration="3" complete="0" priority="1" expand="false">
+            <depend id="75" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="75" name="Dis. #8" color="#8cb6ce" meeting="false" start="2011-09-21" duration="4" complete="0" priority="1" expand="false">
+            <depend id="73" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="73" name="Imp. #8" color="#8cb6ce" meeting="false" start="2011-09-27" duration="7" complete="0" priority="1" expand="false">
+            <depend id="71" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="71" name="Prb. #8" color="#8cb6ce" meeting="false" start="2011-10-06" duration="7" complete="0" priority="1" expand="false">
+            <depend id="85" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="85" name="Doc. #9" color="#8cb6ce" meeting="false" start="2011-10-17" duration="5" complete="0" priority="1" expand="false">
+            <depend id="81" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="81" name="Imp. #9" color="#8cb6ce" meeting="false" start="2011-10-24" duration="3" complete="0" priority="1" expand="false">
+            <depend id="79" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="79" name="Prb. #9" color="#8cb6ce" meeting="false" start="2011-10-27" duration="3" complete="0" priority="1" expand="false">
+            <depend id="89" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="89" name="Doc. #10" color="#8cb6ce" meeting="false" start="2011-11-01" duration="7" complete="0" priority="1" expand="false">
+            <depend id="87" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="87" name="Otros #10" color="#8cb6ce" meeting="false" start="2011-11-10" duration="2" complete="0" priority="1" expand="false"/>
     </tasks>
     <resources>
         <resource id="0" name="Scrum Master" function="Default:1" contacts="scmaster@hidro.com.ar" phone="1122334455"/>
@@ -129,23 +170,23 @@
         <resource id="3" name="Programador" function="Default:0" contacts="" phone=""/>
     </resources>
     <allocations>
-        <allocation task-id="15" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="15" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="16" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="15" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="16" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
-        <allocation task-id="17" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
-        <allocation task-id="17" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="16" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="17" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="19" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="17" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="19" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="20" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="19" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="20" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="22" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="20" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="22" resource-id="2" function="Default:0" responsible="true" load="100.0"/>
-        <allocation task-id="21" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="22" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
         <allocation task-id="21" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
-        <allocation task-id="23" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
+        <allocation task-id="21" resource-id="3" function="Default:0" responsible="true" load="100.0"/>
         <allocation task-id="23" resource-id="0" function="Default:1" responsible="true" load="100.0"/>
+        <allocation task-id="23" resource-id="1" function="Default:0" responsible="true" load="100.0"/>
     </allocations>
     <vacations/>
     <taskdisplaycolumns>
