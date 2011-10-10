@@ -269,7 +269,6 @@ type
     procedure btnCambiarPasswordClick(Sender: TObject);
     procedure btnSimularClick(Sender: TObject);
     procedure tab_HistoricosShow(Sender: TObject);
-    procedure btnHistoricoAlertasClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -289,11 +288,6 @@ implementation
 
 (* Busca los datos históricos del sensor seleccionado, arma un grafico en
 frmGrafico y lo muestra *)
-procedure Tfrm_Principal.btnHistoricoAlertasClick(Sender: TObject);
-begin
-aaa
-end;
-
 procedure Tfrm_Principal.btnHistoricoClick(Sender: TObject);
 var frmGrafico: Tfrm_Grafico;
     ID, TimeStamp: string;
@@ -301,6 +295,15 @@ var frmGrafico: Tfrm_Grafico;
     cont: integer;
     TSDesde, TSHasta: TDatetime;
 begin
+  TSDesde:= cxHistoricoFechaDesde.Date + cxHistoricoHoraDesde.Time ;
+  TSHasta:= cxHistoricoFechaHasta.Date + cxHistoricoHoraHasta.Time ;
+
+  if CompareDateTime(TSDesde,TSHasta) <> -1 then
+  begin
+      msError('Las fechas ingresadas no son válidas');
+      exit;
+  end;
+  
   //ADOQuery_Grafico
   frmGrafico:= Tfrm_Grafico.Create(self);
 
@@ -312,8 +315,7 @@ begin
 
 
 
-  TSDesde:= cxHistoricoFechaDesde.Date + cxHistoricoHoraDesde.Time ;
-  TSHasta:= cxHistoricoFechaHasta.Date + cxHistoricoHoraHasta.Time ;
+
 
   ID:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('ID_sensor').AsString;
   with DM_AccesoDatos.ADOQuery_Grafico do
