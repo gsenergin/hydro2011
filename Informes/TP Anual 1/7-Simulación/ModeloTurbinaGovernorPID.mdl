@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.14"
+    ComputedModelVersion    "1.15"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,9 +25,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Leandro"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Oct 08 12:43:00 2011"
-  RTWModifiedTimeStamp	  239972579
-  ModelVersionFormat	  "1.%<AutoIncrement:14>"
+  LastModifiedDate	  "Mon Oct 10 17:55:55 2011"
+  RTWModifiedTimeStamp	  240169389
+  ModelVersionFormat	  "1.%<AutoIncrement:15>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -713,38 +713,6 @@ Model {
     ReportName		    "simulink-default.rpt"
     SIDHighWatermark	    62
     Block {
-      BlockType		      Reference
-      Name		      "10000MVA 230Kv "
-      SID		      34
-      Ports		      [0, 0, 0, 0, 0, 0, 3]
-      Position		      [970, 186, 1055, 244]
-      BlockMirror	      on
-      LibraryVersion	      "1.1899"
-      DialogController	      "POWERSYS.PowerSysDialog"
-      FontName		      "Verdana"
-      FontSize		      11
-      SourceBlock	      "powerlib/Electrical\nSources/Three-Phase Source"
-      SourceType	      "Three-Phase Source"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      Voltage		      "consumo"
-      PhaseAngle	      "0"
-      Frequency		      "50"
-      InternalConnection      "Yg"
-      SpecifyImpedance	      on
-      Resistance	      "0.8929"
-      Inductance	      "16.58e-3"
-      ShortCircuitLevel	      "10000e6"
-      BaseVoltage	      "25e3"
-      XRratio		      "7"
-    }
-    Block {
       BlockType		      BusSelector
       Name		      "Bus\nSelector"
       SID		      21
@@ -977,15 +945,6 @@ Model {
       SampleTime	      "0"
     }
     Block {
-      BlockType		      Constant
-      Name		      "Potencia Mecanica de referencia [pu]"
-      SID		      4
-      Position		      [105, 120, 170, 150]
-      Value		      "potMecRef"
-      OutDataType	      "fixdt(1, 16)"
-      OutScaling	      "2^0"
-    }
-    Block {
       BlockType		      Reference
       Name		      "Sistema de Excitación"
       SID		      6
@@ -1013,56 +972,6 @@ Model {
       sat		      "[ 0, 0 ]"
       lim		      "[ -11.5, 11.5, 0 ]"
       v0		      "[1,5.55628]"
-    }
-    Block {
-      BlockType		      Reference
-      Name		      "Synchronous Machine\n200MVA 13.8KV"
-      SID		      5
-      Ports		      [2, 1, 0, 0, 0, 0, 3]
-      Position		      [450, 175, 540, 255]
-      LibraryVersion	      "1.1899"
-      DialogController	      "POWERSYS.PowerSysDialog"
-      FontName		      "Verdana"
-      FontSize		      11
-      SourceBlock	      "powerlib/Machines/Synchronous Machine\npu Standard"
-      SourceType	      "Synchronous Machine"
-      ShowPortLabels	      "FromPortIcon"
-      SystemSampleTime	      "-1"
-      FunctionWithSeparateData off
-      RTWMemSecFuncInitTerm   "Inherit from model"
-      RTWMemSecFuncExecute    "Inherit from model"
-      RTWMemSecDataConstants  "Inherit from model"
-      RTWMemSecDataInternal   "Inherit from model"
-      RTWMemSecDataParameters "Inherit from model"
-      PresetModel	      "No"
-      MechanicalLoad	      "Mechanical power Pm"
-      ShowDetailedParameters  on
-      RotorType		      "Salient-pole"
-      NominalParameters	      "[ 200E6  13800   50]"
-      Reactances1	      "[ 1.81, 0.3, 0.23, 1.76, 0.65, 0.25, 0.15 ]"
-      Reactances2	      "[ 1.305, 0.296, 0.252, 0.474,  0.243,  0.18 ]"
-      dAxisTimeConstants      "Open-circuit"
-      qAxisTimeConstants      "Short-circuit"
-      TimeConstants1	      "[ 4.4849  0.0681  0.1  ]"
-      TimeConstants2	      "[ 8.0, 0.03, 1.0, 0.07 ]"
-      TimeConstants3	      "[  4.49  0.0681  0.0513  ]"
-      TimeConstants4	      "[ 8.0, 0.03, 0.3371, 0.0295 ]"
-      TimeConstants5	      "[ 1.01, 0.053, 0.1 ]"
-      TimeConstants6	      "[ 1.3201, 0.023, 1.0, 0.07 ]"
-      TimeConstants7	      "[0.012 0.003 0.003]"
-      TimeConstants8	      "[ 1.3201, 0.0231, 0.3371, 0.0295 ]"
-      StatorResistance	      "0.003"
-      Mechanical	      "[ 3.7 0 20 ]"
-      PolePairs		      "20"
-      InitialConditions	      "[0 -194.123 3.50983 3.50983 3.50983 170.73 50.7301 -69.2699 5.55628]"
-      SetSaturation	      off
-      Saturation	      "[0.6404,0.7127,0.8441,0.9214,0.9956,1.082,1.19,1.316,1.457;0.7,0.7698,0.8872,0.9466,0.9969,1.0"
-      "46,1.1,1.151,1.201]"
-      Units		      "per unit standard parameters"
-      LoadFlowParameters      "[1 150000000 0 0 0]"
-      TsPowergui	      "0"
-      TsBlock		      "-1"
-      IterativeModel	      "Forward Euler"
     }
     Block {
       BlockType		      Terminator
@@ -1241,15 +1150,6 @@ Model {
       SampleTime	      "0"
     }
     Block {
-      BlockType		      Constant
-      Name		      "Velocidad de referencia [pu]"
-      SID		      2
-      Position		      [55, 69, 135, 101]
-      Value		      "velocidadRef"
-      OutDataType	      "fixdt(1, 16)"
-      OutScaling	      "2^0"
-    }
-    Block {
       BlockType		      Scope
       Name		      "Vf [pu]"
       SID		      25
@@ -1305,6 +1205,56 @@ Model {
       SaveFormat	      "Structure"
     }
     Block {
+      BlockType		      Reference
+      Name		      "generador"
+      SID		      5
+      Ports		      [2, 1, 0, 0, 0, 0, 3]
+      Position		      [450, 175, 540, 255]
+      LibraryVersion	      "1.1899"
+      DialogController	      "POWERSYS.PowerSysDialog"
+      FontName		      "Verdana"
+      FontSize		      11
+      SourceBlock	      "powerlib/Machines/Synchronous Machine\npu Standard"
+      SourceType	      "Synchronous Machine"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      PresetModel	      "No"
+      MechanicalLoad	      "Mechanical power Pm"
+      ShowDetailedParameters  on
+      RotorType		      "Salient-pole"
+      NominalParameters	      "[ 200E6  13800   50]"
+      Reactances1	      "[ 1.81, 0.3, 0.23, 1.76, 0.65, 0.25, 0.15 ]"
+      Reactances2	      "[ 1.305, 0.296, 0.252, 0.474,  0.243,  0.18 ]"
+      dAxisTimeConstants      "Open-circuit"
+      qAxisTimeConstants      "Short-circuit"
+      TimeConstants1	      "[ 4.4849  0.0681  0.1  ]"
+      TimeConstants2	      "[ 8.0, 0.03, 1.0, 0.07 ]"
+      TimeConstants3	      "[  4.49  0.0681  0.0513  ]"
+      TimeConstants4	      "[ 8.0, 0.03, 0.3371, 0.0295 ]"
+      TimeConstants5	      "[ 1.01, 0.053, 0.1 ]"
+      TimeConstants6	      "[ 1.3201, 0.023, 1.0, 0.07 ]"
+      TimeConstants7	      "[0.012 0.003 0.003]"
+      TimeConstants8	      "[ 1.3201, 0.0231, 0.3371, 0.0295 ]"
+      StatorResistance	      "0.003"
+      Mechanical	      "[ 3.7 0 20 ]"
+      PolePairs		      "20"
+      InitialConditions	      "[0 -194.123 3.50983 3.50983 3.50983 170.73 50.7301 -69.2699 5.55628]"
+      SetSaturation	      off
+      Saturation	      "[0.6404,0.7127,0.8441,0.9214,0.9956,1.082,1.19,1.316,1.457;0.7,0.7698,0.8872,0.9466,0.9969,1.0"
+      "46,1.1,1.151,1.201]"
+      Units		      "per unit standard parameters"
+      LoadFlowParameters      "[1 150000000 0 0 0]"
+      TsPowergui	      "0"
+      TsBlock		      "-1"
+      IterativeModel	      "Forward Euler"
+    }
+    Block {
       BlockType		      Scope
       Name		      "labc [pu]"
       SID		      23
@@ -1335,6 +1285,15 @@ Model {
       MaxDataPoints	      "inf"
       SampleTime	      "-1"
       SaveFormat	      "Structure"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "potenciaMecRef"
+      SID		      4
+      Position		      [105, 120, 170, 150]
+      Value		      "2"
+      OutDataType	      "fixdt(1, 16)"
+      OutScaling	      "2^0"
     }
     Block {
       BlockType		      Reference
@@ -1391,6 +1350,38 @@ Model {
       methode		      off
     }
     Block {
+      BlockType		      Reference
+      Name		      "redConsumo"
+      SID		      34
+      Ports		      [0, 0, 0, 0, 0, 0, 3]
+      Position		      [970, 186, 1055, 244]
+      BlockMirror	      on
+      LibraryVersion	      "1.1899"
+      DialogController	      "POWERSYS.PowerSysDialog"
+      FontName		      "Verdana"
+      FontSize		      11
+      SourceBlock	      "powerlib/Electrical\nSources/Three-Phase Source"
+      SourceType	      "Three-Phase Source"
+      ShowPortLabels	      "FromPortIcon"
+      SystemSampleTime	      "-1"
+      FunctionWithSeparateData off
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      Voltage		      "230e3"
+      PhaseAngle	      "0"
+      Frequency		      "50"
+      InternalConnection      "Yg"
+      SpecifyImpedance	      on
+      Resistance	      "0.8929"
+      Inductance	      "16.58e-3"
+      ShortCircuitLevel	      "10000e6"
+      BaseVoltage	      "25e3"
+      XRratio		      "7"
+    }
+    Block {
       BlockType		      ToWorkspace
       Name		      "vain"
       SID		      58
@@ -1411,6 +1402,15 @@ Model {
       MaxDataPoints	      "inf"
       SampleTime	      "-1"
       SaveFormat	      "Structure"
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "velocidadRef"
+      SID		      2
+      Position		      [55, 69, 135, 101]
+      Value		      "2"
+      OutDataType	      "fixdt(1, 16)"
+      OutScaling	      "2^0"
     }
     Block {
       BlockType		      ToWorkspace
@@ -1465,14 +1465,14 @@ Model {
       RefreshTime	      0.035000
     }
     Line {
-      SrcBlock		      "Velocidad de referencia [pu]"
+      SrcBlock		      "velocidadRef"
       SrcPort		      1
       Points		      [65, 0]
       DstBlock		      "Turbina y Controlador"
       DstPort		      1
     }
     Line {
-      SrcBlock		      "Potencia Mecanica de referencia [pu]"
+      SrcBlock		      "potenciaMecRef"
       SrcPort		      1
       Points		      [0, 65]
       DstBlock		      "Turbina y Controlador"
@@ -1490,7 +1490,7 @@ Model {
       SrcPort		      1
       Points		      [80, 0]
       Branch {
-	DstBlock		"Synchronous Machine\n200MVA 13.8KV"
+	DstBlock		"generador"
 	DstPort			1
       }
       Branch {
@@ -1513,7 +1513,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
-      SrcBlock		      "Synchronous Machine\n200MVA 13.8KV"
+      SrcBlock		      "generador"
       SrcPort		      RConn1
       Points		      [20, 0]
       Branch {
@@ -1537,7 +1537,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
-      SrcBlock		      "Synchronous Machine\n200MVA 13.8KV"
+      SrcBlock		      "generador"
       SrcPort		      RConn2
       Points		      [35, 0]
       Branch {
@@ -1553,7 +1553,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
-      SrcBlock		      "Synchronous Machine\n200MVA 13.8KV"
+      SrcBlock		      "generador"
       SrcPort		      RConn3
       Points		      [50, 0; 0, 10; 5, 0]
       Branch {
@@ -1573,7 +1573,7 @@ Model {
       Points		      [70, 0]
       Branch {
 	Points			[0, -180]
-	DstBlock		"Synchronous Machine\n200MVA 13.8KV"
+	DstBlock		"generador"
 	DstPort			2
       }
       Branch {
@@ -1582,7 +1582,7 @@ Model {
       }
     }
     Line {
-      SrcBlock		      "Synchronous Machine\n200MVA 13.8KV"
+      SrcBlock		      "generador"
       SrcPort		      1
       Points		      [10, 0; 0, -150]
       Branch {
@@ -1692,7 +1692,7 @@ Model {
     }
     Line {
       LineType		      "Connection"
-      SrcBlock		      "10000MVA 230Kv "
+      SrcBlock		      "redConsumo"
       SrcPort		      RConn1
       Points		      [-20, 0]
       Branch {
@@ -1744,7 +1744,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_SRC"
-	DstBlock		"10000MVA 230Kv "
+	DstBlock		"redConsumo"
 	DstPort			RConn2
       }
       Branch {
@@ -1771,7 +1771,7 @@ Model {
       }
       Branch {
 	ConnectType		"DEST_SRC"
-	DstBlock		"10000MVA 230Kv "
+	DstBlock		"redConsumo"
 	DstPort			RConn3
       }
       Branch {
