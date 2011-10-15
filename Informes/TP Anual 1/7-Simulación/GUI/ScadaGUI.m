@@ -124,22 +124,18 @@ function ejecutar_Callback(hObject, eventdata, handles)
 % hObject    handle to ejecutar (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
 % W Referencia
-%temp = get(handles.wReferencia,'String');
 wRef = get(handles.wReferencia,'String');%str2double(temp);
 % P Referencia
-%temp = get(handles.pReferencia,'String');
 pRef = get(handles.pReferencia,'String');
-%  Consumo
+% Consumo
 consumo = get(handles.consumo,'String');
-
-%  Potencia
+% Potencia
 potencia = get(handles.potencia,'String');
-
-%  Tension
+% Tension
 tension = get(handles.tension,'String');
-
-%  Frecuencia
+% Frecuencia
 frecuencia = get(handles.frecuencia,'String');
 
 % SIMULAR
@@ -252,8 +248,7 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set_param(gcs,'SimulationCommand','Stop');
-vars=evalin('base','who');
-
+vars = evalin('base','who');
 set(handles.listaVar,'String',vars);
 
 
@@ -263,15 +258,16 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-listaVariables=get(handles.listaVar,'String')
-index=get(handles.listaVar,'Value');
-nameVarToPlot=listaVariables{index(1)};
-varToPlot=evalin('base',nameVarToPlot);
-if strcmp(nameVarToPlot,'velocidadRotor')<1 
+listaVariables = get(handles.listaVar,'String')
+index = get(handles.listaVar,'Value');
+nameVarToPlot = listaVariables{index(1)};
+varToPlot = evalin('base',nameVarToPlot);
+if strcmp(nameVarToPlot,'velocidadRotor') < 1 
     plot(handles.axes1,varToPlot.signals.values);
 else
     plot(handles.axes1,varToPlot);
 end
+
 % --- Executes on selection change in listaVar.
 function listaVar_Callback(hObject, eventdata, handles)
 % hObject    handle to listaVar (see GCBO)
