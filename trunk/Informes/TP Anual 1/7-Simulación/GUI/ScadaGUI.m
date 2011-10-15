@@ -22,7 +22,7 @@ function varargout = ScadaGUI(varargin)
 
 % Edit the above text to modify the response to help ScadaGUI
 
-% Last Modified by GUIDE v2.5 10-Oct-2011 19:34:13
+% Last Modified by GUIDE v2.5 15-Oct-2011 13:05:48
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -248,7 +248,10 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set_param(gcs,'SimulationCommand','Stop');
-vars = evalin('base','who');
+%varsToFind = ['who(','corrienteEstator,','potenciaMecRotor,','string,','tensionVaIn,','tensionVaOut,','velocidadRotor)'];
+%varsToFind='who';
+vars = evalin('base','who(''corrienteEstator'',''potenciaMecRotor'',''tensionVaIn'',''tensionVaOut'',''velocidadRotor'')');
+
 set(handles.listaVar,'String',vars);
 
 
@@ -258,7 +261,7 @@ function pushbutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-listaVariables = get(handles.listaVar,'String')
+listaVariables = get(handles.listaVar,'String');
 index = get(handles.listaVar,'Value');
 nameVarToPlot = listaVariables{index(1)};
 varToPlot = evalin('base',nameVarToPlot);
@@ -312,3 +315,13 @@ function varToPlot_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on key press with focus on ejecutar and none of its controls.
+function ejecutar_KeyPressFcn(hObject, eventdata, handles)
+% hObject    handle to ejecutar (see GCBO)
+% eventdata  structure with the following fields (see UICONTROL)
+%	Key: name of the key that was pressed, in lower case
+%	Character: character interpretation of the key(s) that was pressed
+%	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
+% handles    structure with handles and user data (see GUIDATA)

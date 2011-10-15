@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.15"
+    ComputedModelVersion    "1.16"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -25,9 +25,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Leandro"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon Oct 10 17:55:55 2011"
-  RTWModifiedTimeStamp	  240169389
-  ModelVersionFormat	  "1.%<AutoIncrement:15>"
+  LastModifiedDate	  "Sat Oct 15 14:29:35 2011"
+  RTWModifiedTimeStamp	  240589772
+  ModelVersionFormat	  "1.%<AutoIncrement:16>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -697,7 +697,7 @@ Model {
   }
   System {
     Name		    "ModeloTurbinaGovernorPID"
-    Location		    [2, 82, 1262, 747]
+    Location		    [2, 74, 1278, 739]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1137,7 +1137,7 @@ Model {
       Ports		      [1]
       Position		      [130, 534, 160, 566]
       Floating		      off
-      Location		      [373, 457, 697, 696]
+      Location		      [33, 361, 1192, 600]
       Open		      off
       NumInputPorts	      "1"
       List {
@@ -1228,7 +1228,7 @@ Model {
       MechanicalLoad	      "Mechanical power Pm"
       ShowDetailedParameters  on
       RotorType		      "Salient-pole"
-      NominalParameters	      "[ 200E6  13800   50]"
+      NominalParameters	      "[210e6 13.8e3 50]"
       Reactances1	      "[ 1.81, 0.3, 0.23, 1.76, 0.65, 0.25, 0.15 ]"
       Reactances2	      "[ 1.305, 0.296, 0.252, 0.474,  0.243,  0.18 ]"
       dAxisTimeConstants      "Open-circuit"
@@ -1259,9 +1259,9 @@ Model {
       Name		      "labc [pu]"
       SID		      23
       Ports		      [1]
-      Position		      [675, 19, 705, 51]
+      Position		      [675, 14, 705, 46]
       Floating		      off
-      Location		      [715, 193, 1180, 432]
+      Location		      [9, 138, 1259, 377]
       Open		      off
       NumInputPorts	      "1"
       ZoomMode		      "yonly"
@@ -1291,7 +1291,7 @@ Model {
       Name		      "potenciaMecRef"
       SID		      4
       Position		      [105, 120, 170, 150]
-      Value		      "2"
+      Value		      "3"
       OutDataType	      "fixdt(1, 16)"
       OutScaling	      "2^0"
     }
@@ -1417,7 +1417,7 @@ Model {
       Name		      "velocidadRotor"
       SID		      53
       Ports		      [1]
-      Position		      [215, 584, 310, 616]
+      Position		      [225, 584, 320, 616]
       VariableName	      "velocidadRotor"
       MaxDataPoints	      "inf"
       SampleTime	      "-1"
@@ -1634,13 +1634,13 @@ Model {
 	DstPort			3
       }
       Branch {
-	Points			[0, 335]
-	DstBlock		"Velocidad [pu]"
+	Points			[0, 385]
+	DstBlock		"velocidadRotor"
 	DstPort			1
       }
       Branch {
-	Points			[0, 385]
-	DstBlock		"velocidadRotor"
+	Points			[0, 335]
+	DstBlock		"Velocidad [pu]"
 	DstPort			1
       }
     }
