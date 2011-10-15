@@ -16,6 +16,7 @@ object DM_AccesoDatos: TDM_AccesoDatos
     Top = 20
   end
   object ADOTable_Sensor: TADOTable
+    Active = True
     Connection = ADOConnectionHYDRODB
     CursorType = ctStatic
     LockType = ltReadOnly
@@ -290,18 +291,19 @@ object DM_AccesoDatos: TDM_AccesoDatos
   end
   object ADOQuery_AlertasUltimaHora: TADOQuery
     Connection = ADOConnectionHYDRODB
-    CursorType = ctOpenForwardOnly
+    CursorType = ctStatic
     Parameters = <>
     SQL.Strings = (
       
         'select Sensor.descripcion as SensorNombre, Alertas.descripcion, ' +
-        'Alertas.TimeStamp '
+        'Alertas.Timestamp'
       
         'FROM ALERTAS JOIN Sensor ON Alertas.FK_Alertas_Sensor=Sensor.Id_' +
         'Sensor '
       
         'Where TIMESTAMPDIFF(HOUR,alertas.TimeStamp,CURRENT_TIMESTAMP())=' +
-        '0;')
+        '0'
+      'group by SensorNombre;')
     Left = 88
     Top = 272
   end
@@ -310,5 +312,59 @@ object DM_AccesoDatos: TDM_AccesoDatos
     DataSet = ADOQuery_AlertasUltimaHora
     Left = 88
     Top = 336
+  end
+  object StoredProc_Bitacora_Insertar: TADOStoredProc
+    Connection = ADOConnectionHYDRODB
+    ProcedureName = 'Bitacora_Insertar'
+    Parameters = <
+      item
+        Name = 'nombre_usuario'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'descripcion'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 100
+      end>
+    Left = 600
+    Top = 292
+  end
+  object ADOTable_Bitacora: TADOTable
+    Active = True
+    Connection = ADOConnectionHYDRODB
+    CursorType = ctStatic
+    LockType = ltReadOnly
+    IndexName = 'PRIMARY'
+    TableName = 'bitacora'
+    Left = 656
+    Top = 136
+  end
+  object BS_Bitacora: TDataSource
+    DataSet = ADOTable_Bitacora
+    Left = 656
+    Top = 192
+  end
+  object DS_Alertas: TDataSource
+    DataSet = ADOQuery_Alertas
+    Left = 760
+    Top = 200
+  end
+  object ADOQuery_Alertas: TADOQuery
+    Active = True
+    Connection = ADOConnectionHYDRODB
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      
+        'select Sensor.descripcion as SensorNombre, Alertas.descripcion, ' +
+        'Alertas.Fecha, Alertas.Hora '
+      
+        'FROM ALERTAS JOIN Sensor ON Alertas.FK_Alertas_Sensor=Sensor.Id_' +
+        'Sensor ')
+    Left = 760
+    Top = 136
   end
 end

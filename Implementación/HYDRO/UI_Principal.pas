@@ -21,7 +21,10 @@ uses
 
   dblookup, cxListBox, cxMaskEdit, cxDropDownEdit,
 
-  IniFiles, cxCalendar, cxSpinEdit, cxTimeEdit;
+  IniFiles, cxCalendar, cxSpinEdit, cxTimeEdit, cxStyles, cxCustomData,
+  cxFilter, cxData, cxDataStorage, cxDBData, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView,
+  cxGrid, cxPropertiesStore;
 
 type
   Tfrm_Principal = class(TForm)
@@ -143,20 +146,13 @@ type
     HMILabel25: THMILabel;
     HMILabel26: THMILabel;
     cxLabel15: TcxLabel;
-    DBGrid_Sensor: TDBGrid;
-    btnHistorico: TcxButton;
     TimerFechaHora: TTimer;
     Panel_SecuenciasConsignas: TPanel;
     Label40: TLabel;
     Label38: TLabel;
     Label39: TLabel;
-    btn_ConsignaCaudal: TButton;
-    btn_ConsignaVoltaje: TButton;
-    btn_ConsignaManual: TButton;
     txtConsignaVoltaje: TEdit;
     txtConsignaCaudal: TEdit;
-    btn_SecuenciaEncendido: TButton;
-    btn_SecuenciaApagado: TButton;
     btn_FrenosGenerador: TcxButton;
     btn_AperturaAlabe: TcxButton;
     btn_FrenosTurbina: TcxButton;
@@ -185,7 +181,6 @@ type
     DBText_SensoresHH: TDBText;
     DBText_SensoresMax: TDBText;
     btn_ConfiguracionCambiarValores: TcxButton;
-    DBGrid_Configuracion: TDBGrid;
     cxLabel17: TcxLabel;
     cxLabel18: TcxLabel;
     cxLabel30: TcxLabel;
@@ -225,23 +220,57 @@ type
     cxLabel63: TcxLabel;
     lblPassword: TcxLabel;
     DBGrid_Alertas: TDBGrid;
-    cxLabel1: TcxLabel;
+    cxGrid_Configuracion_Alertas: TcxGrid;
+    cxGrid_Configuracion_AlertasDBTableView1: TcxGridDBTableView;
+    cxGrid_Configuracion_AlertasLevel1: TcxGridLevel;
+    cxGrid_Configuracion_AlertasDBTableView1FK_Sensor_RTU: TcxGridDBColumn;
+    cxGrid_Configuracion_AlertasDBTableView1nomenclatura: TcxGridDBColumn;
+    cxGrid_Configuracion_AlertasDBTableView1descripcion: TcxGridDBColumn;
+    cxGrid_Configuracion_AlertasDBTableView1unidad_medida: TcxGridDBColumn;
+    PageControl_Historicos: TcxPageControl;
+    TabHistoricos_TabSensado: TcxTabSheet;
+    TabHistoricos_TabAlertas: TcxTabSheet;
+    btnHistorico: TcxButton;
     cxLabel6: TcxLabel;
     cxHistoricoHoraDesde: TcxTimeEdit;
-    cxHistoricoFechaDesde: TcxDateEdit;
     cxHistoricoHoraHasta: TcxTimeEdit;
     cxHistoricoFechaHasta: TcxDateEdit;
+    cxHistoricoFechaDesde: TcxDateEdit;
+    cxLabel1: TcxLabel;
+    TabHistoricos_TabActividadUsuario: TcxTabSheet;
+    cxGrid_Configuracion_Actividad: TcxGrid;
+    cxGrid_Configuracion_ActividadDBTableView1: TcxGridDBTableView;
+    cxGrid_Configuracion_ActividadLevel1: TcxGridLevel;
+    cxGrid_Historicos_Alertas: TcxGrid;
+    cxGrid_Historicos_AlertasDBTableView1: TcxGridDBTableView;
+    cxGrid_Historicos_AlertasLevel1: TcxGridLevel;
+    cxGrid_Historicos_AlertasDBTableView1SensorNombre: TcxGridDBColumn;
+    cxGrid_Historicos_AlertasDBTableView1descripcion: TcxGridDBColumn;
+    cxGrid_Historicos_AlertasDBTableView1Fecha: TcxGridDBColumn;
+    cxGrid_Historicos_AlertasDBTableView1Hora: TcxGridDBColumn;
+    cxGrid_Historicos_SensadoDBTableView1: TcxGridDBTableView;
+    cxGrid_Historicos_SensadoLevel1: TcxGridLevel;
+    cxGrid_Historicos_Sensado: TcxGrid;
+    cxGrid_Historicos_SensadoDBTableView1FK_Sensor_RTU: TcxGridDBColumn;
+    cxGrid_Historicos_SensadoDBTableView1nomenclatura: TcxGridDBColumn;
+    cxGrid_Historicos_SensadoDBTableView1descripcion: TcxGridDBColumn;
+    cxGrid_Historicos_SensadoDBTableView1unidad_medida: TcxGridDBColumn;
+    cxGrid_Configuracion_ActividadDBTableView1Descripcion: TcxGridDBColumn;
+    cxGrid_Configuracion_ActividadDBTableView1Login: TcxGridDBColumn;
+    cxGrid_Configuracion_ActividadDBTableView1Fecha: TcxGridDBColumn;
+    cxGrid_Configuracion_ActividadDBTableView1Hora: TcxGridDBColumn;
+    cxPropertiesStore1: TcxPropertiesStore;
+    btn_Secuencia_Encendido: TcxButton;
+    bt_Secuencia_Apagado: TcxButton;
+    btn_Consigna_Caudal: TcxButton;
+    btn_Consigna_Voltaje: TcxButton;
+    btn_Consigna_Manual: TcxButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnHistoricoClick(Sender: TObject);
     procedure btn_ConfiguracionCambiarValoresClick(Sender: TObject);
     procedure TimerFechaHoraTimer(Sender: TObject);
     procedure btn_LogoutClick(Sender: TObject);
-    procedure btn_SecuenciaEncendidoClick(Sender: TObject);
-    procedure btn_SecuenciaApagadoClick(Sender: TObject);
-    procedure btn_ConsignaCaudalClick(Sender: TObject);
-    procedure btn_ConsignaVoltajeClick(Sender: TObject);
-    procedure btn_ConsignaManualClick(Sender: TObject);
     procedure SetValorActuador(IDRTU,DirMem,Valor:integer);
     procedure btn_FrenosTurbinaClick(Sender: TObject);
     procedure btn_AperturaAlabeClick(Sender: TObject);
@@ -269,6 +298,13 @@ type
     procedure btnCambiarPasswordClick(Sender: TObject);
     procedure btnSimularClick(Sender: TObject);
     procedure tab_HistoricosShow(Sender: TObject);
+    procedure TabConfiguracion_TabActividadEnter(Sender: TObject);
+    procedure TabConfiguracion_TabActividadExit(Sender: TObject);
+    procedure btn_Secuencia_EncendidoClick(Sender: TObject);
+    procedure bt_Secuencia_ApagadoClick(Sender: TObject);
+    procedure btn_Consigna_CaudalClick(Sender: TObject);
+    procedure btn_Consigna_VoltajeClick(Sender: TObject);
+    procedure btn_Consigna_ManualClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -295,6 +331,9 @@ var frmGrafico: Tfrm_Grafico;
     cont: integer;
     TSDesde, TSHasta: TDatetime;
 begin
+  // Escribo en la bitácora lo que hace el usuario
+  DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Consulta de Histórico');
+
   TSDesde:= cxHistoricoFechaDesde.Date + cxHistoricoHoraDesde.Time ;
   TSHasta:= cxHistoricoFechaHasta.Date + cxHistoricoHoraHasta.Time ;
 
@@ -358,7 +397,10 @@ end;
 
 procedure Tfrm_Principal.btnSimularClick(Sender: TObject);
 begin
-   WinExec(PChar('notepad.exe'),SW_SHOWNORMAL);
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Simulación de Escenarios');
+
+    WinExec(PChar('notepad.exe'),SW_SHOWNORMAL);
 end;
 
 (* Cambia los valores de las alertas para un sensor determinado, a partir
@@ -385,6 +427,10 @@ begin
     end;
 
     // Si llego hasta aca, no hay errores
+
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Cambio de Parametros de Alertas. Min='+inttostr(min)+
+      ' LL='+inttostr(LL)+' L='+inttostr(L)+' H='+inttostr(H)+' HH='+inttostr(HH)+' Max='+inttostr(Max));
 
    ID:= DM_AccesoDatos.ADOTable_Sensor.FieldByName('ID_sensor').AsString;
 
@@ -418,10 +464,12 @@ procedure Tfrm_Principal.SocketSuscripcionError(Sender: TObject;
   Socket: TCustomWinSocket; ErrorEvent: TErrorEvent; var ErrorCode: Integer);
 begin
     showmessage('Error al establecer conexión con el Módulo de Control Automático');
+
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar('N/A','Error al Conectarse con M.C.A.');
+
 //    Application.Terminate;
 end;
-
-
 
 
 
@@ -440,6 +488,9 @@ begin
     cxHistoricoFechaHasta.Text:= DateToStr(now());
     cxHistoricoHoraHasta.Text:= TimeToStr( hora );
 
+    //Refresco las tablas
+    DM_AccesoDatos.RefrescarHistoricos();
+
 end;
 
 //////////////////////////////////////////////////////////
@@ -449,8 +500,11 @@ end;
 
 (* Envía al Módulo de control automático la consigna de caudal,
 e inhabilita los comandos manuales *)
-procedure Tfrm_Principal.btn_ConsignaCaudalClick(Sender: TObject);
+procedure Tfrm_Principal.btn_Consigna_CaudalClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Consigna Caudal: '+txtConsignaCaudal.text+' m^3/s');
+
     SocketSuscripcion.Socket.SendText('#01'+txtConsignaCaudal.text+'#');
     // DESHabilito botones de comando de actuadores
     // HabilitarBotonesActuadores(false);
@@ -462,10 +516,13 @@ begin
     lbl_ModoConsigna.Caption:= 'Modo Automático';
 end;
 
-(* Envía al Módulo de control automático la consigna de voltaje,
-e inhabilita los comandos manuales *)
-procedure Tfrm_Principal.btn_ConsignaVoltajeClick(Sender: TObject);
+
+
+procedure Tfrm_Principal.btn_Consigna_VoltajeClick(Sender: TObject);
 begin
+     // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Consigna Voltaje: '+txtConsignaVoltaje.text+' Volts');
+
     SocketSuscripcion.Socket.SendText('#02'+txtConsignaVoltaje.text+'#');
     // DESHabilito botones de comando de actuadores
    //  HabilitarBotonesActuadores(false);
@@ -478,10 +535,14 @@ begin
 end;
 
 
+
 (* Envía al Módulo de control automático la consigna de modo Manual,
 y habilita los comandos manuales *)
-procedure Tfrm_Principal.btn_ConsignaManualClick(Sender: TObject);
+procedure Tfrm_Principal.btn_Consigna_ManualClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Consigna Manual');
+
     SocketSuscripcion.Socket.SendText('#03#');
     // Habilito botones de comando de actuadores
     btn_FrenosGenerador.Visible:= true;
@@ -495,17 +556,24 @@ end;
 
 (* Envía al Módulo de control automático la consigna realizar una
 secuencia de encendido *)
-procedure Tfrm_Principal.btn_SecuenciaEncendidoClick(Sender: TObject);
+procedure Tfrm_Principal.btn_Secuencia_EncendidoClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Secuencia de Encendido');
+
     SocketSuscripcion.Socket.SendText('#04#');
 end;
 
 (* Envía al Módulo de control automático la consigna realizar una
 secuencia de apagado *)
-procedure Tfrm_Principal.btn_SecuenciaApagadoClick(Sender: TObject);
+procedure Tfrm_Principal.bt_Secuencia_ApagadoClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Secuencia de Apagado');
+
     SocketSuscripcion.Socket.SendText('#05#');
 end;
+
 
 {$ENDREGION}
 
@@ -523,12 +591,18 @@ begin
     btn_FrenosTurbina.Enabled:= valor;
 end;
 
+
 (* Envía al Módulo de control automático el cambio de valor
 en un actuador. Solo para modo manual *)
 procedure Tfrm_Principal.SetValorActuador(IDRTU, DirMem, Valor: integer);
 begin
      if modoManual then
+     begin
        SocketSuscripcion.Socket.SendText('#06'+inttostr(IDRTU)+inttostr(DirMem)+IntToStr(valor)+'#');
+
+       // Escribo en la bitácora lo que hace el usuario
+       DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Set Valor. RTU #'+inttostr(IDRTU)+' @'+inttostr(DirMem)+' = '+IntToStr(valor));
+   end;
 end;
 
 (* Envía al Módulo de control automático el cambio de valor en los frenos
@@ -677,6 +751,16 @@ begin
         SetValorActuador(3,40002,1);
 end;
 
+procedure Tfrm_Principal.TabConfiguracion_TabActividadEnter(Sender: TObject);
+begin
+  DM_AccesoDatos.ADOTable_Bitacora.Active:= true;
+end;
+
+procedure Tfrm_Principal.TabConfiguracion_TabActividadExit(Sender: TObject);
+begin
+    DM_AccesoDatos.ADOTable_Bitacora.Active:= false;
+end;
+
 {$ENDREGION }
 
             
@@ -699,12 +783,18 @@ end;
 (* Llama a la unidad de gestión de usuarios, para eliminar al usuario *)
 procedure Tfrm_Principal.btn_ConfiguracionEliminarClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Eliminado el usuario '+DM_AccesoDatos.ADOTable_Usuario.FieldByName('user').AsString);
+
     GestionUsuarios_EliminarUsuario('');
 end;
 
 (* Llama a la unidad de gestión de usuarios, para resetear la clave del usuario *)
 procedure Tfrm_Principal.btn_ConfiguracionResetearPasswordClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Reseteada la Clave a '+DM_AccesoDatos.ADOTable_Usuario.FieldByName('user').AsString);
+
     GestionUsuarios_ResetearPassword('');
 end;
 
@@ -712,13 +802,16 @@ end;
 previamente eliminado *)
 procedure Tfrm_Principal.btn_ConfiguracionRestaurarUsuarioClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Restaurado el usuario '+DM_AccesoDatos.ADOTable_Usuario.FieldByName('user').AsString);
+
     GestionUsuarios_RestaurarUsuario(DBGrid_ExUsuarios.SelectedField.AsString);
 end;
 
 (* Llama a la unidad de gestión de usuarios, para agregar un nuevo usuario *)
 procedure Tfrm_Principal.btn_ConfiguracionAgregarUsuarioClick(Sender: TObject);
 begin
-    GestionUsuarios_AgregarUsuario();
+    GestionUsuarios_AgregarUsuario(lblUsuario.Caption);
 end;
 
 {$ENDREGION}
@@ -727,6 +820,9 @@ end;
 (*Click en LOGOUT. Sale del sistema*)
 procedure Tfrm_Principal.btn_LogoutClick(Sender: TObject);
 begin
+    // Escribo en la bitácora lo que hace el usuario
+    DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Logout');
+
     //ADOConnectionHYDRODB.Connected:= false;
     //ADOTable_Sensor.Active:= false;
     try

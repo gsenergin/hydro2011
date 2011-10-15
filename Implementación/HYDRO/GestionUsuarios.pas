@@ -10,7 +10,7 @@ procedure GestionUsuarios_CambiarClave(nombre_usuario, claveLogin, claveAnterior
 procedure GestionUsuarios_ResetearPassword(nombre_usuario:string);
 procedure GestionUsuarios_EliminarUsuario(nombre_usuario:string);
 procedure GestionUsuarios_RestaurarUsuario(nombre_usuario:string);
-procedure GestionUsuarios_AgregarUsuario();
+procedure GestionUsuarios_AgregarUsuario(current_user:string);
 
 implementation
 
@@ -29,6 +29,9 @@ begin
              begin
                   DM_AccesoDatos.SP_Usuario_RestorePassword(nombre_usuario, claveNueva);
                   msInfo('¡Clave cambiada con éxito!');
+
+                  // Escribo en la bitácora lo que hace el usuario
+                  DM_AccesoDatos.SP_Bitacora_Insertar(nombre_usuario,'Cambio de clave');
              end;
         end
         else
@@ -83,7 +86,7 @@ end;
 
 (* GestionUsuarios_AgregarUsuario= Agrega un usuario, con clave por defecto
 igual a su nombre. Solo habilitado para el administrador del sistema *)
-procedure GestionUsuarios_AgregarUsuario();
+procedure GestionUsuarios_AgregarUsuario(current_user:string);
 var nombre_usuario:string;
     IDTipoUsuario: integer;
     frm_AgregarUsuario: Tfrm_ABMUsuarios;
@@ -113,7 +116,14 @@ begin
          IDTipoUsuario:= strtoint(frm_AgregarUsuario.cmb_IDTipoUsuario.Text);
           try
             if not DM_AccesoDatos.AQ_Usuario_Existente(nombre_usuario) then
-              DM_AccesoDatos.SP_Usuario_Insert(nombre_usuario, IDTipoUsuario)
+            begin
+              DM_AccesoDatos.SP_Usuario_Insert(nombre_usuario, IDTipoUsuario);
+
+              // Escribo en la bitácora lo que hace el usuario
+              DM_AccesoDatos.SP_Bitacora_Insertar(current_user,'Creado usuario <'+nombre_usuario+'>, Tipo <'
+                  +frm_AgregarUsuario.cmb_TipoUsuario.text+'>');
+
+            end
             else
               msinfo('Error: El nombre de usuario que ingresó ya existe');
           except
