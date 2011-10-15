@@ -28,6 +28,11 @@ type
     StoredProc_UsuarioRestaurar: TADOStoredProc;
     ADOQuery_AlertasUltimaHora: TADOQuery;
     DS_AlertasUltimaHora: TDataSource;
+    StoredProc_Bitacora_Insertar: TADOStoredProc;
+    ADOTable_Bitacora: TADOTable;
+    BS_Bitacora: TDataSource;
+    DS_Alertas: TDataSource;
+    ADOQuery_Alertas: TADOQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     procedure ADOQuery_ExUsuarios_REFRESH();
@@ -37,7 +42,9 @@ type
     procedure SP_Usuario_Insert(nombre_usuario:string; IDTipoUsuario:integer);
     procedure SP_Usuario_RestorePassword(nombre_usuario, nueva_clave:string);
     procedure SP_Usuario_Restaurar(nombre_usuario:string);
+    procedure SP_Bitacora_Insertar(nombre_usuario:string; descripcion:string);
     procedure RefrescarAlertas();
+    procedure RefrescarHistoricos();
 
 
    // function SF_Usuario_Existente(nombre_usuario:string):boolean;
@@ -61,6 +68,7 @@ begin
     ADOTable_Sensor.Active:= true;
     ADOTable_Usuario.Active:= true;
     ADOTable_TipoUsuario.Active:= true;
+    ADOQuery_Alertas.Active:= true;
     ADOQuery_ExUsuarios.Open;
     ADOQuery_AlertasUltimaHora.Open;
 
@@ -70,6 +78,16 @@ procedure TDM_AccesoDatos.RefrescarAlertas();
 begin
      ADOQuery_AlertasUltimaHora.Close;
      ADOQuery_AlertasUltimaHora.Open;
+end;
+
+procedure TDM_AccesoDatos.RefrescarHistoricos;
+begin
+    ADOQuery_Alertas.Close;
+    ADOQuery_Alertas.Open;
+    ADOTable_Bitacora.Close;
+    ADOTable_Bitacora.Open;
+    ADOTable_Sensor.Close;
+    ADOTable_Sensor.Open;
 end;
 
 procedure TDM_AccesoDatos.ADOQuery_ExUsuarios_REFRESH;
@@ -97,6 +115,18 @@ begin
       result:= false
     else
       result:= true;
+end;
+
+procedure TDM_AccesoDatos.SP_Bitacora_Insertar(nombre_usuario,
+  descripcion: string);
+begin
+    with StoredProc_Bitacora_Insertar do
+    begin
+        Close;
+        Parameters[0].Value:= nombre_usuario;
+        Parameters[1].Value:= descripcion;
+        ExecProc;
+    end;
 end;
 
 procedure TDM_AccesoDatos.SP_Usuario_Delete(nombre_usuario: string);

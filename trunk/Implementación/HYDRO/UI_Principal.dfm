@@ -42,10 +42,10 @@ object frm_Principal: Tfrm_Principal
       Transparent = True
     end
     object DBGrid_Alertas: TDBGrid
-      Left = 10
+      Left = 5
       Top = 27
-      Width = 515
-      Height = 110
+      Width = 532
+      Height = 117
       Color = clBlack
       DataSource = DM_AccesoDatos.DS_AlertasUltimaHora
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -86,7 +86,7 @@ object frm_Principal: Tfrm_Principal
         item
           Color = 951029
           Expanded = False
-          FieldName = 'TimeStamp'
+          FieldName = 'Timestamp'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -11
@@ -103,7 +103,7 @@ object frm_Principal: Tfrm_Principal
     Top = 39
     Width = 816
     Height = 506
-    ActivePage = tab_Historicos
+    ActivePage = tab_Control
     TabOrder = 1
     ClientRectBottom = 502
     ClientRectLeft = 4
@@ -121,7 +121,7 @@ object frm_Principal: Tfrm_Principal
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D49484452000002E6
           000001DC08060000009A906F050000000467414D410000B18F0BFC6105000000
-          097048597300000EC100000EC101B8916BED00004C4449444154785EEDDDCDB5
+          097048597300000EC000000EC0016AD6890900004C4449444154785EEDDDCDB5
           233973A0E1F24666682BAFDAA5F1E16E65C62C7A3726DC69567FEC66B148E21F
           08201F9D534752333301045E045E0641DE1FFFFD3FFFFBBDDBBF3FFFFCF3DB3F
           31C000063080010C60602706FEF8E38FEF1DFEED14D3D3FAFA633729BFF7F7B4
@@ -995,6 +995,7 @@ object frm_Principal: Tfrm_Principal
         Top = 253
         Width = 33
         Height = 20
+        Hint = 'Haga Doble-Clic para Encender/Apagar'
         Alignment = taCenter
         Color = clMaroon
         Font.Charset = DEFAULT_CHARSET
@@ -1004,6 +1005,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU2_AT10019DblClick
@@ -1054,6 +1057,7 @@ object frm_Principal: Tfrm_Principal
         Top = 277
         Width = 33
         Height = 20
+        Hint = 'Haga Doble-Clic para Encender/Apagar'
         Alignment = taCenter
         Color = clMaroon
         Font.Charset = DEFAULT_CHARSET
@@ -1063,6 +1067,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU2_AT10016DblClick
@@ -1113,6 +1119,7 @@ object frm_Principal: Tfrm_Principal
         Top = 303
         Width = 33
         Height = 20
+        Hint = 'Haga Doble-Clic para Encender/Apagar'
         Alignment = taCenter
         Color = clMaroon
         Font.Charset = DEFAULT_CHARSET
@@ -1122,6 +1129,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU2_AT10018DblClick
@@ -1172,6 +1181,7 @@ object frm_Principal: Tfrm_Principal
         Top = 327
         Width = 33
         Height = 20
+        Hint = 'Haga Doble-Clic para Encender/Apagar'
         Alignment = taCenter
         Color = clMaroon
         Font.Charset = DEFAULT_CHARSET
@@ -1181,6 +1191,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU2_AT10017DblClick
@@ -1231,6 +1243,7 @@ object frm_Principal: Tfrm_Principal
         Top = 353
         Width = 33
         Height = 20
+        Hint = 'Haga Doble-Clic para Encender/Apagar'
         Alignment = taCenter
         Color = clMaroon
         Font.Charset = DEFAULT_CHARSET
@@ -1240,6 +1253,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU2_AT10011DblClick
@@ -1348,6 +1363,7 @@ object frm_Principal: Tfrm_Principal
         Top = 114
         Width = 35
         Height = 33
+        Hint = 'Haga Doble-Clic para Abrir/Cerrar la compuerta'
         Alignment = taCenter
         Color = clGray
         Font.Charset = DEFAULT_CHARSET
@@ -1357,6 +1373,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU1_ACC0003DblClick
@@ -1407,6 +1425,7 @@ object frm_Principal: Tfrm_Principal
         Top = 90
         Width = 35
         Height = 33
+        Hint = 'Haga Doble-Clic para Abrir/Cerrar la compuerta'
         Alignment = taCenter
         Color = clGray
         Font.Charset = DEFAULT_CHARSET
@@ -1416,6 +1435,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU1_ACC0004DblClick
@@ -1466,6 +1487,7 @@ object frm_Principal: Tfrm_Principal
         Top = 181
         Width = 35
         Height = 33
+        Hint = 'Haga Doble-Clic para Abrir/Cerrar la compuerta'
         Alignment = taCenter
         Color = clGray
         Font.Charset = DEFAULT_CHARSET
@@ -1475,6 +1497,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU2_AT10003DblClick
@@ -1525,6 +1549,7 @@ object frm_Principal: Tfrm_Principal
         Top = 127
         Width = 35
         Height = 33
+        Hint = 'Haga Doble-Clic para Abrir/Cerrar la compuerta'
         Alignment = taCenter
         Color = clGray
         Font.Charset = DEFAULT_CHARSET
@@ -1534,6 +1559,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU2_AT10004DblClick
@@ -1584,6 +1611,7 @@ object frm_Principal: Tfrm_Principal
         Top = 426
         Width = 35
         Height = 33
+        Hint = 'Haga Doble-Clic para Abrir/Cerrar la compuerta'
         Alignment = taCenter
         Color = clGray
         Font.Charset = DEFAULT_CHARSET
@@ -1593,6 +1621,8 @@ object frm_Principal: Tfrm_Principal
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
         Transparent = False
         Layout = tlCenter
         OnDblClick = CLR_RTU3_ASA0002DblClick
@@ -2045,109 +2075,222 @@ object frm_Principal: Tfrm_Principal
       Caption = 'Hist'#243'ricos'
       ImageIndex = 1
       OnShow = tab_HistoricosShow
-      object DBGrid_Sensor: TDBGrid
-        Left = 83
-        Top = 51
-        Width = 558
-        Height = 302
-        Align = alCustom
-        DataSource = DM_AccesoDatos.DS_Sensor
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        ReadOnly = True
+      ExplicitLeft = 5
+      object PageControl_Historicos: TcxPageControl
+        Left = 0
+        Top = 3
+        Width = 805
+        Height = 473
+        ActivePage = TabHistoricos_TabSensado
+        NavigatorPosition = npLeftBottom
+        Rotate = True
+        Style = 11
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'FK_Sensor_RTU'
-            Title.Caption = '# RTU'
-            Width = 43
-            Visible = True
+        TabPosition = tpLeft
+        ClientRectBottom = 469
+        ClientRectLeft = 63
+        ClientRectRight = 801
+        ClientRectTop = 5
+        object TabHistoricos_TabSensado: TcxTabSheet
+          Caption = 'Sensado'
+          ImageIndex = 0
+          ExplicitLeft = 86
+          ExplicitTop = 6
+          ExplicitWidth = 716
+          object btnHistorico: TcxButton
+            Left = 280
+            Top = 436
+            Width = 123
+            Height = 25
+            Caption = 'Ver Hist'#243'rico'
+            TabOrder = 0
+            OnClick = btnHistoricoClick
           end
-          item
-            Expanded = False
-            FieldName = 'nomenclatura'
-            Title.Caption = 'Nomenclatura'
-            Width = 83
-            Visible = True
+          object cxLabel6: TcxLabel
+            Left = 355
+            Top = 404
+            Caption = 'Hasta:'
+            ParentFont = False
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = [fsBold]
+            Style.IsFontAssigned = True
           end
-          item
-            Expanded = False
-            FieldName = 'descripcion'
-            Title.Caption = 'Descripcion'
-            Width = 306
-            Visible = True
+          object cxHistoricoHoraDesde: TcxTimeEdit
+            Left = 218
+            Top = 403
+            EditValue = 0d
+            TabOrder = 2
+            Width = 69
           end
-          item
-            Expanded = False
-            FieldName = 'unidad_medida'
-            Title.Caption = 'Unidad Medida'
-            Width = 84
-            Visible = True
-          end>
-      end
-      object btnHistorico: TcxButton
-        Left = 312
-        Top = 432
-        Width = 123
-        Height = 25
-        Caption = 'Ver Hist'#243'rico'
-        TabOrder = 1
-        OnClick = btnHistoricoClick
-      end
-      object cxLabel1: TcxLabel
-        Left = 83
-        Top = 388
-        Caption = 'Desde:'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.IsFontAssigned = True
-      end
-      object cxLabel6: TcxLabel
-        Left = 395
-        Top = 388
-        Caption = 'Hasta:'
-        ParentFont = False
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'Tahoma'
-        Style.Font.Style = [fsBold]
-        Style.IsFontAssigned = True
-      end
-      object cxHistoricoHoraDesde: TcxTimeEdit
-        Left = 258
-        Top = 387
-        EditValue = 0d
-        TabOrder = 4
-        Width = 69
-      end
-      object cxHistoricoFechaDesde: TcxDateEdit
-        Left = 131
-        Top = 387
-        TabOrder = 5
-        Width = 121
-      end
-      object cxHistoricoHoraHasta: TcxTimeEdit
-        Left = 564
-        Top = 387
-        EditValue = 0d
-        TabOrder = 6
-        Width = 73
-      end
-      object cxHistoricoFechaHasta: TcxDateEdit
-        Left = 441
-        Top = 387
-        TabOrder = 7
-        Width = 121
+          object cxHistoricoHoraHasta: TcxTimeEdit
+            Left = 524
+            Top = 403
+            EditValue = 0d
+            TabOrder = 3
+            Width = 73
+          end
+          object cxHistoricoFechaHasta: TcxDateEdit
+            Left = 401
+            Top = 403
+            TabOrder = 4
+            Width = 121
+          end
+          object cxHistoricoFechaDesde: TcxDateEdit
+            Left = 91
+            Top = 403
+            TabOrder = 5
+            Width = 121
+          end
+          object cxLabel1: TcxLabel
+            Left = 43
+            Top = 404
+            Caption = 'Desde:'
+            ParentFont = False
+            Style.Font.Charset = DEFAULT_CHARSET
+            Style.Font.Color = clWindowText
+            Style.Font.Height = -11
+            Style.Font.Name = 'Tahoma'
+            Style.Font.Style = [fsBold]
+            Style.IsFontAssigned = True
+          end
+          object cxGrid_Historicos_Sensado: TcxGrid
+            Left = 3
+            Top = 0
+            Width = 734
+            Height = 385
+            TabOrder = 7
+            object cxGrid_Historicos_SensadoDBTableView1: TcxGridDBTableView
+              NavigatorButtons.ConfirmDelete = False
+              DataController.DataSource = DM_AccesoDatos.DS_Sensor
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsData.Deleting = False
+              OptionsData.Editing = False
+              OptionsData.Inserting = False
+              object cxGrid_Historicos_SensadoDBTableView1FK_Sensor_RTU: TcxGridDBColumn
+                Caption = 'RTU N'#186
+                DataBinding.FieldName = 'FK_Sensor_RTU'
+                Visible = False
+                GroupIndex = 0
+              end
+              object cxGrid_Historicos_SensadoDBTableView1nomenclatura: TcxGridDBColumn
+                Caption = 'Nomenclatura'
+                DataBinding.FieldName = 'nomenclatura'
+                Width = 78
+              end
+              object cxGrid_Historicos_SensadoDBTableView1descripcion: TcxGridDBColumn
+                Caption = 'Descripcion'
+                DataBinding.FieldName = 'descripcion'
+                Width = 415
+              end
+              object cxGrid_Historicos_SensadoDBTableView1unidad_medida: TcxGridDBColumn
+                Caption = 'Unidad Medida'
+                DataBinding.FieldName = 'unidad_medida'
+                Width = 86
+              end
+            end
+            object cxGrid_Historicos_SensadoLevel1: TcxGridLevel
+              GridView = cxGrid_Historicos_SensadoDBTableView1
+            end
+          end
+        end
+        object TabHistoricos_TabAlertas: TcxTabSheet
+          Caption = 'Alertas'
+          ImageIndex = 1
+          ExplicitLeft = 64
+          ExplicitTop = 6
+          object cxGrid_Historicos_Alertas: TcxGrid
+            Left = 10
+            Top = 4
+            Width = 725
+            Height = 457
+            TabOrder = 0
+            object cxGrid_Historicos_AlertasDBTableView1: TcxGridDBTableView
+              NavigatorButtons.ConfirmDelete = False
+              DataController.DataSource = DM_AccesoDatos.DS_Alertas
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsData.Deleting = False
+              OptionsData.Editing = False
+              OptionsData.Inserting = False
+              object cxGrid_Historicos_AlertasDBTableView1Hora: TcxGridDBColumn
+                DataBinding.FieldName = 'Hora'
+                Width = 117
+              end
+              object cxGrid_Historicos_AlertasDBTableView1SensorNombre: TcxGridDBColumn
+                Caption = 'Sensor'
+                DataBinding.FieldName = 'SensorNombre'
+                Width = 236
+              end
+              object cxGrid_Historicos_AlertasDBTableView1descripcion: TcxGridDBColumn
+                Caption = 'Descripci'#243'n'
+                DataBinding.FieldName = 'descripcion'
+                Width = 336
+              end
+              object cxGrid_Historicos_AlertasDBTableView1Fecha: TcxGridDBColumn
+                DataBinding.FieldName = 'Fecha'
+                Visible = False
+                GroupIndex = 0
+              end
+            end
+            object cxGrid_Historicos_AlertasLevel1: TcxGridLevel
+              GridView = cxGrid_Historicos_AlertasDBTableView1
+            end
+          end
+        end
+        object TabHistoricos_TabActividadUsuario: TcxTabSheet
+          Caption = 'Usuarios'
+          ImageIndex = 2
+          ExplicitLeft = 85
+          ExplicitWidth = 716
+          object cxGrid_Configuracion_Actividad: TcxGrid
+            Left = 3
+            Top = 3
+            Width = 732
+            Height = 458
+            TabOrder = 0
+            object cxGrid_Configuracion_ActividadDBTableView1: TcxGridDBTableView
+              NavigatorButtons.ConfirmDelete = False
+              DataController.DataSource = DM_AccesoDatos.BS_Bitacora
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsData.Deleting = False
+              OptionsData.Editing = False
+              OptionsData.Inserting = False
+              object cxGrid_Configuracion_ActividadDBTableView1Login: TcxGridDBColumn
+                Caption = 'Usuario'
+                DataBinding.FieldName = 'Login'
+                Visible = False
+                GroupIndex = 0
+                Width = 127
+              end
+              object cxGrid_Configuracion_ActividadDBTableView1Fecha: TcxGridDBColumn
+                DataBinding.FieldName = 'Fecha'
+                Visible = False
+                GroupIndex = 1
+                Width = 77
+              end
+              object cxGrid_Configuracion_ActividadDBTableView1Hora: TcxGridDBColumn
+                DataBinding.FieldName = 'Hora'
+                Width = 69
+              end
+              object cxGrid_Configuracion_ActividadDBTableView1Descripcion: TcxGridDBColumn
+                Caption = 'Descripcion de la Actividad'
+                DataBinding.FieldName = 'Descripcion'
+                Width = 428
+              end
+            end
+            object cxGrid_Configuracion_ActividadLevel1: TcxGridLevel
+              GridView = cxGrid_Configuracion_ActividadDBTableView1
+            end
+          end
+        end
       end
     end
     object tab_Simulacion: TcxTabSheet
@@ -9515,7 +9658,7 @@ object frm_Principal: Tfrm_Principal
         Top = 16
         Width = 750
         Height = 460
-        ActivePage = TabConfiguracion_TabUsuarios
+        ActivePage = TabConfiguracion_TabAlertas
         NavigatorPosition = npLeftTop
         ParentBackground = False
         Rotate = True
@@ -9620,51 +9763,6 @@ object frm_Principal: Tfrm_Principal
             Caption = 'Cambiar Valores'
             TabOrder = 0
             OnClick = btn_ConfiguracionCambiarValoresClick
-          end
-          object DBGrid_Configuracion: TDBGrid
-            Left = 47
-            Top = 11
-            Width = 566
-            Height = 302
-            Align = alCustom
-            DataSource = DM_AccesoDatos.DS_Sensor
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            ReadOnly = True
-            TabOrder = 1
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Tahoma'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'FK_Sensor_RTU'
-                Title.Caption = '# RTU'
-                Width = 43
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'nomenclatura'
-                Title.Caption = 'Nomenclatura'
-                Width = 83
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'descripcion'
-                Title.Caption = 'Descripcion'
-                Width = 306
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'unidad_medida'
-                Title.Caption = 'Unidad Medida'
-                Width = 84
-                Visible = True
-              end>
           end
           object cxLabel17: TcxLabel
             Left = 132
@@ -9773,42 +9871,81 @@ object frm_Principal: Tfrm_Principal
             Top = 383
             Width = 60
             Height = 21
-            TabOrder = 10
+            TabOrder = 9
           end
           object txt_ConfiguracionSensoresHH: TEdit
             Left = 492
             Top = 383
             Width = 60
             Height = 21
-            TabOrder = 11
+            TabOrder = 10
           end
           object txt_ConfiguracionSensoresH: TEdit
             Left = 403
             Top = 383
             Width = 60
             Height = 21
-            TabOrder = 12
+            TabOrder = 11
           end
           object txt_ConfiguracionSensoresL: TEdit
             Left = 316
             Top = 383
             Width = 60
             Height = 21
-            TabOrder = 13
+            TabOrder = 12
           end
           object txt_ConfiguracionSensoresLL: TEdit
             Left = 220
             Top = 383
             Width = 60
             Height = 21
-            TabOrder = 14
+            TabOrder = 13
           end
           object txt_ConfiguracionSensoresMin: TEdit
             Left = 132
             Top = 383
             Width = 60
             Height = 21
+            TabOrder = 14
+          end
+          object cxGrid_Configuracion_Alertas: TcxGrid
+            Left = 3
+            Top = 0
+            Width = 674
+            Height = 315
             TabOrder = 15
+            object cxGrid_Configuracion_AlertasDBTableView1: TcxGridDBTableView
+              NavigatorButtons.ConfirmDelete = False
+              DataController.DataSource = DM_AccesoDatos.DS_Sensor
+              DataController.Summary.DefaultGroupSummaryItems = <>
+              DataController.Summary.FooterSummaryItems = <>
+              DataController.Summary.SummaryGroups = <>
+              OptionsData.Deleting = False
+              OptionsData.Editing = False
+              OptionsData.Inserting = False
+              object cxGrid_Configuracion_AlertasDBTableView1FK_Sensor_RTU: TcxGridDBColumn
+                Caption = 'RTU'
+                DataBinding.FieldName = 'FK_Sensor_RTU'
+              end
+              object cxGrid_Configuracion_AlertasDBTableView1nomenclatura: TcxGridDBColumn
+                Caption = 'Nomenclatura'
+                DataBinding.FieldName = 'nomenclatura'
+                Width = 82
+              end
+              object cxGrid_Configuracion_AlertasDBTableView1descripcion: TcxGridDBColumn
+                Caption = 'Descripcion'
+                DataBinding.FieldName = 'descripcion'
+                Width = 416
+              end
+              object cxGrid_Configuracion_AlertasDBTableView1unidad_medida: TcxGridDBColumn
+                Caption = 'Unidad Medida'
+                DataBinding.FieldName = 'unidad_medida'
+                Width = 84
+              end
+            end
+            object cxGrid_Configuracion_AlertasLevel1: TcxGridLevel
+              GridView = cxGrid_Configuracion_AlertasDBTableView1
+            end
           end
         end
         object TabConfiguracion_TabUsuarios: TcxTabSheet
@@ -9824,7 +9961,7 @@ object frm_Principal: Tfrm_Principal
             TabOrder = 0
             object btn_ConfiguracionEliminar: TcxButton
               Left = 213
-              Top = 144
+              Top = 159
               Width = 108
               Height = 25
               Caption = 'Eliminar'
@@ -10226,10 +10363,10 @@ object frm_Principal: Tfrm_Principal
     end
   end
   object Panel_SecuenciasConsignas: TPanel
-    Left = 552
+    Left = 543
     Top = 547
-    Width = 265
-    Height = 146
+    Width = 274
+    Height = 161
     BevelInner = bvRaised
     BevelOuter = bvLowered
     Locked = True
@@ -10249,8 +10386,8 @@ object frm_Principal: Tfrm_Principal
       ParentFont = False
     end
     object Label38: TLabel
-      Left = 8
-      Top = 61
+      Left = 2
+      Top = 69
       Width = 98
       Height = 13
       Caption = 'Caudal Turbinado'
@@ -10262,8 +10399,8 @@ object frm_Principal: Tfrm_Principal
       ParentFont = False
     end
     object Label39: TLabel
-      Left = 9
-      Top = 88
+      Left = 2
+      Top = 96
       Width = 98
       Height = 13
       Caption = 'Voltaje Generado'
@@ -10274,68 +10411,23 @@ object frm_Principal: Tfrm_Principal
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object btn_ConsignaCaudal: TButton
-      Left = 175
-      Top = 54
-      Width = 65
-      Height = 25
-      Caption = 'Set Caudal'
-      TabOrder = 0
-      OnClick = btn_ConsignaCaudalClick
-    end
-    object btn_ConsignaVoltaje: TButton
-      Left = 175
-      Top = 81
-      Width = 65
-      Height = 25
-      Caption = 'Set Voltaje'
-      TabOrder = 1
-      OnClick = btn_ConsignaVoltajeClick
-    end
-    object btn_ConsignaManual: TButton
-      Left = 175
-      Top = 112
-      Width = 65
-      Height = 25
-      Caption = 'Set Manual'
-      TabOrder = 2
-      OnClick = btn_ConsignaManualClick
-    end
     object txtConsignaVoltaje: TEdit
-      Left = 113
-      Top = 85
+      Left = 105
+      Top = 93
       Width = 56
       Height = 21
-      TabOrder = 3
+      TabOrder = 0
     end
     object txtConsignaCaudal: TEdit
-      Left = 112
-      Top = 58
+      Left = 104
+      Top = 66
       Width = 57
       Height = 21
-      TabOrder = 4
-    end
-    object btn_SecuenciaEncendido: TButton
-      Left = 15
-      Top = 23
-      Width = 99
-      Height = 25
-      Caption = 'Sec. de Encendido'
-      TabOrder = 5
-      OnClick = btn_SecuenciaEncendidoClick
-    end
-    object btn_SecuenciaApagado: TButton
-      Left = 136
-      Top = 23
-      Width = 97
-      Height = 25
-      Caption = 'Sec. de Apagado'
-      TabOrder = 6
-      OnClick = btn_SecuenciaApagadoClick
+      TabOrder = 1
     end
     object lbl_ModoConsigna: TcxLabel
       Left = 0
-      Top = 118
+      Top = 127
       Caption = 'Modo Autom'#225'tico'
       ParentFont = False
       Style.Font.Charset = DEFAULT_CHARSET
@@ -10345,6 +10437,238 @@ object frm_Principal: Tfrm_Principal
       Style.Font.Style = [fsItalic]
       Style.IsFontAssigned = True
       Transparent = True
+    end
+    object btn_Secuencia_Encendido: TcxButton
+      Left = 25
+      Top = 25
+      Width = 113
+      Height = 25
+      Hint = 'Ejecuta la Secuencia de Encencido del Sistema'
+      Caption = 'Sec. Encendido'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+      WordWrap = True
+      OnClick = btn_Secuencia_EncendidoClick
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000009140B231E46247D32783ADB33833DF3308139F32871
+        2FDB163F197D0511072300000000000000000000000000000000000000000000
+        00000000000018321D533E874BE6419950FF7DC28FFF96D0A6FF96CFA6FF78BE
+        89FF368D42FF28742FE60D291053000000000000000000000000000000000000
+        00001A3420534A9559F464B478FFA8DBB5FF87CC98FF66BC7DFF64BA7CFF86CB
+        98FFA5D9B4FF58AA6BFF2A7B32F40D2910530000000000000000000000000C16
+        0E224D925CE56AB97DFFA8DBB2FF60BC77FF5CBA73FF59B870FF59B56FFF58B5
+        6FFF5BB774FFA5D9B3FF5AAA6CFF28752FE50511062200000000000000002E54
+        377E53AB68FFAADDB4FF64C179FF5FBE71FF60BC77FFFFFFFFFFFFFFFFFF59B8
+        70FF58B56EFF5CB774FFA6DAB4FF388F43FF16401A7E00000000000000005394
+        64DB8ACC98FF89D396FF6BC67AFF63C170FF55AB65FFFFFFFFFFFFFFFFFF59B8
+        70FF59B870FF5BB972FF85CC97FF7BBE8DFF297231DB000000000000000061A9
+        76F6A9DDB3FF7DCF8AFF75CC81FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF59B870FF67BE7DFF9CD4ABFF32833BF6000000000000000065AC
+        7AF6B6E2BEFF8BD597FF7AC986FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFF59B870FF69C17EFF9DD4AAFF368640F600000000000000005E9B
+        71DBACDDB6FFA6DFAFFF81CB8CFF7CC986FF6EBD79FFFFFFFFFFFFFFFFFF5BAC
+        6AFF60BC77FF5CBA73FF8BD199FF80C592FF347A3DDB0000000000000000375B
+        437E85C797FFD2EED7FF95D9A0FF8AD394FF7FC889FFFFFFFFFFFFFFFFFF79CD
+        85FF6BC37CFF6FC77EFFACDFB5FF459E57FF2048267E00000000000000000F19
+        122265A579E5AADAB7FFD8F1DCFF92D89DFF88CD93FF84CC8EFF8BD496FF8AD4
+        95FF83D28EFFAFE0B7FF6BB97DFF41894DE509140B2200000000000000000000
+        0000253D2D536BB081F4AFDCBBFFDCF2E0FFB6E4BDFF9BDBA5FF96D9A0FFA5DF
+        AFFFC0E8C5FF79C28AFF4D975BF419321E530000000000000000000000000000
+        000000000000253D2D5366A67AE694CEA4FFC3E6CBFFCFEBD4FFC9E9CEFFAFDD
+        B8FF6DB97FFF4F955FE61B342153000000000000000000000000000000000000
+        00000000000000000000101A1323375B437D5E9C71DB65AB7AF362A976F35595
+        66DB2F54387D0D170F2300000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000}
+    end
+    object bt_Secuencia_Apagado: TcxButton
+      Left = 144
+      Top = 25
+      Width = 113
+      Height = 25
+      Hint = 'Ejecuta la Secuencia de Apagado del Sistema'
+      Caption = 'Sec. Apagado'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      WordWrap = True
+      OnClick = bt_Secuencia_ApagadoClick
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC4C6F3656BE05259DC53
+        5BDC5058DA4952DA5960DCB7BAF0FAFAFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFC6C8F3747CE78997FA8495FF7F90FC7D8EFA7D8DF77D8BF25159DD9B9F
+        EAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCACCF47E86E796A5FA5A74FF3250FF30
+        4FFF2C49FE2542FA4860F98694F46970E2BDC0F1FFFFFFFFFFFFFFFFFFD0D2F5
+        878EE99FADFB6781FF405EFF405EFF3C59FF3755FF3350FF2846FD4A65FD8996
+        F6656EE1C1C3F2FFFFFFFFFFFF888EE8A2B2FC738FFF4F70FF4F6EFF4B69FF46
+        64FF415EFF3C5AFF3755FF2C4BFF4E67FF8493FA5F66DEFFFFFFFFFFFF848AE6
+        A6BBFF5F7FFF5F7EFF5A79FF5573FF506EFF4B69FF4664FF415EFF3B59FF314F
+        FF8799FF565EDDFFFFFFFFFFFF9094E8ABBEFF6D8DFF6989FF6583FF5F7EFF5A
+        79FF5574FF506FFF4B69FF4663FF3F5CFF8A9BFF6269DFFFFFFFFFFFFF959AE9
+        B1C4FF7698FF7393FF6E8EFF6989FF6583FF5F7EFF5A79FF5573FF4F6EFF4867
+        FF90A1FF686FE1FFFFFFFFFFFF989DEAB8CDFF7DA0FF7C9DFF7899FF7393FF6E
+        8EFF6989FF6583FF607EFF5978FF4F70FF98AAFF6B72E2FFFFFFFFFFFFA7ABEE
+        BCCDFC9CBBFF81A5FF81A2FF7C9EFF7899FF7493FF6F8EFF6989FF6080FF7893
+        FF9EADFB7F85E5FFFFFFFFFFFFDFE1F8AFB5F1C1D1FCA0BFFF86AAFF85A7FF81
+        A2FF7C9DFF7898FF6F90FF85A1FFACBAFB9097EAD2D3F6FFFFFFFFFFFFFFFFFF
+        E0E1F8B1B7F0C4D4FCA3C2FF8BAFFF89ABFF84A7FF7EA0FF91AEFFB4C3FB9CA2
+        EDD5D6F6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E1F8B2B9F2C2D3FCC1D6FFBD
+        D1FFBBCFFFB9CEFFB7C8FC989FEDC3C5F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFE1E2F9AFB3EFA6AAEDA5AAEDA4A8ED9EA4EBA5A9EDD8D9F7FCFC
+        FEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    end
+    object btn_Consigna_Caudal: TcxButton
+      Left = 167
+      Top = 61
+      Width = 90
+      Height = 25
+      Hint = 'Define una consigna de Caudal'
+      Caption = 'Set Caudal'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+      WordWrap = True
+      OnClick = btn_Consigna_CaudalClick
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFEEE5C2FFC9AB35FFBA9400FFBB9400FFC29F
+        16FFDCC87AFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFD9C572FFB48A00FFBA9200FFBB9500FFBC9600FFBB94
+        00FFB68D00FFBE9907FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFF0E9C8FFB48900FFBB9500FFBC9600FFBC9600FFBC9600FFBC96
+        00FFBC9600FFB78F00FFCBAE3BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFC8AA30FFB99200FFBC9600FFBC9600FFBC9600FFBC9600FFBC96
+        00FFBC9600FFBB9500FFB78E00FFF6F2DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFBA9500FFBB9400FFBC9600FFBC9600FFBC9600FFBC9600FFBC96
+        00FFBC9600FFBC9600FFB58C00FFEADEAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFBC9702FFBB9400FFBC9600FFBC9600FFBC9600FFBC9600FFBC96
+        00FFBC9600FFBC9500FFB68D00FFEBDFB2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFC9AA33FFB99200FFBC9600FFBC9600FFBC9600FFBC9600FFBC96
+        00FFBC9600FFBB9500FFB78F00FFF2ECD1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFE5D69EFFB68D00FFBC9600FFBC9600FFBC9600FFBC9600FFBC96
+        00FFBC9600FFBA9400FFBE9807FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFB88F00FFBB9400FFBC9600FFBC9600FFBC9600FFBC96
+        00FFBC9600FFB68D00FFE2D190FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFE3D499FFB58C00FFBB9500FFBC9600FFBC9600FFBC96
+        00FFBA9400FFBB9500FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFC4A320FFB99200FFBC9600FFBC9600FFBB95
+        00FFB58A00FFECE1B7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFF3EED6FFB68E00FFBB9500FFBC9600FFB890
+        00FFCFB44BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD7C168FFB78F00FFBB9400FFBA94
+        00FFFDFCFAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFBA9300FFB68D00FFDFCC
+        85FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDECC82FFB58C00FFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD5BE61FFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    end
+    object btn_Consigna_Voltaje: TcxButton
+      Left = 167
+      Top = 89
+      Width = 90
+      Height = 25
+      Hint = 'Define una consigna de Voltaje'
+      Caption = 'Set Voltaje'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 6
+      WordWrap = True
+      OnClick = btn_Consigna_VoltajeClick
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF747474FFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8A8A8FF000000FFF0F0
+        F0FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF474747FF000000FF6262
+        62FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC3C3C3FF000000FF7F7F
+        7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F7FFFFFFFFFF000000FF6262
+        62FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF555555FF1A1A
+        1AFFF3F3F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFC2C2C2FF989898FFFFFFFFFFFFFFFFFFB3B3B3FF0000
+        00FFD6D6D6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFCDCDCDFF252525FF000000FFFFFFFFFFFFFFFFFF0000
+        00FFB2B2B2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFF696969FF000000FF000000FF5E5E5EFF0000
+        00FF555555FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFF7B7B7BFF050505FFDBDBDBFF343434FF0101
+        01FF444444FFE9E9E9FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFC4C4C4FF060606FF515151FFFFFFFFFF9393
+        93FF5C5C5CFFC5C5C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFE0E0E0FF292929FF000000FFFFFFFFFFFFFF
+        FFFFE8E8E8FFE8E8E8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5C5C5CFF000000FF5E5E5EFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF858585FF000000FF000000FFEBEB
+        EBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB6B6B6FF000000FF000000FF8D8D
+        8DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF171717FF000000FF1F1F
+        1FFFD6D6D6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    end
+    object btn_Consigna_Manual: TcxButton
+      Left = 144
+      Top = 119
+      Width = 113
+      Height = 25
+      Hint = 'Permite manejar manualmente los actuadores (solo para expertos)'
+      Caption = 'Modo Manual'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 7
+      WordWrap = True
+      OnClick = btn_Consigna_ManualClick
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        000005090B0D0A0909136B3013988E391CE3A34221F5A94521FAA84321FAA13F
+        20F692381CEA823A1ABA0B090A1605090B0D000000000000000000000000344D
+        64792477CAFB845F5FFBBF6035FFFEB961FFFEB962FFFEB962FFFEB962FFFEB9
+        61FFFEB961FFB14924FF756069F52D7BC8F838536C830000000000000000297D
+        D0FE82BAEEFF9F6658FFF5BB84FFFFAC5BFFFEA85AFFFEA257FFFE9C53FFFFA3
+        55FFFF9F50FFF8AE78FFA45E4AFF83BCEFFF2A77C9FE0000000000000000287B
+        CCFC78B3EAFFB39E94FFFFB760FFFFB663FFFEB261FFFEAC5DFFFEA559FFFD9E
+        53FFFE974EFFFF8D43FFBC8F82FF7EB8EDFF2872C3FA0000000000000000321A
+        0D508A5444FFFCC8ABFFFFD198FFFEC76DFFFEBF68FFFEB964FFFEB15EFFFEA8
+        59FFFDA054FFFFB77AFFFEA980FF885042FF341D106000000000000000000100
+        0001401A0560C44C1FFFF6E4D6FFFFE4A4FFFFD472FFFFC969FFFFC063FFFFB6
+        5FFFFFC180FFF6D7C6FFC5491FFF411A05690201000400000000000000000000
+        000005020107441E0869BC481CFFF4E2D4FF4E7BA9FF4D7BA8FF4D7BA8FF4E7B
+        A9FFF3D6C3FFBE461CFF441D086F0603010A0000000000000000000000000000
+        00000000000003010005432618A2346DA7FF9CCCF8FFAFD4F7FFAFD4F7FFA5CF
+        F6FF3474AEFF472A1FAD05020109000000000000000000000000000000000000
+        00000000000000000000204670C4A6CAEEFFABCCEAFFA7D0F6FFA8D0F6FFABCC
+        EAFFA7CDEEFF244E7BCC00000000000000000000000000000000000000000000
+        000000000000000000001D5790EDD9E8F7FF97C5F1FF8EBBE5FF7FA9D1FF89B5
+        DFFFCDDFEEFF21629EF102040506000000000000000000000000000000000000
+        000000000000000000000C3E87FF7C97B8FF8AB7E4FF719CC8FF15406EFF1944
+        72FF22456BFF113A64FA02030407000000000000000000000000000000000000
+        000000000000000000000F4B97FF12589FFF0F4A8AFF0F4B87FF114B87FF154C
+        85FF124175FF0E3057F100000000000000000000000000000000000000000000
+        0000000000000000000008183077114E95FE12589BFF125899FF115393FF0F4A
+        87FF0E3E71FE0A17268100000000000000000000000000000000000000000000
+        00000000000000000000000000000A1A347D114587F4104B90FF0F488AFF103F
+        78F50B1A2F840000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000}
     end
   end
   object StatusBar: TStatusBar
@@ -10647,5 +10971,11 @@ object frm_Principal: Tfrm_Principal
     OnTimer = TimerStatusBarTimer
     Left = 616
     Top = 48
+  end
+  object cxPropertiesStore1: TcxPropertiesStore
+    Components = <>
+    StorageName = 'cxPropertiesStore1'
+    Left = 48
+    Top = 8
   end
 end

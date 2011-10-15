@@ -1,11 +1,11 @@
 program Hydro;
 
 uses
-  Forms, Controls,
+  Forms,
+  Controls,
   UI_Principal in 'UI_Principal.pas' {frm_Principal},
   AccesoDatos in 'AccesoDatos.pas' {DM_AccesoDatos: TDataModule},
   UI_Login in 'UI_Login.pas' {PasswordDlg},
-  UI_Splash in 'UI_Splash.pas' {frm_splashScreen},
   UI_Grafico in 'UI_Grafico.pas' {frm_Grafico},
   Mensajes in 'Mensajes.pas',
   UI_AgregarUsuario in 'UI_AgregarUsuario.pas' {frm_ABMUsuarios},
@@ -24,7 +24,7 @@ begin
 
   repeat
     Application.CreateForm(TDM_AccesoDatos, DM_AccesoDatos);
-//    Application.CreateForm(Tfrm_ABMUsuarios, frm_ABMUsuarios);
+  //    Application.CreateForm(Tfrm_ABMUsuarios, frm_ABMUsuarios);
     Application.CreateForm(Tfrm_Principal, frm_Principal);
     Application.CreateForm(TPasswordDlg, PasswordDlg);
 
@@ -45,15 +45,19 @@ begin
       frm_Principal.lblTipoUsuario.Caption:= tipoUsuarioActual;
       frm_Principal.lblPassword.Caption:= passwordActual;
 
+      DM_AccesoDatos.SP_Bitacora_Insertar(usuarioActual,'Login al Sistema');
+
       // Habilitar o desabilitar funciones según tipo de usuario
 
         if (tipoUsuarioActual='Visitante') then
         begin
           with frm_Principal do
           begin
+            tab_Historicos.TabVisible:= false;
             tab_Configuracion.TabVisible:= false;
             tab_Simulacion.TabVisible:= false;
             Panel_SecuenciasConsignas.Visible:= false;
+
           end;
         end
 
@@ -67,9 +71,13 @@ begin
                 PanelConfiguracionUsuariosActuales.Visible:= false;
                 PanelConfiguracionUsuariosNuevos.Visible:= false;
                 PanelConfiguracionExUsuarios.Visible:= false;
+            tab_Historicos.TabVisible:= true;
+              TabHistoricos_TabSensado.TabVisible:= true;
+              TabHistoricos_TabAlertas.TabVisible:= true;
+              TabHistoricos_TabActividadUsuario.TabVisible:= false;
             tab_Simulacion.TabVisible:= false;
             Panel_SecuenciasConsignas.Visible:= TRUE;
-              btn_ConsignaManual.Visible:= false;
+              btn_Consigna_Manual.Visible:= false;
           end;
         end
 
@@ -83,9 +91,13 @@ begin
                 PanelConfiguracionUsuariosActuales.Visible:= TRUE;
                 PanelConfiguracionUsuariosNuevos.Visible:= TRUE;
                 PanelConfiguracionExUsuarios.Visible:= TRUE;
+            tab_Historicos.TabVisible:= true;
+              TabHistoricos_TabSensado.TabVisible:= true;
+              TabHistoricos_TabAlertas.TabVisible:= true;
+              TabHistoricos_TabActividadUsuario.TabVisible:= true;
             tab_Simulacion.TabVisible:= TRUE;
             Panel_SecuenciasConsignas.Visible:= TRUE;
-              btn_ConsignaManual.Visible:= TRUE;
+              btn_Consigna_Manual.Visible:= TRUE;
           end;
         end;
 
@@ -99,6 +111,7 @@ begin
     else
     if modalResult = mrAbort then // mrAbort
     begin
+      DM_AccesoDatos.SP_Bitacora_Insertar('N/A','Login Fallido. User='+PasswordDlg.User.Text);
       PasswordDlg.free;
       frm_Principal.Free;
       DM_AccesoDatos.Free;
