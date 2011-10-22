@@ -22,7 +22,7 @@ function varargout = ScadaGUI(varargin)
 
 % Edit the above text to modify the response to help ScadaGUI
 
-% Last Modified by GUIDE v2.5 15-Oct-2011 13:05:48
+% Last Modified by GUIDE v2.5 22-Oct-2011 11:45:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -290,7 +290,8 @@ ParametrosGenerador = ['[',potencia,' ',tension,' ',frecuencia,']'];
 
 find_system('Name','ModeloTurbinaGovernorPID');
 open_system('ModeloTurbinaGovernorPID');
-%load_system('ModeloTurbinaGovernorPID')
+%load_system('ModeloTurbinaGovernorPID');
+
 set_param('ModeloTurbinaGovernorPID/velocidadRef','Value',wRef);
 set_param('ModeloTurbinaGovernorPID/potenciaMecRef','Value',pRef);
 set_param('ModeloTurbinaGovernorPID/redConsumo','Voltage',consumo);
@@ -303,6 +304,7 @@ function pushbutton2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set_param(gcs,'SimulationCommand','Stop');
+%close_system('ModeloTurbinaGovernorPID', 1);
 %varsToFind = ['who(','corrienteEstator,','potenciaMecRotor,','string,','tensionVaIn,','tensionVaOut,','velocidadRotor)'];
 %varsToFind='who';
 vars = evalin('base','who(''corrienteEstator'',''potenciaMecRotor'',''tensionVaIn'',''tensionVaOut'',''velocidadRotor'')');
