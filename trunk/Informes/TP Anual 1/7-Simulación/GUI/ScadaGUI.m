@@ -118,39 +118,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on button press in ejecutar.
-function ejecutar_Callback(hObject, eventdata, handles)
-% hObject    handle to ejecutar (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% W Referencia
-wRef = get(handles.wReferencia,'String');%str2double(temp);
-% P Referencia
-pRef = get(handles.pReferencia,'String');
-% Consumo
-consumo = get(handles.consumo,'String');
-% Potencia
-potencia = get(handles.potencia,'String');
-% Tension
-tension = get(handles.tension,'String');
-% Frecuencia
-frecuencia = get(handles.frecuencia,'String');
-
-% SIMULAR
-ParametrosGenerador = ['[',potencia,' ',tension,' ',frecuencia,']'];
-
-find_system('Name','ModeloTurbinaGovernorPID');
-open_system('ModeloTurbinaGovernorPID');
-set_param('ModeloTurbinaGovernorPID/velocidadRef','Value',wRef);
-set_param('ModeloTurbinaGovernorPID/potenciaMecRef','Value',pRef);
-set_param('ModeloTurbinaGovernorPID/redConsumo','Voltage',consumo);
-set_param('ModeloTurbinaGovernorPID/generador','NominalParameters',ParametrosGenerador);
-
-set_param(gcs,'SimulationCommand','Start');
-
-
 function consumo_Callback(hObject, eventdata, handles)
 % hObject    handle to consumo (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -241,36 +208,6 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-set_param(gcs,'SimulationCommand','Stop');
-%varsToFind = ['who(','corrienteEstator,','potenciaMecRotor,','string,','tensionVaIn,','tensionVaOut,','velocidadRotor)'];
-%varsToFind='who';
-vars = evalin('base','who(''corrienteEstator'',''potenciaMecRotor'',''tensionVaIn'',''tensionVaOut'',''velocidadRotor'')');
-
-set(handles.listaVar,'String',vars);
-
-
-
-% --- Executes on button press in pushbutton3.
-function pushbutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-listaVariables = get(handles.listaVar,'String');
-index = get(handles.listaVar,'Value');
-nameVarToPlot = listaVariables{index(1)};
-varToPlot = evalin('base',nameVarToPlot);
-if strcmp(nameVarToPlot,'velocidadRotor') < 1 
-    plot(handles.axes1,varToPlot.signals.values);
-else
-    plot(handles.axes1,varToPlot);
-end
-
 % --- Executes on selection change in listaVar.
 function listaVar_Callback(hObject, eventdata, handles)
 % hObject    handle to listaVar (see GCBO)
@@ -325,3 +262,64 @@ function ejecutar_KeyPressFcn(hObject, eventdata, handles)
 %	Character: character interpretation of the key(s) that was pressed
 %	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
 % handles    structure with handles and user data (see GUIDATA)
+
+
+%-------------------FUNCIONES-------------------
+
+% --- Executes on button press in ejecutar.
+function ejecutar_Callback(hObject, eventdata, handles)
+% hObject    handle to ejecutar (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% W Referencia
+wRef = get(handles.wReferencia,'String');%str2double(temp);
+% P Referencia
+pRef = get(handles.pReferencia,'String');
+% Consumo
+consumo = get(handles.consumo,'String');
+% Potencia
+potencia = get(handles.potencia,'String');
+% Tension
+tension = get(handles.tension,'String');
+% Frecuencia
+frecuencia = get(handles.frecuencia,'String');
+
+% SIMULAR
+ParametrosGenerador = ['[',potencia,' ',tension,' ',frecuencia,']'];
+
+find_system('Name','ModeloTurbinaGovernorPID');
+open_system('ModeloTurbinaGovernorPID');
+%load_system('ModeloTurbinaGovernorPID')
+set_param('ModeloTurbinaGovernorPID/velocidadRef','Value',wRef);
+set_param('ModeloTurbinaGovernorPID/potenciaMecRef','Value',pRef);
+set_param('ModeloTurbinaGovernorPID/redConsumo','Voltage',consumo);
+set_param('ModeloTurbinaGovernorPID/generador','NominalParameters',ParametrosGenerador);
+set_param(gcs,'SimulationCommand','Start');
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set_param(gcs,'SimulationCommand','Stop');
+%varsToFind = ['who(','corrienteEstator,','potenciaMecRotor,','string,','tensionVaIn,','tensionVaOut,','velocidadRotor)'];
+%varsToFind='who';
+vars = evalin('base','who(''corrienteEstator'',''potenciaMecRotor'',''tensionVaIn'',''tensionVaOut'',''velocidadRotor'')');
+%vars = who('corrienteEstator','potenciaMecRotor','tensionVaIn','tensionVaOut','velocidadRotor');
+set(handles.listaVar,'String',vars);
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+listaVariables = get(handles.listaVar,'String');
+index = get(handles.listaVar,'Value');
+nameVarToPlot = listaVariables{index(1)};
+varToPlot = evalin('base',nameVarToPlot);
+if strcmp(nameVarToPlot,'velocidadRotor') < 1 
+    plot(handles.axes1,varToPlot.signals.values);
+else
+    plot(handles.axes1,varToPlot);
+end
