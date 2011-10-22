@@ -32,6 +32,8 @@
       </category>
       <category name="Other files"><!--Do not modify the value of the name attribute, unless it is a class name.-->
          <file>$(PROJECTDIR)\ModeloTurbinaGovernorPID.mdl</file>
+         <file>$(PROJECTDIR)\ScadaGUI.asv</file>
+         <file>$(PROJECTDIR)\ScadaGUI.fig</file>
       </category>
       <category name="C/C++ files"><!--Do not modify the value of the name attribute, unless it is a class name.--></category>
    </file_info>
