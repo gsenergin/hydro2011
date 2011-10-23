@@ -24,7 +24,7 @@ uses
   IniFiles, cxCalendar, cxSpinEdit, cxTimeEdit, cxStyles, cxCustomData,
   cxFilter, cxData, cxDataStorage, cxDBData, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxGridCustomView,
-  cxGrid, cxPropertiesStore;
+  cxGrid, cxPropertiesStore, cxImage, cxMemo;
 
 type
   Tfrm_Principal = class(TForm)
@@ -46,27 +46,7 @@ type
     lblFecha: TcxLabel;
     lblHora: TcxLabel;
     cxLabel8: TcxLabel;
-    cxLabel19: TcxLabel;
-    cxLabel21: TcxLabel;
-    cxLabel22: TcxLabel;
-    cxLabel23: TcxLabel;
-    cxLabel24: TcxLabel;
-    cxLabel25: TcxLabel;
-    cxLabel26: TcxLabel;
-    cxLabel27: TcxLabel;
-    cxLabel28: TcxLabel;
-    cxLabel9: TcxLabel;
-    img_GolpeAriete: TImage;
     btnSimular: TcxButton;
-    cxTextEdit1: TcxTextEdit;
-    cxTextEdit2: TcxTextEdit;
-    cxTextEdit3: TcxTextEdit;
-    cxTextEdit4: TcxTextEdit;
-    cxTextEdit5: TcxTextEdit;
-    cxTextEdit6: TcxTextEdit;
-    cxTextEdit7: TcxTextEdit;
-    cxTextEdit8: TcxTextEdit;
-    cxTextEdit9: TcxTextEdit;
     cxLabel11: TcxLabel;
     cxLabel13: TcxLabel;
     cxLabel14: TcxLabel;
@@ -265,6 +245,8 @@ type
     btn_Consigna_Caudal: TcxButton;
     btn_Consigna_Voltaje: TcxButton;
     btn_Consigna_Manual: TcxButton;
+    cxMemoSimulacion: TcxMemo;
+    cxImage1: TcxImage;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnHistoricoClick(Sender: TObject);
