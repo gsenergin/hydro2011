@@ -1,0 +1,97 @@
+@charset "utf-8";
+#content{
+	height:562px;
+	width:768px;
+	background:url(../images/Control_Base_4.png);
+	background-repeat:no-repeat;
+	}
+
+span {
+	text-align:left;
+	font-size:12px;
+	color:#F00;
+	vertical-align:top;
+	
+	}
+body{
+	width:768px;
+	height:562px;}
+
+#apDiv1 {
+	position:absolute;
+	width:63px;
+	height:89px;
+	z-index:1;
+	left: 43px;
+	top: 107px;
+}
+#apDiv2 {
+	position:absolute;
+	width:60px;
+	height:45px;
+	z-index:2;
+	left: 199px;
+	top: 28px;
+}
+#apDiv3 {
+	position:absolute;
+	left:330px;
+	top:85px;
+	width:60px;
+	height:85px;
+	z-index:3;
+}
+#apDiv4 {
+	position:absolute;
+	left:328px;
+	top:269px;
+	width:60px;
+	height:32px;
+	z-index:4;
+}
+#apDiv5 {
+	position:absolute;
+	left:121px;
+	top:405px;
+	width:60px;
+	height:71px;
+	z-index:5;
+}
+p {
+	font-size:12px;
+	text-align:center;
+	font-weight:bold;
+	}
+
+#apDiv6 {
+	position:absolute;
+	width:190px;
+	height:161px;
+	z-index:6;
+	left: 63px;
+	top: 228px;
+}
+#apDiv7 {
+	position:absolute;
+	width:100px;
+	z-index:7;
+	left: 663px;
+	top: 189px;
+}
+
+#apDiv8 {
+	position:absolute;
+	width:100px;
+	z-index:8;
+	left: 650px;
+	top: 462px;
+}
+
+
+#apDiv9 {
+	position:absolute;
+	width:100px;
+	z-index:9;
+	left: 653px;
+	top: 378px;
+}
