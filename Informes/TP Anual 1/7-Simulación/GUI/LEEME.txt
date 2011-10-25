@@ -1,0 +1,5 @@
+#Para ejecutar el Simulador desde una linea de comando, situados en el directorio donde se encuentran los archivos ScadaGUI.m y .fig tecleamos el siguiente comando
+
+MATALAB -nodesktop -r ScadaGUI
+
+#Nota: Puede ser necesario tener instalado MatLab o por lo menos usar el MCRInstaller
