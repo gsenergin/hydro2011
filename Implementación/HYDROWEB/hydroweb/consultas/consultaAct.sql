@@ -1,0 +1,1 @@
+select registroeventos.valorSeteado, registroeventos.TimeStamp from registroeventos where registroeventos.FK_RegistroEventos_Actuador =  (select actuador.ID_actuador FROM actuador WHERE nomenclatura = "ASA0002" LIMIT 0, 1000) order by registroeventos.TimeStamp desc limit 0,1

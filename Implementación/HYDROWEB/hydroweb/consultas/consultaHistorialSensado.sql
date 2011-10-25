@@ -1,0 +1,2 @@
+select historialsensado.ID_Historial,nueva.ID_sensor, nueva.descripcion , historialsensado.TimeStamp, historialsensado.valorSensado from historialsensado
+inner join (select sensor.ID_sensor, sensor.descripcion from sensor) as nueva on historialsensado.FK_HistorialSensado_Sensor = nueva.ID_sensor
