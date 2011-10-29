@@ -4,19 +4,17 @@ object DM_AccesoDatos: TDM_AccesoDatos
   Height = 569
   Width = 1023
   object ADOConnectionHYDRODB: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
-      'er ID=root;Data Source=HydroDB;Mode=Read'
+      'er ID=root;Data Source=HydroDB;Mode=Read;Initial Catalog=hydrodb'
     ConnectionTimeout = 0
     DefaultDatabase = 'hydrodb'
     LoginPrompt = False
-    Mode = cmRead
+    Provider = 'MSDASQL.1'
     Left = 104
     Top = 20
   end
   object ADOTable_Sensor: TADOTable
-    Active = True
     Connection = ADOConnectionHYDRODB
     CursorType = ctStatic
     LockType = ltReadOnly
@@ -154,7 +152,6 @@ object DM_AccesoDatos: TDM_AccesoDatos
     Top = 184
   end
   object ADOTable_TipoUsuario: TADOTable
-    Active = True
     Connection = ADOConnectionHYDRODB
     CursorType = ctStatic
     LockType = ltReadOnly
@@ -175,7 +172,6 @@ object DM_AccesoDatos: TDM_AccesoDatos
     Top = 192
   end
   object ADOTable_Usuario: TADOTable
-    Active = True
     Connection = ADOConnectionHYDRODB
     CursorType = ctStatic
     Filter = 'Baja=0'
@@ -322,18 +318,19 @@ object DM_AccesoDatos: TDM_AccesoDatos
         Attributes = [paNullable]
         DataType = ftString
         Size = 50
+        Value = Null
       end
       item
         Name = 'descripcion'
         Attributes = [paNullable]
         DataType = ftString
         Size = 100
+        Value = Null
       end>
     Left = 600
     Top = 292
   end
   object ADOTable_Bitacora: TADOTable
-    Active = True
     Connection = ADOConnectionHYDRODB
     CursorType = ctStatic
     LockType = ltReadOnly
@@ -353,7 +350,6 @@ object DM_AccesoDatos: TDM_AccesoDatos
     Top = 200
   end
   object ADOQuery_Alertas: TADOQuery
-    Active = True
     Connection = ADOConnectionHYDRODB
     CursorType = ctStatic
     Parameters = <>
