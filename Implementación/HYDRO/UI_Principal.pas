@@ -382,7 +382,7 @@ begin
     // Escribo en la bitácora lo que hace el usuario
     DM_AccesoDatos.SP_Bitacora_Insertar(lblUsuario.Caption,'Simulación de Escenarios');
 
-    WinExec(PChar('notepad.exe'),SW_SHOWNORMAL);
+    WinExec(PChar('simulador.bat'),SW_SHOWNORMAL);
 end;
 
 (* Cambia los valores de las alertas para un sensor determinado, a partir

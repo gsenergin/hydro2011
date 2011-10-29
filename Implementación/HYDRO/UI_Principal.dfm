@@ -121,7 +121,7 @@ object frm_Principal: Tfrm_Principal
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D49484452000002E6
           000001DC08060000009A906F050000000467414D410000B18F0BFC6105000000
-          097048597300000EBF00000EBF013805532400004C4449444154785EEDDDCDB5
+          097048597300000EBE00000EBE01EA42B1C000004C4449444154785EEDDDCDB5
           233973A0E1F24666682BAFDAA5F1E16E65C62C7A3726DC69567FEC66B148E21F
           08201F9D534752333301045E045E0641DE1FFFFD3FFFFBBDDBBF3FFFFCF3DB3F
           31C000063080010C60602706FEF8E38FEF1DFEED14D3D3FAFA633729BFF7F7B4
@@ -2288,7 +2288,6 @@ object frm_Principal: Tfrm_Principal
     object tab_Simulacion: TcxTabSheet
       Caption = 'Simulaci'#243'n'
       ImageIndex = 3
-      ExplicitLeft = 9
       object btnSimular: TcxButton
         Left = 94
         Top = 336
@@ -2345,7 +2344,8 @@ object frm_Principal: Tfrm_Principal
         Lines.Strings = (
           ''
           'La simulaci'#243'n de sistemas discretos y continuos '
-          'permite una mejor comprensi'#243'n de los procesos '
+          'permite una mejor comprensi'#243'n de los '
+          'procesos '
           'que se modelan.'
           ''
           ''
