@@ -329,7 +329,11 @@ begin
    if (DM_AccesoDatosBD.ADOConnection1.Connected and DM_AccesoDatosRTU.TCP_UDPPort1.Active) then
      TTGuardarDatos.GuardarDatos();
 
-   
+   // Si detecto que se produjo un error, disparo una secuencia de apagado de emergencia
+   if (DM_AccesoDatosRTU.RTU2_ST10012.ValueRaw=1) and (DM_AccesoDatosRTU.RTU2_ST10013.ValueRaw <> 0) then
+      btn_SecuenciaApagadoClick(self);
+    
+
 end;
 
 end.
