@@ -311,20 +311,29 @@ begin
           Sensores[i].LimiteSuperior:= Sensores[i].HH;
 
     case radioRangoSensores.ItemIndex of
-      // Sin Alertas  L < x < H 
+      // Sin Alertas  L < x < H
       0: begin
             for i:= 7 to 9 do // temperaturras
+            begin
+              Sensores[i].LimiteInferior:= Sensores[i].L;
               Sensores[i].LimiteSuperior:= Sensores[i].H;
+            end;
       end;
       // Alertas Leves LL < x < HH
       1: begin
             for i:= 7 to 9 do // temperaturras
+            begin
+              Sensores[i].LimiteInferior:= Sensores[i].L;
               Sensores[i].LimiteSuperior:= Sensores[i].HH;
+            end;
       end;
       // Alertas Graves   min < x < max
       2:begin
           for i:= 7 to 9 do // temperaturras
-            Sensores[i].LimiteInferior:= Sensores[i].min;
+          begin
+              Sensores[i].LimiteInferior:= Sensores[i].L;
+              Sensores[i].LimiteSuperior:= Sensores[i].max;
+          end;
       end;
 
     end;(*END CASE*)
@@ -763,9 +772,9 @@ begin
 
    (*----      SSA0001 - Sensores[15] - Nivel Desfogue   ----*)
    i:= incIndex(Sensores[15].index);
-   // Igual al maximo de caudal turbinado
+   // Igual al promedio entre el caudal de entrada y el caudal turbinado
    if Sensores[11].Valores[i]<>0 then   
-      Sensores[15].valores[i]:= Sensores[11].max
+      Sensores[15].valores[i]:= (Sensores[11].Valores[i]+Sensores[1].valores[i]) div 2
    else
       Sensores[15].valores[i]:= 0;
 
