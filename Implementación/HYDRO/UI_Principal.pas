@@ -849,13 +849,14 @@ begin
 
     SocketSuscripcion.Host:= IP;
     SocketSuscripcion.Port:= PUERTO;
+    TCP_UDPPort1.Active:= false;
     TCP_UDPPort1.Host:= IP;
 
-
+    TCP_UDPPort1.Active:= true;
     //SocketSuscripcion.Host:= '127.0.0.1';
     //SocketSuscripcion.Port:= 9000;
     SocketSuscripcion.Active:= true;
-    TCP_UDPPort1.Active:= true;
+
    //  frm_Principal.Width:= 767;
      TimerFechaHoraTimer(self);
 
