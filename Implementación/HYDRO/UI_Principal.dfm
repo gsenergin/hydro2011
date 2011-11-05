@@ -8972,7 +8972,6 @@ object frm_Principal: Tfrm_Principal
       item
         Width = 150
       end>
-    ExplicitWidth = 819
   end
   object dxSkinController1: TdxSkinController
     Kind = lfOffice11
@@ -9240,7 +9239,6 @@ object frm_Principal: Tfrm_Principal
     Top = 52
   end
   object TCP_UDPPort1: TTCP_UDPPort
-    Active = True
     Host = '127.0.0.1'
     Port = 502
     Timeout = 0
