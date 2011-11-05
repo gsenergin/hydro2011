@@ -212,7 +212,7 @@ begin
               if delta <>0 then
               begin
                  RTU2_AT10007.Value:= valorAnt + delta;
-                 Logger.LogWrite('Revisando Consigna de Voltaje - %Alaves '+inttostr(delta));
+                 Logger.LogWrite('Revisando Consigna de Voltaje - %Alabes '+inttostr(delta));
               end
               else
               begin
