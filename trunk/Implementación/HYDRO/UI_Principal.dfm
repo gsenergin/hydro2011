@@ -121,7 +121,7 @@ object frm_Principal: Tfrm_Principal
         Picture.Data = {
           0B546478504E47496D61676589504E470D0A1A0A0000000D49484452000002E6
           000001DC08060000009A906F050000000467414D410000B18F0BFC6105000000
-          097048597300000EBE00000EBE01EA42B1C000004C4449444154785EEDDDCDB5
+          097048597300000EBD00000EBD0147FB90AD00004C4449444154785EEDDDCDB5
           233973A0E1F24666682BAFDAA5F1E16E65C62C7A3726DC69567FEC66B148E21F
           08201F9D534752333301045E045E0641DE1FFFFD3FFFFBBDDBBF3FFFFCF3DB3F
           31C000063080010C60602706FEF8E38FEF1DFEED14D3D3FAFA633729BFF7F7B4
@@ -2075,6 +2075,10 @@ object frm_Principal: Tfrm_Principal
       Caption = 'Hist'#243'ricos'
       ImageIndex = 1
       OnShow = tab_HistoricosShow
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object PageControl_Historicos: TcxPageControl
         Left = 0
         Top = 3
@@ -2197,6 +2201,10 @@ object frm_Principal: Tfrm_Principal
         object TabHistoricos_TabAlertas: TcxTabSheet
           Caption = 'Alertas'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object cxGrid_Historicos_Alertas: TcxGrid
             Left = 10
             Top = 4
@@ -2240,6 +2248,10 @@ object frm_Principal: Tfrm_Principal
         object TabHistoricos_TabActividadUsuario: TcxTabSheet
           Caption = 'Usuarios'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object cxGrid_Configuracion_Actividad: TcxGrid
             Left = 3
             Top = 3
@@ -2288,6 +2300,10 @@ object frm_Principal: Tfrm_Principal
     object tab_Simulacion: TcxTabSheet
       Caption = 'Simulaci'#243'n'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object btnSimular: TcxButton
         Left = 94
         Top = 336
@@ -7939,6 +7955,10 @@ object frm_Principal: Tfrm_Principal
     object tab_Configuracion: TcxTabSheet
       Caption = 'Configuraci'#243'n'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object PageControl_Configuracion: TcxPageControl
         Left = 0
         Top = 16
@@ -8237,6 +8257,10 @@ object frm_Principal: Tfrm_Principal
         object TabConfiguracion_TabUsuarios: TcxTabSheet
           Caption = 'Usuarios'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
+          ExplicitWidth = 0
+          ExplicitHeight = 0
           object PanelConfiguracionUsuariosActuales: TPanel
             Left = 3
             Top = 167
