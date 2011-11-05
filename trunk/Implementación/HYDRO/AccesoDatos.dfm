@@ -6,10 +6,11 @@ object DM_AccesoDatos: TDM_AccesoDatos
   object ADOConnectionHYDRODB: TADOConnection
     ConnectionString = 
       'Provider=MSDASQL.1;Persist Security Info=False;Data Source=Hydro' +
-      'DB;Mode=Read;Initial Catalog=hydrodb'
+      'DB;Mode=Read;Initial Catalog=hydrodb;'
     ConnectionTimeout = 0
     DefaultDatabase = 'hydrodb'
     LoginPrompt = False
+    Mode = cmRead
     Provider = 'MSDASQL.1'
     Left = 104
     Top = 20
