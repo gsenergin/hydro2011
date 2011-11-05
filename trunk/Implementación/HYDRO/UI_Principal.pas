@@ -595,11 +595,13 @@ begin
     if modoManual then
     try
       valor:= strtoint( InputBox('SetValor','Ingrese el Porcentaje de aplicación de Frenos del Generador (0-100)','0'));
+      if valor>100 then
+        Raise Exception.Create('Valor Incorrecto');
+      SetValorActuador(2,40015,valor);
     except
-      Showmessage('Valor Incorrecto');
-      exit;
+      On E : Exception do
+        msError(E.Message);
     end;
-    SetValorActuador(2,40015,valor);
 end;
 
 (* Envía al Módulo de control automático el cambio de valor en los frenos
@@ -610,11 +612,13 @@ begin
     if modoManual then
     try
       valor:= strtoint( InputBox('SetValor','Ingrese el Porcentaje de aplicación de Frenos de la Turbina (0-100)','0'));
+      if valor>100 then
+        Raise Exception.Create('Valor Incorrecto');
+      SetValorActuador(2,40006,valor);
     except
-      Showmessage('Valor Incorrecto');
-      exit;
+      On E : Exception do
+        msError(E.Message);
     end;
-    SetValorActuador(2,40006,valor);
 end;
 
 (* Envía al Módulo de control automático el cambio de valor en la apertura
@@ -625,11 +629,13 @@ begin
     if modoManual then
     try
       valor:= strtoint( InputBox('SetValor','Ingrese el Porcentaje de apertura de los álabes (0-100)','100'));
+      if valor>100 then
+        Raise Exception.Create('Valor Incorrecto');
+      SetValorActuador(2,40007,valor);
     except
-      Showmessage('Valor Incorrecto');
-      exit;
+      On E : Exception do
+        msError(E.Message);
     end;
-    SetValorActuador(2,40007,valor);
 end;
 
 
