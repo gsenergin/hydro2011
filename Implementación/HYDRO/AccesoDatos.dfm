@@ -5,8 +5,8 @@ object DM_AccesoDatos: TDM_AccesoDatos
   Width = 1023
   object ADOConnectionHYDRODB: TADOConnection
     ConnectionString = 
-      'Provider=MSDASQL.1;Password=123456;Persist Security Info=True;Us' +
-      'er ID=root;Data Source=HydroDB;Mode=Read;Initial Catalog=hydrodb'
+      'Provider=MSDASQL.1;Persist Security Info=False;Data Source=Hydro' +
+      'DB;Mode=Read;Initial Catalog=hydrodb'
     ConnectionTimeout = 0
     DefaultDatabase = 'hydrodb'
     LoginPrompt = False
