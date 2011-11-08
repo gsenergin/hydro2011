@@ -24,7 +24,7 @@ PÁGINA INICIAL DEL SISTEMA, CON USUARIO REGISTRADO
 <div id="left">
 <div id="sidebar">
         <ul id="demo_menu1">
-        	<li><a href="#" ></a></li>
+        	<li><a href="#" > &nbsp;</a> </li>
             <li><a href="controlMain.php" >Control</a></li>
             <li><a href="historial.php" >Estadisticas</a></li>
             <!--<li><a href="#" >Less</a></li>
@@ -34,10 +34,10 @@ PÁGINA INICIAL DEL SISTEMA, CON USUARIO REGISTRADO
 </div>
 </div>
 	<div id="right">
-		<p id="titulo">BIENVENIDO, usted está logueado como: <?php echo $_SESSION['MM_Username']?></p> 
+		<p id="bienvenida">BIENVENIDO, usted está registrado como: <?php echo $_SESSION['MM_Username']?></p> 
 <div id="center">
 
-  <p ID="bienvenida">SELECCIONE EN EL MENÚ DE LA IZQUIERDA LA OPCIÓN DESEADA
+  <h2 ID="titulo">SELECCIONE EN EL MENÚ DE LA IZQUIERDA LA OPCIÓN DESEADA</h2>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>

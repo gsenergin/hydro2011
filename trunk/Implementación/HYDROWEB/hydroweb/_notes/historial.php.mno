@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_sensores" value="name:ID_sensor;datatype:int,name:descripcion;datatype:string,name:unidad_medida;datatype:string" />
+</info>
