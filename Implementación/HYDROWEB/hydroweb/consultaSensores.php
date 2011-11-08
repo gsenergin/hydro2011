@@ -32,7 +32,8 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 
 mysql_select_db($database_hydroweb, $hydroweb);
-$query_sensoresUltimo = "select sensor.ID_sensor,sensor.descripcion, hs.valorSensado, sensor.unidad_medida,hs.TimeStamp from sensor 	left join historialsensado as hs on FK_HistorialSensado_Sensor = sensor.ID_sensor  	order by hs.TimeStamp desc limit 0,15 	";
+/*$query_sensoresUltimo = "select sensor.ID_sensor,sensor.descripcion, hs.valorSensado, sensor.unidad_medida,hs.TimeStamp from sensor 	left join historialsensado as hs on FK_HistorialSensado_Sensor = sensor.ID_sensor  	order by hs.TimeStamp desc limit 0,15 	";*/
+$query_sensoresUltimo = "select * from (select sensor.ID_sensor,sensor.descripcion, hs.valorSensado, sensor.unidad_medida,hs.TimeStamp from sensor left join historialsensado as hs on FK_HistorialSensado_Sensor = sensor.ID_sensor order by hs.TimeStamp desc limit 0,15 ) as sens order by ID_sensor";
 $sensoresUltimo = mysql_query($query_sensoresUltimo, $hydroweb) or die(mysql_error());
 $totalRows_sensoresUltimo = mysql_num_rows($sensoresUltimo);
 ?>

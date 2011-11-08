@@ -51,15 +51,30 @@ $totalRows_sensores = mysql_num_rows($sensores);
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+
 <meta http-equiv="content-type" content="text/html; charset= iso-8859-1" />
 <title>SISTEMA DE MONITOREO Y CONTROL</title>
+
+
+<style>
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header{ margin-bottom: 8px; }
+.ui-timepicker-div dl{ text-align: left; }
+.ui-timepicker-div dl dt{ height: 25px; }
+.ui-timepicker-div dl dd{ margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+</style>
+
+
 <link href="css/styles.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/blue-glass/sidebar.css" />
 <link type="text/css" href="css/redmond/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.sidebar.js"></script>
-<script type="text/javascript" src="js/calendario.js"></script>
+<script type="text/javascript" src="js/timepicker.js"></script>
+
 <!-- javascript con el jquery para selección de fechas -->
 <script type="text/javascript" src="js/menu.js"></script>
 </head>
@@ -87,7 +102,7 @@ $totalRows_sensores = mysql_num_rows($sensores);
             
             <?php if (isset($_POST["selecSensores"])){
 					$seleccionado = $_POST["selecSensores"];
-				} ?>
+				}else $seleccionado = '' ?>
             <form action="" method="post" name="formSensores">
               <p>
             
@@ -108,6 +123,7 @@ $totalRows_sensores = mysql_num_rows($sensores);
       									mysql_data_seek($sensores, 0);
 	 									$row_sensores = mysql_fetch_assoc($sensores);
   										   }
+										   
 				?>
                 </select>&nbsp; 
                 
@@ -138,13 +154,15 @@ $totalRows_sensores = mysql_num_rows($sensores);
 				$idSensor = $_POST["selecSensores"];
 			  	echo "<div id=\"grafico\">";
                 include "./swf/charts.php";
-                echo InsertChart ("./swf/charts.swf","./swf/charts_library", "estadisticas.php?idSensor=".$idSensor."&desde=".$fDesde."&hasta=".$fHasta, 900, 700 );
+				echo "estadisticas.php?idSensor=".$idSensor."&desde=".str_replace(":","dp",str_replace(" ","eb",$fDesde))."&hasta=".str_replace(":","dp",str_replace(" ","eb",$fHasta));
+                echo InsertChart ("./swf/charts.swf","./swf/charts_library", "estadisticas.php?idSensor=".$idSensor."&desde=".str_replace(":","dp",str_replace(" ","eb",$fDesde))."&hasta=".str_replace(":","dp",str_replace(" ","eb",$fHasta)), 1100, 900 );
 				echo "</div>";
 				}
 				?>
     		</div>
 	</div>
-    <script type="text/javascript">
+	<script type="text/javascript" src="js/calendario.js"></script>  
+    <script type="text/javascript">	
         $("ul#demo_menu1").sidebar({
             position:"left", open:"click",
             events:{

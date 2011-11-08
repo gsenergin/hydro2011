@@ -4,12 +4,16 @@
 include "swf/charts.php";
 if(isset($_REQUEST["idSensor"])){
 $id = $_REQUEST["idSensor"];
-$Desde = $_REQUEST["desde"];
-list($mesDesde, $diaDesde, $anioDesde) = split('[/]', $Desde);
-$Desde = $anioDesde."-".$mesDesde."-".$diaDesde;
-$Hasta = $_REQUEST["hasta"];
-list($mesHasta, $diaHasta, $anioHasta) = split('[/]', $Hasta);
-$Hasta = $anioHasta."-".$mesHasta."-".$diaHasta;
+$Desde = str_replace("dp",":",str_replace("eb"," ",$_REQUEST["desde"]));
+list($fechaD,$horaD) = split(" ",$Desde);
+list($mesDesde, $diaDesde, $anioDesde) = split('[/]', $fechaD);
+$Desde = $anioDesde."-".$mesDesde."-".$diaDesde." ".$horaD;
+
+
+$Hasta = str_replace("dp",":",str_replace("eb"," ",$_REQUEST["hasta"]));
+list($fechaH,$horaH) = split(" ",$Hasta);
+list($mesHasta, $diaHasta, $anioHasta) = split('[/]', $fechaH);
+$Hasta = $anioHasta."-".$mesHasta."-".$diaHasta." ".$horaH;
 } else {
 	$id=0;
 	}
@@ -20,14 +24,18 @@ $row_historiaEst = mysql_fetch_assoc($historiaEst);
 $totalRows_historiaEst = mysql_num_rows($historiaEst);
 
 if($totalRows_historiaEst >0){
-	$chart['chart_data'][0][$i] = $row_historiaEst['TimeStamp'];
+	$chart['chart_data'][0][0] = $row_historiaEst['TimeStamp'];
 	$chart['chart_data'][1][0]="SENSOR: ". $row_historiaEst['descripcion'];
-		for($i = 1;  $i <$totalRows_historiaEst; $i++){
-		$filai = mysql_fetch_array($historiaEst);
-		$fecha = $filai["TimeStamp"];
-		$fechaYhora = substr($fecha,0,9)."\r".substr($fecha,9);
-		$chart['chart_data'][0][$i] = $fechaYhora;
-		$chart['chart_data'][1][$i] = $filai["valorSensado"];
+		
+		$salto = $totalRows_historiaEst / 20;
+		for($i = 1;  $i <$totalRows_historiaEst; $i){	
+			mysql_data_seek($historiaEst,$i);
+			$filai = mysql_fetch_array($historiaEst);
+			$fecha = $filai["TimeStamp"];
+			$fechaYhora = substr($fecha,0,9)."\r".substr($fecha,9);
+			$chart['chart_data'][0][$i] = $fechaYhora;
+			$chart['chart_data'][1][$i] = $filai["valorSensado"];
+			$i = $i + $salto;
 		}
 	}else {
 		$chart['chart_data'][0][$i] = "ERROR";
@@ -38,7 +46,7 @@ $chart [ 'legend_label' ] = array (   'layout'  =>  "vertical",
                                       'bullet'  =>  "circle",
                                       'font'    =>  "Arial", 
                                       'bold'    =>  true, 
-                                      'size'    =>  14, 
+                                      'size'    =>  10, 
                                       'color'   =>  "88FF00", 
                                       'alpha'   =>  90
                                   ); 
