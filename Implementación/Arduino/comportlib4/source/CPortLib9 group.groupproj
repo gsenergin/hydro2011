@@ -1,0 +1,49 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{217e9dc2-5589-4db9-98b4-0099fad5e21d}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="CPortLib9">
+    <MSBuild Projects="CPortLib9.dproj" Targets="" />
+  </Target>
+  <Target Name="CPortLib9:Clean">
+    <MSBuild Projects="CPortLib9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="CPortLib9:Make">
+    <MSBuild Projects="CPortLib9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DsgnCPort9">
+    <MSBuild Projects="DsgnCPort9.dproj" Targets="" />
+  </Target>
+  <Target Name="DsgnCPort9:Clean">
+    <MSBuild Projects="DsgnCPort9.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DsgnCPort9:Make">
+    <MSBuild Projects="DsgnCPort9.dproj" Targets="Make" />
+  </Target>
+  <Target Name="MiniTerm">
+    <MSBuild Projects="..\Examples\delphi\MiniTerm.dproj" Targets="" />
+  </Target>
+  <Target Name="MiniTerm:Clean">
+    <MSBuild Projects="..\Examples\delphi\MiniTerm.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="MiniTerm:Make">
+    <MSBuild Projects="..\Examples\delphi\MiniTerm.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="CPortLib9;DsgnCPort9;MiniTerm" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="CPortLib9:Clean;DsgnCPort9:Clean;MiniTerm:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="CPortLib9:Make;DsgnCPort9:Make;MiniTerm:Make" />
+  </Target>
+</Project>

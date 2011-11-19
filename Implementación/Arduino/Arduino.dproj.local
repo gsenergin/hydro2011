@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/11/12 15:46:46.200.pas,D:\Mis Documentos\RAD Studio\Projects\Unit1.pas=D:\[Proyecto]\Implementación\Arduino\Unit1.pas</Transaction>
+    <Transaction>2011/11/12 15:46:46.200.dfm,D:\Mis Documentos\RAD Studio\Projects\Unit1.dfm=D:\[Proyecto]\Implementación\Arduino\Unit1.dfm</Transaction>
+    <Transaction>2011/11/12 15:46:48.858.dproj,D:\Mis Documentos\RAD Studio\Projects\Project1.dproj=D:\[Proyecto]\Implementación\Arduino\Project1.dproj</Transaction>
+    <Transaction>2011/11/12 17:55:25.420.dproj,D:\[Proyecto]\Implementación\Arduino\Project1.dproj=D:\[Proyecto]\Implementación\Arduino\Arduino.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
