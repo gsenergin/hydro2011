@@ -247,6 +247,7 @@ type
     btn_Consigna_Manual: TcxButton;
     cxMemoSimulacion: TcxMemo;
     cxImage1: TcxImage;
+    btnSalaTurbinas: TcxButton;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnHistoricoClick(Sender: TObject);
@@ -287,6 +288,7 @@ type
     procedure btn_Consigna_CaudalClick(Sender: TObject);
     procedure btn_Consigna_VoltajeClick(Sender: TObject);
     procedure btn_Consigna_ManualClick(Sender: TObject);
+    procedure btnSalaTurbinasClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -376,6 +378,11 @@ end;
 
 
 
+
+procedure Tfrm_Principal.btnSalaTurbinasClick(Sender: TObject);
+begin
+    WinExec(PChar('..\Arduino\Arduino.exe'),SW_NORMAL);
+end;
 
 procedure Tfrm_Principal.btnSimularClick(Sender: TObject);
 begin
