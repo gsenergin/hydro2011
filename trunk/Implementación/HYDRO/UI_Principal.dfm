@@ -2070,6 +2070,17 @@ object frm_Principal: Tfrm_Principal
         SpeedButtonOptions.GroupIndex = 4
         SpeedButtonOptions.AllowAllUp = True
       end
+      object btnSalaTurbinas: TcxButton
+        Left = 707
+        Top = 2
+        Width = 98
+        Height = 23
+        Caption = 'Sala de Turbinas'
+        TabOrder = 31
+        OnClick = btnSalaTurbinasClick
+        SpeedButtonOptions.GroupIndex = 4
+        SpeedButtonOptions.AllowAllUp = True
+      end
     end
     object tab_Historicos: TcxTabSheet
       Caption = 'Hist'#243'ricos'
